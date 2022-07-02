@@ -1,4 +1,4 @@
-# [1266. 访问所有点的最小时间](https://leetcode-cn.com/problems/minimum-time-visiting-all-points)
+# [1266. 访问所有点的最小时间](https://leetcode.cn/problems/minimum-time-visiting-all-points)
 
 [English Version](/solution/1200-1299/1266.Minimum%20Time%20Visiting%20All%20Points/README_EN.md)
 
@@ -26,7 +26,7 @@
 
 <p><strong>示例 1：</strong></p>
 
-<p><img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/1200-1299/1266.Minimum%20Time%20Visiting%20All%20Points/images/1626_example_1.png" style="height: 428px; width: 500px;" /></p>
+<p><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/1200-1299/1266.Minimum%20Time%20Visiting%20All%20Points/images/1626_example_1.png" style="height: 428px; width: 500px;" /></p>
 
 <pre>
 <strong>输入：</strong>points = [[1,1],[3,4],[-1,0]]

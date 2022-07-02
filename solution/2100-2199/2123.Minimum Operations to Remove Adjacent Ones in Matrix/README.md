@@ -1,4 +1,4 @@
-# [2123. Minimum Operations to Remove Adjacent Ones in Matrix](https://leetcode-cn.com/problems/minimum-operations-to-remove-adjacent-ones-in-matrix)
+# [2123. 使矩阵中的 1 互不相邻的最小操作数](https://leetcode.cn/problems/minimum-operations-to-remove-adjacent-ones-in-matrix)
 
 [English Version](/solution/2100-2199/2123.Minimum%20Operations%20to%20Remove%20Adjacent%20Ones%20in%20Matrix/README_EN.md)
 
@@ -15,7 +15,7 @@
 <p>&nbsp;</p>
 
 <p><strong>示例 1:</strong></p>
-<img src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/2100-2199/2123.Minimum%20Operations%20to%20Remove%20Adjacent%20Ones%20in%20Matrix/images/image-20211223181501-1.png" style="width: 644px; height: 250px;">
+<img src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/2100-2199/2123.Minimum%20Operations%20to%20Remove%20Adjacent%20Ones%20in%20Matrix/images/image-20211223181501-1.png" style="width: 644px; height: 250px;">
 <pre><strong>输入:</strong> grid = [[1,1,0],[0,1,1],[1,1,1]]
 <strong>输出:</strong> 3
 <strong>解释:</strong> 可以进行三次操作（把 grid[0][1], grid[1][2] 和 grid[2][1] 变成 0）。
@@ -23,14 +23,14 @@
 </pre>
 
 <p><strong>示例 2:</strong></p>
-<img src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/2100-2199/2123.Minimum%20Operations%20to%20Remove%20Adjacent%20Ones%20in%20Matrix/images/image-20211223181518-2.png" style="height: 250px; width: 255px;">
+<img src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/2100-2199/2123.Minimum%20Operations%20to%20Remove%20Adjacent%20Ones%20in%20Matrix/images/image-20211223181518-2.png" style="height: 250px; width: 255px;">
 <pre><strong>输入:</strong> grid = [[0,0,0],[0,0,0],[0,0,0]]
 <strong>输出:</strong> 0
 <strong>解释:</strong> 矩阵中没有 1，此时矩阵也是完全独立的，因此无需操作，返回 0。
 </pre>
 
 <p><strong>示例 3:</strong></p>
-<img src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/2100-2199/2123.Minimum%20Operations%20to%20Remove%20Adjacent%20Ones%20in%20Matrix/images/image-20211223181817-3.png" style="width: 165px; height: 167px;">
+<img src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/2100-2199/2123.Minimum%20Operations%20to%20Remove%20Adjacent%20Ones%20in%20Matrix/images/image-20211223181817-3.png" style="width: 165px; height: 167px;">
 <pre><strong>输入:</strong> grid = [[0,1],[1,0]]
 <strong>输出:</strong> 0
 <strong>解释:</strong> 矩阵中的所有的 1 与其它 1 均不相邻，已经是完全独立的，因此无需操作，返回 0。

@@ -1,4 +1,4 @@
-# [1603. 设计停车系统](https://leetcode-cn.com/problems/design-parking-system)
+# [1603. 设计停车系统](https://leetcode.cn/problems/design-parking-system)
 
 [English Version](/solution/1600-1699/1603.Design%20Parking%20System/README_EN.md)
 
@@ -103,6 +103,43 @@ class ParkingSystem {
  * Your ParkingSystem object will be instantiated and called as such:
  * ParkingSystem obj = new ParkingSystem(big, medium, small);
  * boolean param_1 = obj.addCar(carType);
+ */
+```
+
+### **Rust**
+
+```rust
+struct ParkingSystem {
+    list: [i32; 3],
+}
+
+
+/**
+ * `&self` means the method takes an immutable reference.
+ * If you need a mutable reference, change it to `&mut self` instead.
+ */
+impl ParkingSystem {
+
+    fn new(big: i32, medium: i32, small: i32) -> Self {
+        Self {
+            list: [big, medium, small]
+        }
+    }
+
+    fn add_car(&mut self, car_type: i32) -> bool {
+        let i = (car_type - 1) as usize;
+        if self.list[i] == 0 {
+            return false;
+        }
+        self.list[i] -= 1;
+        true
+    }
+}
+
+/**
+ * Your ParkingSystem object will be instantiated and called as such:
+ * let obj = ParkingSystem::new(big, medium, small);
+ * let ret_1: bool = obj.add_car(carType);
  */
 ```
 

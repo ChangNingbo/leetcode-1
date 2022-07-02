@@ -1,4 +1,4 @@
-# [577. 员工奖金](https://leetcode-cn.com/problems/employee-bonus)
+# [577. 员工奖金](https://leetcode.cn/problems/employee-bonus)
 
 [English Version](/solution/0500-0599/0577.Employee%20Bonus/README_EN.md)
 
@@ -52,7 +52,7 @@ empId 是这张表单的主关键字
 ### **SQL**
 
 ```sql
-SELECT 
+SELECT
     e.name, b.bonus
 FROM
     Employee e

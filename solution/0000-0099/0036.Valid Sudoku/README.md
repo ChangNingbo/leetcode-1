@@ -1,4 +1,4 @@
-# [36. 有效的数独](https://leetcode-cn.com/problems/valid-sudoku)
+# [36. 有效的数独](https://leetcode.cn/problems/valid-sudoku)
 
 [English Version](/solution/0000-0099/0036.Valid%20Sudoku/README_EN.md)
 
@@ -27,7 +27,7 @@
 <p>&nbsp;</p>
 
 <p><strong>示例 1：</strong></p>
-<img src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0000-0099/0036.Valid%20Sudoku/images/250px-sudoku-by-l2g-20050714svg.png" style="height:250px; width:250px" />
+<img src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0000-0099/0036.Valid%20Sudoku/images/250px-sudoku-by-l2g-20050714svg.png" style="height:250px; width:250px" />
 <pre>
 <strong>输入：</strong>board = 
 [["5","3",".",".","7",".",".",".","."]

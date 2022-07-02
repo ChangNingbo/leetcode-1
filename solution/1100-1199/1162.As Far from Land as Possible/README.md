@@ -1,4 +1,4 @@
-# [1162. 地图分析](https://leetcode-cn.com/problems/as-far-from-land-as-possible)
+# [1162. 地图分析](https://leetcode.cn/problems/as-far-from-land-as-possible)
 
 [English Version](/solution/1100-1199/1162.As%20Far%20from%20Land%20as%20Possible/README_EN.md)
 
@@ -16,7 +16,7 @@
 
 <p><strong>示例 1：</strong></p>
 
-<p><strong><img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/1100-1199/1162.As%20Far%20from%20Land%20as%20Possible/images/1336_ex1.jpeg" /></strong></p>
+<p><strong><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/1100-1199/1162.As%20Far%20from%20Land%20as%20Possible/images/1336_ex1.jpeg" /></strong></p>
 
 <pre>
 <strong>输入：</strong>grid = [[1,0,1],[0,0,0],[1,0,1]]
@@ -27,7 +27,7 @@
 
 <p><strong>示例 2：</strong></p>
 
-<p><strong><img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/1100-1199/1162.As%20Far%20from%20Land%20as%20Possible/images/1336_ex2.jpeg" /></strong></p>
+<p><strong><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/1100-1199/1162.As%20Far%20from%20Land%20as%20Possible/images/1336_ex2.jpeg" /></strong></p>
 
 <pre>
 <strong>输入：</strong>grid = [[1,0,0],[0,0,0],[0,0,0]]
@@ -71,7 +71,7 @@ class Solution:
         valid = False
         while q:
             ans += 1
-            for _ in range(len(q), 0, -1):
+            for _ in range(len(q)):
                 i, j = q.popleft()
                 for a, b in [[0, 1], [0, -1], [1, 0], [-1, 0]]:
                     x, y = i + a, b + j

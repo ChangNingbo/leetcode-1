@@ -1,4 +1,4 @@
-# [432. 全 O(1) 的数据结构](https://leetcode-cn.com/problems/all-oone-data-structure)
+# [432. 全 O(1) 的数据结构](https://leetcode.cn/problems/all-oone-data-structure)
 
 [English Version](/solution/0400-0499/0432.All%20O%60one%20Data%20Structure/README_EN.md)
 
@@ -17,6 +17,8 @@
 	<li><code>getMaxKey()</code> 返回任意一个计数最大的字符串。如果没有元素存在，返回一个空字符串 <code>""</code> 。</li>
 	<li><code>getMinKey()</code> 返回任意一个计数最小的字符串。如果没有元素存在，返回一个空字符串 <code>""</code> 。</li>
 </ul>
+
+<p><strong>注意：</strong>每个函数都应当满足 <code>O(1)</code> 平均时间复杂度。</p>
 
 <p>&nbsp;</p>
 
@@ -153,7 +155,7 @@ class AllOne {
         root.next = root;
         root.prev = root;
     }
-    
+
     public void inc(String key) {
         if (!nodes.containsKey(key)) {
             if (root.next == root || root.next.cnt > 1) {
@@ -177,7 +179,7 @@ class AllOne {
             }
         }
     }
-    
+
     public void dec(String key) {
         Node curr = nodes.get(key);
         if (curr.cnt == 1) {
@@ -197,11 +199,11 @@ class AllOne {
             curr.remove();
         }
     }
-    
+
     public String getMaxKey() {
         return root.prev.keys.iterator().next();
     }
-    
+
     public String getMinKey() {
         return root.next.keys.iterator().next();
     }

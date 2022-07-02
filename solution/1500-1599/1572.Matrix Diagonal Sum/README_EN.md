@@ -10,7 +10,7 @@
 
 <p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/1500-1599/1572.Matrix%20Diagonal%20Sum/images/sample_1911.png" style="width: 336px; height: 174px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/1500-1599/1572.Matrix%20Diagonal%20Sum/images/sample_1911.png" style="width: 336px; height: 174px;" />
 <pre>
 <strong>Input:</strong> mat = [[<strong>1</strong>,2,<strong>3</strong>],
 &nbsp;             [4,<strong>5</strong>,6],
@@ -122,6 +122,24 @@ func diagonalSum(mat [][]int) int {
 		}
 	}
 	return res
+}
+```
+
+### **Rust**
+
+```rust
+impl Solution {
+    pub fn diagonal_sum(mat: Vec<Vec<i32>>) -> i32 {
+        let n = mat.len();
+        let mut res = 0;
+        for i in 0..n {
+            res += mat[i][i] + mat[n - i - 1][i];
+        }
+        if n & 1 == 1 {
+            return res - mat[n / 2][n / 2];
+        }
+        res
+    }
 }
 ```
 

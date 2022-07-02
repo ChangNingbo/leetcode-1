@@ -14,7 +14,7 @@
 
 <p><strong>Example 1:</strong></p>
 
-<p><img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/1500-1599/1557.Minimum%20Number%20of%20Vertices%20to%20Reach%20All%20Nodes/images/untitled22.png" style="width: 231px; height: 181px;" /></p>
+<p><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/1500-1599/1557.Minimum%20Number%20of%20Vertices%20to%20Reach%20All%20Nodes/images/untitled22.png" style="width: 231px; height: 181px;" /></p>
 
 <pre>
 
@@ -26,7 +26,7 @@
 
 <p><strong>Example 2:</strong></p>
 
-<p><img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/1500-1599/1557.Minimum%20Number%20of%20Vertices%20to%20Reach%20All%20Nodes/images/untitled.png" style="width: 201px; height: 201px;" /></p>
+<p><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/1500-1599/1557.Minimum%20Number%20of%20Vertices%20to%20Reach%20All%20Nodes/images/untitled.png" style="width: 201px; height: 201px;" /></p>
 
 <pre>
 
@@ -43,10 +43,15 @@
 <p><strong>Constraints:</strong></p>
 
 <ul>
+
     <li><code>2 &lt;= n &lt;= 10^5</code></li>
+
     <li><code>1 &lt;= edges.length &lt;= min(10^5, n * (n - 1) / 2)</code></li>
+
     <li><code>edges[i].length == 2</code></li>
+
     <li><code>0 &lt;= from<sub>i,</sub>&nbsp;to<sub>i</sub> &lt; n</code></li>
+
     <li>All pairs <code>(from<sub>i</sub>, to<sub>i</sub>)</code> are distinct.</li>
 
 </ul>
@@ -117,6 +122,41 @@ func findSmallestSetOfVertices(n int, edges [][]int) []int {
 		}
 	}
 	return ans
+}
+```
+
+### **TypeScript**
+
+```ts
+function findSmallestSetOfVertices(n: number, edges: number[][]): number[] {
+    const arr = new Array(n).fill(true);
+    for (const [_, i] of edges) {
+        arr[i] = false;
+    }
+    const res = [];
+    arr.forEach((v, i) => {
+        if (v) {
+            res.push(i);
+        }
+    });
+    return res;
+}
+```
+
+### **Rust**
+
+```rust
+impl Solution {
+    pub fn find_smallest_set_of_vertices(n: i32, edges: Vec<Vec<i32>>) -> Vec<i32> {
+        let mut arr = vec![true; n as usize];
+        edges.iter().for_each(|edge| {
+            arr[edge[1] as usize] = false;
+        });
+        arr.iter()
+            .enumerate()
+            .filter_map(|(i, &v)| if v { Some(i as i32) } else { None })
+            .collect()
+    }
 }
 ```
 

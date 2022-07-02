@@ -1,4 +1,4 @@
-# [1941. 检查是否所有字符出现次数相同](https://leetcode-cn.com/problems/check-if-all-characters-have-equal-number-of-occurrences)
+# [1941. 检查是否所有字符出现次数相同](https://leetcode.cn/problems/check-if-all-characters-have-equal-number-of-occurrences)
 
 [English Version](/solution/1900-1999/1941.Check%20if%20All%20Characters%20Have%20Equal%20Number%20of%20Occurrences/README_EN.md)
 
@@ -49,14 +49,8 @@
 ```python
 class Solution:
     def areOccurrencesEqual(self, s: str) -> bool:
-        counter = Counter(s)
-        cnt = -1
-        for c, times in counter.items():
-            if cnt == -1:
-                cnt = times
-            elif cnt != times:
-                return False
-        return True
+        cnt = Counter(s)
+        return len(set(cnt.values())) == 1
 ```
 
 ### **Java**
@@ -66,24 +60,57 @@ class Solution:
 ```java
 class Solution {
     public boolean areOccurrencesEqual(String s) {
-        int[] counter = new int[26];
+        int[] cnt = new int[26];
         for (char c : s.toCharArray()) {
-            ++counter[c - 'a'];
+            ++cnt[c - 'a'];
         }
-        int cnt = -1;
-        for (int i = 0; i < 26; ++i) {
-            if (counter[i] == 0) {
+        int t = 0;
+        for (int v : cnt) {
+            if (v == 0) {
                 continue;
             }
-
-            if (cnt == -1) {
-                cnt = counter[i];
-            } else if (cnt != counter[i]) {
+            if (t == 0) {
+                t = v;
+            } else if (t != v) {
                 return false;
             }
         }
         return true;
     }
+}
+```
+
+### **C++**
+
+```cpp
+class Solution {
+public:
+    bool areOccurrencesEqual(string s) {
+        vector<int> cnt(26);
+        for (char& c : s) ++cnt[c - 'a'];
+        unordered_set<int> ss;
+        for (int& v : cnt) if (v) ss.insert(v);
+        return ss.size() == 1;
+    }
+};
+```
+
+### **Go**
+
+```go
+func areOccurrencesEqual(s string) bool {
+	cnt := make([]int, 26)
+	for _, c := range s {
+		cnt[c-'a']++
+	}
+	ss := map[int]bool{}
+	for _, v := range cnt {
+		if v == 0 {
+			continue
+		}
+		ss[v] = true
+	}
+	return len(ss) == 1
 }
 ```
 

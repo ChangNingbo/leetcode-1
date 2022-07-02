@@ -1,4 +1,4 @@
-# [2181. 合并零之间的节点](https://leetcode-cn.com/problems/merge-nodes-in-between-zeros)
+# [2181. 合并零之间的节点](https://leetcode.cn/problems/merge-nodes-in-between-zeros)
 
 [English Version](/solution/2100-2199/2181.Merge%20Nodes%20in%20Between%20Zeros/README_EN.md)
 
@@ -15,7 +15,7 @@
 <p>&nbsp;</p>
 
 <p><strong>示例 1：<br />
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/2100-2199/2181.Merge%20Nodes%20in%20Between%20Zeros/images/ex1-1.png" style="width: 600px; height: 41px;" /></strong></p>
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/2100-2199/2181.Merge%20Nodes%20in%20Between%20Zeros/images/ex1-1.png" style="width: 600px; height: 41px;" /></strong></p>
 
 <pre>
 <strong>输入：</strong>head = [0,3,1,0,4,5,2,0]
@@ -27,7 +27,7 @@
 </pre>
 
 <p><strong>示例 2：<br />
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/2100-2199/2181.Merge%20Nodes%20in%20Between%20Zeros/images/ex2-1.png" style="width: 600px; height: 41px;" /></strong></p>
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/2100-2199/2181.Merge%20Nodes%20in%20Between%20Zeros/images/ex2-1.png" style="width: 600px; height: 41px;" /></strong></p>
 
 <pre>
 <strong>输入：</strong>head = [0,1,0,3,0,2,2,0]

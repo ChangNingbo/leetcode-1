@@ -1,4 +1,4 @@
-# [2212. 射箭比赛中的最大得分](https://leetcode-cn.com/problems/maximum-points-in-an-archery-competition)
+# [2212. 射箭比赛中的最大得分](https://leetcode.cn/problems/maximum-points-in-an-archery-competition)
 
 [English Version](/solution/2200-2299/2212.Maximum%20Points%20in%20an%20Archery%20Competition/README_EN.md)
 
@@ -35,7 +35,7 @@
 
 <p><strong>示例 1：</strong></p>
 
-<p><img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/2200-2299/2212.Maximum%20Points%20in%20an%20Archery%20Competition/images/1647744752-kQKrXw-image.png" style="width: 600px; height: 120px;" /></p>
+<p><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/2200-2299/2212.Maximum%20Points%20in%20an%20Archery%20Competition/images/1647744752-kQKrXw-image.png" style="width: 600px; height: 120px;" /></p>
 
 <pre>
 <strong>输入：</strong>numArrows = 9, aliceArrows = [1,1,0,1,0,0,2,1,0,1,2,0]
@@ -47,7 +47,7 @@ Bob 获得总分 4 + 5 + 8 + 9 + 10 + 11 = 47 。
 
 <p><strong>示例 2：</strong></p>
 
-<p><img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/2200-2299/2212.Maximum%20Points%20in%20an%20Archery%20Competition/images/1647744785-cMHzaC-image.png" style="width: 600px; height: 117px;" /></p>
+<p><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/2200-2299/2212.Maximum%20Points%20in%20an%20Archery%20Competition/images/1647744785-cMHzaC-image.png" style="width: 600px; height: 117px;" /></p>
 
 <pre>
 <strong>输入：</strong>numArrows = 3, aliceArrows = [0,0,1,0,0,0,0,0,0,0,0,2]
@@ -72,6 +72,10 @@ Bob 获得总分 8 + 9 + 10 = 27 。
 
 <!-- 这里可写通用的实现逻辑 -->
 
+**方法一：二进制枚举**
+
+枚举 bob 射箭的最终状态，寻找满足题意的、且使得 bob 得分最大的状态。
+
 <!-- tabs:start -->
 
 ### **Python3**
@@ -79,7 +83,27 @@ Bob 获得总分 8 + 9 + 10 = 27 。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def maximumBobPoints(self, numArrows: int, aliceArrows: List[int]) -> List[int]:
+        n = len(aliceArrows)
+        state = 0
+        mx = -1
+        for mask in range(1 << n):
+            cnt = points = 0
+            for i, alice in enumerate(aliceArrows):
+                if (mask >> i) & 1:
+                    cnt += alice + 1
+                    points += i
+            if cnt <= numArrows and mx < points:
+                state = mask
+                mx = points
+        ans = [0] * n
+        for i, alice in enumerate(aliceArrows):
+            if (state >> i) & 1:
+                ans[i] = alice + 1
+                numArrows -= ans[i]
+        ans[0] = numArrows
+        return ans
 ```
 
 ### **Java**
@@ -87,13 +111,167 @@ Bob 获得总分 8 + 9 + 10 = 27 。
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public int[] maximumBobPoints(int numArrows, int[] aliceArrows) {
+        int n = aliceArrows.length;
+        int mx = -1;
+        int state = 0;
+        for (int mask = 1; mask < 1 << n; ++mask) {
+            int cnt = 0, points = 0;
+            for (int i = 0; i < n; ++i) {
+                if (((mask >> i) & 1) == 1) {
+                    cnt += aliceArrows[i] + 1;
+                    points += i;
+                }
+            }
+            if (cnt <= numArrows && mx < points) {
+                state = mask;
+                mx = points;
+            }
+        }
+        int[] ans = new int[n];
+        for (int i = 0; i < n; ++i) {
+            if (((state >> i) & 1) == 1) {
+                ans[i] = aliceArrows[i] + 1;
+                numArrows -= ans[i];
+            }
+        }
+        ans[0] += numArrows;
+        return ans;
+    }
+}
+```
 
+### **C++**
+
+```cpp
+class Solution {
+public:
+    vector<int> maximumBobPoints(int numArrows, vector<int>& aliceArrows) {
+        int n = aliceArrows.size();
+        int state = 0, mx = -1;
+        for (int mask = 1; mask < 1 << n; ++mask)
+        {
+            int cnt = 0, points = 0;
+            for (int i = 0; i < n; ++i)
+            {
+                if ((mask >> i) & 1)
+                {
+                    cnt += aliceArrows[i] + 1;
+                    points += i;
+                }
+            }
+            if (cnt <= numArrows && mx < points)
+            {
+                state = mask;
+                mx = points;
+            }
+        }
+        vector<int> ans(n);
+        for (int i = 0; i < n; ++i)
+        {
+            if ((state >> i) & 1)
+            {
+                ans[i] = aliceArrows[i] + 1;
+                numArrows -= ans[i];
+            }
+        }
+        ans[0] += numArrows;
+        return ans;
+    }
+};
+```
+
+### **Go**
+
+```go
+func maximumBobPoints(numArrows int, aliceArrows []int) []int {
+	n := len(aliceArrows)
+	state, mx := 0, -1
+	for mask := 1; mask < 1<<n; mask++ {
+		cnt, points := 0, 0
+		for i, alice := range aliceArrows {
+			if (mask>>i)&1 == 1 {
+				cnt += alice + 1
+				points += i
+			}
+		}
+		if cnt <= numArrows && mx < points {
+			state = mask
+			mx = points
+		}
+	}
+	ans := make([]int, n)
+	for i, alice := range aliceArrows {
+		if (state>>i)&1 == 1 {
+			ans[i] = alice + 1
+			numArrows -= ans[i]
+		}
+	}
+	ans[0] += numArrows
+	return ans
+}
 ```
 
 ### **TypeScript**
 
 ```ts
+function maximumBobPoints(numArrows: number, aliceArrows: number[]): number[] {
+    const dfs = (arr: number[], i: number, c: number): number[] => {
+        if (i < 0 || c === 0) {
+            arr[0] += c;
+            return arr;
+        }
+        const a1 = dfs([...arr], i - 1, c);
+        if (c > aliceArrows[i]) {
+            arr[i] = aliceArrows[i] + 1;
+            const a2 = dfs(arr, i - 1, c - aliceArrows[i] - 1);
+            if (
+                a2.reduce((p, v, i) => p + (v > 0 ? i : 0), 0) >=
+                a1.reduce((p, v, i) => p + (v > 0 ? i : 0), 0)
+            ) {
+                return a2;
+            }
+        }
+        return a1;
+    };
+    return dfs(new Array(12).fill(0), 11, numArrows);
+}
+```
 
+### **Rust**
+
+```rust
+impl Solution {
+    fn dfs(alice_arrows: &Vec<i32>, mut res: Vec<i32>, count: i32, i: usize) -> Vec<i32> {
+        if i == 0 || count == 0 {
+            res[0] += count;
+            return res;
+        }
+        let r1 = Self::dfs(alice_arrows, res.clone(), count, i - 1);
+        if count > alice_arrows[i] {
+            res[i] = alice_arrows[i] + 1;
+            let r2 = Self::dfs(alice_arrows, res, count - alice_arrows[i] - 1, i - 1);
+            if r2
+                .iter()
+                .enumerate()
+                .map(|(i, v)| if v > &0 { i } else { 0 })
+                .sum::<usize>()
+                > r1.iter()
+                    .enumerate()
+                    .map(|(i, v)| if v > &0 { i } else { 0 })
+                    .sum::<usize>()
+            {
+                return r2;
+            }
+        }
+        r1
+    }
+
+    pub fn maximum_bob_points(num_arrows: i32, alice_arrows: Vec<i32>) -> Vec<i32> {
+        Self::dfs(&alice_arrows, vec![0; 12], num_arrows, 11)
+    }
+}
 ```
 
 ### **...**

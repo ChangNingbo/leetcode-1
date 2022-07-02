@@ -4,11 +4,11 @@ class Solution:
         if k >= m + n - 3:
             return m + n - 2
         q = deque([(0, 0, k)])
-        vis = set([(0, 0, k)])
+        vis = {(0, 0, k)}
         ans = 0
         while q:
             ans += 1
-            for _ in range(len(q), 0, -1):
+            for _ in range(len(q)):
                 i, j, k = q.popleft()
                 for a, b in [[0, -1], [0, 1], [1, 0], [-1, 0]]:
                     x, y = i + a, j + b

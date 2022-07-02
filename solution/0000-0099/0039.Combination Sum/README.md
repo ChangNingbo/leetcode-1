@@ -1,4 +1,4 @@
-# [39. 组合总和](https://leetcode-cn.com/problems/combination-sum)
+# [39. 组合总和](https://leetcode.cn/problems/combination-sum)
 
 [English Version](/solution/0000-0099/0039.Combination%20Sum/README_EN.md)
 
@@ -179,6 +179,60 @@ func combinationSum(candidates []int, target int) [][]int {
 	var t []int
 	dfs(0, 0, t)
 	return ans
+}
+```
+
+### **TypeScript**
+
+```ts
+function combinationSum(candidates: number[], target: number): number[][] {
+    const n = candidates.length;
+    const t: number[] = [];
+    const res: number[][] = [];
+    const dfs = (i: number, sum: number) => {
+        if (sum > target) {
+            return;
+        }
+        if (sum === target) {
+            res.push([...t]);
+            return;
+        }
+        for (let j = i; j < n; j++) {
+            t.push(candidates[j]);
+            dfs(j, sum + candidates[j]);
+            t.pop();
+        }
+    };
+    dfs(0, 0);
+    return res;
+}
+```
+
+### **Rust**
+
+```rust
+impl Solution {
+    fn dfs(i: usize, count: i32, candidates: &Vec<i32>, t: &mut Vec<i32>, res: &mut Vec<Vec<i32>>) {
+        if count < 0 {
+            return;
+        }
+        if count == 0 {
+            res.push(t.clone());
+            return;
+        }
+        for j in i..candidates.len() {
+            let num = candidates[j];
+            t.push(num);
+            Self::dfs(j, count - num, candidates, t, res);
+            t.pop();
+        }
+    }
+
+    pub fn combination_count(candidates: Vec<i32>, target: i32) -> Vec<Vec<i32>> {
+        let mut res = Vec::new();
+        Self::dfs(0, target, &candidates, &mut vec![], &mut res);
+        res
+    }
 }
 ```
 

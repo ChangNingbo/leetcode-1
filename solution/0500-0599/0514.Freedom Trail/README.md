@@ -1,4 +1,4 @@
-# [514. 自由之路](https://leetcode-cn.com/problems/freedom-trail)
+# [514. 自由之路](https://leetcode.cn/problems/freedom-trail)
 
 [English Version](/solution/0500-0599/0514.Freedom%20Trail/README_EN.md)
 
@@ -23,7 +23,7 @@
 
 <p><strong>示例 1：</strong></p>
 
-<p><img src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0500-0599/0514.Freedom%20Trail/images/ring.jpg" style="height: 450px; width: 450px;" /></p>
+<p><img src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0500-0599/0514.Freedom%20Trail/images/ring.jpg" style="height: 450px; width: 450px;" /></p>
 
 <center>&nbsp;</center>
 

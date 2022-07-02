@@ -1,4 +1,4 @@
-# [2080. 区间内查询数字的频率](https://leetcode-cn.com/problems/range-frequency-queries)
+# [2080. 区间内查询数字的频率](https://leetcode.cn/problems/range-frequency-queries)
 
 [English Version](/solution/2000-2099/2080.Range%20Frequency%20Queries/README_EN.md)
 
@@ -69,7 +69,7 @@ class RangeFreqQuery:
         if value not in self.mp:
             return 0
         arr = self.mp[value]
-        l, r = bisect.bisect_right(arr, left - 1), bisect.bisect_right(arr, right)
+        l, r = bisect_right(arr, left - 1), bisect_right(arr, right)
         return r - l
 
 

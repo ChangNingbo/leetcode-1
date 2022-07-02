@@ -10,7 +10,7 @@
 
 <p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0000-0099/0064.Minimum%20Path%20Sum/images/minpath.jpg" style="width: 242px; height: 242px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0000-0099/0064.Minimum%20Path%20Sum/images/minpath.jpg" style="width: 242px; height: 242px;" />
 <pre>
 <strong>Input:</strong> grid = [[1,3,1],[1,5,1],[4,2,1]]
 <strong>Output:</strong> 7
@@ -95,11 +95,9 @@ function minPathSum(grid: number[][]): number {
     for (let j = 1; j < n; ++j) {
         dp[0][j] = dp[0][j - 1] + grid[0][j];
     }
-    // dp
     for (let i = 1; i < m; ++i) {
         for (let j = 1; j < n; ++j) {
-            let cur = grid[i][j];
-            dp[i][j] = cur + Math.min(dp[i - 1][j], dp[i][j - 1]);
+            dp[i][j] = Math.min(dp[i - 1][j], dp[i][j - 1]) + grid[i][j];
         }
     }
     return dp[m - 1][n - 1];
@@ -190,6 +188,56 @@ public class Solution {
             }
         }
         return dp[m- 1, n - 1];
+    }
+}
+```
+
+### **JavaScript**
+
+```js
+/**
+ * @param {number[][]} grid
+ * @return {number}
+ */
+var minPathSum = function (grid) {
+    let m = grid.length,
+        n = grid[0].length;
+    let dp = Array.from({ length: m }, v => new Array(n).fill(0));
+    dp[0][0] = grid[0][0];
+    for (let i = 1; i < m; ++i) {
+        dp[i][0] = dp[i - 1][0] + grid[i][0];
+    }
+    for (let j = 1; j < n; ++j) {
+        dp[0][j] = dp[0][j - 1] + grid[0][j];
+    }
+    for (let i = 1; i < m; ++i) {
+        for (let j = 1; j < n; ++j) {
+            dp[i][j] = Math.min(dp[i - 1][j], dp[i][j - 1]) + grid[i][j];
+        }
+    }
+    return dp[m - 1][n - 1];
+};
+```
+
+### **Rust**
+
+```rust
+impl Solution {
+    pub fn min_path_sum(mut grid: Vec<Vec<i32>>) -> i32 {
+        let m = grid.len();
+        let n = grid[0].len();
+        for i in 1..m {
+            grid[i][0] += grid[i - 1][0];
+        }
+        for i in 1..n {
+            grid[0][i] += grid[0][i - 1];
+        }
+        for i in 1..m {
+            for j in 1..n {
+                grid[i][j] += grid[i][j - 1].min(grid[i - 1][j]);
+            }
+        }
+        grid[m - 1][n - 1]
     }
 }
 ```

@@ -1,4 +1,4 @@
-# [953. 验证外星语词典](https://leetcode-cn.com/problems/verifying-an-alien-dictionary)
+# [953. 验证外星语词典](https://leetcode.cn/problems/verifying-an-alien-dictionary)
 
 [English Version](/solution/0900-0999/0953.Verifying%20an%20Alien%20Dictionary/README_EN.md)
 
@@ -60,19 +60,19 @@
 ```python
 class Solution:
     def isAlienSorted(self, words: List[str], order: str) -> bool:
-        index = {c: i for i, c in enumerate(order)}
-        for i in range(len(words) - 1):
-            w1, w2 = words[i], words[i + 1]
-            l1, l2 = len(w1), len(w2)
-            flag = False
-            for j in range(max(l1, l2)):
-                i1, i2 = -1 if j >= l1 else index[w1[j]], -1 if j >= l2 else index[w2[j]]
-                if i1 > i2:
-                    # 说明不是按字典序排序，直接返回False
+        m = {c: i for i, c in enumerate(order)}
+        for i in range(20):
+            prev = -1
+            valid = True
+            for x in words:
+                curr = -1 if i >= len(x) else m[x[i]]
+                if prev > curr:
                     return False
-                if i1 < i2:
-                    # 说明当前两单词是按字典序排序，无需再往下进行循环比较
-                    break
+                if prev == curr:
+                    valid = False
+                prev = curr
+            if valid:
+                return True
         return True
 ```
 
@@ -83,25 +83,25 @@ class Solution:
 ```java
 class Solution {
     public boolean isAlienSorted(String[] words, String order) {
-        int[] index = new int[26];
-        for (int i = 0; i < index.length; ++i) {
-            index[order.charAt(i) - 'a'] = i;
+        int[] m = new int[26];
+        for (int i = 0; i < 26; ++i) {
+            m[order.charAt(i) - 'a'] = i;
         }
-        for (int i = 0; i < words.length - 1; ++i) {
-            String w1 = words[i];
-            String w2 = words[i + 1];
-            int l1 = w1.length(), l2 = w2.length();
-            for (int j = 0; j < Math.max(l1, l2); ++j) {
-                int i1 = j >= l1 ? -1 : index[w1.charAt(j) - 'a'];
-                int i2 = j >= l2 ? -1 : index[w2.charAt(j) - 'a'];
-                if (i1 > i2) {
-                    // 说明不是按字典序排序，直接返回False
+        for (int i = 0; i < 20; ++i) {
+            int prev = -1;
+            boolean valid = true;
+            for (String x : words) {
+                int curr = i >= x.length() ? -1 : m[x.charAt(i) - 'a'];
+                if (prev > curr) {
                     return false;
                 }
-                if (i1 < i2) {
-                    // 说明当前两单词是按字典序排序，无需再往下进行循环比较
-                    break;
+                if (prev == curr) {
+                    valid = false;
                 }
+                prev = curr;
+            }
+            if (valid) {
+                break;
             }
         }
         return true;
@@ -114,24 +114,21 @@ class Solution {
 ```cpp
 class Solution {
 public:
-    bool isAlienSorted(vector<string> &words, string order) {
-        vector<int> index(26);
-        for (int i = 0; i < index.size(); ++i)
-            index[order[i] - 'a'] = i;
-        for (int i = 0; i < words.size() - 1; ++i)
+    bool isAlienSorted(vector<string>& words, string order) {
+        vector<int> m(26);
+        for (int i = 0; i < 26; ++i) m[order[i] - 'a'] = i;
+        for (int i = 0; i < 20; ++i)
         {
-            string w1 = words[i];
-            string w2 = words[i + 1];
-            int l1 = w1.size(), l2 = w2.size();
-            for (int j = 0; j < max(l1, l2); ++j)
+            int prev = -1;
+            bool valid = true;
+            for (auto& x : words)
             {
-                int i1 = j >= l1 ? -1 : index[w1[j] - 'a'];
-                int i2 = j >= l2 ? -1 : index[w2[j] - 'a'];
-                if (i1 > i2)
-                    return false;
-                if (i1 < i2)
-                    break;
+                int curr = i >= x.size() ? -1 : m[x[i] - 'a'];
+                if (prev > curr) return false;
+                if (prev == curr) valid = false;
+                prev = curr;
             }
+            if (valid) break;
         }
         return true;
     }
@@ -142,35 +139,64 @@ public:
 
 ```go
 func isAlienSorted(words []string, order string) bool {
-	index := make(map[byte]int)
-	for i := range order {
-		index[order[i]] = i
+	m := make([]int, 26)
+	for i, c := range order {
+		m[c-'a'] = i
 	}
-	for i := 0; i < len(words)-1; i++ {
-		w1, w2 := words[i], words[i+1]
-		l1, l2 := len(w1), len(w2)
-		flag := true
-		for j := 0; j < min(l1, l2) && flag; j++ {
-			i1, i2 := index[w1[j]], index[w2[j]]
-			if i1 > i2 {
+	for i := 0; i < 20; i++ {
+		prev := -1
+		valid := true
+		for _, x := range words {
+			curr := -1
+			if i < len(x) {
+				curr = m[x[i]-'a']
+			}
+			if prev > curr {
 				return false
 			}
-			if i1 < i2 {
-				flag = false
+			if prev == curr {
+				valid = false
 			}
+			prev = curr
 		}
-		if flag && l1 > l2 {
-			return false
+		if valid {
+			break
 		}
 	}
 	return true
 }
+```
 
-func min(a, b int) int {
-	if a < b {
-		return a
-	}
-	return b
+### **Rust**
+
+```rust
+use std::collections::HashMap;
+impl Solution {
+    pub fn is_alien_sorted(words: Vec<String>, order: String) -> bool {
+        let n = words.len();
+        let mut map = HashMap::new();
+        order.as_bytes().iter().enumerate().for_each(|(i, &v)| {
+            map.insert(v, i);
+        });
+        for i in 1..n {
+            let s1 = words[i - 1].as_bytes();
+            let s2 = words[i].as_bytes();
+            let mut is_equal = true;
+            for i in 0..s1.len().min(s2.len()) {
+                if map.get(&s1[i]) > map.get(&s2[i]) {
+                    return false;
+                }
+                if map.get(&s1[i]) < map.get(&s2[i]) {
+                    is_equal = false;
+                    break;
+                }
+            }
+            if is_equal && s1.len() > s2.len() {
+                return false;
+            }
+        }
+        true
+    }
 }
 ```
 

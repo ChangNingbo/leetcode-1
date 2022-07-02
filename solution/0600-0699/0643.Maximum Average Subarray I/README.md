@@ -1,4 +1,4 @@
-# [643. 子数组最大平均数 I](https://leetcode-cn.com/problems/maximum-average-subarray-i)
+# [643. 子数组最大平均数 I](https://leetcode.cn/problems/maximum-average-subarray-i)
 
 [English Version](/solution/0600-0699/0643.Maximum%20Average%20Subarray%20I/README_EN.md)
 
@@ -100,6 +100,24 @@ function findMaxAverage(nums: number[], k: number): number {
         ans = Math.max(ans, sum);
     }
     return ans / k;
+}
+```
+
+### **Rust**
+
+```rust
+impl Solution {
+    pub fn find_max_average(nums: Vec<i32>, k: i32) -> f64 {
+        let k = k as usize;
+        let n = nums.len();
+        let mut sum = nums.iter().take(k).sum::<i32>();
+        let mut max = sum;
+        for i in k..n {
+            sum += nums[i] - nums[i - k];
+            max = max.max(sum);
+        }
+        f64::from(max) / f64::from(k as i32)
+    }
 }
 ```
 

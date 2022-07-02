@@ -1,4 +1,4 @@
-# [500. 键盘行](https://leetcode-cn.com/problems/keyboard-row)
+# [500. 键盘行](https://leetcode.cn/problems/keyboard-row)
 
 [English Version](/solution/0500-0599/0500.Keyboard%20Row/README_EN.md)
 
@@ -16,7 +16,7 @@
 	<li>第三行由字符 <code>"zxcvbnm"</code> 组成。</li>
 </ul>
 
-<p><img alt="American keyboard" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0500-0599/0500.Keyboard%20Row/images/keyboard.png" style="width: 100%; max-width: 600px" /></p>
+<p><img alt="American keyboard" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0500-0599/0500.Keyboard%20Row/images/keyboard.png" style="width: 100%; max-width: 600px" /></p>
 
 <p> </p>
 

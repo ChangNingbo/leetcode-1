@@ -1,4 +1,4 @@
-# [62. 不同路径](https://leetcode-cn.com/problems/unique-paths)
+# [62. 不同路径](https://leetcode.cn/problems/unique-paths)
 
 [English Version](/solution/0000-0099/0062.Unique%20Paths/README_EN.md)
 
@@ -15,7 +15,7 @@
 <p> </p>
 
 <p><strong>示例 1：</strong></p>
-<img src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0000-0099/0062.Unique%20Paths/images/robot_maze.png" />
+<img src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0000-0099/0062.Unique%20Paths/images/robot_maze.png" />
 <pre>
 <strong>输入：</strong>m = 3, n = 7
 <strong>输出：</strong>28</pre>
@@ -58,9 +58,9 @@
 
 <!-- 这里可写通用的实现逻辑 -->
 
-动态规划。
+**方法一：动态规划**
 
-假设 `dp[i][j]` 表示到达网格 `(i,j)` 的路径数，则 `dp[i][j] = dp[i - 1][j] + dp[i][j - 1]`。
+假设 `dp[i][j]` 表示到达网格 `(i, j)` 的路径数，则 `dp[i][j] = dp[i - 1][j] + dp[i][j - 1]`。
 
 <!-- tabs:start -->
 
@@ -150,6 +150,23 @@ func uniquePaths(m int, n int) int {
 		}
 	}
 	return dp[m-1][n-1]
+}
+```
+
+### **Rust**
+
+```rust
+impl Solution {
+    pub fn unique_paths(m: i32, n: i32) -> i32 {
+        let (m, n) = (m as usize, n as usize);
+        let mut dp = vec![1; n];
+        for i in 1..m {
+            for j in 1..n {
+                dp[j] += dp[j - 1];
+            }
+        }
+        dp[n - 1]
+    }
 }
 ```
 

@@ -1,4 +1,4 @@
-# [61. 旋转链表](https://leetcode-cn.com/problems/rotate-list)
+# [61. 旋转链表](https://leetcode.cn/problems/rotate-list)
 
 [English Version](/solution/0000-0099/0061.Rotate%20List/README_EN.md)
 
@@ -11,14 +11,14 @@
 <p>&nbsp;</p>
 
 <p><strong>示例 1：</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0000-0099/0061.Rotate%20List/images/rotate1.jpg" style="width: 450px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0000-0099/0061.Rotate%20List/images/rotate1.jpg" style="width: 450px;" />
 <pre>
 <strong>输入：</strong>head = [1,2,3,4,5], k = 2
 <strong>输出：</strong>[4,5,1,2,3]
 </pre>
 
 <p><strong>示例 2：</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0000-0099/0061.Rotate%20List/images/roate2.jpg" style="width: 305px; height: 350px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0000-0099/0061.Rotate%20List/images/roate2.jpg" style="width: 305px; height: 350px;" />
 <pre>
 <strong>输入：</strong>head = [0,1,2], k = 4
 <strong>输出：</strong>[2,0,1]
@@ -165,6 +165,51 @@ function rotateRight(head: ListNode | null, k: number): ListNode | null {
 }
 ```
 
+```ts
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     val: number
+ *     next: ListNode | null
+ *     constructor(val?: number, next?: ListNode | null) {
+ *         this.val = (val===undefined ? 0 : val)
+ *         this.next = (next===undefined ? null : next)
+ *     }
+ * }
+ */
+
+function rotateRight(head: ListNode | null, k: number): ListNode | null {
+    if (head == null || k === 0) {
+        return head;
+    }
+
+    let n = 0;
+    let cur = head;
+    while (cur != null) {
+        cur = cur.next;
+        n++;
+    }
+    k = k % n;
+    if (k === 0) {
+        return head;
+    }
+
+    cur = head;
+    for (let i = 0; i < n - k - 1; i++) {
+        cur = cur.next;
+    }
+
+    const res = cur.next;
+    cur.next = null;
+    cur = res;
+    while (cur.next != null) {
+        cur = cur.next;
+    }
+    cur.next = head;
+    return res;
+}
+```
+
 ### **C++**
 
 ```cpp
@@ -254,6 +299,59 @@ public class Solution {
         slow.next = null;
         fast.next = head;
         return start;
+    }
+}
+```
+
+### **Rust**
+
+```rust
+// Definition for singly-linked list.
+// #[derive(PartialEq, Eq, Clone, Debug)]
+// pub struct ListNode {
+//   pub val: i32,
+//   pub next: Option<Box<ListNode>>
+// }
+//
+// impl ListNode {
+//   #[inline]
+//   fn new(val: i32) -> Self {
+//     ListNode {
+//       next: None,
+//       val
+//     }
+//   }
+// }
+impl Solution {
+    pub fn rotate_right(mut head: Option<Box<ListNode>>, mut k: i32) -> Option<Box<ListNode>> {
+        if head.is_none() || k == 0 {
+            return head;
+        }
+        let n = {
+            let mut cur = &head;
+            let mut res = 0;
+            while cur.is_some() {
+                cur = &cur.as_ref().unwrap().next;
+                res += 1;
+            }
+            res
+        };
+        k = k % n;
+        if k == 0 {
+            return head;
+        }
+
+        let mut cur = &mut head;
+        for _ in 0..n - k - 1 {
+            cur = &mut cur.as_mut().unwrap().next;
+        }
+        let mut res = cur.as_mut().unwrap().next.take();
+        cur = &mut res;
+        while cur.is_some() {
+            cur = &mut cur.as_mut().unwrap().next;
+        }
+        *cur = head.take();
+        res
     }
 }
 ```

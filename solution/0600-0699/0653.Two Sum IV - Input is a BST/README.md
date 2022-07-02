@@ -1,4 +1,4 @@
-# [653. 两数之和 IV - 输入 BST](https://leetcode-cn.com/problems/two-sum-iv-input-is-a-bst)
+# [653. 两数之和 IV - 输入 BST](https://leetcode.cn/problems/two-sum-iv-input-is-a-bst)
 
 [English Version](/solution/0600-0699/0653.Two%20Sum%20IV%20-%20Input%20is%20a%20BST/README_EN.md)
 
@@ -11,14 +11,14 @@
 <p>&nbsp;</p>
 
 <p><strong>示例 1：</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0600-0699/0653.Two%20Sum%20IV%20-%20Input%20is%20a%20BST/images/sum_tree_1.jpg" style="height: 229px; width: 400px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0600-0699/0653.Two%20Sum%20IV%20-%20Input%20is%20a%20BST/images/sum_tree_1.jpg" style="height: 229px; width: 400px;" />
 <pre>
 <strong>输入:</strong> root = [5,3,6,2,4,null,7], k = 9
 <strong>输出:</strong> true
 </pre>
 
 <p><strong>示例 2：</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0600-0699/0653.Two%20Sum%20IV%20-%20Input%20is%20a%20BST/images/sum_tree_2.jpg" style="height: 229px; width: 400px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0600-0699/0653.Two%20Sum%20IV%20-%20Input%20is%20a%20BST/images/sum_tree_2.jpg" style="height: 229px; width: 400px;" />
 <pre>
 <strong>输入:</strong> root = [5,3,6,2,4,null,7], k = 28
 <strong>输出:</strong> false
@@ -156,15 +156,15 @@ function find(root: TreeNode | null, k: number, nodes: Set<number>): boolean {
 
 function findTarget(root: TreeNode | null, k: number): boolean {
     if (root == null) {
-      return false;
+        return false;
     }
     const set = new Set<number>();
     const dfs = (root: TreeNode | null) => {
         if (root == null) {
-          return false;
+            return false;
         }
         if (set.has(root.val)) {
-          return true;
+            return true;
         }
         set.add(k - root.val);
         return dfs(root.left) || dfs(root.right);

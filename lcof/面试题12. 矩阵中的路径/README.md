@@ -1,4 +1,4 @@
-# [面试题 12. 矩阵中的路径](https://leetcode-cn.com/problems/ju-zhen-zhong-de-lu-jing-lcof/)
+# [面试题 12. 矩阵中的路径](https://leetcode.cn/problems/ju-zhen-zhong-de-lu-jing-lcof/)
 
 ## 题目描述
 
@@ -10,7 +10,7 @@
 
 <p>例如，在下面的 3×4 的矩阵中包含单词 "ABCCED"（单词中的字母已标出）。</p>
 
-<p><img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/lcof/%E9%9D%A2%E8%AF%95%E9%A2%9812.%20%E7%9F%A9%E9%98%B5%E4%B8%AD%E7%9A%84%E8%B7%AF%E5%BE%84/images/word2.jpg" style="width: 322px; height: 242px;" /></p>
+<p><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/lcof/%E9%9D%A2%E8%AF%95%E9%A2%9812.%20%E7%9F%A9%E9%98%B5%E4%B8%AD%E7%9A%84%E8%B7%AF%E5%BE%84/images/word2.jpg" style="width: 322px; height: 242px;" /></p>
 
 <p> </p>
 
@@ -40,7 +40,7 @@
 
 <p> </p>
 
-<p><strong>注意：</strong>本题与主站 79 题相同：<a href="https://leetcode-cn.com/problems/word-search/">https://leetcode-cn.com/problems/word-search/</a></p>
+<p><strong>注意：</strong>本题与主站 79 题相同：<a href="https://leetcode.cn/problems/word-search/">https://leetcode.cn/problems/word-search/</a></p>
 
 ## 解法
 
@@ -214,24 +214,24 @@ public:
 function exist(board: string[][], word: string): boolean {
     const m = board.length;
     const n = board[0].length;
-    const dfs = (y: number, x: number, i: number) => {
-        if (i === word.length) {
-            return true;
-        }
-        if ((board[y] || [])[x] !== word[i]) {
+    const dfs = (i: number, j: number, k: number) => {
+        if ((board[i] ?? [])[j] !== word[k]) {
             return false;
         }
-        const temp = board[y][x];
-        board[y][x] = '';
+        if (++k === word.length) {
+            return true;
+        }
+        const temp = board[i][j];
+        board[i][j] = ' ';
         if (
-            dfs(y + 1, x, i + 1) ||
-            dfs(y, x + 1, i + 1) ||
-            dfs(y - 1, x, i + 1) ||
-            dfs(y, x - 1, i + 1)
+            dfs(i + 1, j, k) ||
+            dfs(i, j + 1, k) ||
+            dfs(i - 1, j, k) ||
+            dfs(i, j - 1, k)
         ) {
             return true;
         }
-        board[y][x] = temp;
+        board[i][j] = temp;
         return false;
     };
     for (let i = 0; i < m; i++) {
@@ -249,23 +249,24 @@ function exist(board: string[][], word: string): boolean {
 
 ```rust
 impl Solution {
-    fn dfs(board: &mut Vec<Vec<char>>, chars: &Vec<char>, y: usize, x: usize, i: usize) -> bool {
-        if board[y][x] != chars[i] {
+    fn dfs(board: &mut Vec<Vec<char>>, chars: &Vec<char>, i: usize, j: usize, mut k: usize) -> bool {
+        if board[i][j] != chars[k] {
             return false;
         }
-        if i + 1 == chars.len() {
+        k += 1;
+        if k == chars.len() {
             return true;
         }
-        let temp = board[y][x];
-        board[y][x] = ' ';
-        if y != 0 && Solution::dfs(board, chars, y - 1, x, i + 1)
-            || x != 0 && Solution::dfs(board, chars, y, x - 1, i + 1)
-            || y != board.len() - 1 && Solution::dfs(board, chars, y + 1, x, i + 1)
-            || x != board[0].len() - 1 && Solution::dfs(board, chars, y, x + 1, i + 1)
+        let temp = board[i][j];
+        board[i][j] = ' ';
+        if i != 0 && Self::dfs(board, chars, i - 1, j, k)
+            || j != 0 && Self::dfs(board, chars, i, j - 1, k)
+            || i != board.len() - 1 && Self::dfs(board, chars, i + 1, j, k)
+            || j != board[0].len() - 1 && Self::dfs(board, chars, i, j + 1, k)
         {
             return true;
         }
-        board[y][x] = temp;
+        board[i][j] = temp;
         false
     }
 
@@ -275,7 +276,7 @@ impl Solution {
         let chars = word.chars().collect::<Vec<char>>();
         for i in 0..m {
             for j in 0..n {
-                if Solution::dfs(&mut board, &chars, i, j, 0) {
+                if Self::dfs(&mut board, &chars, i, j, 0) {
                     return true;
                 }
             }

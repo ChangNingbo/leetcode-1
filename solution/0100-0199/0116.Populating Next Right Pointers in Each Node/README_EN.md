@@ -21,7 +21,7 @@ struct Node {
 
 <p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0100-0199/0116.Populating%20Next%20Right%20Pointers%20in%20Each%20Node/images/116_sample.png" style="width: 500px; height: 171px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0100-0199/0116.Populating%20Next%20Right%20Pointers%20in%20Each%20Node/images/116_sample.png" style="width: 500px; height: 171px;" />
 <pre>
 <strong>Input:</strong> root = [1,2,3,4,5,6,7]
 <strong>Output:</strong> [1,#,2,3,#,4,5,6,7,#]
@@ -208,18 +208,53 @@ public:
  */
 
 function connect(root: Node | null): Node | null {
+    if (root == null || root.left == null) {
+        return root;
+    }
+    const { left, right, next } = root;
+    left.next = right;
+    if (next != null) {
+        right.next = next.left;
+    }
+    connect(left);
+    connect(right);
+    return root;
+}
+```
+
+```ts
+/**
+ * Definition for Node.
+ * class Node {
+ *     val: number
+ *     left: Node | null
+ *     right: Node | null
+ *     next: Node | null
+ *     constructor(val?: number, left?: Node, right?: Node, next?: Node) {
+ *         this.val = (val===undefined ? 0 : val)
+ *         this.left = (left===undefined ? null : left)
+ *         this.right = (right===undefined ? null : right)
+ *         this.next = (next===undefined ? null : next)
+ *     }
+ * }
+ */
+
+function connect(root: Node | null): Node | null {
     if (root == null) {
         return root;
     }
-    const { left, right } = root;
-    if (left != null) {
-        left.next = right;
+    const queue = [root];
+    while (queue.length !== 0) {
+        const n = queue.length;
+        let pre = null;
+        for (let i = 0; i < n; i++) {
+            const node = queue.shift();
+            node.next = pre;
+            pre = node;
+            const { left, right } = node;
+            left && queue.push(right, left);
+        }
     }
-    if (right != null && root.next != null) {
-        root.right.next = root.next.left;
-    }
-    connect(root.left);
-    connect(root.right);
     return root;
 }
 ```

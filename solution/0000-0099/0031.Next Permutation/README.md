@@ -1,4 +1,4 @@
-# [31. 下一个排列](https://leetcode-cn.com/problems/next-permutation)
+# [31. 下一个排列](https://leetcode.cn/problems/next-permutation)
 
 [English Version](/solution/0000-0099/0031.Next%20Permutation/README_EN.md)
 
@@ -78,10 +78,32 @@
 
 ```
 
-### **...**
+### **C++**
 
-```
-
+```cpp
+class Solution {
+public:
+    void nextPermutation(vector<int>& nums) {
+        int i, j;
+        int n = nums.size();
+        for (i = n - 2; i >= 0; i--) {
+            if (nums[i] < nums[i + 1]) {
+                break;
+            }
+        }
+        if (i < 0)
+            reverse(nums.begin(), nums.end());
+        else {
+            for (j = n - 1; j >= 0; j--) {
+                if (nums[i] < nums[j]) {
+                    break;
+                }
+            }
+            swap(nums[i], nums[j]);
+            reverse(nums.begin() + i + 1, nums.end());
+        }
+    }
+};
 ```
 
 <!-- tabs:end -->

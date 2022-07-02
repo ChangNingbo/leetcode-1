@@ -1,4 +1,4 @@
-# [1572. 矩阵对角线元素的和](https://leetcode-cn.com/problems/matrix-diagonal-sum)
+# [1572. 矩阵对角线元素的和](https://leetcode.cn/problems/matrix-diagonal-sum)
 
 [English Version](/solution/1500-1599/1572.Matrix%20Diagonal%20Sum/README_EN.md)
 
@@ -14,7 +14,7 @@
 
 <p><strong>示例&nbsp; 1：</strong></p>
 
-<p><img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/1500-1599/1572.Matrix%20Diagonal%20Sum/images/sample_1911.png" style="height:174px; width:336px" /></p>
+<p><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/1500-1599/1572.Matrix%20Diagonal%20Sum/images/sample_1911.png" style="height:174px; width:336px" /></p>
 
 <pre>
 <strong>输入：</strong>mat = [[<strong>1</strong>,2,<strong>3</strong>],
@@ -134,6 +134,24 @@ func diagonalSum(mat [][]int) int {
 		}
 	}
 	return res
+}
+```
+
+### **Rust**
+
+```rust
+impl Solution {
+    pub fn diagonal_sum(mat: Vec<Vec<i32>>) -> i32 {
+        let n = mat.len();
+        let mut res = 0;
+        for i in 0..n {
+            res += mat[i][i] + mat[n - i - 1][i];
+        }
+        if n & 1 == 1 {
+            return res - mat[n / 2][n / 2];
+        }
+        res
+    }
 }
 ```
 

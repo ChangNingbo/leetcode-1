@@ -1,4 +1,4 @@
-# [351. 安卓系统手势解锁](https://leetcode-cn.com/problems/android-unlock-patterns)
+# [351. 安卓系统手势解锁](https://leetcode.cn/problems/android-unlock-patterns)
 
 [English Version](/solution/0300-0399/0351.Android%20Unlock%20Patterns/README_EN.md)
 
@@ -20,7 +20,7 @@
 
 <p>以下是一些有效和无效解锁模式的示例：</p>
 
-<p><img src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0300-0399/0351.Android%20Unlock%20Patterns/images/android-unlock.png" /></p>
+<p><img src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0300-0399/0351.Android%20Unlock%20Patterns/images/android-unlock.png" /></p>
 
 <ul>
 	<li><strong>无效手势：</strong><code>[4,1,3,6]</code> ，连接点 1 和点&nbsp;3 时经过了未被连接过的&nbsp;2 号点。</li>

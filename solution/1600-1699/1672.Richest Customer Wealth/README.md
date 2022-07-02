@@ -1,4 +1,4 @@
-# [1672. 最富有客户的资产总量](https://leetcode-cn.com/problems/richest-customer-wealth)
+# [1672. 最富有客户的资产总量](https://leetcode.cn/problems/richest-customer-wealth)
 
 [English Version](/solution/1600-1699/1672.Richest%20Customer%20Wealth/README_EN.md)
 
@@ -114,6 +114,35 @@ func maximumWealth(accounts [][]int) int {
 		}
 	}
 	return res
+}
+```
+
+### **TypeScript**
+
+```ts
+function maximumWealth(accounts: number[][]): number {
+    return accounts.reduce(
+        (res, account) =>
+            Math.max(
+                res,
+                account.reduce((p, v) => p + v),
+            ),
+        0,
+    );
+}
+```
+
+### **Rust**
+
+```rust
+impl Solution {
+    pub fn maximum_wealth(accounts: Vec<Vec<i32>>) -> i32 {
+        accounts
+            .iter()
+            .map(|account| account.iter().sum())
+            .max()
+            .unwrap()
+    }
 }
 ```
 

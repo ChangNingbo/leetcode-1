@@ -14,7 +14,7 @@
 
 <p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/1000-1099/1008.Construct%20Binary%20Search%20Tree%20from%20Preorder%20Traversal/images/1266.png" style="height: 386px; width: 590px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/1000-1099/1008.Construct%20Binary%20Search%20Tree%20from%20Preorder%20Traversal/images/1266.png" style="height: 386px; width: 590px;" />
 <pre>
 <strong>Input:</strong> preorder = [8,5,1,7,10,12]
 <strong>Output:</strong> [8,5,10,1,7,null,12]
@@ -184,6 +184,110 @@ func bstFromPreorder(preorder []int) *TreeNode {
 		return root
 	}
 	return dfs(0, len(preorder)-1)
+}
+```
+
+### **TypeScript**
+
+```ts
+/**
+ * Definition for a binary tree node.
+ * class TreeNode {
+ *     val: number
+ *     left: TreeNode | null
+ *     right: TreeNode | null
+ *     constructor(val?: number, left?: TreeNode | null, right?: TreeNode | null) {
+ *         this.val = (val===undefined ? 0 : val)
+ *         this.left = (left===undefined ? null : left)
+ *         this.right = (right===undefined ? null : right)
+ *     }
+ * }
+ */
+
+function bstFromPreorder(preorder: number[]): TreeNode | null {
+    const n = preorder.length;
+    const next = new Array(n);
+    const stack = [];
+    for (let i = n - 1; i >= 0; i--) {
+        while (
+            stack.length !== 0 &&
+            preorder[stack[stack.length - 1]] < preorder[i]
+        ) {
+            stack.pop();
+        }
+        next[i] = stack[stack.length - 1] ?? n;
+        stack.push(i);
+    }
+
+    const dfs = (left: number, right: number) => {
+        if (left >= right) {
+            return null;
+        }
+        return new TreeNode(
+            preorder[left],
+            dfs(left + 1, next[left]),
+            dfs(next[left], right),
+        );
+    };
+    return dfs(0, n);
+}
+```
+
+### **Rust**
+
+```rust
+// Definition for a binary tree node.
+// #[derive(Debug, PartialEq, Eq)]
+// pub struct TreeNode {
+//   pub val: i32,
+//   pub left: Option<Rc<RefCell<TreeNode>>>,
+//   pub right: Option<Rc<RefCell<TreeNode>>>,
+// }
+//
+// impl TreeNode {
+//   #[inline]
+//   pub fn new(val: i32) -> Self {
+//     TreeNode {
+//       val,
+//       left: None,
+//       right: None
+//     }
+//   }
+// }
+use std::rc::Rc;
+use std::cell::RefCell;
+impl Solution {
+    fn dfs(
+        preorder: &Vec<i32>,
+        next: &Vec<usize>,
+        left: usize,
+        right: usize,
+    ) -> Option<Rc<RefCell<TreeNode>>> {
+        if left >= right {
+            return None;
+        }
+        Some(Rc::new(RefCell::new(TreeNode {
+            val: preorder[left],
+            left: Self::dfs(preorder, next, left + 1, next[left]),
+            right: Self::dfs(preorder, next, next[left], right),
+        })))
+    }
+
+    pub fn bst_from_preorder(preorder: Vec<i32>) -> Option<Rc<RefCell<TreeNode>>> {
+        let n = preorder.len();
+        let mut stack = Vec::new();
+        let mut next = vec![n; n];
+        for i in (0..n).rev() {
+            while !stack.is_empty() && preorder[*stack.last().unwrap()] < preorder[i] {
+                stack.pop();
+            }
+            if !stack.is_empty() {
+                next[i] = *stack.last().unwrap();
+            }
+            stack.push(i);
+        }
+        Self::dfs(&preorder, &next, 0, n)
+    }
 }
 ```
 

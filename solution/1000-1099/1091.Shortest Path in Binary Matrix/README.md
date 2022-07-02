@@ -1,4 +1,4 @@
-# [1091. 二进制矩阵中的最短路径](https://leetcode-cn.com/problems/shortest-path-in-binary-matrix)
+# [1091. 二进制矩阵中的最短路径](https://leetcode.cn/problems/shortest-path-in-binary-matrix)
 
 [English Version](/solution/1000-1099/1091.Shortest%20Path%20in%20Binary%20Matrix/README_EN.md)
 
@@ -20,14 +20,14 @@
 <p> </p>
 
 <p><strong>示例 1：</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/1000-1099/1091.Shortest%20Path%20in%20Binary%20Matrix/images/example1_1.png" style="width: 500px; height: 234px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/1000-1099/1091.Shortest%20Path%20in%20Binary%20Matrix/images/example1_1.png" style="width: 500px; height: 234px;" />
 <pre>
 <strong>输入：</strong>grid = [[0,1],[1,0]]
 <strong>输出：</strong>2
 </pre>
 
 <p><strong>示例 2：</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/1000-1099/1091.Shortest%20Path%20in%20Binary%20Matrix/images/example2_1.png" style="height: 216px; width: 500px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/1000-1099/1091.Shortest%20Path%20in%20Binary%20Matrix/images/example2_1.png" style="height: 216px; width: 500px;" />
 <pre>
 <strong>输入：</strong>grid = [[0,0,0],[1,1,0],[1,1,0]]
 <strong>输出：</strong>4
@@ -74,7 +74,7 @@ class Solution:
         ans = 0
         while q:
             ans += 1
-            for _ in range(len(q), 0, -1):
+            for _ in range(len(q)):
                 i, j = q.popleft()
                 if (i, j) == (n - 1, n - 1):
                     return ans
@@ -194,6 +194,44 @@ func shortestPathBinaryMatrix(grid [][]int) int {
 		}
 	}
 	return -1
+}
+```
+
+### **Rust**
+
+```rust
+use std::collections::VecDeque;
+impl Solution {
+    pub fn shortest_path_binary_matrix(mut grid: Vec<Vec<i32>>) -> i32 {
+        let n = grid.len();
+        let mut queue = VecDeque::new();
+        queue.push_back([0, 0]);
+        let mut res = 0;
+        while !queue.is_empty() {
+            res += 1;
+            for _ in 0..queue.len() {
+                let [i, j] = queue.pop_front().unwrap();
+                if grid[i][j] == 1 {
+                    continue;
+                }
+                if i == n - 1 && j == n - 1 {
+                    return res;
+                }
+                grid[i][j] = 1;
+                for x in -1..=1 {
+                    for y in -1..=1 {
+                        let x = x + i as i32;
+                        let y = y + j as i32;
+                        if x < 0 || x == n as i32 || y < 0 || y == n as i32 {
+                            continue;
+                        }
+                        queue.push_back([x as usize, y as usize]);
+                    }
+                }
+            }
+        }
+        -1
+    }
 }
 ```
 

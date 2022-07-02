@@ -1,4 +1,4 @@
-# [2039. 网络空闲的时刻](https://leetcode-cn.com/problems/the-time-when-the-network-becomes-idle)
+# [2039. 网络空闲的时刻](https://leetcode.cn/problems/the-time-when-the-network-becomes-idle)
 
 [English Version](/solution/2000-2099/2039.The%20Time%20When%20the%20Network%20Becomes%20Idle/README_EN.md)
 
@@ -27,7 +27,7 @@
 
 <p><strong>示例 1：</strong></p>
 
-<p><img alt="example 1" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/2000-2099/2039.The%20Time%20When%20the%20Network%20Becomes%20Idle/images/quiet-place-example1.png" style="width: 750px; height: 384px;"></p>
+<p><img alt="example 1" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/2000-2099/2039.The%20Time%20When%20the%20Network%20Becomes%20Idle/images/quiet-place-example1.png" style="width: 750px; height: 384px;"></p>
 
 <pre><b>输入：</b>edges = [[0,1],[1,2]], patience = [0,2,1]
 <b>输出：</b>8
@@ -57,7 +57,7 @@
 
 <p><strong>示例 2：</strong></p>
 
-<p><img alt="example 2" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/2000-2099/2039.The%20Time%20When%20the%20Network%20Becomes%20Idle/images/network_a_quiet_place_2.png" style="width: 100px; height: 85px;"></p>
+<p><img alt="example 2" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/2000-2099/2039.The%20Time%20When%20the%20Network%20Becomes%20Idle/images/network_a_quiet_place_2.png" style="width: 100px; height: 85px;"></p>
 
 <pre><b>输入：</b>edges = [[0,1],[0,2],[1,2]], patience = [0,10,10]
 <b>输出：</b>3
@@ -86,7 +86,7 @@
 
 <!-- 这里可写通用的实现逻辑 -->
 
-用 BFS 获取主服务器 0 到每个数据服务器的最短距离 step。每个数据服务器 v 从发出信息到收到主服务器的响应信息，所经过的距离（或者时间） `d = step * 2`，由于数据服务器 v 可能每隔 `t = patience[v]` 就会重复发送一次消息，可以推算出每个数据服务器 v 最后一次发送消息的时间是 `⌊(d - 1) / t⌋ * t`，所以它最后一次收到主服务器的响应信息时间是 `⌊(d - 1) / t⌋ * t + d`，空闲时间是 `⌊(d - 1) / t⌋ * t + d + 1`，找出所有空间时间的最大值即可。 
+用 BFS 获取主服务器 0 到每个数据服务器的最短距离 step。每个数据服务器 v 从发出信息到收到主服务器的响应信息，所经过的距离（或者时间） `d = step * 2`，由于数据服务器 v 可能每隔 `t = patience[v]` 就会重复发送一次消息，可以推算出每个数据服务器 v 最后一次发送消息的时间是 `⌊(d - 1) / t⌋ * t`，所以它最后一次收到主服务器的响应信息时间是 `⌊(d - 1) / t⌋ * t + d`，空闲时间是 `⌊(d - 1) / t⌋ * t + d + 1`，找出所有空间时间的最大值即可。
 
 <!-- tabs:start -->
 

@@ -1,4 +1,4 @@
-# [1138. 字母板上的路径](https://leetcode-cn.com/problems/alphabet-board-path)
+# [1138. 字母板上的路径](https://leetcode.cn/problems/alphabet-board-path)
 
 [English Version](/solution/1100-1199/1138.Alphabet%20Board%20Path/README_EN.md)
 
@@ -10,7 +10,7 @@
 
 <p>在本题里，字母板为<code>board = ["abcde", "fghij", "klmno", "pqrst", "uvwxy", "z"]</code>，如下所示。</p>
 
-<p><img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/1100-1199/1138.Alphabet%20Board%20Path/images/azboard.png" style="width: 300px;" /></p>
+<p><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/1100-1199/1138.Alphabet%20Board%20Path/images/azboard.png" style="width: 300px;" /></p>
 
 <p>我们可以按下面的指令规则行动：</p>
 

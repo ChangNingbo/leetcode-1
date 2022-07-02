@@ -1,4 +1,4 @@
-# [389. 找不同](https://leetcode-cn.com/problems/find-the-difference)
+# [389. 找不同](https://leetcode.cn/problems/find-the-difference)
 
 [English Version](/solution/0300-0399/0389.Find%20the%20Difference/README_EN.md)
 
@@ -82,6 +82,31 @@ class Solution {
             --counter[index];
         }
         return ' ';
+    }
+}
+```
+
+### **Rust**
+
+```rust
+impl Solution {
+    pub fn find_the_difference(s: String, t: String) -> char {
+        let s = s.as_bytes();
+        let t = t.as_bytes();
+        let n = s.len();
+        let mut count = [0; 26];
+        for i in 0..n {
+            count[(s[i] - b'a') as usize] -= 1;
+            count[(t[i] - b'a') as usize] += 1;
+        }
+        let mut res = *t.last().unwrap();
+        for i in 0..26 {
+            if count[i] == 1 {
+                res = (i as u8) + b'a';
+                break;
+            }
+        }
+        char::from(res)
     }
 }
 ```

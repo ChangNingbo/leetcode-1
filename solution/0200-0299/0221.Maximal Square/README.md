@@ -1,4 +1,4 @@
-# [221. 最大正方形](https://leetcode-cn.com/problems/maximal-square)
+# [221. 最大正方形](https://leetcode.cn/problems/maximal-square)
 
 [English Version](/solution/0200-0299/0221.Maximal%20Square/README_EN.md)
 
@@ -11,14 +11,14 @@
 <p> </p>
 
 <p><strong>示例 1：</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0200-0299/0221.Maximal%20Square/images/max1grid.jpg" style="width: 400px; height: 319px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0200-0299/0221.Maximal%20Square/images/max1grid.jpg" style="width: 400px; height: 319px;" />
 <pre>
 <strong>输入：</strong>matrix = [["1","0","1","0","0"],["1","0","1","1","1"],["1","1","1","1","1"],["1","0","0","1","0"]]
 <strong>输出：</strong>4
 </pre>
 
 <p><strong>示例 2：</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0200-0299/0221.Maximal%20Square/images/max2grid.jpg" style="width: 165px; height: 165px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0200-0299/0221.Maximal%20Square/images/max2grid.jpg" style="width: 165px; height: 165px;" />
 <pre>
 <strong>输入：</strong>matrix = [["0","1"],["1","0"]]
 <strong>输出：</strong>1

@@ -1,4 +1,4 @@
-# [1882. 使用服务器处理任务](https://leetcode-cn.com/problems/process-tasks-using-servers)
+# [1882. 使用服务器处理任务](https://leetcode.cn/problems/process-tasks-using-servers)
 
 [English Version](/solution/1800-1899/1882.Process%20Tasks%20Using%20Servers/README_EN.md)
 
@@ -83,18 +83,18 @@ class Solution:
     def assignTasks(self, servers: List[int], tasks: List[int]) -> List[int]:
         idle, busy = [], []
         for i, weight in enumerate(servers):
-            heapq.heappush(idle, (weight, i))
+            heappush(idle, (weight, i))
         res = []
         for start, cost in enumerate(tasks):
             while busy and busy[0][0] <= start:
-                _, s, i = heapq.heappop(busy)
-                heapq.heappush(idle, (s, i))
+                _, s, i = heappop(busy)
+                heappush(idle, (s, i))
             if idle:
-                s, i = heapq.heappop(idle)
-                heapq.heappush(busy, (start + cost, s, i))
+                s, i = heappop(idle)
+                heappush(busy, (start + cost, s, i))
             else:
-                t, s, i = heapq.heappop(busy)
-                heapq.heappush(busy, (t + cost, s, i))
+                t, s, i = heappop(busy)
+                heappush(busy, (t + cost, s, i))
             res.append(i)
         return res
 ```

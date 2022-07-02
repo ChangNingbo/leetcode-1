@@ -7,8 +7,8 @@
 <p>You are given a string <code>s</code> formed by digits and <code>&#39;#&#39;</code>. We want to map <code>s</code> to English lowercase characters as follows:</p>
 
 <ul>
-	<li>Characters (<code>&#39;a&#39;</code> to <code>&#39;i&#39;)</code> are represented by (<code>&#39;1&#39;</code> to <code>&#39;9&#39;</code>) respectively.</li>
-	<li>Characters (<code>&#39;j&#39;</code> to <code>&#39;z&#39;)</code> are represented by (<code>&#39;10#&#39;</code> to <code>&#39;26#&#39;</code>) respectively.</li>
+	<li>Characters (<code>&#39;a&#39;</code> to <code>&#39;i&#39;</code>) are represented by (<code>&#39;1&#39;</code> to <code>&#39;9&#39;</code>) respectively.</li>
+	<li>Characters (<code>&#39;j&#39;</code> to <code>&#39;z&#39;</code>) are represented by (<code>&#39;10#&#39;</code> to <code>&#39;26#&#39;</code>) respectively.</li>
 </ul>
 
 <p>Return <em>the string formed after mapping</em>.</p>
@@ -85,6 +85,53 @@ class Solution {
 
     private char get(String s) {
         return (char) ('a' + Integer.parseInt(s) - 1);
+    }
+}
+```
+
+### **TypeScript**
+
+```ts
+function freqAlphabets(s: string): string {
+    const n = s.length;
+    const res = [];
+    let i = 0;
+    while (i < n) {
+        let code: string;
+        if (s[i + 2] === '#') {
+            code = s.slice(i, i + 2);
+            i += 3;
+        } else {
+            code = s[i];
+            i += 1;
+        }
+        res.push(code);
+    }
+    return res.map(v => String.fromCharCode(96 + Number(v))).join('');
+}
+```
+
+### **Rust**
+
+```rust
+impl Solution {
+    pub fn freq_alphabets(s: String) -> String {
+        let s = s.as_bytes();
+        let n = s.len();
+        let mut res = String::new();
+        let mut i = 0;
+        while i < n {
+            let code: u8;
+            if s.get(i + 2).is_some() && s[i + 2] == b'#' {
+                code = (s[i] - b'0') * 10 + s[i + 1];
+                i += 3;
+            } else {
+                code = s[i];
+                i += 1;
+            }
+            res.push(char::from(97 + code - b'1'));
+        }
+        res
     }
 }
 ```

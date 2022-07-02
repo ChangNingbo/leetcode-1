@@ -1,4 +1,4 @@
-# [17. 电话号码的字母组合](https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number)
+# [17. 电话号码的字母组合](https://leetcode.cn/problems/letter-combinations-of-a-phone-number)
 
 [English Version](/solution/0000-0099/0017.Letter%20Combinations%20of%20a%20Phone%20Number/README_EN.md)
 
@@ -10,7 +10,7 @@
 
 <p>给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母。</p>
 
-<p><img src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0000-0099/0017.Letter%20Combinations%20of%20a%20Phone%20Number/images/200px-telephone-keypad2svg.png" style="width: 200px;" /></p>
+<p><img src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0000-0099/0017.Letter%20Combinations%20of%20a%20Phone%20Number/images/200px-telephone-keypad2svg.png" style="width: 200px;" /></p>
 
 <p>&nbsp;</p>
 
@@ -300,6 +300,42 @@ impl Solution {
             &map,
             &mut res,
         );
+        res
+    }
+}
+```
+
+```rust
+impl Solution {
+    fn dfs(i: usize, digits: &[u8], map: &Vec<Vec<char>>, s: &mut String, res: &mut Vec<String>) {
+        if i == digits.len() {
+            res.push(s.clone());
+            return;
+        }
+        for c in map[(digits[i] - b'2') as usize].iter() {
+            s.push(*c);
+            Self::dfs(i + 1, digits, map, s, res);
+            s.pop();
+        }
+    }
+
+    pub fn letter_combinations(digits: String) -> Vec<String> {
+        if digits.is_empty() {
+            return Vec::new();
+        }
+        let digits = digits.as_bytes();
+        let map = vec![
+            vec!['a', 'b', 'c'],
+            vec!['d', 'e', 'f'],
+            vec!['g', 'h', 'i'],
+            vec!['j', 'k', 'l'],
+            vec!['m', 'n', 'o'],
+            vec!['p', 'q', 'r', 's'],
+            vec!['t', 'u', 'v'],
+            vec!['w', 'x', 'y', 'z'],
+        ];
+        let mut res = Vec::new();
+        Self::dfs(0, digits, &map, &mut String::new(), &mut res);
         res
     }
 }

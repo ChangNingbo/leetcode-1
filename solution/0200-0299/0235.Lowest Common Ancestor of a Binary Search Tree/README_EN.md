@@ -10,7 +10,7 @@
 
 <p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0200-0299/0235.Lowest%20Common%20Ancestor%20of%20a%20Binary%20Search%20Tree/images/binarysearchtree_improved.png" style="width: 200px; height: 190px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0200-0299/0235.Lowest%20Common%20Ancestor%20of%20a%20Binary%20Search%20Tree/images/binarysearchtree_improved.png" style="width: 200px; height: 190px;" />
 <pre>
 <strong>Input:</strong> root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 8
 <strong>Output:</strong> 6
@@ -18,7 +18,7 @@
 </pre>
 
 <p><strong>Example 2:</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0200-0299/0235.Lowest%20Common%20Ancestor%20of%20a%20Binary%20Search%20Tree/images/binarysearchtree_improved.png" style="width: 200px; height: 190px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0200-0299/0235.Lowest%20Common%20Ancestor%20of%20a%20Binary%20Search%20Tree/images/binarysearchtree_improved.png" style="width: 200px; height: 190px;" />
 <pre>
 <strong>Input:</strong> root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 4
 <strong>Output:</strong> 2
@@ -62,9 +62,9 @@ Iterative:
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
         while root:
-            if root.val < p.val and root.val < q.val:
+            if root.val < min(p.val, q.val):
                 root = root.right
-            elif root.val > p.val and root.val > q.val:
+            elif root.val > max(p.val, q.val):
                 root = root.left
             else:
                 return root
@@ -84,9 +84,9 @@ class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
         if root is None:
             return None
-        if root.val < p.val and root.val < q.val:
+        if root.val < min(p.val, q.val):
             return self.lowestCommonAncestor(root.right, p, q)
-        if root.val > p.val and root.val > q.val:
+        if root.val > max(p.val, q.val):
             return self.lowestCommonAncestor(root.left, p, q)
         return root
 ```

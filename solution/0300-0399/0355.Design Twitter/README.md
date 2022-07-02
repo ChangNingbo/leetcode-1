@@ -1,4 +1,4 @@
-# [355. 设计推特](https://leetcode-cn.com/problems/design-twitter)
+# [355. 设计推特](https://leetcode.cn/problems/design-twitter)
 
 [English Version](/solution/0300-0399/0355.Design%20Twitter/README_EN.md)
 
@@ -91,7 +91,7 @@ class Twitter:
         users.add(userId)
         tweets = [self.user_tweets[u][::-1][:10] for u in users]
         tweets = sum(tweets, [])
-        return heapq.nlargest(10, tweets, key=lambda tweet: self.tweets[tweet])
+        return nlargest(10, tweets, key=lambda tweet: self.tweets[tweet])
 
     def follow(self, followerId: int, followeeId: int) -> None:
         """

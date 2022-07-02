@@ -1,4 +1,4 @@
-# [面试题 56 - II. 数组中数字出现的次数 II](https://leetcode-cn.com/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-ii-lcof/)
+# [面试题 56 - II. 数组中数字出现的次数 II](https://leetcode.cn/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-ii-lcof/)
 
 ## 题目描述
 
@@ -90,6 +90,27 @@ var singleNumber = function (nums) {
     }
     return a;
 };
+```
+
+### **Rust**
+
+```rust
+impl Solution {
+    pub fn single_number(nums: Vec<i32>) -> i32 {
+        let mut counts = [0; 32];
+        for num in nums.iter() {
+            for i in 0..32 {
+                counts[i] += (num >> i) & 1;
+            }
+        }
+        let mut res = 0;
+        for count in counts.iter().rev() {
+            res <<= 1;
+            res |= count % 3;
+        }
+        res
+    }
+}
 ```
 
 ### **...**

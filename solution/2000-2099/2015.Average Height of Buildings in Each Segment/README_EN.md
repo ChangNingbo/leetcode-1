@@ -16,7 +16,6 @@
     	<li>From 5 to 10, there is only the second building with an average height of <code>4 / 1 = 4</code>.</li>
     </ul>
     </li>
-
 </ul>
 
 <p>Given <code>buildings</code>, return <em>the 2D integer array </em><code>street</code><em> as described above (<strong>excluding</strong> any areas of the street where there are no buldings). You may return the array in <strong>any order</strong></em>.</p>
@@ -27,7 +26,7 @@
 
 <p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>
-<img src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/2000-2099/2015.Average%20Height%20of%20Buildings%20in%20Each%20Segment/images/image-20210921224001-2.png" style="width: 500px; height: 349px;" />
+<img src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/2000-2099/2015.Average%20Height%20of%20Buildings%20in%20Each%20Segment/images/image-20210921224001-2.png" style="width: 500px; height: 349px;" />
 <pre>
 <strong>Input:</strong> buildings = [[1,4,2],[3,9,4]]
 <strong>Output:</strong> [[1,3,2],[3,4,3],[4,9,4]]

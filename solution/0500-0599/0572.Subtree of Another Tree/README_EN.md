@@ -10,14 +10,14 @@
 
 <p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0500-0599/0572.Subtree%20of%20Another%20Tree/images/subtree1-tree.jpg" style="width: 532px; height: 400px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0500-0599/0572.Subtree%20of%20Another%20Tree/images/subtree1-tree.jpg" style="width: 532px; height: 400px;" />
 <pre>
 <strong>Input:</strong> root = [3,4,5,1,2], subRoot = [4,1,2]
 <strong>Output:</strong> true
 </pre>
 
 <p><strong>Example 2:</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0500-0599/0572.Subtree%20of%20Another%20Tree/images/subtree2-tree.jpg" style="width: 502px; height: 458px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0500-0599/0572.Subtree%20of%20Another%20Tree/images/subtree2-tree.jpg" style="width: 502px; height: 458px;" />
 <pre>
 <strong>Input:</strong> root = [3,4,5,1,2,null,null,null,null,0], subRoot = [4,1,2]
 <strong>Output:</strong> false
@@ -193,6 +193,104 @@ var isSubtree = function (root, subRoot) {
         isSubtree(root.right, subRoot)
     );
 };
+```
+
+### **TypeScript**
+
+```ts
+/**
+ * Definition for a binary tree node.
+ * class TreeNode {
+ *     val: number
+ *     left: TreeNode | null
+ *     right: TreeNode | null
+ *     constructor(val?: number, left?: TreeNode | null, right?: TreeNode | null) {
+ *         this.val = (val===undefined ? 0 : val)
+ *         this.left = (left===undefined ? null : left)
+ *         this.right = (right===undefined ? null : right)
+ *     }
+ * }
+ */
+
+const dfs = (root: TreeNode | null, subRoot: TreeNode | null) => {
+    if (root == null && subRoot == null) {
+        return true;
+    }
+    if (root == null || subRoot == null || root.val !== subRoot.val) {
+        return false;
+    }
+    return dfs(root.left, subRoot.left) && dfs(root.right, subRoot.right);
+};
+
+function isSubtree(root: TreeNode | null, subRoot: TreeNode | null): boolean {
+    if (root == null) {
+        return false;
+    }
+    return (
+        dfs(root, subRoot) ||
+        isSubtree(root.left, subRoot) ||
+        isSubtree(root.right, subRoot)
+    );
+}
+```
+
+### **Rust**
+
+```rust
+// Definition for a binary tree node.
+// #[derive(Debug, PartialEq, Eq)]
+// pub struct TreeNode {
+//   pub val: i32,
+//   pub left: Option<Rc<RefCell<TreeNode>>>,
+//   pub right: Option<Rc<RefCell<TreeNode>>>,
+// }
+//
+// impl TreeNode {
+//   #[inline]
+//   pub fn new(val: i32) -> Self {
+//     TreeNode {
+//       val,
+//       left: None,
+//       right: None
+//     }
+//   }
+// }
+use std::rc::Rc;
+use std::cell::RefCell;
+impl Solution {
+    fn dfs(root: &Option<Rc<RefCell<TreeNode>>>, sub_root: &Option<Rc<RefCell<TreeNode>>>) -> bool {
+        if root.is_none() && sub_root.is_none() {
+            return true;
+        }
+        if root.is_none() || sub_root.is_none() {
+            return false;
+        }
+        let root = root.as_ref().unwrap().borrow();
+        let sub_root = sub_root.as_ref().unwrap().borrow();
+        root.val == sub_root.val
+            && Self::dfs(&root.left, &sub_root.left)
+            && Self::dfs(&root.right, &sub_root.right)
+    }
+
+    fn help(
+        root: &Option<Rc<RefCell<TreeNode>>>,
+        sub_root: &Option<Rc<RefCell<TreeNode>>>,
+    ) -> bool {
+        if root.is_none() {
+            return false;
+        }
+        Self::dfs(root, sub_root)
+            || Self::help(&root.as_ref().unwrap().borrow().left, sub_root)
+            || Self::help(&root.as_ref().unwrap().borrow().right, sub_root)
+    }
+
+    pub fn is_subtree(
+        root: Option<Rc<RefCell<TreeNode>>>,
+        sub_root: Option<Rc<RefCell<TreeNode>>>,
+    ) -> bool {
+        Self::help(&root, &sub_root)
+    }
+}
 ```
 
 ### **...**

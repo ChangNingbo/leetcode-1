@@ -1,4 +1,4 @@
-# [724. 寻找数组的中心下标](https://leetcode-cn.com/problems/find-pivot-index)
+# [724. 寻找数组的中心下标](https://leetcode.cn/problems/find-pivot-index)
 
 [English Version](/solution/0700-0799/0724.Find%20Pivot%20Index/README_EN.md)
 
@@ -56,13 +56,13 @@
 
 <p>&nbsp;</p>
 
-<p><strong>注意：</strong>本题与主站 1991 题相同：<a href="https://leetcode-cn.com/problems/find-the-middle-index-in-array/" target="_blank">https://leetcode-cn.com/problems/find-the-middle-index-in-array/</a></p>
+<p><strong>注意：</strong>本题与主站 1991 题相同：<a href="https://leetcode.cn/problems/find-the-middle-index-in-array/" target="_blank">https://leetcode.cn/problems/find-the-middle-index-in-array/</a></p>
 
 ## 解法
 
 <!-- 这里可写通用的实现逻辑 -->
 
-前缀和。
+**方法一：前缀和**
 
 <!-- tabs:start -->
 
@@ -78,6 +78,18 @@ class Solution:
             if (presum << 1) == s - v:
                 return i
             presum += v
+        return -1
+```
+
+```python
+class Solution:
+    def pivotIndex(self, nums: List[int]) -> int:
+        l, r = 0, sum(nums)
+        for i, v in enumerate(nums):
+            r -= v
+            if l == r:
+                return i
+            l += v
         return -1
 ```
 
@@ -105,16 +117,37 @@ class Solution {
 }
 ```
 
+```java
+class Solution {
+    public int pivotIndex(int[] nums) {
+        int l = 0, r = 0;
+        for (int v : nums) {
+            r += v;
+        }
+        for (int i = 0; i < nums.length; ++i) {
+            r -= nums[i];
+            if (l == r) {
+                return i;
+            }
+            l += nums[i];
+        }
+        return -1;
+    }
+}
+```
+
 ### **TypeScript**
 
 ```ts
 function pivotIndex(nums: number[]): number {
-    let rightSum = nums.reduce((a, c) => a + c, 0),
-        leftSum = 0;
-    for (let i = 0; i < nums.length; i++) {
-        rightSum -= nums[i];
-        if (leftSum == rightSum) return i;
-        leftSum += nums[i];
+    let l = 0;
+    let r = nums.reduce((a, b) => a + b, 0);
+    for (let i = 0; i < nums.length; ++i) {
+        r -= nums[i];
+        if (l == r) {
+            return i;
+        }
+        l += nums[i];
     }
     return -1;
 }
@@ -141,6 +174,23 @@ public:
 };
 ```
 
+```cpp
+class Solution {
+public:
+    int pivotIndex(vector<int>& nums) {
+        int l = 0, r = 0;
+        for (int& v : nums) r += v;
+        for (int i = 0; i < nums.size(); ++i)
+        {
+            r -= nums[i];
+            if (l == r) return i;
+            l += nums[i];
+        }
+        return -1;
+    }
+};
+```
+
 ### **Go**
 
 ```go
@@ -155,6 +205,23 @@ func pivotIndex(nums []int) int {
 			return i
 		}
 		presum += e
+	}
+	return -1
+}
+```
+
+```go
+func pivotIndex(nums []int) int {
+	l, r := 0, 0
+	for _, v := range nums {
+		r += v
+	}
+	for i, v := range nums {
+		r -= v
+		if l == r {
+			return i
+		}
+		l += v
 	}
 	return -1
 }

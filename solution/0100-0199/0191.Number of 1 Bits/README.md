@@ -1,4 +1,4 @@
-# [191. 位 1 的个数](https://leetcode-cn.com/problems/number-of-1-bits)
+# [191. 位 1 的个数](https://leetcode.cn/problems/number-of-1-bits)
 
 [English Version](/solution/0100-0199/0191.Number%20of%201%20Bits/README_EN.md)
 
@@ -65,7 +65,34 @@
 
 <!-- 这里可写通用的实现逻辑 -->
 
-`n & (n - 1)` 会消除 n 中最后一位中的 1。
+**方法一：位运算**
+
+利用 `n & (n - 1)` 消除 `n` 中最后一位 1 这一特点，优化过程：
+
+```txt
+HAMMING-WEIGHT(n)
+    r = 0
+    while n != 0
+        n &= n - 1
+        r += 1
+    r
+```
+
+以 5 为例，演示推演过程：
+
+```txt
+[0, 1, 0, 1] // 5
+[0, 1, 0, 0] // 5 - 1 = 4
+[0, 1, 0, 0] // 5 & 4 = 4
+
+[0, 1, 0, 0] // 4
+[0, 0, 1, 1] // 4 - 1 = 3
+[0, 0, 0, 0] // 4 & 3 = 0
+```
+
+**方法二：lowbit**
+
+`x -= (x & -x)` 可以消除二进制形式的最后一位 1。
 
 同 [剑指 Offer 15. 二进制中 1 的个数](/lcof/面试题15.%20二进制中1的个数/README.md)
 
@@ -81,6 +108,16 @@ class Solution:
         ans = 0
         while n:
             n &= n - 1
+            ans += 1
+        return ans
+```
+
+```python
+class Solution:
+    def hammingWeight(self, n: int) -> int:
+        ans = 0
+        while n:
+            n -= (n & -n)
             ans += 1
         return ans
 ```
@@ -103,16 +140,17 @@ public class Solution {
 }
 ```
 
-### **Go**
-
-```go
-func hammingWeight(num uint32) int {
-	ans := 0
-	for num != 0 {
-		num &= num - 1
-		ans++
-	}
-	return ans
+```java
+public class Solution {
+    // you need to treat n as an unsigned value
+    public int hammingWeight(int n) {
+        int ans = 0;
+        while (n != 0) {
+            n -= (n & -n);
+            ++ans;
+        }
+        return ans;
+    }
 }
 ```
 
@@ -133,6 +171,45 @@ public:
 };
 ```
 
+```cpp
+class Solution {
+public:
+    int hammingWeight(uint32_t n) {
+        int ans = 0;
+        while (n)
+        {
+            n -= (n & -n);
+            ++ans;
+        }
+        return ans;
+    }
+};
+```
+
+### **Go**
+
+```go
+func hammingWeight(num uint32) int {
+	ans := 0
+	for num != 0 {
+		num &= num - 1
+		ans++
+	}
+	return ans
+}
+```
+
+```go
+func hammingWeight(num uint32) int {
+	ans := 0
+	for num != 0 {
+		num -= (num & -num)
+		ans++
+	}
+	return ans
+}
+```
+
 ### **JavaScript**
 
 ```js
@@ -148,6 +225,42 @@ var hammingWeight = function (n) {
     }
     return ans;
 };
+```
+
+### **Rust**
+
+```rust
+impl Solution {
+    pub fn hammingWeight(n: u32) -> i32 {
+        n.count_ones() as i32
+    }
+}
+```
+
+```rust
+impl Solution {
+    pub fn hammingWeight(mut n: u32) -> i32 {
+        let mut res = 0;
+        while n != 0 {
+            res += n & 1;
+            n >>= 1;
+        }
+        res as i32
+    }
+}
+```
+
+```rust
+impl Solution {
+    pub fn hammingWeight(mut n: u32) -> i32 {
+        let mut res = 0;
+        while n != 0 {
+            n &= (n - 1);
+            res += 1;
+        }
+        res
+    }
+}
 ```
 
 ### **...**

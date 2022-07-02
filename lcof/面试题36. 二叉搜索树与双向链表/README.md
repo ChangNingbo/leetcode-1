@@ -1,4 +1,4 @@
-# [面试题 36. 二叉搜索树与双向链表](https://leetcode-cn.com/problems/er-cha-sou-suo-shu-yu-shuang-xiang-lian-biao-lcof/)
+# [面试题 36. 二叉搜索树与双向链表](https://leetcode.cn/problems/er-cha-sou-suo-shu-yu-shuang-xiang-lian-biao-lcof/)
 
 ## 题目描述
 
@@ -12,7 +12,7 @@
 
 <p>&nbsp;</p>
 
-<p><img src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/lcof/%E9%9D%A2%E8%AF%95%E9%A2%9836.%20%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%8E%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8/images/bstdlloriginalbst.png"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/lcof/%E9%9D%A2%E8%AF%95%E9%A2%9836.%20%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%8E%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8/images/bstdlloriginalbst.png"></p>
 
 <p>&nbsp;</p>
 
@@ -22,7 +22,7 @@
 
 <p>&nbsp;</p>
 
-<p><img src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/lcof/%E9%9D%A2%E8%AF%95%E9%A2%9836.%20%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%8E%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8/images/bstdllreturndll.png"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/lcof/%E9%9D%A2%E8%AF%95%E9%A2%9836.%20%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%8E%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8/images/bstdllreturndll.png"></p>
 
 <p>&nbsp;</p>
 
@@ -30,7 +30,7 @@
 
 <p>&nbsp;</p>
 
-<p><strong>注意：</strong>本题与主站 426 题相同：<a href="https://leetcode-cn.com/problems/convert-binary-search-tree-to-sorted-doubly-linked-list/">https://leetcode-cn.com/problems/convert-binary-search-tree-to-sorted-doubly-linked-list/</a></p>
+<p><strong>注意：</strong>本题与主站 426 题相同：<a href="https://leetcode.cn/problems/convert-binary-search-tree-to-sorted-doubly-linked-list/">https://leetcode.cn/problems/convert-binary-search-tree-to-sorted-doubly-linked-list/</a></p>
 
 <p><strong>注意：</strong>此题对比原题有改动。</p>
 

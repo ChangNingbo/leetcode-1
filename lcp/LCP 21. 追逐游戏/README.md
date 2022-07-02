@@ -1,4 +1,4 @@
-# [LCP 21. 追逐游戏](https://leetcode-cn.com/problems/Za25hA)
+# [LCP 21. 追逐游戏](https://leetcode.cn/problems/Za25hA)
 
 ## 题目描述
 
@@ -28,7 +28,7 @@
 
 > 解释：
 
-> ![image.png](https://cdn.jsdelivr.net/gh/doocs/leetcode@main/lcp/LCP%2021.%20追逐游戏/images/1597991318-goeHHr-image.png){:height="250px"}
+> ![image.png](https://fastly.jsdelivr.net/gh/doocs/leetcode@main/lcp/LCP%2021.%20追逐游戏/images/1597991318-goeHHr-image.png){:height="250px"}
 
 >
 
@@ -50,7 +50,7 @@
 
 > 解释：
 
-> ![image.png](https://cdn.jsdelivr.net/gh/doocs/leetcode@main/lcp/LCP%2021.%20追逐游戏/images/1597991157-QfeakF-image.png)
+> ![image.png](https://fastly.jsdelivr.net/gh/doocs/leetcode@main/lcp/LCP%2021.%20追逐游戏/images/1597991157-QfeakF-image.png)
 
 >
 

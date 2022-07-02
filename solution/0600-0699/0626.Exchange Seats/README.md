@@ -1,4 +1,4 @@
-# [626. 换座位](https://leetcode-cn.com/problems/exchange-seats)
+# [626. 换座位](https://leetcode.cn/problems/exchange-seats)
 
 [English Version](/solution/0600-0699/0626.Exchange%20Seats/README_EN.md)
 
@@ -68,27 +68,27 @@ Seat 表:
 ```sql
 SELECT
 	s1.id,
-	COALESCE ( s2.student, s1.student ) AS student 
+	COALESCE ( s2.student, s1.student ) AS student
 FROM
 	seat s1
-	LEFT JOIN seat s2 ON ( s1.id + 1 ) ^ 1 - 1 = s2.id 
+	LEFT JOIN seat s2 ON ( s1.id + 1 ) ^ 1 - 1 = s2.id
 ORDER BY
 	s1.id;
 ```
 
 ```sql
-SELECT 
+SELECT
     id + (
-        CASE 
+        CASE
             WHEN id % 2 = 1 AND id != (SELECT MAX(id) FROM seat) THEN 1
 			WHEN id % 2 = 0 THEN -1
 			ELSE 0
 		END
-    ) AS id, 
+    ) AS id,
     student
-FROM 
+FROM
     seat
-ORDER BY 
+ORDER BY
 	id;
 ```
 

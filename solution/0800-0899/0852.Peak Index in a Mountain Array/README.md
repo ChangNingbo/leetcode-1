@@ -1,4 +1,4 @@
-# [852. 山脉数组的峰顶索引](https://leetcode-cn.com/problems/peak-index-in-a-mountain-array)
+# [852. 山脉数组的峰顶索引](https://leetcode.cn/problems/peak-index-in-a-mountain-array)
 
 [English Version](/solution/0800-0899/0852.Peak%20Index%20in%20a%20Mountain%20Array/README_EN.md)
 
@@ -172,6 +172,44 @@ var peakIndexInMountainArray = function (arr) {
     }
     return left;
 };
+```
+
+### **TypeScript**
+
+```ts
+function peakIndexInMountainArray(arr: number[]): number {
+    let left = 1,
+        right = arr.length - 2;
+    while (left < right) {
+        const mid = (left + right) >> 1;
+        if (arr[mid] > arr[mid + 1]) {
+            right = mid;
+        } else {
+            left = mid + 1;
+        }
+    }
+    return left;
+}
+```
+
+### **Rust**
+
+```rust
+impl Solution {
+    pub fn peak_index_in_mountain_array(arr: Vec<i32>) -> i32 {
+        let mut left = 1;
+        let mut right = arr.len() - 2;
+        while left < right {
+            let mid = left + (right - left) / 2;
+            if arr[mid] > arr[mid + 1] {
+                right = mid;
+            } else {
+                left = left + 1;
+            }
+        }
+        left as i32
+    }
+}
 ```
 
 ### **...**

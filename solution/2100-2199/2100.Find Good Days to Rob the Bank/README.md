@@ -1,4 +1,4 @@
-# [2100. 适合打劫银行的日子](https://leetcode-cn.com/problems/find-good-days-to-rob-the-bank)
+# [2100. 适合打劫银行的日子](https://leetcode.cn/problems/find-good-days-to-rob-the-bank)
 
 [English Version](/solution/2100-2199/2100.Find%20Good%20Days%20to%20Rob%20the%20Bank/README_EN.md)
 
@@ -51,15 +51,6 @@
 没有任何一天的前 2 天警卫数目是非递增的。
 所以没有适合打劫银行的日子，返回空数组。
 </pre>
-
-<p><strong>示例 4：</strong></p>
-
-<pre>
-<b>输入：</b>security = [1], time = 5
-<b>输出：</b>[]
-<strong>解释：</strong>
-没有日子前面和后面有 5 天时间。
-所以没有适合打劫银行的日子，返回空数组。</pre>
 
 <p>&nbsp;</p>
 

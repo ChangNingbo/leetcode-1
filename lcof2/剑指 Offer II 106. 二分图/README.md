@@ -1,4 +1,4 @@
-# [剑指 Offer II 106. 二分图](https://leetcode-cn.com/problems/vEAB3K)
+# [剑指 Offer II 106. 二分图](https://leetcode.cn/problems/vEAB3K)
 
 ## 题目描述
 
@@ -23,7 +23,7 @@
 
 <p><strong>示例 1：</strong></p>
 
-<p><img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/lcof2/%E5%89%91%E6%8C%87%20Offer%20II%20106.%20%E4%BA%8C%E5%88%86%E5%9B%BE/images/bi2.jpg" style="width: 222px; height: 222px;" /></p>
+<p><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/lcof2/%E5%89%91%E6%8C%87%20Offer%20II%20106.%20%E4%BA%8C%E5%88%86%E5%9B%BE/images/bi2.jpg" style="width: 222px; height: 222px;" /></p>
 
 <pre>
 <strong>输入：</strong>graph = [[1,2,3],[0,2],[0,1,3],[0,2]]
@@ -32,7 +32,7 @@
 
 <p><strong>示例 2：</strong></p>
 
-<p><img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/lcof2/%E5%89%91%E6%8C%87%20Offer%20II%20106.%20%E4%BA%8C%E5%88%86%E5%9B%BE/images/bi1.jpg" style="width: 222px; height: 222px;" /></p>
+<p><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/lcof2/%E5%89%91%E6%8C%87%20Offer%20II%20106.%20%E4%BA%8C%E5%88%86%E5%9B%BE/images/bi1.jpg" style="width: 222px; height: 222px;" /></p>
 
 <pre>
 <strong>输入：</strong>graph = [[1,3],[0,2],[1,3],[0,2]]
@@ -55,7 +55,7 @@
 
 <p>&nbsp;</p>
 
-<p><meta charset="UTF-8" />注意：本题与主站 785&nbsp;题相同：&nbsp;<a href="https://leetcode-cn.com/problems/is-graph-bipartite/">https://leetcode-cn.com/problems/is-graph-bipartite/</a></p>
+<p><meta charset="UTF-8" />注意：本题与主站 785&nbsp;题相同：&nbsp;<a href="https://leetcode.cn/problems/is-graph-bipartite/">https://leetcode.cn/problems/is-graph-bipartite/</a></p>
 
 ## 解法
 

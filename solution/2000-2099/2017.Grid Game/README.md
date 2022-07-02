@@ -1,4 +1,4 @@
-# [2017. 网格游戏](https://leetcode-cn.com/problems/grid-game)
+# [2017. 网格游戏](https://leetcode.cn/problems/grid-game)
 
 [English Version](/solution/2000-2099/2017.Grid%20Game/README_EN.md)
 
@@ -18,7 +18,7 @@
 
 <p><strong>示例 1：</strong></p>
 
-<p><img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/2000-2099/2017.Grid%20Game/images/a1.png" style="width: 388px; height: 103px;" /></p>
+<p><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/2000-2099/2017.Grid%20Game/images/a1.png" style="width: 388px; height: 103px;" /></p>
 
 <pre>
 <strong>输入：</strong>grid = [[2,5,4],[1,5,1]]
@@ -29,7 +29,7 @@
 </pre>
 
 <p><strong>示例 2：</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/2000-2099/2017.Grid%20Game/images/a2.png" style="width: 384px; height: 105px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/2000-2099/2017.Grid%20Game/images/a2.png" style="width: 384px; height: 105px;" />
 <pre>
 <strong>输入：</strong>grid = [[3,3,1],[8,5,2]]
 <strong>输出：</strong>4
@@ -39,7 +39,7 @@
 </pre>
 
 <p><strong>示例 3：</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/2000-2099/2017.Grid%20Game/images/a3.png" style="width: 493px; height: 103px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/2000-2099/2017.Grid%20Game/images/a3.png" style="width: 493px; height: 103px;" />
 <pre>
 <strong>输入：</strong>grid = [[1,3,1,15],[1,3,3,1]]
 <strong>输出：</strong>7
@@ -70,7 +70,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def gridGame(self, grid: List[List[int]]) -> int:
+        ans = inf
+        s1, s2 = sum(grid[0]), 0
+        for j, v in enumerate(grid[0]):
+            s1 -= v
+            ans = min(ans, max(s1, s2))
+            s2 += grid[1][j]
+        return ans
 ```
 
 ### **Java**
@@ -78,7 +86,77 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public long gridGame(int[][] grid) {
+        long ans = Long.MAX_VALUE;
+        long s1 = 0, s2 = 0;
+        for (int v : grid[0]) {
+            s1 += v;
+        }
+        int n = grid[0].length;
+        for (int j = 0; j < n; ++j) {
+            s1 -= grid[0][j];
+            ans = Math.min(ans, Math.max(s1, s2));
+            s2 += grid[1][j];
+        }
+        return ans;
+    }
+}
+```
 
+### **C++**
+
+```cpp
+using ll = long long;
+
+class Solution {
+public:
+    long long gridGame(vector<vector<int>>& grid) {
+        ll ans = LONG_MAX;
+        int n = grid[0].size();
+        ll s1 = 0, s2 = 0;
+        for (int& v : grid[0]) s1 += v;
+        for (int j = 0; j < n; ++j)
+        {
+            s1 -= grid[0][j];
+            ans = min(ans, max(s1, s2));
+            s2 += grid[1][j];
+        }
+        return ans;
+    }
+};
+```
+
+### **Go**
+
+```go
+func gridGame(grid [][]int) int64 {
+	ans := math.MaxInt64
+	s1, s2 := 0, 0
+	for _, v := range grid[0] {
+		s1 += v
+	}
+	for j, v := range grid[0] {
+		s1 -= v
+		ans = min(ans, max(s1, s2))
+		s2 += grid[1][j]
+	}
+	return int64(ans)
+}
+
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
+
+func min(a, b int) int {
+	if a < b {
+		return a
+	}
+	return b
+}
 ```
 
 ### **...**

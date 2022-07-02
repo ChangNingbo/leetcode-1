@@ -1,4 +1,4 @@
-# [797. 所有可能的路径](https://leetcode-cn.com/problems/all-paths-from-source-to-target)
+# [797. 所有可能的路径](https://leetcode.cn/problems/all-paths-from-source-to-target)
 
 [English Version](/solution/0700-0799/0797.All%20Paths%20From%20Source%20to%20Target/README_EN.md)
 
@@ -14,7 +14,7 @@
 
 <p><strong>示例 1：</strong></p>
 
-<p><img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0700-0799/0797.All%20Paths%20From%20Source%20to%20Target/images/all_1.jpg" /></p>
+<p><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0700-0799/0797.All%20Paths%20From%20Source%20to%20Target/images/all_1.jpg" /></p>
 
 <pre>
 <strong>输入：</strong>graph = [[1,2],[3],[3],[]]
@@ -24,7 +24,7 @@
 
 <p><strong>示例 2：</strong></p>
 
-<p><img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0700-0799/0797.All%20Paths%20From%20Source%20to%20Target/images/all_2.jpg" /></p>
+<p><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0700-0799/0797.All%20Paths%20From%20Source%20to%20Target/images/all_2.jpg" /></p>
 
 <pre>
 <strong>输入：</strong>graph = [[4,3,1],[3,2,4],[3],[4],[]]
@@ -247,6 +247,29 @@ var allPathsSourceTarget = function (graph) {
     dfs(t);
     return ans;
 };
+```
+
+### **Rust**
+
+```rust
+impl Solution {
+    fn dfs(i: usize, path: &mut Vec<i32>, res: &mut Vec<Vec<i32>>, graph: &Vec<Vec<i32>>) {
+        path.push(i as i32);
+        if i == graph.len() - 1 {
+            res.push(path.clone());
+        }
+        for j in graph[i].iter() {
+            Self::dfs(*j as usize, path, res, graph)
+        }
+        path.pop();
+    }
+
+    pub fn all_paths_source_target(graph: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
+        let mut res = Vec::new();
+        Self::dfs(0, &mut vec![], &mut res, &graph);
+        res
+    }
+}
 ```
 
 ### **...**

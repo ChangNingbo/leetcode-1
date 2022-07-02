@@ -10,16 +10,16 @@
 
 <p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0100-0199/0108.Convert%20Sorted%20Array%20to%20Binary%20Search%20Tree/images/btree1.jpg" style="width: 302px; height: 222px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0100-0199/0108.Convert%20Sorted%20Array%20to%20Binary%20Search%20Tree/images/btree1.jpg" style="width: 302px; height: 222px;" />
 <pre>
 <strong>Input:</strong> nums = [-10,-3,0,5,9]
 <strong>Output:</strong> [0,-3,9,-10,null,5]
 <strong>Explanation:</strong> [0,-10,5,null,-3,null,9] is also accepted:
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0100-0199/0108.Convert%20Sorted%20Array%20to%20Binary%20Search%20Tree/images/btree2.jpg" style="width: 302px; height: 222px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0100-0199/0108.Convert%20Sorted%20Array%20to%20Binary%20Search%20Tree/images/btree2.jpg" style="width: 302px; height: 222px;" />
 </pre>
 
 <p><strong>Example 2:</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0100-0199/0108.Convert%20Sorted%20Array%20to%20Binary%20Search%20Tree/images/btree.jpg" style="width: 342px; height: 142px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0100-0199/0108.Convert%20Sorted%20Array%20to%20Binary%20Search%20Tree/images/btree.jpg" style="width: 342px; height: 142px;" />
 <pre>
 <strong>Input:</strong> nums = [1,3]
 <strong>Output:</strong> [3,1]
@@ -159,6 +159,37 @@ var sortedArrayToBST = function (nums) {
 };
 ```
 
+### **TypeScript**
+
+```ts
+/**
+ * Definition for a binary tree node.
+ * class TreeNode {
+ *     val: number
+ *     left: TreeNode | null
+ *     right: TreeNode | null
+ *     constructor(val?: number, left?: TreeNode | null, right?: TreeNode | null) {
+ *         this.val = (val===undefined ? 0 : val)
+ *         this.left = (left===undefined ? null : left)
+ *         this.right = (right===undefined ? null : right)
+ *     }
+ * }
+ */
+
+function sortedArrayToBST(nums: number[]): TreeNode | null {
+    const n = nums.length;
+    if (n === 0) {
+        return null;
+    }
+    const mid = n >> 1;
+    return new TreeNode(
+        nums[mid],
+        sortedArrayToBST(nums.slice(0, mid)),
+        sortedArrayToBST(nums.slice(mid + 1)),
+    );
+}
+```
+
 ### **Go**
 
 ```go
@@ -184,6 +215,48 @@ func buildBST(nums []int, start, end int) *TreeNode {
 		Left:  buildBST(nums, start, mid-1),
 		Right: buildBST(nums, mid+1, end),
 	}
+}
+```
+
+### **Rust**
+
+```rust
+// Definition for a binary tree node.
+// #[derive(Debug, PartialEq, Eq)]
+// pub struct TreeNode {
+//   pub val: i32,
+//   pub left: Option<Rc<RefCell<TreeNode>>>,
+//   pub right: Option<Rc<RefCell<TreeNode>>>,
+// }
+//
+// impl TreeNode {
+//   #[inline]
+//   pub fn new(val: i32) -> Self {
+//     TreeNode {
+//       val,
+//       left: None,
+//       right: None
+//     }
+//   }
+// }
+use std::rc::Rc;
+use std::cell::RefCell;
+impl Solution {
+    fn to_bst(nums: &Vec<i32>, start: usize, end: usize) -> Option<Rc<RefCell<TreeNode>>> {
+        if start >= end {
+            return None;
+        }
+        let mid = start + (end - start) / 2;
+        Some(Rc::new(RefCell::new(TreeNode {
+            val: nums[mid],
+            left: Self::to_bst(nums, start, mid),
+            right: Self::to_bst(nums, mid + 1, end),
+        })))
+    }
+
+    pub fn sorted_array_to_bst(nums: Vec<i32>) -> Option<Rc<RefCell<TreeNode>>> {
+        Self::to_bst(&nums, 0, nums.len())
+    }
 }
 ```
 

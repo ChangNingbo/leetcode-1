@@ -16,7 +16,7 @@
 
 <p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/1400-1499/1466.Reorder%20Routes%20to%20Make%20All%20Paths%20Lead%20to%20the%20City%20Zero/images/sample_1_1819.png" style="width: 311px; height: 189px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/1400-1499/1466.Reorder%20Routes%20to%20Make%20All%20Paths%20Lead%20to%20the%20City%20Zero/images/sample_1_1819.png" style="width: 311px; height: 189px;" />
 <pre>
 <strong>Input:</strong> n = 6, connections = [[0,1],[1,3],[2,3],[4,0],[4,5]]
 <strong>Output:</strong> 3
@@ -24,7 +24,7 @@
 </pre>
 
 <p><strong>Example 2:</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/1400-1499/1466.Reorder%20Routes%20to%20Make%20All%20Paths%20Lead%20to%20the%20City%20Zero/images/sample_2_1819.png" style="width: 509px; height: 79px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/1400-1499/1466.Reorder%20Routes%20to%20Make%20All%20Paths%20Lead%20to%20the%20City%20Zero/images/sample_2_1819.png" style="width: 509px; height: 79px;" />
 <pre>
 <strong>Input:</strong> n = 5, connections = [[1,0],[1,2],[3,2],[3,4]]
 <strong>Output:</strong> 2
@@ -51,18 +51,137 @@
 
 ## Solutions
 
+DFS.
+
+Treat the graph as undirected. Start a dfs from the root, if you come across an edge in the forward direction, you need to reverse the edge.
+
 <!-- tabs:start -->
 
 ### **Python3**
 
 ```python
+class Solution:
+    def minReorder(self, n: int, connections: List[List[int]]) -> int:
+        def dfs(u):
+            vis[u] = True
+            ans = 0
+            for v in g[u]:
+                if not vis[v]:
+                    if (u, v) in s:
+                        ans += 1
+                    ans += dfs(v)
+            return ans
 
+        g = defaultdict(list)
+        s = set()
+        for a, b in connections:
+            g[a].append(b)
+            g[b].append(a)
+            s.add((a, b))
+        vis = [False] * n
+        return dfs(0)
 ```
 
 ### **Java**
 
 ```java
+class Solution {
+    public int minReorder(int n, int[][] connections) {
+        Map<Integer, List<Pair<Integer, Boolean>>> g = new HashMap<>();
+        for (int[] e : connections) {
+            int u = e[0], v = e[1];
+            g.computeIfAbsent(u, k -> new ArrayList<>()).add(new Pair<>(v, true));
+            g.computeIfAbsent(v, k -> new ArrayList<>()).add(new Pair<>(u, false));
+        }
+        boolean[] vis = new boolean[n];
+        return dfs(0, g, vis);
+    }
 
+    private int dfs(int u, Map<Integer, List<Pair<Integer, Boolean>>> g, boolean[] vis) {
+        vis[u] = true;
+        int ans = 0;
+        for (Pair<Integer, Boolean> e : g.getOrDefault(u, Collections.emptyList())) {
+            int v = e.getKey();
+            boolean exist = e.getValue();
+            if (!vis[v]) {
+                if (exist) {
+                    ++ans;
+                }
+                ans += dfs(v, g, vis);
+            }
+        }
+        return ans;
+    }
+}
+```
+
+### **C++**
+
+```cpp
+class Solution {
+public:
+    int minReorder(int n, vector<vector<int>>& connections) {
+        unordered_map<int, vector<pair<int, bool>>> g;
+        for (auto& e : connections)
+        {
+            int u = e[0], v = e[1];
+            g[u].push_back({v, true});
+            g[v].push_back({u, false});
+        }
+        vector<bool> vis(n);
+        return dfs(0, g, vis);
+    }
+
+    int dfs(int u, unordered_map<int, vector<pair<int, bool>>>& g, vector<bool>& vis) {
+        vis[u] = true;
+        int ans = 0;
+        for (auto& p : g[u])
+        {
+            int v = p.first;
+            bool exist = p.second;
+            if (!vis[v])
+            {
+                if (exist) ++ans;
+                ans += dfs(v, g, vis);
+            }
+        }
+        return ans;
+    }
+};
+```
+
+### **Go**
+
+```go
+func minReorder(n int, connections [][]int) int {
+	type pib struct {
+		v int
+		b bool
+	}
+	g := map[int][]pib{}
+	for _, e := range connections {
+		u, v := e[0], e[1]
+		g[u] = append(g[u], pib{v, true})
+		g[v] = append(g[v], pib{u, false})
+	}
+	vis := make([]bool, n)
+	var dfs func(int) int
+	dfs = func(u int) int {
+		ans := 0
+		vis[u] = true
+		for _, p := range g[u] {
+			v, exist := p.v, p.b
+			if !vis[v] {
+				if exist {
+					ans++
+				}
+				ans += dfs(v)
+			}
+		}
+		return ans
+	}
+	return dfs(0)
+}
 ```
 
 ### **...**

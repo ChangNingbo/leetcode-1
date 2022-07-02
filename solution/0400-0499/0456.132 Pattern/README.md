@@ -1,4 +1,4 @@
-# [456. 132 模式](https://leetcode-cn.com/problems/132-pattern)
+# [456. 132 模式](https://leetcode.cn/problems/132-pattern)
 
 [English Version](/solution/0400-0499/0456.132%20Pattern/README_EN.md)
 
@@ -92,7 +92,7 @@ class BinaryIndexedTree:
     def __init__(self, n):
         self.n = n
         self.c = [0] * (n + 1)
-    
+
     @staticmethod
     def lowbit(x):
         return x & -x
@@ -101,7 +101,7 @@ class BinaryIndexedTree:
         while x <= self.n:
             self.c[x] += delta
             x += BinaryIndexedTree.lowbit(x)
-    
+
     def query(self, x):
         s = 0
         while x:

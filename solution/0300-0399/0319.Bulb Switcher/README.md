@@ -1,4 +1,4 @@
-# [319. 灯泡开关](https://leetcode-cn.com/problems/bulb-switcher)
+# [319. 灯泡开关](https://leetcode.cn/problems/bulb-switcher)
 
 [English Version](/solution/0300-0399/0319.Bulb%20Switcher/README_EN.md)
 
@@ -16,7 +16,7 @@
 
 <p><strong>示例 1：</strong></p>
 
-<p><img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0300-0399/0319.Bulb%20Switcher/images/bulb.jpg" style="width: 421px; height: 321px;" /></p>
+<p><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0300-0399/0319.Bulb%20Switcher/images/bulb.jpg" style="width: 421px; height: 321px;" /></p>
 
 <pre>
 <strong>输入：</strong>n =<strong> </strong>3

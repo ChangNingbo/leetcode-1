@@ -46,18 +46,69 @@ There is no way to divide nums into 4 / 2 = 2 pairs such that the pairs satisfy 
 
 ## Solutions
 
+The first step is to count the number of times each number appears in the array. Since the question asks for pairs of numbers that are part of putting two equal elements together, in other words to see if each number occurs an even number of times.
+
 <!-- tabs:start -->
 
 ### **Python3**
 
 ```python
-
+class Solution:
+    def divideArray(self, nums: List[int]) -> bool:
+        cnt = Counter(nums)
+        return all(v % 2 == 0 for v in cnt.values())
 ```
 
 ### **Java**
 
 ```java
+class Solution {
+    public boolean divideArray(int[] nums) {
+        int[] cnt = new int[510];
+        for (int v : nums) {
+            ++cnt[v];
+        }
+        for (int v : cnt) {
+            if (v % 2 != 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+```
 
+### **C++**
+
+```cpp
+class Solution {
+public:
+    bool divideArray(vector<int>& nums) {
+        vector<int> cnt(510);
+        for (int& v : nums) ++cnt[v];
+        for (int& v : cnt)
+            if (v % 2)
+                return false;
+        return true;
+    }
+};
+```
+
+### **Go**
+
+```go
+func divideArray(nums []int) bool {
+	cnt := make([]int, 510)
+	for _, v := range nums {
+		cnt[v]++
+	}
+	for _, v := range cnt {
+		if v%2 == 1 {
+			return false
+		}
+	}
+	return true
+}
 ```
 
 ### **TypeScript**

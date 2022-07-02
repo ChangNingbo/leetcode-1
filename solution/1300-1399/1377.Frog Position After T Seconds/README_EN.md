@@ -12,7 +12,7 @@
 
 <p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/1300-1399/1377.Frog%20Position%20After%20T%20Seconds/images/frog1.jpg" style="width: 338px; height: 304px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/1300-1399/1377.Frog%20Position%20After%20T%20Seconds/images/frog1.jpg" style="width: 338px; height: 304px;" />
 <pre>
 <strong>Input:</strong> n = 7, edges = [[1,2],[1,3],[1,7],[2,4],[2,6],[3,5]], t = 2, target = 4
 <strong>Output:</strong> 0.16666666666666666 
@@ -20,7 +20,7 @@
 </pre>
 
 <p><strong>Example 2:</strong></p>
-<strong><img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/1300-1399/1377.Frog%20Position%20After%20T%20Seconds/images/frog2.jpg" style="width: 304px; height: 304px;" /></strong>
+<strong><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/1300-1399/1377.Frog%20Position%20After%20T%20Seconds/images/frog2.jpg" style="width: 304px; height: 304px;" /></strong>
 
 <pre>
 <strong>Input:</strong> n = 7, edges = [[1,2],[1,3],[1,7],[2,4],[2,6],[3,5]], t = 1, target = 7
@@ -42,18 +42,165 @@
 
 ## Solutions
 
+BFS.
+
 <!-- tabs:start -->
 
 ### **Python3**
 
 ```python
-
+class Solution:
+    def frogPosition(self, n: int, edges: List[List[int]], t: int, target: int) -> float:
+        g = defaultdict(list)
+        for u, v in edges:
+            g[u].append(v)
+            g[v].append(u)
+        q = deque([(1, 1.0)])
+        vis = [False] * (n + 1)
+        vis[1] = True
+        while q and t >= 0:
+            for _ in range(len(q)):
+                u, p = q.popleft()
+                nxt = [v for v in g[u] if not vis[v]]
+                if u == target and (not nxt or t == 0):
+                    return p
+                for v in nxt:
+                    vis[v] = True
+                    q.append((v, p / len(nxt)))
+            t -= 1
+        return 0
 ```
 
 ### **Java**
 
 ```java
+class Solution {
+    public double frogPosition(int n, int[][] edges, int t, int target) {
+        List<Integer>[] g = new List[n + 1];
+        for (int i = 0; i <= n; ++i) {
+            g[i] = new ArrayList<>();
+        }
+        for (int[] e : edges) {
+            int u = e[0], v = e[1];
+            g[u].add(v);
+            g[v].add(u);
+        }
+        Deque<Pair<Integer, Double>> q = new ArrayDeque<>();
+        q.offer(new Pair<>(1, 1.0));
+        boolean[] vis = new boolean[n + 1];
+        vis[1] = true;
+        while (!q.isEmpty() && t >= 0) {
+            for (int k = q.size(); k > 0; --k) {
+                Pair<Integer, Double> x = q.poll();
+                int u = x.getKey();
+                double p = x.getValue();
+                List<Integer> nxt = new ArrayList<>();
+                for (int v : g[u]) {
+                    if (!vis[v]) {
+                        nxt.add(v);
+                        vis[v] = true;
+                    }
+                }
+                if (u == target && (nxt.isEmpty() || t == 0)) {
+                    return p;
+                }
+                for (int v : nxt) {
+                    q.offer(new Pair<>(v, p / nxt.size()));
+                }
+            }
+            --t;
+        }
+        return 0;
+    }
+}
+```
 
+### **C++**
+
+```cpp
+class Solution {
+public:
+    double frogPosition(int n, vector<vector<int>>& edges, int t, int target) {
+        vector<vector<int>> g(n + 1);
+        for (auto& e : edges)
+        {
+            int u = e[0], v = e[1];
+            g[u].push_back(v);
+            g[v].push_back(u);
+        }
+        typedef pair<int, double> pid;
+        queue<pid> q;
+        q.push({1, 1.0});
+        vector<bool> vis(n + 1);
+        vis[1] = true;
+        while (!q.empty() && t >= 0)
+        {
+            for (int k = q.size(); k; --k)
+            {
+                auto x = q.front();
+                q.pop();
+                int u = x.first;
+                double p = x.second;
+                vector<int> nxt;
+                for (int v : g[u])
+                {
+                    if (!vis[v])
+                    {
+                        vis[v] = true;
+                        nxt.push_back(v);
+                    }
+                }
+                if (u == target && (t == 0 || nxt.empty())) return p;
+                for (int v : nxt) q.push({v, p / nxt.size()});
+            }
+            --t;
+        }
+        return 0;
+    }
+};
+```
+
+### **Go**
+
+```go
+type pid struct {
+	x int
+	p float64
+}
+
+func frogPosition(n int, edges [][]int, t int, target int) float64 {
+	g := make([][]int, n+1)
+	for _, e := range edges {
+		u, v := e[0], e[1]
+		g[u] = append(g[u], v)
+		g[v] = append(g[v], u)
+	}
+	q := []pid{pid{1, 1.0}}
+	vis := make([]bool, n+1)
+	vis[1] = true
+	for len(q) > 0 && t >= 0 {
+		for k := len(q); k > 0; k-- {
+			x := q[0]
+			q = q[1:]
+			u, p := x.x, x.p
+			var nxt []int
+			for _, v := range g[u] {
+				if !vis[v] {
+					vis[v] = true
+					nxt = append(nxt, v)
+				}
+			}
+			if u == target && (len(nxt) == 0 || t == 0) {
+				return p
+			}
+			for _, v := range nxt {
+				q = append(q, pid{v, p / float64(len(nxt))})
+			}
+		}
+		t--
+	}
+	return 0
+}
 ```
 
 ### **...**

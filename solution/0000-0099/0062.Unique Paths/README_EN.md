@@ -12,7 +12,7 @@
 
 <p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>
-<img src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0000-0099/0062.Unique%20Paths/images/robot_maze.png" style="width: 400px; height: 183px;" />
+<img src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0000-0099/0062.Unique%20Paths/images/robot_maze.png" style="width: 400px; height: 183px;" />
 <pre>
 <strong>Input:</strong> m = 3, n = 7
 <strong>Output:</strong> 28
@@ -124,6 +124,23 @@ func uniquePaths(m int, n int) int {
 		}
 	}
 	return dp[m-1][n-1]
+}
+```
+
+### **Rust**
+
+```rust
+impl Solution {
+    pub fn unique_paths(m: i32, n: i32) -> i32 {
+        let (m, n) = (m as usize, n as usize);
+        let mut dp = vec![1; n];
+        for i in 1..m {
+            for j in 1..n {
+                dp[j] += dp[j - 1];
+            }
+        }
+        dp[n - 1]
+    }
 }
 ```
 

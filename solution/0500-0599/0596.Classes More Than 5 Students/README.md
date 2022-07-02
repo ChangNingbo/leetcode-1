@@ -1,4 +1,4 @@
-# [596. 超过 5 名学生的课](https://leetcode-cn.com/problems/classes-more-than-5-students)
+# [596. 超过 5 名学生的课](https://leetcode.cn/problems/classes-more-than-5-students)
 
 [English Version](/solution/0500-0599/0596.Classes%20More%20Than%205%20Students/README_EN.md)
 
@@ -21,7 +21,7 @@
 
 <p>&nbsp;</p>
 
-<p>编写一个SQL查询来报告 <strong>至少有5个学生</strong> 的所有类。</p>
+<p>编写一个SQL查询来报告 <strong>至少有5个学生</strong> 的所有班级。</p>
 
 <p>以 <strong>任意顺序 </strong>返回结果表。</p>
 
@@ -69,11 +69,11 @@ Courses table:
 
 ```sql
 SELECT
-	class 
+	class
 FROM
-	courses 
+	courses
 GROUP BY
-	class 
+	class
 HAVING
 	COUNT( class ) >= 5
 ```

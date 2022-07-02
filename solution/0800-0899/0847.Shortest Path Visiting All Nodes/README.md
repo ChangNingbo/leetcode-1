@@ -1,4 +1,4 @@
-# [847. 访问所有节点的最短路径](https://leetcode-cn.com/problems/shortest-path-visiting-all-nodes)
+# [847. 访问所有节点的最短路径](https://leetcode.cn/problems/shortest-path-visiting-all-nodes)
 
 [English Version](/solution/0800-0899/0847.Shortest%20Path%20Visiting%20All%20Nodes/README_EN.md)
 
@@ -18,7 +18,7 @@
 </ol>
 
 <p><strong>示例 1：</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0800-0899/0847.Shortest%20Path%20Visiting%20All%20Nodes/images/shortest1-graph.jpg" style="width: 222px; height: 183px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0800-0899/0847.Shortest%20Path%20Visiting%20All%20Nodes/images/shortest1-graph.jpg" style="width: 222px; height: 183px;" />
 <pre>
 <strong>输入：</strong>graph = [[1,2,3],[0],[0],[0]]
 <strong>输出：</strong>4
@@ -26,7 +26,7 @@
 
 <p><strong>示例 2：</strong></p>
 
-<p><img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0800-0899/0847.Shortest%20Path%20Visiting%20All%20Nodes/images/shortest2-graph.jpg" style="width: 382px; height: 222px;" /></p>
+<p><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0800-0899/0847.Shortest%20Path%20Visiting%20All%20Nodes/images/shortest2-graph.jpg" style="width: 382px; height: 222px;" /></p>
 
 <pre>
 <strong>输入：</strong>graph = [[1],[0,2,4],[1,3,4],[2],[1,2]]
@@ -106,17 +106,17 @@ class Solution:
         q = []
         dist = [[float('inf')] * (1 << n) for _ in range(n)]
         for i in range(n):
-            heapq.heappush(q, (f(1 << i), i, 1 << i))
+            heappush(q, (f(1 << i), i, 1 << i))
             dist[i][1 << i] = 0
         while q:
-            _, u, state = heapq.heappop(q)
+            _, u, state = heappop(q)
             if state == (1 << n) - 1:
                 return dist[u][state]
             for v in graph[u]:
                 nxt = state | (1 << v)
                 if dist[v][nxt] > dist[u][state] + 1:
                     dist[v][nxt] = dist[u][state] + 1
-                    heapq.heappush(q, (dist[v][nxt] + f(nxt), v, nxt))
+                    heappush(q, (dist[v][nxt] + f(nxt), v, nxt))
         return 0
 ```
 
@@ -181,8 +181,7 @@ class Solution {
             Arrays.fill(dist[i], Integer.MAX_VALUE);
         }
         PriorityQueue<int[]> q = new PriorityQueue<>(Comparator.comparingInt(a -> a[0]));
-        for (int i = 0; i < n; ++i)
-        {
+        for (int i = 0; i < n; ++i) {
             q.offer(new int[]{f(1 << i), i, 1 << i});
             dist[i][1 << i] = 0;
         }

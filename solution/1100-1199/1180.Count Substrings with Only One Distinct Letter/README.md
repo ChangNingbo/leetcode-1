@@ -1,4 +1,4 @@
-# [1180. 统计只含单一字母的子串](https://leetcode-cn.com/problems/count-substrings-with-only-one-distinct-letter)
+# [1180. 统计只含单一字母的子串](https://leetcode.cn/problems/count-substrings-with-only-one-distinct-letter)
 
 [English Version](/solution/1100-1199/1180.Count%20Substrings%20with%20Only%20One%20Distinct%20Letter/README_EN.md)
 
@@ -48,7 +48,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def countLetters(self, s: str) -> int:
+        n = len(s)
+        i = ans = 0
+        while i < n:
+            j = i
+            while j < n and s[j] == s[i]:
+                j += 1
+            ans += (1 + j - i) * (j - i) // 2
+            i = j
+        return ans
 ```
 
 ### **Java**
@@ -56,7 +66,56 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public int countLetters(String s) {
+        int ans = 0;
+        for (int i = 0, n = s.length(); i < n;) {
+            int j = i;
+            while (j < n && s.charAt(j) == s.charAt(i)) {
+                ++j;
+            }
+            ans += (1 + j - i) * (j - i) / 2;
+            i = j;
+        }
+        return ans;
+    }
+}
+```
 
+### **C++**
+
+```cpp
+class Solution {
+public:
+    int countLetters(string s) {
+        int ans = 0;
+        for (int i = 0, n = s.size(); i < n;)
+        {
+            int j = i;
+            while (j < n && s[j] == s[i]) ++j;
+            ans += (1 + j - i) * (j - i) / 2;
+            i = j;
+        }
+        return ans;
+    }
+};
+```
+
+### **Go**
+
+```go
+func countLetters(s string) int {
+	ans := 0
+	for i, n := 0, len(s); i < n; {
+		j := i
+		for j < n && s[j] == s[i] {
+			j++
+		}
+		ans += (1 + j - i) * (j - i) / 2
+		i = j
+	}
+	return ans
+}
 ```
 
 ### **...**

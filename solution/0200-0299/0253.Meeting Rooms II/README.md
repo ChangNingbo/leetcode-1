@@ -1,4 +1,4 @@
-# [253. 会议室 II](https://leetcode-cn.com/problems/meeting-rooms-ii)
+# [253. 会议室 II](https://leetcode.cn/problems/meeting-rooms-ii)
 
 [English Version](/solution/0200-0299/0253.Meeting%20Rooms%20II/README_EN.md)
 
@@ -37,7 +37,7 @@
 
 <!-- 这里可写通用的实现逻辑 -->
 
-差分数组。
+**方法一：差分数组**
 
 <!-- tabs:start -->
 
@@ -52,9 +52,7 @@ class Solution:
         for start, end in intervals:
             delta[start] += 1
             delta[end] -= 1
-        for i in range(len(delta) - 1):
-            delta[i + 1] += delta[i]
-        return max(delta)
+        return max(accumulate(delta))
 ```
 
 ### **Java**

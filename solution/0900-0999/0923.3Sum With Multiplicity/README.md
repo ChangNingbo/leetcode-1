@@ -1,4 +1,4 @@
-# [923. 三数之和的多种可能](https://leetcode-cn.com/problems/3sum-with-multiplicity)
+# [923. 三数之和的多种可能](https://leetcode.cn/problems/3sum-with-multiplicity)
 
 [English Version](/solution/0900-0999/0923.3Sum%20With%20Multiplicity/README_EN.md)
 
@@ -68,10 +68,29 @@ arr[i] = 1, arr[j] = arr[k] = 2 出现 12 次：
 
 ```
 
-### **...**
+### **C++**
 
-```
-
+```cpp
+class Solution {
+public:
+    int threeSumMulti(vector<int>& arr, int target) {
+        unordered_map<int, long> c;
+        for (int a : arr) c[a]++;
+        long res = 0;
+        for (auto it : c)
+            for (auto it2 : c) {
+                int i = it.first, j = it2.first, k = target - i - j;
+                if (!c.count(k)) continue;
+                if (i == j && j == k)
+                    res += c[i] * (c[i] - 1) * (c[i] - 2) / 6;
+                else if (i == j && j != k)
+                    res += c[i] * (c[i] - 1) / 2 * c[k];
+                else if (i < j && j < k)
+                    res += c[i] * c[j] * c[k];
+            }
+        return res % int(1e9 + 7);
+    }
+};
 ```
 
 <!-- tabs:end -->

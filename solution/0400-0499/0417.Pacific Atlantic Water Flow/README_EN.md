@@ -14,7 +14,7 @@
 
 <p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0400-0499/0417.Pacific%20Atlantic%20Water%20Flow/images/waterflow-grid.jpg" style="width: 573px; height: 573px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0400-0499/0417.Pacific%20Atlantic%20Water%20Flow/images/waterflow-grid.jpg" style="width: 573px; height: 573px;" />
 <pre>
 <strong>Input:</strong> heights = [[1,2,2,3,5],[3,2,3,4,4],[2,4,5,3,1],[6,7,1,4,5],[5,1,1,2,4]]
 <strong>Output:</strong> [[0,4],[1,3],[1,4],[2,2],[3,0],[3,1],[4,0]]
@@ -48,7 +48,7 @@ class Solution:
     def pacificAtlantic(self, heights: List[List[int]]) -> List[List[int]]:
         def bfs(q, vis):
             while q:
-                for _ in range(len(q), 0, -1):
+                for _ in range(len(q)):
                     i, j = q.popleft()
                     for a, b in [[0, -1], [0, 1], [1, 0], [-1, 0]]:
                         x, y = i + a, j + b
@@ -70,12 +70,7 @@ class Solution:
                     q2.append((i, j))
         bfs(q1, vis1)
         bfs(q2, vis2)
-        ans = []
-        for i in range(m):
-            for j in range(n):
-                if (i, j) in vis1 and (i, j) in vis2:
-                    ans.append((i, j))
-        return ans
+        return [(i, j) for i in range(m) for j in range(n) if (i, j) in vis1 and (i, j) in vis2]
 ```
 
 ### **Java**
@@ -264,6 +259,61 @@ func pacificAtlantic(heights [][]int) [][]int {
 		}
 	}
 	return ans
+}
+```
+
+### **TypeScript**
+
+```ts
+function pacificAtlantic(heights: number[][]): number[][] {
+    const m = heights.length;
+    const n = heights[0].length;
+    const dirs = [
+        [1, 0],
+        [0, 1],
+        [-1, 0],
+        [0, -1],
+    ];
+    const gird = new Array(m).fill(0).map(() => new Array(n).fill(0));
+    const isVis = new Array(m).fill(0).map(() => new Array(n).fill(false));
+
+    const dfs = (i: number, j: number) => {
+        if (isVis[i][j]) {
+            return;
+        }
+        gird[i][j]++;
+        isVis[i][j] = true;
+        const h = heights[i][j];
+        for (const [x, y] of dirs) {
+            if (h <= (heights[i + x] ?? [])[j + y]) {
+                dfs(i + x, j + y);
+            }
+        }
+    };
+
+    for (let i = 0; i < n; i++) {
+        dfs(0, i);
+    }
+    for (let i = 0; i < m; i++) {
+        dfs(i, 0);
+    }
+    isVis.forEach(v => v.fill(false));
+    for (let i = 0; i < n; i++) {
+        dfs(m - 1, i);
+    }
+    for (let i = 0; i < m; i++) {
+        dfs(i, n - 1);
+    }
+
+    const res = [];
+    for (let i = 0; i < m; i++) {
+        for (let j = 0; j < n; j++) {
+            if (gird[i][j] === 2) {
+                res.push([i, j]);
+            }
+        }
+    }
+    return res;
 }
 ```
 

@@ -55,20 +55,142 @@ There are 0 hills and valleys so we return 0.
 
 ### **Python3**
 
-```python
+First make the consecutive duplicate value to be unique with the side values.
 
+```python
+class Solution:
+    def countHillValley(self, nums: List[int]) -> int:
+        arr = [nums[0]]
+        for v in nums[1:]:
+            if v != arr[-1]:
+                arr.append(v)
+        return sum((arr[i] < arr[i - 1]) == (arr[i] < arr[i + 1]) for i in range(1, len(arr) - 1))
+```
+
+```python
+class Solution:
+    def countHillValley(self, nums: List[int]) -> int:
+        ans = j = 0
+        for i in range(1, len(nums) - 1):
+            if nums[i] == nums[i + 1]:
+                continue
+            if nums[i] > nums[j] and nums[i] > nums[i + 1]:
+                ans += 1
+            if nums[i] < nums[j] and nums[i] < nums[i + 1]:
+                ans += 1
+            j = i
+        return ans
 ```
 
 ### **Java**
 
-```java
+Use two pointers to solve the problem
 
+```java
+class Solution {
+    public int countHillValley(int[] nums) {
+        int ans = 0;
+        for (int i = 1, j = 0; i < nums.length - 1; ++i) {
+            if (nums[i] == nums[i + 1]) {
+                continue;
+            }
+            if (nums[i] > nums[j] && nums[i] > nums[i + 1]) {
+                ++ans;
+            }
+            if (nums[i] < nums[j] && nums[i] < nums[i + 1]) {
+                ++ans;
+            }
+            j = i;
+        }
+        return ans;
+    }
+}
+```
+
+### **C++**
+
+```cpp
+class Solution {
+public:
+    int countHillValley(vector<int>& nums) {
+        int ans = 0;
+        for (int i = 1, j = 0; i < nums.size() - 1; ++i)
+        {
+            if (nums[i] == nums[i + 1]) continue;
+            if (nums[i] > nums[j] && nums[i] > nums[i + 1]) ++ans;
+            if (nums[i] < nums[j] && nums[i] < nums[i + 1]) ++ans;
+            j = i;
+        }
+        return ans;
+    }
+};
+```
+
+### **Go**
+
+```go
+func countHillValley(nums []int) int {
+	ans := 0
+	for i, j := 1, 0; i < len(nums)-1; i++ {
+		if nums[i] == nums[i+1] {
+			continue
+		}
+		if nums[i] > nums[j] && nums[i] > nums[i+1] {
+			ans++
+		}
+		if nums[i] < nums[j] && nums[i] < nums[i+1] {
+			ans++
+		}
+		j = i
+	}
+	return ans
+}
 ```
 
 ### **TypeScript**
 
 ```ts
+function countHillValley(nums: number[]): number {
+    const n = nums.length;
+    let res = 0;
+    let prev = nums[0];
+    for (let i = 1; i < n - 1; i++) {
+        const num = nums[i];
+        const next = nums[i + 1];
+        if (num == next) {
+            continue;
+        }
+        if ((num > prev && num > next) || (num < prev && num < next)) {
+            res += 1;
+        }
+        prev = num;
+    }
+    return res;
+}
+```
 
+### **Rust**
+
+```rust
+impl Solution {
+    pub fn count_hill_valley(nums: Vec<i32>) -> i32 {
+        let n = nums.len();
+        let mut res = 0;
+        let mut prev = nums[0];
+        for i in 1..n - 1 {
+            let num = nums[i];
+            let next = nums[i + 1];
+            if num == next {
+                continue;
+            }
+            if num > prev && num > next || num < prev && num < next {
+                res += 1;
+            }
+            prev = num;
+        }
+        res
+    }
+}
 ```
 
 ### **...**

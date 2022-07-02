@@ -1,4 +1,4 @@
-# [309. 最佳买卖股票时机含冷冻期](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown)
+# [309. 最佳买卖股票时机含冷冻期](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-cooldown)
 
 [English Version](/solution/0300-0399/0309.Best%20Time%20to%20Buy%20and%20Sell%20Stock%20with%20Cooldown/README_EN.md)
 
@@ -95,6 +95,24 @@ class Solution {
         }
         return f2;
     }
+}
+```
+
+### **TypeScript**
+
+```ts
+function maxProfit(prices: number[]): number {
+    const n = prices.length;
+    let dp = Array.from({ length: n }, v => new Array(3).fill(0));
+    dp[0] = [0, -prices[0], Number.MIN_SAFE_INTEGER];
+    for (let i = 1; i < n; i++) {
+        dp[i] = [
+            Math.max(dp[i - 1][0], dp[i - 1][2]),
+            Math.max(dp[i - 1][1], dp[i - 1][0] - prices[i]),
+            dp[i - 1][1] + prices[i],
+        ];
+    }
+    return Math.max(dp[n - 1][0], dp[n - 1][2]);
 }
 ```
 

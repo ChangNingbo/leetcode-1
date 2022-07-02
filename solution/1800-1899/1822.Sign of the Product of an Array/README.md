@@ -1,4 +1,4 @@
-# [1822. 数组元素积的符号](https://leetcode-cn.com/problems/sign-of-the-product-of-an-array)
+# [1822. 数组元素积的符号](https://leetcode.cn/problems/sign-of-the-product-of-an-array)
 
 [English Version](/solution/1800-1899/1822.Sign%20of%20the%20Product%20of%20an%20Array/README_EN.md)
 
@@ -56,6 +56,8 @@
 ## 解法
 
 <!-- 这里可写通用的实现逻辑 -->
+
+不可模拟乘积过程，给定的范围有可能导致数值溢出，只关注数值的符号变化即可。
 
 <!-- tabs:start -->
 
@@ -143,6 +145,25 @@ func arraySign(nums []int) int {
 		}
 	}
 	return res
+}
+```
+
+### **Rust**
+
+```rust
+use std::cmp::Ordering;
+impl Solution {
+    pub fn array_sign(nums: Vec<i32>) -> i32 {
+        let mut res = 1;
+        for num in nums.iter() {
+            match num.cmp(&0) {
+                Ordering::Equal => return 0,
+                Ordering::Less => res *= -1,
+                Ordering::Greater => {}
+            }
+        }
+        res
+    }
 }
 ```
 

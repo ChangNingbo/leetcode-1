@@ -1,4 +1,4 @@
-# [143. 重排链表](https://leetcode-cn.com/problems/reorder-list)
+# [143. 重排链表](https://leetcode.cn/problems/reorder-list)
 
 [English Version](/solution/0100-0199/0143.Reorder%20List/README_EN.md)
 
@@ -23,7 +23,7 @@ L<sub>0</sub> → L<sub>n</sub> → L<sub>1</sub> → L<sub>n - 1</sub> → L<su
 
 <p><strong>示例 1：</strong></p>
 
-<p><img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0100-0199/0143.Reorder%20List/images/1626420311-PkUiGI-image.png" style="width: 240px; " /></p>
+<p><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0100-0199/0143.Reorder%20List/images/1626420311-PkUiGI-image.png" style="width: 240px; " /></p>
 
 <pre>
 <strong>输入：</strong>head = [1,2,3,4]
@@ -31,7 +31,7 @@ L<sub>0</sub> → L<sub>n</sub> → L<sub>1</sub> → L<sub>n - 1</sub> → L<su
 
 <p><strong>示例 2：</strong></p>
 
-<p><img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0100-0199/0143.Reorder%20List/images/1626420320-YUiulT-image.png" style="width: 320px; " /></p>
+<p><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0100-0199/0143.Reorder%20List/images/1626420320-YUiulT-image.png" style="width: 320px; " /></p>
 
 <pre>
 <strong>输入：</strong>head = [1,2,3,4,5]
@@ -284,6 +284,130 @@ var reorderList = function (head) {
         pre = t;
     }
 };
+```
+
+### **TypeScript**
+
+```ts
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     val: number
+ *     next: ListNode | null
+ *     constructor(val?: number, next?: ListNode | null) {
+ *         this.val = (val===undefined ? 0 : val)
+ *         this.next = (next===undefined ? null : next)
+ *     }
+ * }
+ */
+
+/**
+ Do not return anything, modify head in-place instead.
+ */
+function reorderList(head: ListNode | null): void {
+    const arr = [];
+    let node = head;
+    while (node.next != null) {
+        arr.push(node);
+        node = node.next;
+    }
+    let l = 0;
+    let r = arr.length - 1;
+    while (l < r) {
+        const start = arr[l];
+        const end = arr[r];
+        [end.next.next, start.next, end.next] = [start.next, end.next, null];
+        l++;
+        r--;
+    }
+}
+```
+
+```ts
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     val: number
+ *     next: ListNode | null
+ *     constructor(val?: number, next?: ListNode | null) {
+ *         this.val = (val===undefined ? 0 : val)
+ *         this.next = (next===undefined ? null : next)
+ *     }
+ * }
+ */
+
+/**
+ Do not return anything, modify head in-place instead.
+ */
+function reorderList(head: ListNode | null): void {
+    let slow = head;
+    let fast = head;
+    // 找到中心节点
+    while (fast != null && fast.next != null) {
+        slow = slow.next;
+        fast = fast.next.next;
+    }
+    // 反转节点
+    let next = slow.next;
+    slow.next = null;
+    while (next != null) {
+        [next.next, slow, next] = [slow, next, next.next];
+    }
+    // 合并
+    let left = head;
+    let right = slow;
+    while (right.next != null) {
+        const next = left.next;
+        left.next = right;
+        right = right.next;
+        left.next.next = next;
+        left = left.next.next;
+    }
+}
+```
+
+### **Rust**
+
+```rust
+// Definition for singly-linked list.
+// #[derive(PartialEq, Eq, Clone, Debug)]
+// pub struct ListNode {
+//   pub val: i32,
+//   pub next: Option<Box<ListNode>>
+// }
+//
+// impl ListNode {
+//   #[inline]
+//   fn new(val: i32) -> Self {
+//     ListNode {
+//       next: None,
+//       val
+//     }
+//   }
+// }
+use std::collections::VecDeque;
+impl Solution {
+    pub fn reorder_list(head: &mut Option<Box<ListNode>>) {
+        let mut tail = &mut head.as_mut().unwrap().next;
+        let mut head = tail.take();
+        let mut deque = VecDeque::new();
+        while head.is_some() {
+            let next = head.as_mut().unwrap().next.take();
+            deque.push_back(head);
+            head = next;
+        }
+        let mut flag = false;
+        while !deque.is_empty() {
+            *tail = if flag {
+                deque.pop_front().unwrap()
+            } else {
+                deque.pop_back().unwrap()
+            };
+            tail = &mut tail.as_mut().unwrap().next;
+            flag = !flag;
+        }
+    }
+}
 ```
 
 ### **...**

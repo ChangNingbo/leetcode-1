@@ -1,4 +1,4 @@
-# [1900. 最佳运动员的比拼回合](https://leetcode-cn.com/problems/the-earliest-and-latest-rounds-where-players-compete)
+# [1900. 最佳运动员的比拼回合](https://leetcode.cn/problems/the-earliest-and-latest-rounds-where-players-compete)
 
 [English Version](/solution/1900-1999/1900.The%20Earliest%20and%20Latest%20Rounds%20Where%20Players%20Compete/README_EN.md)
 
@@ -18,7 +18,6 @@
     	<li>运动员 <code>4</code> 轮空晋级下一回合</li>
     </ul>
     </li>
-
 </ul>
 
 <p>每回合结束后，获胜者将会基于最开始分配给他们的原始顺序（升序）重新排成一排。</p>

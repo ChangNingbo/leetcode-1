@@ -1,4 +1,4 @@
-# [面试题 07. 重建二叉树](https://leetcode-cn.com/problems/zhong-jian-er-cha-shu-lcof/)
+# [面试题 07. 重建二叉树](https://leetcode.cn/problems/zhong-jian-er-cha-shu-lcof/)
 
 ## 题目描述
 
@@ -9,7 +9,7 @@
 <p> </p>
 
 <p><strong>示例 1:</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/lcof/%E9%9D%A2%E8%AF%95%E9%A2%9807.%20%E9%87%8D%E5%BB%BA%E4%BA%8C%E5%8F%89%E6%A0%91/images/tree.jpg" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/lcof/%E9%9D%A2%E8%AF%95%E9%A2%9807.%20%E9%87%8D%E5%BB%BA%E4%BA%8C%E5%8F%89%E6%A0%91/images/tree.jpg" />
 <pre>
 <strong>Input:</strong> preorder = [3,9,20,15,7], inorder = [9,3,15,20,7]
 <strong>Output:</strong> [3,9,20,null,null,15,7]
@@ -30,7 +30,7 @@
 
 <p> </p>
 
-<p><strong>注意</strong>：本题与主站 105 题重复：<a href="https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/">https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/</a></p>
+<p><strong>注意</strong>：本题与主站 105 题重复：<a href="https://leetcode.cn/problems/construct-binary-tree-from-preorder-and-inorder-traversal/">https://leetcode.cn/problems/construct-binary-tree-from-preorder-and-inorder-traversal/</a></p>
 
 ## 解法
 
@@ -279,7 +279,7 @@ function buildTree(preorder: number[], inorder: number[]): TreeNode | null {
 use std::rc::Rc;
 use std::cell::RefCell;
 impl Solution {
-    pub fn build_tree(preorder: Vec<i32>, inorder: Vec<i32>) -> Option<Rc<RefCell<TreeNode>>> {
+    fn help(preorder: &[i32], inorder: &[i32]) -> Option<Rc<RefCell<TreeNode>>> {
         if inorder.is_empty() {
             return None;
         }
@@ -287,9 +287,13 @@ impl Solution {
         let i = inorder.iter().position(|num| *num == val).unwrap();
         Some(Rc::new(RefCell::new(TreeNode {
             val,
-            left: Self::build_tree(preorder[1..i + 1].to_vec(), inorder[..i].to_vec()),
-            right: Self::build_tree(preorder[i + 1..].to_vec(), inorder[i + 1..].to_vec()),
+            left: Self::help(&preorder[1..i + 1], &inorder[..i]),
+            right: Self::help(&preorder[i + 1..], &inorder[i + 1..]),
         })))
+    }
+
+    pub fn build_tree(preorder: Vec<i32>, inorder: Vec<i32>) -> Option<Rc<RefCell<TreeNode>>> {
+        Self::help(&preorder, &inorder)
     }
 }
 ```

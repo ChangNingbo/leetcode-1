@@ -21,7 +21,7 @@ struct Node {
 
 <p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0100-0199/0117.Populating%20Next%20Right%20Pointers%20in%20Each%20Node%20II/images/117_sample.png" style="width: 500px; height: 171px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0100-0199/0117.Populating%20Next%20Right%20Pointers%20in%20Each%20Node%20II/images/117_sample.png" style="width: 500px; height: 171px;" />
 <pre>
 <strong>Input:</strong> root = [1,2,3,4,5,null,7]
 <strong>Output:</strong> [1,#,2,3,#,4,5,7,#]
@@ -187,6 +187,142 @@ public:
         return root;
     }
 };
+```
+
+### **Go**
+
+```go
+/**
+ * Definition for a Node.
+ * type Node struct {
+ *     Val int
+ *     Left *Node
+ *     Right *Node
+ *     Next *Node
+ * }
+ */
+
+func connect(root *Node) *Node {
+    if root == nil {
+        return nil
+    }
+    if root.Left != nil && root.Right != nil {
+        root.Left.Next = root.Right
+    }
+    if root.Left != nil && root.Right == nil {
+        root.Left.Next = getNext(root.Next)
+    }
+    if root.Right != nil {
+        root.Right.Next = getNext(root.Next)
+    }
+
+    connect(root.Right)
+    connect(root.Left)
+    return root
+}
+
+func getNext(node *Node) *Node {
+    for node != nil {
+        if node.Left != nil {
+            return node.Left
+        }
+        if node.Right != nil {
+            return node.Right
+        }
+        node = node.Next
+    }
+    return nil
+}
+```
+
+### **TypeScript**
+
+BFS:
+
+```ts
+/**
+ * Definition for Node.
+ * class Node {
+ *     val: number
+ *     left: Node | null
+ *     right: Node | null
+ *     next: Node | null
+ *     constructor(val?: number, left?: Node, right?: Node, next?: Node) {
+ *         this.val = (val===undefined ? 0 : val)
+ *         this.left = (left===undefined ? null : left)
+ *         this.right = (right===undefined ? null : right)
+ *         this.next = (next===undefined ? null : next)
+ *     }
+ * }
+ */
+
+function connect(root: Node | null): Node | null {
+    if (root == null) {
+        return root;
+    }
+    const queue = [root];
+    while (queue.length !== 0) {
+        const n = queue.length;
+        let pre = null;
+        for (let i = 0; i < n; i++) {
+            const node = queue.shift();
+            node.next = pre;
+            pre = node;
+            const { left, right } = node;
+            right && queue.push(right);
+            left && queue.push(left);
+        }
+    }
+    return root;
+}
+```
+
+DFS:
+
+```ts
+/**
+ * Definition for Node.
+ * class Node {
+ *     val: number
+ *     left: Node | null
+ *     right: Node | null
+ *     next: Node | null
+ *     constructor(val?: number, left?: Node, right?: Node, next?: Node) {
+ *         this.val = (val===undefined ? 0 : val)
+ *         this.left = (left===undefined ? null : left)
+ *         this.right = (right===undefined ? null : right)
+ *         this.next = (next===undefined ? null : next)
+ *     }
+ * }
+ */
+
+const find = (root: Node | null): Node | null => {
+    if (root == null) {
+        return root;
+    }
+    const { left, right, next } = root;
+    return left || right || find(next);
+};
+
+function connect(root: Node | null): Node | null {
+    if (root == null) {
+        return root;
+    }
+    const { left, right, next } = root;
+    if (left != null) {
+        if (right != null) {
+            left.next = right;
+        } else {
+            left.next = find(next);
+        }
+    }
+    if (right != null) {
+        right.next = find(next);
+    }
+    connect(right);
+    connect(left);
+    return root;
+}
 ```
 
 ### **...**

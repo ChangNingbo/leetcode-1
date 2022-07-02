@@ -8,7 +8,7 @@
 
 <p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/1800-1899/1886.Determine%20Whether%20Matrix%20Can%20Be%20Obtained%20By%20Rotation/images/grid3.png" style="width: 301px; height: 121px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/1800-1899/1886.Determine%20Whether%20Matrix%20Can%20Be%20Obtained%20By%20Rotation/images/grid3.png" style="width: 301px; height: 121px;" />
 <pre>
 <strong>Input:</strong> mat = [[0,1],[1,0]], target = [[1,0],[0,1]]
 <strong>Output:</strong> true
@@ -16,7 +16,7 @@
 </pre>
 
 <p><strong>Example 2:</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/1800-1899/1886.Determine%20Whether%20Matrix%20Can%20Be%20Obtained%20By%20Rotation/images/grid4.png" style="width: 301px; height: 121px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/1800-1899/1886.Determine%20Whether%20Matrix%20Can%20Be%20Obtained%20By%20Rotation/images/grid4.png" style="width: 301px; height: 121px;" />
 <pre>
 <strong>Input:</strong> mat = [[0,1],[1,1]], target = [[1,0],[0,1]]
 <strong>Output:</strong> false
@@ -24,7 +24,7 @@
 </pre>
 
 <p><strong>Example 3:</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/1800-1899/1886.Determine%20Whether%20Matrix%20Can%20Be%20Obtained%20By%20Rotation/images/grid4.png" style="width: 661px; height: 184px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/1800-1899/1886.Determine%20Whether%20Matrix%20Can%20Be%20Obtained%20By%20Rotation/images/grid4.png" style="width: 661px; height: 184px;" />
 <pre>
 <strong>Input:</strong> mat = [[0,0,0],[0,1,0],[1,1,1]], target = [[1,1,1],[0,1,0],[0,0,0]]
 <strong>Output:</strong> true
@@ -104,6 +104,79 @@ class Solution {
             }
         }
         return true;
+    }
+}
+```
+
+### **TypeScript**
+
+```ts
+function findRotation(mat: number[][], target: number[][]): boolean {
+    for (let k = 0; k < 4; k++) {
+        rotate(mat);
+        if (isEqual(mat, target)) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function isEqual(A: number[][], B: number[][]) {
+    const n = A.length;
+    for (let i = 0; i < n; i++) {
+        for (let j = 0; j < n; j++) {
+            if (A[i][j] !== B[i][j]) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+function rotate(matrix: number[][]): void {
+    const n = matrix.length;
+    for (let i = 0; i < n >> 1; i++) {
+        for (let j = 0; j < (n + 1) >> 1; j++) {
+            [
+                matrix[i][j],
+                matrix[n - 1 - j][i],
+                matrix[n - 1 - i][n - 1 - j],
+                matrix[j][n - 1 - i],
+            ] = [
+                matrix[n - 1 - j][i],
+                matrix[n - 1 - i][n - 1 - j],
+                matrix[j][n - 1 - i],
+                matrix[i][j],
+            ];
+        }
+    }
+}
+```
+
+### **Rust**
+
+```rust
+impl Solution {
+    pub fn find_rotation(mat: Vec<Vec<i32>>, target: Vec<Vec<i32>>) -> bool {
+        let n = mat.len();
+        let mut is_equal = [true; 4];
+        for i in 0..n {
+            for j in 0..n {
+                if is_equal[0] && mat[i][j] != target[i][j] {
+                    is_equal[0] = false;
+                }
+                if is_equal[1] && mat[i][j] != target[j][n - 1 - i] {
+                    is_equal[1] = false;
+                }
+                if is_equal[2] && mat[i][j] != target[n - 1 - i][n - 1 - j] {
+                    is_equal[2] = false;
+                }
+                if is_equal[3] && mat[i][j] != target[n - 1 - j][i] {
+                    is_equal[3] = false;
+                }
+            }
+        }
+        is_equal.into_iter().any(|&v| v)
     }
 }
 ```

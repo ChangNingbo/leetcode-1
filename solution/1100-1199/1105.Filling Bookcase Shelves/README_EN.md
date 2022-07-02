@@ -20,7 +20,7 @@
 
 <p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/1100-1199/1105.Filling%20Bookcase%20Shelves/images/shelves.png" style="height: 500px; width: 337px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/1100-1199/1105.Filling%20Bookcase%20Shelves/images/shelves.png" style="height: 500px; width: 337px;" />
 <pre>
 <strong>Input:</strong> books = [[1,1],[2,3],[2,3],[1,1],[1,1],[1,1],[1,2]], shelf_width = 4
 <strong>Output:</strong> 6
@@ -52,13 +52,46 @@ Notice that book number 2 does not have to be on the first shelf.
 ### **Python3**
 
 ```python
-
+class Solution:
+    def minHeightShelves(self, books: List[List[int]], shelfWidth: int) -> int:
+        n = len(books)
+        dp = [0] * (n + 1)
+        dp[1] = books[0][1]
+        for i in range(2, n + 1):
+            dp[i] = books[i - 1][1] + dp[i - 1]
+            w, h = books[i - 1][0], books[i - 1][1]
+            for j in range(i - 1, 0, -1):
+                w += books[j - 1][0]
+                if w > shelfWidth:
+                    break
+                h = max(books[j - 1][1], h)
+                dp[i] = min(dp[i], dp[j - 1] + h)
+        return dp[n]
 ```
 
 ### **Java**
 
 ```java
-
+class Solution {
+    public int minHeightShelves(int[][] books, int shelfWidth) {
+        int n = books.length;
+        int[] dp = new int[n + 1];
+        dp[1] = books[0][1];
+        for (int i = 2; i <= n; i++) {
+            dp[i] = dp[i - 1] + books[i - 1][1];
+            int w = books[i - 1][0], h = books[i - 1][1];
+            for (int j = i - 1; j > 0; j--) {
+                w += books[j - 1][0];
+                if (w > shelfWidth) {
+                    break;
+                }
+                h = Math.max(h, books[j - 1][1]);
+                dp[i] = Math.min(dp[i], dp[j - 1] + h);
+            }
+        }
+        return dp[n];
+    }
+}
 ```
 
 ### **...**

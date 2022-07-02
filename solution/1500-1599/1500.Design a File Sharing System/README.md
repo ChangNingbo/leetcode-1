@@ -1,4 +1,4 @@
-# [1500. 设计文件分享系统](https://leetcode-cn.com/problems/design-a-file-sharing-system)
+# [1500. 设计文件分享系统](https://leetcode.cn/problems/design-a-file-sharing-system)
 
 [English Version](/solution/1500-1599/1500.Design%20a%20File%20Sharing%20System/README_EN.md)
 
@@ -101,7 +101,7 @@ class FileSharing:
 
     def join(self, ownedChunks: List[int]) -> int:
         if self.reused:
-            userID = heapq.heappop(self.reused)
+            userID = heappop(self.reused)
         else:
             self.cur += 1
             userID = self.cur
@@ -109,7 +109,7 @@ class FileSharing:
         return userID
 
     def leave(self, userID: int) -> None:
-        heapq.heappush(self.reused, userID)
+        heappush(self.reused, userID)
         self.user_chunks.pop(userID)
 
     def request(self, userID: int, chunkID: int) -> List[int]:

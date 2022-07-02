@@ -1,4 +1,4 @@
-# [429. N 叉树的层序遍历](https://leetcode-cn.com/problems/n-ary-tree-level-order-traversal)
+# [429. N 叉树的层序遍历](https://leetcode.cn/problems/n-ary-tree-level-order-traversal)
 
 [English Version](/solution/0400-0499/0429.N-ary%20Tree%20Level%20Order%20Traversal/README_EN.md)
 
@@ -14,7 +14,7 @@
 
 <p><strong>示例 1：</strong></p>
 
-<p><img src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0400-0499/0429.N-ary%20Tree%20Level%20Order%20Traversal/images/narytreeexample.png" style="width: 100%; max-width: 300px;" /></p>
+<p><img src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0400-0499/0429.N-ary%20Tree%20Level%20Order%20Traversal/images/narytreeexample.png" style="width: 100%; max-width: 300px;" /></p>
 
 <pre>
 <strong>输入：</strong>root = [1,null,3,2,4,null,5,6]
@@ -23,7 +23,7 @@
 
 <p><strong>示例 2：</strong></p>
 
-<p><img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0400-0499/0429.N-ary%20Tree%20Level%20Order%20Traversal/images/sample_4_964.png" style="width: 296px; height: 241px;" /></p>
+<p><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0400-0499/0429.N-ary%20Tree%20Level%20Order%20Traversal/images/sample_4_964.png" style="width: 296px; height: 241px;" /></p>
 
 <pre>
 <strong>输入：</strong>root = [1,null,2,3,4,5,null,null,6,7,null,8,null,9,10,null,null,11,null,12,null,13,null,null,14]
@@ -43,13 +43,27 @@
 
 <!-- 这里可写通用的实现逻辑 -->
 
-“BFS 层次遍历实现”。
+**方法一：BFS**
+
+借助队列，逐层遍历。
+
+时间复杂度 O(n)。
+
+**方法二：DFS**
+
+按深度遍历。
+
+假设当前深度为 i，遍历到的节点为 root。若结果列表 `ans[i]` 不存在，则创建一个空列表放入 ans 中，然后将 `root.val` 放入 `ans[i]`。接着往下一层遍历（root 的子节点）。
+
+时间复杂度 O(n)。
 
 <!-- tabs:start -->
 
 ### **Python3**
 
 <!-- 这里可写当前语言的特殊实现逻辑 -->
+
+BFS：
 
 ```python
 """
@@ -69,7 +83,7 @@ class Solution:
         q = deque([root])
         while q:
             t = []
-            for _ in range(len(q), 0, -1):
+            for _ in range(len(q)):
                 root = q.popleft()
                 t.append(root.val)
                 q.extend(root.children)
@@ -77,9 +91,38 @@ class Solution:
         return ans
 ```
 
+DFS：
+
+```python
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val=None, children=None):
+        self.val = val
+        self.children = children
+"""
+
+class Solution:
+    def levelOrder(self, root: 'Node') -> List[List[int]]:
+        def dfs(root, i):
+            if root is None:
+                return
+            if len(ans) <= i:
+                ans.append([])
+            ans[i].append(root.val)
+            for child in root.children:
+                dfs(child, i + 1)
+
+        ans = []
+        dfs(root, 0)
+        return ans
+```
+
 ### **Java**
 
 <!-- 这里可写当前语言的特殊实现逻辑 -->
+
+BFS：
 
 ```java
 /*
@@ -123,32 +166,53 @@ class Solution {
 }
 ```
 
-也可以使用 DFS:
+DFS：
 
 ```java
-class Solution {
-    public List<List<Integer>> levelOrder(Node root) {
-        List<List<Integer>> res = new ArrayList<>();
-        dfs(root, 0, res);
-        return res;
+/*
+// Definition for a Node.
+class Node {
+    public int val;
+    public List<Node> children;
+
+    public Node() {}
+
+    public Node(int _val) {
+        val = _val;
     }
 
-    private void dfs(Node root, int level, List<List<Integer>> res) {
+    public Node(int _val, List<Node> _children) {
+        val = _val;
+        children = _children;
+    }
+};
+*/
+
+class Solution {
+    public List<List<Integer>> levelOrder(Node root) {
+        List<List<Integer>> ans = new ArrayList<>();
+        dfs(root, 0, ans);
+        return ans;
+    }
+
+    private void dfs(Node root, int i, List<List<Integer>> ans) {
         if (root == null) {
             return;
         }
-        if (res.size() <= level) {
-            res.add(new ArrayList<>());
+        if (ans.size() <= i) {
+            ans.add(new ArrayList<>());
         }
-        res.get(level++).add(root.val);
+        ans.get(i++).add(root.val);
         for (Node child : root.children) {
-            dfs(child, level, res);
+            dfs(child, i, ans);
         }
     }
 }
 ```
 
 ### **C++**
+
+BFS：
 
 ```cpp
 /*
@@ -194,7 +258,49 @@ public:
 };
 ```
 
+DFS：
+
+```cpp
+/*
+// Definition for a Node.
+class Node {
+public:
+    int val;
+    vector<Node*> children;
+
+    Node() {}
+
+    Node(int _val) {
+        val = _val;
+    }
+
+    Node(int _val, vector<Node*> _children) {
+        val = _val;
+        children = _children;
+    }
+};
+*/
+
+class Solution {
+public:
+    vector<vector<int>> levelOrder(Node* root) {
+        vector<vector<int>> ans;
+        dfs(root, 0, ans);
+        return ans;
+    }
+
+    void dfs(Node* root, int i, vector<vector<int>>& ans) {
+        if (!root) return;
+        if (ans.size() <= i) ans.push_back({});
+        ans[i++].push_back(root->val);
+        for (Node* child : root->children) dfs(child, i, ans);
+    }
+};
+```
+
 ### **Go**
+
+BFS：
 
 ```go
 /**
@@ -224,6 +330,107 @@ func levelOrder(root *Node) [][]int {
 		ans = append(ans, t)
 	}
 	return ans
+}
+```
+
+DFS：
+
+```go
+/**
+ * Definition for a Node.
+ * type Node struct {
+ *     Val int
+ *     Children []*Node
+ * }
+ */
+
+func levelOrder(root *Node) [][]int {
+	var ans [][]int
+	var dfs func(root *Node, i int)
+	dfs = func(root *Node, i int) {
+		if root == nil {
+			return
+		}
+		if len(ans) <= i {
+			ans = append(ans, []int{})
+		}
+		ans[i] = append(ans[i], root.Val)
+		for _, child := range root.Children {
+			dfs(child, i+1)
+		}
+	}
+	dfs(root, 0)
+	return ans
+}
+```
+
+### **TypeScript**
+
+BFS：
+
+```ts
+/**
+ * Definition for node.
+ * class Node {
+ *     val: number
+ *     children: Node[]
+ *     constructor(val?: number) {
+ *         this.val = (val===undefined ? 0 : val)
+ *         this.children = []
+ *     }
+ * }
+ */
+
+function levelOrder(root: Node | null): number[][] {
+    const res = [];
+    if (root == null) {
+        return res;
+    }
+    const queue = [root];
+    while (queue.length !== 0) {
+        const n = queue.length;
+        const vals = [];
+        for (let i = 0; i < n; i++) {
+            const { val, children } = queue.shift();
+            vals.push(val);
+            queue.push(...children);
+        }
+        res.push(vals);
+    }
+    return res;
+}
+```
+
+DFS：
+
+```ts
+/**
+ * Definition for node.
+ * class Node {
+ *     val: number
+ *     children: Node[]
+ *     constructor(val?: number) {
+ *         this.val = (val===undefined ? 0 : val)
+ *         this.children = []
+ *     }
+ * }
+ */
+
+function levelOrder(root: Node | null): number[][] {
+    const res = [];
+    const dfs = (root: Node | null, depth: number) => {
+        if (root == null) {
+            return;
+        }
+        if (res.length <= depth) {
+            res.push([]);
+        }
+        const { val, children } = root;
+        res[depth].push(val);
+        children.forEach(node => dfs(node, depth + 1));
+    };
+    dfs(root, 0);
+    return res;
 }
 ```
 

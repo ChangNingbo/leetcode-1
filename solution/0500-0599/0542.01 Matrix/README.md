@@ -1,4 +1,4 @@
-# [542. 01 矩阵](https://leetcode-cn.com/problems/01-matrix)
+# [542. 01 矩阵](https://leetcode.cn/problems/01-matrix)
 
 [English Version](/solution/0500-0599/0542.01%20Matrix/README_EN.md)
 
@@ -14,7 +14,7 @@
 
 <p><b>示例 1：</b></p>
 
-<p><img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0500-0599/0542.01%20Matrix/images/1626667201-NCWmuP-image.png" style="width: 150px; " /></p>
+<p><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0500-0599/0542.01%20Matrix/images/1626667201-NCWmuP-image.png" style="width: 150px; " /></p>
 
 <pre>
 <strong>输入：</strong>mat =<strong> </strong>[[0,0,0],[0,1,0],[0,0,0]]
@@ -23,7 +23,7 @@
 
 <p><b>示例 2：</b></p>
 
-<p><img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0500-0599/0542.01%20Matrix/images/1626667205-xFxIeK-image.png" style="width: 150px; " /></p>
+<p><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0500-0599/0542.01%20Matrix/images/1626667205-xFxIeK-image.png" style="width: 150px; " /></p>
 
 <pre>
 <b>输入：</b>mat =<b> </b>[[0,0,0],[0,1,0],[1,1,1]]
@@ -47,7 +47,7 @@
 
 <!-- 这里可写通用的实现逻辑 -->
 
-多源 BFS。
+**方法一：多源 BFS**
 
 初始化结果矩阵 ans，所有 0 的距离为 0，所以 1 的距离为 -1。初始化队列 q 存储 BFS 需要检查的位置，并将所有 0 的位置入队。
 
@@ -65,9 +65,9 @@ class Solution:
         m, n = len(mat), len(mat[0])
         ans = [[-1] * n for _ in range(m)]
         q = deque()
-        for i in range(m):
-            for j in range(n):
-                if mat[i][j] == 0:
+        for i, row in enumerate(mat):
+            for j, v in enumerate(row):
+                if v == 0:
                     ans[i][j] = 0
                     q.append((i, j))
         dirs = [(0, 1), (0, -1), (1, 0), (-1, 0)]
@@ -176,9 +176,9 @@ func updateMatrix(mat [][]int) [][]int {
 	}
 	type pair struct{ x, y int }
 	var q []pair
-	for i := 0; i < m; i++ {
-		for j := 0; j < n; j++ {
-			if mat[i][j] == 0 {
+	for i, row := range mat {
+		for j, v := range row {
+			if v == 0 {
 				ans[i][j] = 0
 				q = append(q, pair{i, j})
 			}

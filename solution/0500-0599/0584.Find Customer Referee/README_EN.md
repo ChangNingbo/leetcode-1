@@ -20,7 +20,7 @@ Each row of this table indicates the id of a customer, their name, and the id of
 
 <p>&nbsp;</p>
 
-<p>Write an SQL query to report the IDs of the customer that are <strong>not referred by</strong> the customer with <code>id = 2</code>.</p>
+<p>Write an SQL query to report the names of the customer that are <strong>not referred by</strong> the customer with <code>id = 2</code>.</p>
 
 <p>Return the result table in <strong>any order</strong>.</p>
 
@@ -60,12 +60,23 @@ Customer table:
 ### **SQL**
 
 ```sql
-SELECT 
+SELECT
     name
 FROM
     Customer
 WHERE
     referee_id != 2 OR referee_id IS NULL;
+```
+
+MySQL can use `IFNULL()`:
+
+```sql
+SELECT
+    name
+FROM
+    customer
+WHERE
+    IFNULL(referee_id, 0) != 2;
 ```
 
 <!-- tabs:end -->

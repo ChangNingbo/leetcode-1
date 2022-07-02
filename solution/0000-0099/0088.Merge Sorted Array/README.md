@@ -1,4 +1,4 @@
-# [88. 合并两个有序数组](https://leetcode-cn.com/problems/merge-sorted-array)
+# [88. 合并两个有序数组](https://leetcode.cn/problems/merge-sorted-array)
 
 [English Version](/solution/0000-0099/0088.Merge%20Sorted%20Array/README_EN.md)
 
@@ -87,6 +87,23 @@ class Solution:
             k -= 1
 ```
 
+```python
+class Solution:
+    def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
+        """
+        Do not return anything, modify nums1 in-place instead.
+        """
+        i, j, k = m - 1, n - 1, m + n - 1
+        while j >= 0:
+            if i < 0 or nums1[i] < nums2[j]:
+                nums1[k] = nums2[j]
+                j -= 1
+            else:
+                nums1[k] = nums1[i]
+                i -= 1
+            k -= 1
+```
+
 ### **Java**
 
 <!-- 这里可写当前语言的特殊实现逻辑 -->
@@ -146,6 +163,37 @@ var merge = function (nums1, m, nums2, n) {
         }
     }
 };
+```
+
+### **Rust**
+
+```rust
+impl Solution {
+    pub fn merge(nums1: &mut Vec<i32>, m: i32, nums2: &mut Vec<i32>, n: i32) {
+        let (mut m, mut n) = (m as usize, n as usize);
+        for i in (0..m + n).rev() {
+            nums1[i] = match (m == 0, n == 0) {
+                (true, false) => {
+                    n -= 1;
+                    nums2[n]
+                }
+                (false, true) => {
+                    m -= 1;
+                    nums1[m]
+                }
+                (_, _) => {
+                    if nums1[m - 1] > nums2[n - 1] {
+                        m -= 1;
+                        nums1[m]
+                    } else {
+                        n -= 1;
+                        nums2[n]
+                    }
+                }
+            }
+        }
+    }
+}
 ```
 
 ### **...**

@@ -1,4 +1,4 @@
-# [1760. 袋子里最少数目的球](https://leetcode-cn.com/problems/minimum-limit-of-balls-in-a-bag)
+# [1760. 袋子里最少数目的球](https://leetcode.cn/problems/minimum-limit-of-balls-in-a-bag)
 
 [English Version](/solution/1700-1799/1760.Minimum%20Limit%20of%20Balls%20in%20a%20Bag/README_EN.md)
 
@@ -16,7 +16,6 @@
     	<li>比方说，一个袋子里有 <code>5</code> 个球，你可以把它们分到两个新袋子里，分别有 <code>1</code> 个和 <code>4</code> 个球，或者分别有 <code>2</code> 个和 <code>3</code> 个球。</li>
     </ul>
     </li>
-
 </ul>
 
 <p>你的开销是单个袋子里球数目的 <strong>最大值</strong> ，你想要 <strong>最小化</strong> 开销。</p>
@@ -69,7 +68,7 @@
 
 <!-- 这里可写通用的实现逻辑 -->
 
-二分查找。
+**方法一：二分查找**
 
 题目可以转换为：对某个开销值，看它能不能在 maxOperations 次操作内得到。二分枚举开销值，找到最小的开销值即可。
 
@@ -85,7 +84,7 @@ class Solution:
         left, right = 1, max(nums)
         while left < right:
             mid = (left + right) >> 1
-            ops = sum([(num - 1) // mid for num in nums])
+            ops = sum((num - 1) // mid for num in nums)
             if ops <= maxOperations:
                 right = mid
             else:
@@ -100,7 +99,7 @@ class Solution:
 ```java
 class Solution {
     public int minimumSize(int[] nums, int maxOperations) {
-        int left = 1, right = 1000000000;
+        int left = 1, right = (int) 1e9;
         while (left < right) {
             int mid = (left + right) >>> 1;
             long ops = 0;
@@ -124,18 +123,14 @@ class Solution {
 class Solution {
 public:
     int minimumSize(vector<int>& nums, int maxOperations) {
-        int left = 1, right = *max_element(nums.begin(), nums.end());
-        while (left < right) {
-            int mid = left + (right - left >> 1);
+        int left = 1, right = 1e9;
+        while (left < right)
+        {
+            int mid = left + ((right - left) >> 1);
             long long ops = 0;
-            for (int num : nums) {
-                ops += (num - 1) / mid;
-            }
-            if (ops <= maxOperations) {
-                right = mid;
-            } else {
-                left = mid + 1;
-            }
+            for (int num : nums) ops += (num - 1) / mid;
+            if (ops <= maxOperations) right = mid;
+            else left = mid + 1;
         }
         return left;
     }
@@ -146,7 +141,7 @@ public:
 
 ```go
 func minimumSize(nums []int, maxOperations int) int {
-	left, right := 1, max(nums)
+	left, right := 1, int(1e9)
 	for left < right {
 		mid := (left + right) >> 1
 		var ops int
@@ -160,16 +155,6 @@ func minimumSize(nums []int, maxOperations int) int {
 		}
 	}
 	return left
-}
-
-func max(nums []int) int {
-	res := 0
-	for _, num := range nums {
-		if res < num {
-			res = num
-		}
-	}
-	return res
 }
 ```
 

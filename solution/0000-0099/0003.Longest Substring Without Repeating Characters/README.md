@@ -1,4 +1,4 @@
-# [3. 无重复字符的最长子串](https://leetcode-cn.com/problems/longest-substring-without-repeating-characters)
+# [3. 无重复字符的最长子串](https://leetcode.cn/problems/longest-substring-without-repeating-characters)
 
 [English Version](/solution/0000-0099/0003.Longest%20Substring%20Without%20Repeating%20Characters/README_EN.md)
 
@@ -48,13 +48,26 @@
 
 <!-- 这里可写通用的实现逻辑 -->
 
-“滑动窗口 + 哈希表”。
+**方法一：双指针 + 哈希表**
 
 定义一个哈希表记录当前窗口内出现的字符，i、j 分别表示不重复子串的开始位置和结束位置，ans 表示无重复字符子串的最大长度。
 
-遍历 s 每个字符 c，若 `[i, j - 1]` 窗口内存在 `c`，则 i 循环向右移动，更新哈希表，直至 `[i, j - 1]` 窗口不存在 `c`，循环结束。将 `c` 加入哈希表中，此时 `[i, j]` 窗口内不含重复元素，更新 ans 的最大值：`res = max(ans, j - i + 1)`。
+遍历 s 每个字符 c，若 `[i, j - 1]` 窗口内存在 `c`，则 i 循环向右移动，更新哈希表，直至 `[i, j - 1]` 窗口不存在 `c`，循环结束。将 `c` 加入哈希表中，此时 `[i, j]` 窗口内不含重复元素，更新 ans 的最大值：`ans = max(ans, j - i + 1)`。
 
 最后返回 ans 即可。
+
+时间复杂度 O(n)，其中 n 表示字符串 s 的长度。
+
+双指针算法模板：
+
+```java
+for (int i = 0, j = 0; i < n; ++i) {
+    while (j < i && check(j, i)) {
+        ++j;
+    }
+    // 具体问题的逻辑
+}
+```
 
 <!-- tabs:start -->
 
@@ -245,23 +258,20 @@ use std::collections::HashSet;
 
 impl Solution {
     pub fn length_of_longest_substring(s: String) -> i32 {
-        let n = s.len();
-        let cs: Vec<char> = s.chars().collect();
+        let s = s.as_bytes();
         let mut set = HashSet::new();
-        let mut l = 0;
-        let mut r = 0;
-        let mut res = 0;
-        while r != n {
-            let k = cs[r];
-            while set.contains(&k) {
-                set.remove(&cs[l]);
-                l += 1;
-            }
-            set.insert(k);
-            res = res.max(set.len());
-            r += 1;
-        }
-        res as i32
+        let mut i = 0;
+        s.iter()
+            .map(|c| {
+                while set.contains(&c) {
+                    set.remove(&s[i]);
+                    i += 1;
+                }
+                set.insert(c);
+                set.len()
+            })
+            .max()
+            .unwrap_or(0) as i32
     }
 }
 ```

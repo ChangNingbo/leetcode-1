@@ -8,7 +8,7 @@
 
 <p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0400-0499/0407.Trapping%20Rain%20Water%20II/images/trap1-3d.jpg" style="width: 361px; height: 321px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0400-0499/0407.Trapping%20Rain%20Water%20II/images/trap1-3d.jpg" style="width: 361px; height: 321px;" />
 <pre>
 <strong>Input:</strong> heightMap = [[1,4,3,1,3,2],[3,2,1,3,2,4],[2,3,3,2,3,1]]
 <strong>Output:</strong> 4
@@ -18,7 +18,7 @@ The total volume of water trapped is 4.
 </pre>
 
 <p><strong>Example 2:</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0400-0499/0407.Trapping%20Rain%20Water%20II/images/trap2-3d.jpg" style="width: 401px; height: 321px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0400-0499/0407.Trapping%20Rain%20Water%20II/images/trap2-3d.jpg" style="width: 401px; height: 321px;" />
 <pre>
 <strong>Input:</strong> heightMap = [[3,3,3,3,3],[3,2,2,2,3],[3,2,1,2,3],[3,2,2,2,3],[3,3,3,3,3]]
 <strong>Output:</strong> 10
@@ -49,19 +49,19 @@ class Solution:
         for i in range(m):
             for j in range(n):
                 if i == 0 or i == m - 1 or j == 0 or j == n - 1:
-                    heapq.heappush(pq, (heightMap[i][j], i, j))
+                    heappush(pq, (heightMap[i][j], i, j))
                     vis[i][j] = True
 
         ans = 0
         while pq:
-            e = heapq.heappop(pq)
+            e = heappop(pq)
             for x, y in [[0, 1], [0, -1], [1, 0], [-1, 0]]:
                 i, j = e[1] + x, e[2] + y
                 if i >= 0 and i < m and j >= 0 and j < n and not vis[i][j]:
                     if heightMap[i][j] < e[0]:
                         ans += e[0] - heightMap[i][j]
                     vis[i][j] = True
-                    heapq.heappush(pq, (max(heightMap[i][j], e[0]), i, j))
+                    heappush(pq, (max(heightMap[i][j], e[0]), i, j))
         return ans
 ```
 

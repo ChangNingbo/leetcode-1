@@ -1,4 +1,4 @@
-# [745. 前缀和后缀搜索](https://leetcode-cn.com/problems/prefix-and-suffix-search)
+# [745. 前缀和后缀搜索](https://leetcode.cn/problems/prefix-and-suffix-search)
 
 [English Version](/solution/0700-0799/0745.Prefix%20and%20Suffix%20Search/README_EN.md)
 
@@ -30,6 +30,8 @@
 WordFilter wordFilter = new WordFilter(["apple"]);
 wordFilter.f("a", "e"); // 返回 0 ，因为下标为 0 的单词的 prefix = "a" 且 suffix = 'e" 。
 </pre>
+
+
 
 <p><strong>提示：</strong></p>
 

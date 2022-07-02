@@ -1,4 +1,4 @@
-# [剑指 Offer II 013. 二维子矩阵的和](https://leetcode-cn.com/problems/O4NDxx)
+# [剑指 Offer II 013. 二维子矩阵的和](https://leetcode.cn/problems/O4NDxx)
 
 ## 题目描述
 
@@ -21,7 +21,7 @@
 
 <p><strong>示例 1：</strong></p>
 
-<p><img src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/lcof2/%E5%89%91%E6%8C%87%20Offer%20II%20013.%20%E4%BA%8C%E7%BB%B4%E5%AD%90%E7%9F%A9%E9%98%B5%E7%9A%84%E5%92%8C/images/1626332422-wUpUHT-image.png" style="width: 200px;" /></p>
+<p><img src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/lcof2/%E5%89%91%E6%8C%87%20Offer%20II%20013.%20%E4%BA%8C%E7%BB%B4%E5%AD%90%E7%9F%A9%E9%98%B5%E7%9A%84%E5%92%8C/images/1626332422-wUpUHT-image.png" style="width: 200px;" /></p>
 
 <pre>
 <strong>输入:</strong>
@@ -53,7 +53,7 @@ numMatrix.sumRegion(1, 2, 2, 4); // return 12 (蓝色矩形框的元素总和)
 
 <p>&nbsp;</p>
 
-<p><meta charset="UTF-8" />注意：本题与主站 304&nbsp;题相同：&nbsp;<a href="https://leetcode-cn.com/problems/range-sum-query-2d-immutable/">https://leetcode-cn.com/problems/range-sum-query-2d-immutable/</a></p>
+<p><meta charset="UTF-8" />注意：本题与主站 304&nbsp;题相同：&nbsp;<a href="https://leetcode.cn/problems/range-sum-query-2d-immutable/">https://leetcode.cn/problems/range-sum-query-2d-immutable/</a></p>
 
 ## 解法
 

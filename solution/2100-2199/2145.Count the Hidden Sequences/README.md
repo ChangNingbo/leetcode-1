@@ -1,4 +1,4 @@
-# [2145. 统计隐藏数组数目](https://leetcode-cn.com/problems/count-the-hidden-sequences)
+# [2145. 统计隐藏数组数目](https://leetcode.cn/problems/count-the-hidden-sequences)
 
 [English Version](/solution/2100-2199/2145.Count%20the%20Hidden%20Sequences/README_EN.md)
 
@@ -18,7 +18,6 @@
     	<li><code>[1, 2, 3, 4]</code>&nbsp;不符合要求，因为相邻元素的差值不符合给定数据。</li>
     </ul>
     </li>
-
 </ul>
 
 <p>请你返回 <strong>符合</strong>&nbsp;要求的隐藏数组的数目。如果没有符合要求的隐藏数组，请返回 <code>0</code>&nbsp;。</p>

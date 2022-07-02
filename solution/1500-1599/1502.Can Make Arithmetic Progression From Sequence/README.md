@@ -1,4 +1,4 @@
-# [1502. 判断能否形成等差数列](https://leetcode-cn.com/problems/can-make-arithmetic-progression-from-sequence)
+# [1502. 判断能否形成等差数列](https://leetcode.cn/problems/can-make-arithmetic-progression-from-sequence)
 
 [English Version](/solution/1500-1599/1502.Can%20Make%20Arithmetic%20Progression%20From%20Sequence/README_EN.md)
 
@@ -89,6 +89,24 @@ var canMakeArithmeticProgression = function (arr) {
     }
     return true;
 };
+```
+
+### **Rust**
+
+```rust
+impl Solution {
+    pub fn can_make_arithmetic_progression(mut arr: Vec<i32>) -> bool {
+        arr.sort();
+        let n = arr.len();
+        let target = arr[0] - arr[1];
+        for i in 2..n {
+            if arr[i - 1] - arr[i] != target {
+                return false;
+            }
+        }
+        true
+    }
+}
 ```
 
 ### **...**

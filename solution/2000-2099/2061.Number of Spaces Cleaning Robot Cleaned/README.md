@@ -1,4 +1,4 @@
-# [2061. Number of Spaces Cleaning Robot Cleaned](https://leetcode-cn.com/problems/number-of-spaces-cleaning-robot-cleaned)
+# [2061. 扫地机器人清扫过的空间个数](https://leetcode.cn/problems/number-of-spaces-cleaning-robot-cleaned)
 
 [English Version](/solution/2000-2099/2061.Number%20of%20Spaces%20Cleaning%20Robot%20Cleaned/README_EN.md)
 
@@ -15,7 +15,7 @@
 <p>&nbsp;</p>
 
 <p><strong>示例 1：</strong><br />
-<img src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/2000-2099/2061.Number%20of%20Spaces%20Cleaning%20Robot%20Cleaned/images/image-20211101204703-1.png" style="width: 250px; height: 242px;" /></p>
+<img src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/2000-2099/2061.Number%20of%20Spaces%20Cleaning%20Robot%20Cleaned/images/image-20211101204703-1.png" style="width: 250px; height: 242px;" /></p>
 
 <pre>
 <strong>输入:</strong> room = [[0,0,0],[1,1,0],[0,0,0]]
@@ -30,7 +30,7 @@
 </pre>
 
 <p><strong>示例 2：</strong><br />
-<img src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/2000-2099/2061.Number%20of%20Spaces%20Cleaning%20Robot%20Cleaned/images/image-20211101204736-2.png" style="width: 250px; height: 245px;" /></p>
+<img src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/2000-2099/2061.Number%20of%20Spaces%20Cleaning%20Robot%20Cleaned/images/image-20211101204736-2.png" style="width: 250px; height: 245px;" /></p>
 
 <pre>
 <strong>输入:</strong> room = [[0,1,0],[1,0,0],[0,0,0]]

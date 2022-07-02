@@ -1,4 +1,4 @@
-# [295. 数据流的中位数](https://leetcode-cn.com/problems/find-median-from-data-stream)
+# [295. 数据流的中位数](https://leetcode.cn/problems/find-median-from-data-stream)
 
 [English Version](/solution/0200-0299/0295.Find%20Median%20from%20Data%20Stream/README_EN.md)
 
@@ -61,10 +61,10 @@ class MedianFinder:
         self.max_heap = []
 
     def addNum(self, num: int) -> None:
-        heapq.heappush(self.min_heap, num)
-        heapq.heappush(self.max_heap, -heapq.heappop(self.min_heap))
+        heappush(self.min_heap, num)
+        heappush(self.max_heap, -heappop(self.min_heap))
         if len(self.max_heap) - len(self.min_heap) > 1:
-            heapq.heappush(self.min_heap, -heapq.heappop(self.max_heap))
+            heappush(self.min_heap, -heappop(self.max_heap))
 
     def findMedian(self) -> float:
         if len(self.max_heap) > len(self.min_heap):

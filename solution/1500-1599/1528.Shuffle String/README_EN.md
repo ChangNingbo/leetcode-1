@@ -10,7 +10,7 @@
 
 <p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/1500-1599/1528.Shuffle%20String/images/q1.jpg" style="width: 321px; height: 243px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/1500-1599/1528.Shuffle%20String/images/q1.jpg" style="width: 321px; height: 243px;" />
 <pre>
 <strong>Input:</strong> s = &quot;codeleet&quot;, <code>indices</code> = [4,5,6,7,0,2,1,3]
 <strong>Output:</strong> &quot;leetcode&quot;
@@ -43,13 +43,53 @@
 ### **Python3**
 
 ```python
-
+class Solution:
+    def restoreString(self, s: str, indices: List[int]) -> str:
+        ans = [0] * len(s)
+        for i, c in enumerate(s):
+            ans[indices[i]] = c
+        return ''.join(ans)
 ```
 
 ### **Java**
 
 ```java
+class Solution {
+    public String restoreString(String s, int[] indices) {
+        int n = s.length();
+        char[] ans = new char[n];
+        for (int i = 0; i < n; ++i) {
+            ans[indices[i]] = s.charAt(i);
+        }
+        return String.valueOf(ans);
+    }
+}
+```
 
+### **C++**
+
+```cpp
+class Solution {
+public:
+    string restoreString(string s, vector<int>& indices) {
+        int n = s.size();
+        string ans(n, 0);
+        for (int i = 0; i < n; ++i) ans[indices[i]] = s[i];
+        return ans;
+    }
+};
+```
+
+### **Go**
+
+```go
+func restoreString(s string, indices []int) string {
+	ans := make([]rune, len(s))
+	for i, c := range s {
+		ans[indices[i]] = c
+	}
+	return string(ans)
+}
 ```
 
 ### **...**

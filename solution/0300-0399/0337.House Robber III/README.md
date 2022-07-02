@@ -1,4 +1,4 @@
-# [337. 打家劫舍 III](https://leetcode-cn.com/problems/house-robber-iii)
+# [337. 打家劫舍 III](https://leetcode.cn/problems/house-robber-iii)
 
 [English Version](/solution/0300-0399/0337.House%20Robber%20III/README_EN.md)
 
@@ -16,7 +16,7 @@
 
 <p><strong>示例 1:</strong></p>
 
-<p><img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0300-0399/0337.House%20Robber%20III/images/rob1-tree.jpg" /></p>
+<p><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0300-0399/0337.House%20Robber%20III/images/rob1-tree.jpg" /></p>
 
 <pre>
 <strong>输入: </strong>root = [3,2,3,null,3,null,1]
@@ -25,7 +25,7 @@
 
 <p><strong>示例 2:</strong></p>
 
-<p><img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0300-0399/0337.House%20Robber%20III/images/rob2-tree.jpg" /></p>
+<p><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0300-0399/0337.House%20Robber%20III/images/rob2-tree.jpg" /></p>
 
 <pre>
 <strong>输入: </strong>root = [3,4,5,1,3,null,1]
@@ -65,7 +65,7 @@
 #         self.right = right
 class Solution:
     def rob(self, root: TreeNode) -> int:
-        @lru_cache(None)
+        @cache
         def dfs(root):
             if root is None:
                 return 0

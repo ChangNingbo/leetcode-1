@@ -10,7 +10,7 @@
 
 <p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0600-0699/0668.Kth%20Smallest%20Number%20in%20Multiplication%20Table/images/multtable1-grid.jpg" style="width: 500px; height: 254px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0600-0699/0668.Kth%20Smallest%20Number%20in%20Multiplication%20Table/images/multtable1-grid.jpg" style="width: 500px; height: 254px;" />
 <pre>
 <strong>Input:</strong> m = 3, n = 3, k = 5
 <strong>Output:</strong> 3
@@ -18,7 +18,7 @@
 </pre>
 
 <p><strong>Example 2:</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0600-0699/0668.Kth%20Smallest%20Number%20in%20Multiplication%20Table/images/multtable2-grid.jpg" style="width: 493px; height: 293px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0600-0699/0668.Kth%20Smallest%20Number%20in%20Multiplication%20Table/images/multtable2-grid.jpg" style="width: 493px; height: 293px;" />
 <pre>
 <strong>Input:</strong> m = 2, n = 3, k = 6
 <strong>Output:</strong> 6
@@ -35,18 +35,97 @@
 
 ## Solutions
 
+Binary search.
+
 <!-- tabs:start -->
 
 ### **Python3**
 
 ```python
-
+class Solution:
+    def findKthNumber(self, m: int, n: int, k: int) -> int:
+        left, right = 1, m * n
+        while left < right:
+            mid = (left + right) >> 1
+            cnt = 0
+            for i in range(1, m + 1):
+                cnt += min(mid // i, n)
+            if cnt >= k:
+                right = mid
+            else:
+                left = mid + 1
+        return left
 ```
 
 ### **Java**
 
 ```java
+class Solution {
+    public int findKthNumber(int m, int n, int k) {
+        int left = 1, right = m * n;
+        while (left < right) {
+            int mid = (left + right) >>> 1;
+            int cnt = 0;
+            for (int i = 1; i <= m; ++i) {
+                cnt += Math.min(mid / i, n);
+            }
+            if (cnt >= k) {
+                right = mid;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return left;
+    }
+}
+```
 
+### **C++**
+
+```cpp
+class Solution {
+public:
+    int findKthNumber(int m, int n, int k) {
+        int left = 1, right = m * n;
+        while (left < right)
+        {
+            int mid = (left + right) >> 1;
+            int cnt = 0;
+            for (int i = 1; i <= m; ++i) cnt += min(mid / i, n);
+            if (cnt >= k) right = mid;
+            else left = mid + 1;
+        }
+        return left;
+    }
+};
+```
+
+### **Go**
+
+```go
+func findKthNumber(m int, n int, k int) int {
+	left, right := 1, m*n
+	for left < right {
+		mid := (left + right) >> 1
+		cnt := 0
+		for i := 1; i <= m; i++ {
+			cnt += min(mid/i, n)
+		}
+		if cnt >= k {
+			right = mid
+		} else {
+			left = mid + 1
+		}
+	}
+	return left
+}
+
+func min(a, b int) int {
+	if a < b {
+		return a
+	}
+	return b
+}
 ```
 
 ### **...**

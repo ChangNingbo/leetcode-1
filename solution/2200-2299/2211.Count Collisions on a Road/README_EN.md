@@ -57,19 +57,91 @@ No cars will collide with each other. Thus, the total number of collisions that 
 ### **Python3**
 
 ```python
-
+class Solution:
+    def countCollisions(self, directions: str) -> int:
+        d = directions.lstrip('L').rstrip('R')
+        return len(d) - d.count('S')
 ```
 
 ### **Java**
 
 ```java
-
+class Solution {
+    public int countCollisions(String directions) {
+        char[] ds = directions.toCharArray();
+        int n = ds.length;
+        int l = 0;
+        int r = n - 1;
+        while (l < n && ds[l] == 'L') {
+            ++l;
+        }
+        while (r >= 0 && ds[r] == 'R') {
+            --r;
+        }
+        int ans = 0;
+        for (int i = l; i <= r; ++i) {
+            if (ds[i] != 'S') {
+                ++ans;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **TypeScript**
 
 ```ts
+function countCollisions(directions: string): number {
+    const n = directions.length;
+    let l = 0,
+        r = n - 1;
+    while (l < n && directions[l] == 'L') {
+        ++l;
+    }
+    while (r >= 0 && directions[r] == 'R') {
+        --r;
+    }
+    let ans = 0;
+    for (let i = l; i <= r; ++i) {
+        if (directions[i] != 'S') {
+            ++ans;
+        }
+    }
+    return ans;
+}
+```
 
+### **C++**
+
+```cpp
+class Solution {
+public:
+    int countCollisions(string directions) {
+        int l = 0, r = directions.size() -1, count = 0;
+        while (l <= r && directions[l] == 'L') {
+            l++;
+        }
+        while (l <= r && directions[r] == 'R') {
+            r--;
+        }
+        for (int i = l; i <=r; i++) {
+            count += directions[i] != 'S';
+        }
+        return count;
+
+    }
+};
+```
+
+### **Go**
+
+```go
+func countCollisions(directions string) int {
+	d := strings.TrimLeft(directions, "L")
+	d = strings.TrimRight(d, "R")
+	return len(d) - strings.Count(d, "S")
+}
 ```
 
 ### **...**

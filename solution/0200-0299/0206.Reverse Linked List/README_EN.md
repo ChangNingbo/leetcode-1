@@ -8,14 +8,14 @@
 
 <p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0200-0299/0206.Reverse%20Linked%20List/images/rev1ex1.jpg" style="width: 542px; height: 222px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0200-0299/0206.Reverse%20Linked%20List/images/rev1ex1.jpg" style="width: 542px; height: 222px;" />
 <pre>
 <strong>Input:</strong> head = [1,2,3,4,5]
 <strong>Output:</strong> [5,4,3,2,1]
 </pre>
 
 <p><strong>Example 2:</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0200-0299/0206.Reverse%20Linked%20List/images/rev1ex2.jpg" style="width: 182px; height: 222px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0200-0299/0206.Reverse%20Linked%20List/images/rev1ex2.jpg" style="width: 182px; height: 222px;" />
 <pre>
 <strong>Input:</strong> head = [1,2]
 <strong>Output:</strong> [2,1]
@@ -48,21 +48,35 @@
 ```python
 # Definition for singly-linked list.
 # class ListNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.next = None
-
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
 class Solution:
     def reverseList(self, head: ListNode) -> ListNode:
-        previous, current, next = None, head, None
+        dummy = ListNode()
+        curr = head
+        while curr:
+            next = curr.next
+            curr.next = dummy.next
+            dummy.next = curr
+            curr = next
+        return dummy.next
+```
 
-        while current is not None:
-            next = current.next
-            current.next = previous
-            previous = current
-            current = next
-
-        return previous
+```python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def reverseList(self, head: ListNode) -> ListNode:
+        if head is None or head.next is None:
+            return head
+        ans = self.reverseList(head.next)
+        head.next.next = head
+        head.next = None
+        return ans
 ```
 
 ### **Java**
@@ -75,19 +89,22 @@ Iterative version:
  * public class ListNode {
  *     int val;
  *     ListNode next;
- *     ListNode(int x) { val = x; }
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
 class Solution {
     public ListNode reverseList(ListNode head) {
-        ListNode pre = null, p = head;
-        while (p != null) {
-            ListNode q = p.next;
-            p.next = pre;
-            pre = p;
-            p = q;
+        ListNode dummy = new ListNode();
+        ListNode curr = head;
+        while (curr != null) {
+            ListNode next = curr.next;
+            curr.next = dummy.next;
+            dummy.next = curr;
+            curr = next;
         }
-        return pre;
+        return dummy.next;
     }
 }
 ```
@@ -100,7 +117,9 @@ Recursive version:
  * public class ListNode {
  *     int val;
  *     ListNode next;
- *     ListNode(int x) { val = x; }
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
 class Solution {
@@ -108,10 +127,10 @@ class Solution {
         if (head == null || head.next == null) {
             return head;
         }
-        ListNode res = reverseList(head.next);
+        ListNode ans = reverseList(head.next);
         head.next.next = head;
         head.next = null;
-        return res;
+        return ans;
     }
 }
 ```
@@ -131,14 +150,15 @@ class Solution {
  * @return {ListNode}
  */
 var reverseList = function (head) {
-    let pre = null;
-    for (let p = head; p; ) {
-        let q = p.next;
-        p.next = pre;
-        pre = p;
-        p = q;
+    let dummy = new ListNode();
+    let curr = head;
+    while (curr) {
+        let next = curr.next;
+        curr.next = dummy.next;
+        dummy.next = curr;
+        curr = next;
     }
-    return pre;
+    return dummy.next;
 };
 ```
 
@@ -153,14 +173,34 @@ var reverseList = function (head) {
  * }
  */
 func reverseList(head *ListNode) *ListNode {
-	var pre *ListNode
-	for p := head; p != nil; {
-		q := p.Next
-		p.Next = pre
-		pre = p
-		p = q
+	dummy := &ListNode{}
+	curr := head
+	for curr != nil {
+		next := curr.Next
+		curr.Next = dummy.Next
+		dummy.Next = curr
+		curr = next
 	}
-	return pre
+	return dummy.Next
+}
+```
+
+```go
+/**
+ * Definition for singly-linked list.
+ * type ListNode struct {
+ *     Val int
+ *     Next *ListNode
+ * }
+ */
+func reverseList(head *ListNode) *ListNode {
+	if head == nil || head.Next == nil {
+		return head
+	}
+	ans := reverseList(head.Next)
+	head.Next.Next = head
+	head.Next = nil
+	return ans
 }
 ```
 
@@ -180,16 +220,39 @@ func reverseList(head *ListNode) *ListNode {
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
-        ListNode* pre = nullptr;
-        ListNode* p = head;
-        while (p)
+        ListNode* dummy = new ListNode();
+        ListNode* curr = head;
+        while (curr)
         {
-            ListNode* q = p->next;
-            p->next = pre;
-            pre = p;
-            p = q;
+            ListNode* next = curr->next;
+            curr->next = dummy->next;
+            dummy->next = curr;
+            curr = next;
         }
-        return pre;
+        return dummy->next;
+    }
+};
+```
+
+```cpp
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        if (!head || !head->next) return head;
+        ListNode* ans = reverseList(head->next);
+        head->next->next = head;
+        head->next = nullptr;
+        return ans;
     }
 };
 ```

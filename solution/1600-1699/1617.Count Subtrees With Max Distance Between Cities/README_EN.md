@@ -18,7 +18,7 @@
 
 <p><strong>Example 1:</strong></p>
 
-<p><strong><img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/1600-1699/1617.Count%20Subtrees%20With%20Max%20Distance%20Between%20Cities/images/p1.png" style="width: 161px; height: 181px;" /></strong></p>
+<p><strong><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/1600-1699/1617.Count%20Subtrees%20With%20Max%20Distance%20Between%20Cities/images/p1.png" style="width: 161px; height: 181px;" /></strong></p>
 
 <pre>
 
@@ -66,7 +66,6 @@ No subtree has two nodes where the max distance between them is 3.
     <li><code>edges[i].length == 2</code></li>
     <li><code>1 &lt;= u<sub>i</sub>, v<sub>i</sub> &lt;= n</code></li>
     <li>All pairs <code>(u<sub>i</sub>, v<sub>i</sub>)</code> are distinct.</li>
-
 </ul>
 
 ## Solutions

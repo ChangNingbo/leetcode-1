@@ -14,14 +14,14 @@
 
 <p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0500-0599/0547.Number%20of%20Provinces/images/graph1.jpg" style="width: 222px; height: 142px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0500-0599/0547.Number%20of%20Provinces/images/graph1.jpg" style="width: 222px; height: 142px;" />
 <pre>
 <strong>Input:</strong> isConnected = [[1,1,0],[1,1,0],[0,0,1]]
 <strong>Output:</strong> 2
 </pre>
 
 <p><strong>Example 2:</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0500-0599/0547.Number%20of%20Provinces/images/graph2.jpg" style="width: 222px; height: 142px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0500-0599/0547.Number%20of%20Provinces/images/graph2.jpg" style="width: 222px; height: 142px;" />
 <pre>
 <strong>Input:</strong> isConnected = [[1,0,0],[0,1,0],[0,0,1]]
 <strong>Output:</strong> 3
@@ -281,6 +281,36 @@ func findCircleNum(isConnected [][]int) int {
 		}
 	}
 	return ans
+}
+```
+
+### **Rust**
+
+```rust
+impl Solution {
+    fn dfs(is_connected: &mut Vec<Vec<i32>>, vis: &mut Vec<bool>, i: usize) {
+        vis[i] = true;
+        for j in 0..is_connected.len() {
+            if vis[j] || is_connected[i][j] == 0 {
+                continue;
+            }
+            Self::dfs(is_connected, vis, j);
+        }
+    }
+
+    pub fn find_circle_num(mut is_connected: Vec<Vec<i32>>) -> i32 {
+        let n = is_connected.len();
+        let mut vis = vec![false; n];
+        let mut res = 0;
+        for i in 0..n {
+            if vis[i] {
+                continue;
+            }
+            res += 1;
+            Self::dfs(&mut is_connected, &mut vis, i);
+        }
+        res
+    }
 }
 ```
 

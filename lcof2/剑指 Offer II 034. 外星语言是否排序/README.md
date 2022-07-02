@@ -1,4 +1,4 @@
-# [剑指 Offer II 034. 外星语言是否排序](https://leetcode-cn.com/problems/lwyVBB)
+# [剑指 Offer II 034. 外星语言是否排序](https://leetcode.cn/problems/lwyVBB)
 
 ## 题目描述
 
@@ -45,7 +45,7 @@
 
 <p>&nbsp;</p>
 
-<p><meta charset="UTF-8" />注意：本题与主站 953&nbsp;题相同：&nbsp;<a href="https://leetcode-cn.com/problems/verifying-an-alien-dictionary/">https://leetcode-cn.com/problems/verifying-an-alien-dictionary/</a></p>
+<p><meta charset="UTF-8" />注意：本题与主站 953&nbsp;题相同：&nbsp;<a href="https://leetcode.cn/problems/verifying-an-alien-dictionary/">https://leetcode.cn/problems/verifying-an-alien-dictionary/</a></p>
 
 ## 解法
 
@@ -122,7 +122,8 @@ function isAlienSorted(words: string[], order: string): boolean {
     function compare(str1: string, str2: string): boolean {
         const n = Math.min(str1.length, str2.length);
         for (let i = 0; i < n; i++) {
-            let k1 = str1[i], k2 = str2[i];
+            let k1 = str1[i],
+                k2 = str2[i];
             if (k1 != k2) return charMap.get(k1) < charMap.get(k2);
         }
         return n == str1.length;
@@ -131,7 +132,7 @@ function isAlienSorted(words: string[], order: string): boolean {
         if (!compare(words[i - 1], words[i])) return false;
     }
     return true;
-};
+}
 ```
 
 ### **C++**

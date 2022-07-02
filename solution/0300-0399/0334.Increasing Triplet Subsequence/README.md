@@ -1,4 +1,4 @@
-# [334. 递增的三元子序列](https://leetcode-cn.com/problems/increasing-triplet-subsequence)
+# [334. 递增的三元子序列](https://leetcode.cn/problems/increasing-triplet-subsequence)
 
 [English Version](/solution/0300-0399/0334.Increasing%20Triplet%20Subsequence/README_EN.md)
 
@@ -178,6 +178,31 @@ func increasingTriplet(nums []int) bool {
 		}
 	}
 	return false
+}
+```
+
+### **Rust**
+
+```rust
+impl Solution {
+    pub fn increasing_triplet(nums: Vec<i32>) -> bool {
+        let n = nums.len();
+        if n < 3 {
+            return false;
+        }
+        let mut min = i32::MAX;
+        let mut mid = i32::MAX;
+        for num in nums.into_iter() {
+            if num <= min {
+                min = num;
+            } else if num <= mid {
+                mid = num;
+            } else {
+                return true;
+            }
+        }
+        false
+    }
 }
 ```
 

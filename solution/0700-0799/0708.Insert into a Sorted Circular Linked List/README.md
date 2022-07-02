@@ -1,4 +1,4 @@
-# [708. 循环有序列表的插入](https://leetcode-cn.com/problems/insert-into-a-sorted-circular-linked-list)
+# [708. 循环有序列表的插入](https://leetcode.cn/problems/insert-into-a-sorted-circular-linked-list)
 
 [English Version](/solution/0700-0799/0708.Insert%20into%20a%20Sorted%20Circular%20Linked%20List/README_EN.md)
 
@@ -17,14 +17,14 @@
 <p>&nbsp;</p>
 
 <p><strong>示例 1：</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0700-0799/0708.Insert%20into%20a%20Sorted%20Circular%20Linked%20List/images/example_1_before_65p.jpg" style="height: 149px; width: 250px;" /><br />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0700-0799/0708.Insert%20into%20a%20Sorted%20Circular%20Linked%20List/images/example_1_before_65p.jpg" style="height: 149px; width: 250px;" /><br />
 &nbsp;
 <pre>
 <strong>输入：</strong>head = [3,4,1], insertVal = 2
 <strong>输出：</strong>[3,4,1,2]
 <strong>解释：</strong>在上图中，有一个包含三个元素的循环有序列表，你获得值为 3 的节点的指针，我们需要向表中插入元素 2 。新插入的节点应该在 1 和 3 之间，插入之后，整个列表如上图所示，最后返回节点 3 。
 
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0700-0799/0708.Insert%20into%20a%20Sorted%20Circular%20Linked%20List/images/example_1_after_65p.jpg" style="height: 149px; width: 250px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0700-0799/0708.Insert%20into%20a%20Sorted%20Circular%20Linked%20List/images/example_1_after_65p.jpg" style="height: 149px; width: 250px;" />
 </pre>
 
 <p><strong>示例 2：</strong></p>
@@ -70,21 +70,20 @@ class Node:
         self.next = next
 """
 
+
 class Solution:
-    def insert(self, head: 'Node', insertVal: int) -> 'Node':
-        node = Node(val=insertVal)
+    def insert(self, head: 'Optional[Node]', insertVal: int) -> 'Node':
+        node = Node(insertVal)
         if head is None:
             node.next = node
             return node
-        pre, cur = head, head.next
-        while 1:
-            if pre.val <= insertVal <= cur.val or (pre.val > cur.val and (insertVal >= pre.val or insertVal <= cur.val)):
+        prev, curr = head, head.next
+        while curr != head:
+            if prev.val <= insertVal <= curr.val or (prev.val > curr.val and (insertVal >= prev.val or insertVal <= curr.val)):
                 break
-            pre, cur = cur, cur.next
-            if pre == head:
-                break
-        pre.next = node
-        node.next = cur
+            prev, curr = curr, curr.next
+        prev.next = node
+        node.next = curr
         return head
 ```
 
@@ -119,19 +118,16 @@ class Solution {
             node.next = node;
             return node;
         }
-        Node pre = head, cur = head.next;
-        while (true) {
-            if ((pre.val <= insertVal && insertVal <= cur.val) || (pre.val > cur.val && (insertVal >= pre.val || cur.val >= insertVal))) {
+        Node prev = head, curr = head.next;
+        while (curr != head) {
+            if ((prev.val <= insertVal && insertVal <= curr.val) || (prev.val > curr.val && (insertVal >= prev.val || insertVal <= curr.val))) {
                 break;
             }
-            pre = cur;
-            cur = cur.next;
-            if (pre == head) {
-                break;
-            }
+            prev = curr;
+            curr = curr.next;
         }
-        pre.next = node;
-        node.next = cur;
+        prev.next = node;
+        node.next = curr;
         return head;
     }
 }
@@ -164,44 +160,54 @@ public:
 class Solution {
 public:
     Node* insert(Node* head, int insertVal) {
-        Node* insert = new Node(insertVal);
-        if (head == nullptr) {
-            head = insert;
-            head->next = head;
-        } else if (head->next == nullptr) {
-            head->next = insert;
-            insert->next = head;
-        } else {
-            insertCore(head, insert);
+        Node* node = new Node(insertVal);
+        if (!head)
+        {
+            node->next = node;
+            return node;
         }
-
+        Node *prev = head, *curr = head->next;
+        while (curr != head)
+        {
+            if ((prev->val <= insertVal && insertVal <= curr->val) || (prev->val > curr->val && (insertVal >= prev->val || insertVal <= curr->val))) break;
+            prev = curr;
+            curr = curr->next;
+        }
+        prev->next = node;
+        node->next = curr;
         return head;
     }
-
-    void insertCore(Node* head, Node* insert) {
-        Node* cur = head;
-        Node* maxNode = head;
-        Node* next = head->next;
-
-        while (!(cur->val <= insert->val && insert->val <= next->val) && next != head) {
-            cur = cur->next;
-            next = next->next;
-
-            if (cur->val >= maxNode->val)
-                maxNode = cur;
-        }
-
-        if (cur->val <= insert->val && insert->val <= next->val) {
-            insert->next = next;
-            cur->next = insert;
-        } else {
-            insert->next = maxNode->next;
-            maxNode->next = insert;
-
-        }
-
-    }
 };
+```
+
+### **Go**
+
+```go
+/**
+ * Definition for a Node.
+ * type Node struct {
+ *     Val int
+ *     Next *Node
+ * }
+ */
+
+func insert(head *Node, x int) *Node {
+	node := &Node{Val: x}
+	if head == nil {
+		node.Next = node
+		return node
+	}
+	prev, curr := head, head.Next
+	for curr != head {
+		if (prev.Val <= x && x <= curr.Val) || (prev.Val > curr.Val && (x >= prev.Val || x <= curr.Val)) {
+			break
+		}
+		prev, curr = curr, curr.Next
+	}
+	prev.Next = node
+	node.Next = curr
+	return head
+}
 ```
 
 ### **...**

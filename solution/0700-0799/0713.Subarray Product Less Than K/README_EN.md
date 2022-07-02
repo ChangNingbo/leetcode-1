@@ -37,41 +37,112 @@ Note that [10, 5, 2] is not included as the product of 100 is not strictly less 
 
 <!-- tabs:start -->
 
+### **Python3**
+
+```python
+class Solution:
+    def numSubarrayProductLessThanK(self, nums: List[int], k: int) -> int:
+        ans, s, j = 0, 1, 0
+        for i, v in enumerate(nums):
+            s *= v
+            while j <= i and s >= k:
+                s //= nums[j]
+                j += 1
+            ans += i - j + 1
+        return ans
+```
+
+### **Java**
+
+```java
+class Solution {
+    public int numSubarrayProductLessThanK(int[] nums, int k) {
+        int ans = 0;
+        for (int i = 0, j = 0, s = 1; i < nums.length; ++i) {
+            s *= nums[i];
+            while (j <= i && s >= k) {
+                s /= nums[j++];
+            }
+            ans += i - j + 1;
+        }
+        return ans;
+    }
+}
+```
+
 ### **C++**
 
 ```cpp
 class Solution {
 public:
     int numSubarrayProductLessThanK(vector<int>& nums, int k) {
-        int left = 0, right;
-        long mul = 1;
-        int count = 0;
-
-        for (right = 0; right < nums.size(); right++) {
-            mul *= nums[right];
-
-            while(left <= right && mul >= k) {
-                mul /= nums[left++];
-            }
-
-            count += right >= left? right - left + 1: 0;
+        int ans = 0;
+        for (int i = 0, j = 0, s = 1; i < nums.size(); ++i)
+        {
+            s *= nums[i];
+            while (j <= i && s >= k) s /= nums[j++];
+            ans += i - j + 1;
         }
-
-        return count;
+        return ans;
     }
 };
 ```
 
-### **Python3**
+### **Go**
 
-```python
-
+```go
+func numSubarrayProductLessThanK(nums []int, k int) int {
+	ans := 0
+	for i, j, s := 0, 0, 1; i < len(nums); i++ {
+		s *= nums[i]
+		for ; j <= i && s >= k; j++ {
+			s /= nums[j]
+		}
+		ans += i - j + 1
+	}
+	return ans
+}
 ```
 
-### **Java**
+### **TypeScript**
 
-```java
+```ts
+function numSubarrayProductLessThanK(nums: number[], k: number): number {
+    let ans = 0;
+    for (let i = 0, j = 0, s = 1; i < nums.length; ++i) {
+        s *= nums[i];
+        while (j <= i && s >= k) {
+            s /= nums[j++];
+        }
+        ans += i - j + 1;
+    }
+    return ans;
+}
+```
 
+### **Rust**
+
+```rust
+impl Solution {
+    pub fn num_subarray_product_less_than_k(nums: Vec<i32>, k: i32) -> i32 {
+        if k <= 1 {
+            return 0;
+        }
+
+        let mut res = 0;
+        let mut product = 1;
+        let mut i = 0;
+        nums.iter().enumerate().for_each(|(j, v)| {
+            product *= v;
+            while product >= k {
+                product /= nums[i];
+                i += 1;
+            }
+            res += j - i + 1;
+        });
+        res as i32
+    }
+}
 ```
 
 ### **...**

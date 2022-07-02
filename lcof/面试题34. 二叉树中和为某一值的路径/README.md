@@ -1,4 +1,4 @@
-# [面试题 34. 二叉树中和为某一值的路径](https://leetcode-cn.com/problems/er-cha-shu-zhong-he-wei-mou-yi-zhi-de-lu-jing-lcof/)
+# [面试题 34. 二叉树中和为某一值的路径](https://leetcode.cn/problems/er-cha-shu-zhong-he-wei-mou-yi-zhi-de-lu-jing-lcof/)
 
 ## 题目描述
 
@@ -12,7 +12,7 @@
 
 <p><strong>示例 1：</strong></p>
 
-<p><img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/lcof/%E9%9D%A2%E8%AF%95%E9%A2%9834.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E5%92%8C%E4%B8%BA%E6%9F%90%E4%B8%80%E5%80%BC%E7%9A%84%E8%B7%AF%E5%BE%84/images/pathsumii1.jpg" /></p>
+<p><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/lcof/%E9%9D%A2%E8%AF%95%E9%A2%9834.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E5%92%8C%E4%B8%BA%E6%9F%90%E4%B8%80%E5%80%BC%E7%9A%84%E8%B7%AF%E5%BE%84/images/pathsumii1.jpg" /></p>
 
 <pre>
 <strong>输入：</strong>root = [5,4,8,11,null,13,4,7,2,null,null,5,1], targetSum = 22
@@ -21,7 +21,7 @@
 
 <p><strong>示例 2：</strong></p>
 
-<p><img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/lcof/%E9%9D%A2%E8%AF%95%E9%A2%9834.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E5%92%8C%E4%B8%BA%E6%9F%90%E4%B8%80%E5%80%BC%E7%9A%84%E8%B7%AF%E5%BE%84/images/pathsum2.jpg" /></p>
+<p><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/lcof/%E9%9D%A2%E8%AF%95%E9%A2%9834.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E5%92%8C%E4%B8%BA%E6%9F%90%E4%B8%80%E5%80%BC%E7%9A%84%E8%B7%AF%E5%BE%84/images/pathsum2.jpg" /></p>
 
 <pre>
 <strong>输入：</strong>root = [1,2,3], targetSum = 5
@@ -45,7 +45,7 @@
 	<li><code>-1000 &lt;= targetSum &lt;= 1000</code></li>
 </ul>
 
-<p>注意：本题与主站 113&nbsp;题相同：<a href="https://leetcode-cn.com/problems/path-sum-ii/">https://leetcode-cn.com/problems/path-sum-ii/</a></p>
+<p>注意：本题与主站 113&nbsp;题相同：<a href="https://leetcode.cn/problems/path-sum-ii/">https://leetcode.cn/problems/path-sum-ii/</a></p>
 
 ## 解法
 
@@ -250,11 +250,10 @@ function pathSum(root: TreeNode | null, target: number): number[][] {
             if (target === 0) {
                 res.push([...paths]);
             }
-            paths.pop();
-            return;
+        } else {
+            left && dfs(left, target);
+            right && dfs(right, target);
         }
-        left && dfs(left, target);
-        right && dfs(right, target);
         paths.pop();
     };
     dfs(root, target);
@@ -283,9 +282,8 @@ function pathSum(root: TreeNode | null, target: number): number[][] {
 //     }
 //   }
 // }
-use std::cell::RefCell;
 use std::rc::Rc;
-
+use std::cell::RefCell;
 impl Solution {
     fn dfs(
         root: &Option<Rc<RefCell<TreeNode>>>,
@@ -300,14 +298,15 @@ impl Solution {
             if node.left.is_none() && node.right.is_none() && target == 0 {
                 res.push(paths.clone());
             }
-            Solution::dfs(&node.left, target, paths, res);
-            Solution::dfs(&node.right, target, paths, res);
+            Self::dfs(&node.left, target, paths, res);
+            Self::dfs(&node.right, target, paths, res);
             paths.pop();
         }
     }
+
     pub fn path_sum(root: Option<Rc<RefCell<TreeNode>>>, target: i32) -> Vec<Vec<i32>> {
         let mut res = vec![];
-        Solution::dfs(&root, target, &mut vec![], &mut res);
+        Self::dfs(&root, target, &mut vec![], &mut res);
         res
     }
 }
@@ -332,9 +331,8 @@ impl Solution {
 //     }
 //   }
 // }
-use std::cell::RefCell;
 use std::rc::Rc;
-
+use std::cell::RefCell;
 impl Solution {
     fn dfs(
         root: &Option<Rc<RefCell<TreeNode>>>,
@@ -350,19 +348,18 @@ impl Solution {
             if target == 0 {
                 res.push(paths.clone());
             }
-            paths.pop();
-            return res;
-        }
-        if node.left.is_some() {
-            let res_l = Solution::dfs(&node.left, target, paths);
-            if !res_l.is_empty() {
-                res = [res, res_l].concat();
+        } else {
+            if node.left.is_some() {
+                let res_l = Self::dfs(&node.left, target, paths);
+                if !res_l.is_empty() {
+                    res = [res, res_l].concat();
+                }
             }
-        }
-        if node.right.is_some() {
-            let res_r = Solution::dfs(&node.right, target, paths);
-            if !res_r.is_empty() {
-                res = [res, res_r].concat();
+            if node.right.is_some() {
+                let res_r = Self::dfs(&node.right, target, paths);
+                if !res_r.is_empty() {
+                    res = [res, res_r].concat();
+                }
             }
         }
         paths.pop();
@@ -372,7 +369,7 @@ impl Solution {
         if root.is_none() {
             return vec![];
         }
-        Solution::dfs(&root, target, &mut vec![])
+        Self::dfs(&root, target, &mut vec![])
     }
 }
 ```

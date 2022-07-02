@@ -15,6 +15,7 @@
 +--------------+---------+
 account is the primary key for this table.
 Each row of this table contains the account number of each user in the bank.
+There will be no two users having the same name in the table.
 </pre>
 
 <p>&nbsp;</p>
@@ -85,22 +86,19 @@ Charlie&#39;s balance is (6000 + 6000 - 4000) = 8000.
 
 <!-- tabs:start -->
 
-### **Python3**
+### **SQL**
 
-```python
-
-```
-
-### **Java**
-
-```java
-
-```
-
-### **...**
-
-```
-
+```sql
+SELECT
+    u.name,
+    SUM(t.amount) AS balance
+FROM
+    users AS u
+    JOIN transactions AS t ON u.account = t.account
+GROUP BY
+    name
+HAVING
+    SUM(t.amount) > 10000;
 ```
 
 <!-- tabs:end -->

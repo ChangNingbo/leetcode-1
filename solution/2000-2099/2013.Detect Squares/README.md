@@ -1,4 +1,4 @@
-# [2013. 检测正方形](https://leetcode-cn.com/problems/detect-squares)
+# [2013. 检测正方形](https://leetcode.cn/problems/detect-squares)
 
 [English Version](/solution/2000-2099/2013.Detect%20Squares/README_EN.md)
 
@@ -26,7 +26,7 @@
 <p>&nbsp;</p>
 
 <p><strong>示例：</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/2000-2099/2013.Detect%20Squares/images/image.png" style="width: 869px; height: 504px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/2000-2099/2013.Detect%20Squares/images/image.png" style="width: 869px; height: 504px;" />
 <pre>
 <strong>输入：</strong>
 ["DetectSquares", "add", "add", "add", "count", "count", "add", "count"]

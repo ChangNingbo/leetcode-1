@@ -1,4 +1,4 @@
-# [面试题 59 - I. 滑动窗口的最大值](https://leetcode-cn.com/problems/hua-dong-chuang-kou-de-zui-da-zhi-lcof/)
+# [面试题 59 - I. 滑动窗口的最大值](https://leetcode.cn/problems/hua-dong-chuang-kou-de-zui-da-zhi-lcof/)
 
 ## 题目描述
 
@@ -27,7 +27,7 @@
 
 <p>你可以假设 <em>k </em>总是有效的，在输入数组不为空的情况下，1 &le; k &le;&nbsp;输入数组的大小。</p>
 
-<p>注意：本题与主站 239 题相同：<a href="https://leetcode-cn.com/problems/sliding-window-maximum/">https://leetcode-cn.com/problems/sliding-window-maximum/</a></p>
+<p>注意：本题与主站 239 题相同：<a href="https://leetcode.cn/problems/sliding-window-maximum/">https://leetcode.cn/problems/sliding-window-maximum/</a></p>
 
 ## 解法
 
@@ -179,6 +179,72 @@ func maxSlidingWindow(nums []int, k int) []int {
 		}
 	}
 	return ans
+}
+```
+
+### **TypeScript**
+
+```ts
+function maxSlidingWindow(nums: number[], k: number): number[] {
+    const n = nums.length;
+    const res = [];
+    if (n === 0 || k === 0) {
+        return res;
+    }
+    const queue = [];
+    for (let i = 0; i < k; i++) {
+        while (queue.length !== 0 && queue[queue.length - 1] < nums[i]) {
+            queue.pop();
+        }
+        queue.push(nums[i]);
+    }
+    res.push(queue[0]);
+    for (let i = k; i < n; i++) {
+        if (queue[0] === nums[i - k]) {
+            queue.shift();
+        }
+        while (queue.length !== 0 && queue[queue.length - 1] < nums[i]) {
+            queue.pop();
+        }
+        queue.push(nums[i]);
+        res.push(queue[0]);
+    }
+    return res;
+}
+```
+
+### **Rust**
+
+```rust
+use std::collections::VecDeque;
+impl Solution {
+    pub fn max_sliding_window(nums: Vec<i32>, k: i32) -> Vec<i32> {
+        let k = k as usize;
+        let n = nums.len();
+        if n == 0 || k == 0 {
+            return Vec::new();
+        }
+        let mut res = vec![0; n - k + 1];
+        let mut queue = VecDeque::new();
+        for i in 0..k {
+            while !queue.is_empty() && *queue.back().unwrap() < nums[i] {
+                queue.pop_back();
+            }
+            queue.push_back(nums[i]);
+        }
+        res[0] = queue[0];
+        for i in k..n {
+            if nums[i - k] == queue[0] {
+                queue.pop_front();
+            }
+            while !queue.is_empty() && *queue.back().unwrap() < nums[i] {
+                queue.pop_back();
+            }
+            queue.push_back(nums[i]);
+            res[i - k + 1] = queue[0];
+        }
+        res
+    }
 }
 ```
 

@@ -10,7 +10,7 @@
 
 <p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0300-0399/0329.Longest%20Increasing%20Path%20in%20a%20Matrix/images/grid1.jpg" style="width: 242px; height: 242px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0300-0399/0329.Longest%20Increasing%20Path%20in%20a%20Matrix/images/grid1.jpg" style="width: 242px; height: 242px;" />
 <pre>
 <strong>Input:</strong> matrix = [[9,9,4],[6,6,8],[2,1,1]]
 <strong>Output:</strong> 4
@@ -18,7 +18,7 @@
 </pre>
 
 <p><strong>Example 2:</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0300-0399/0329.Longest%20Increasing%20Path%20in%20a%20Matrix/images/tmp-grid.jpg" style="width: 253px; height: 253px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0300-0399/0329.Longest%20Increasing%20Path%20in%20a%20Matrix/images/tmp-grid.jpg" style="width: 253px; height: 253px;" />
 <pre>
 <strong>Input:</strong> matrix = [[3,4,5],[3,2,6],[2,2,1]]
 <strong>Output:</strong> 4
@@ -51,7 +51,7 @@
 ```python
 class Solution:
     def longestIncreasingPath(self, matrix: List[List[int]]) -> int:
-        @lru_cache(None)
+        @cache
         def dfs(i, j):
             ans = 1
             for a, b in [[-1, 0], [1, 0], [0, 1], [0, -1]]:

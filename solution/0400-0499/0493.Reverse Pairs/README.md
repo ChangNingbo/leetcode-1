@@ -1,4 +1,4 @@
-# [493. 翻转对](https://leetcode-cn.com/problems/reverse-pairs)
+# [493. 翻转对](https://leetcode.cn/problems/reverse-pairs)
 
 [English Version](/solution/0400-0499/0493.Reverse%20Pairs/README_EN.md)
 
@@ -52,7 +52,14 @@
 
 解决方案是直接遍历数组，每个位置先求出 `query(a[i])`，然后再修改树状数组 `update(a[i], 1)` 即可。当数的范围比较大时，需要进行离散化，即先进行去重并排序，然后对每个数字进行编号。
 
-**方法三：线段树**
+**方法二：线段树**
+
+线段树将整个区间分割为多个不连续的子区间，子区间的数量不超过 `log(width)`。更新某个元素的值，只需要更新 `log(width)` 个区间，并且这些区间都包含在一个包含该元素的大区间内。
+
+-   线段树的每个节点代表一个区间；
+-   线段树具有唯一的根节点，代表的区间是整个统计范围，如 `[1, N]`；
+-   线段树的每个叶子节点代表一个长度为 1 的元区间 `[x, x]`；
+-   对于每个内部节点 `[l, r]`，它的左儿子是 `[l, mid]`，右儿子是 `[mid + 1, r]`, 其中 `mid = ⌊(l + r) / 2⌋` (即向下取整)。
 
 <!-- tabs:start -->
 
@@ -154,7 +161,7 @@ class SegmentTree:
     def __init__(self, n):
         self.tr = [Node() for _ in range(4 * n)]
         self.build(1, 1, n)
-    
+
     def build(self, u, l, r):
         self.tr[u].l = l
         self.tr[u].r = r
@@ -163,7 +170,7 @@ class SegmentTree:
         mid = (l + r) >> 1
         self.build(u << 1, l, mid)
         self.build(u << 1 | 1, mid + 1, r)
-    
+
     def modify(self, u, x, v):
         if self.tr[u].l == x and self.tr[u].r == x:
             self.tr[u].v += 1
@@ -174,10 +181,10 @@ class SegmentTree:
         else:
             self.modify(u << 1 | 1, x, v)
         self.pushup(u)
-    
+
     def pushup(self, u):
         self.tr[u].v = self.tr[u << 1].v + self.tr[u << 1 | 1].v
-    
+
     def query(self, u, l, r):
         if self.tr[u].l >= l and self.tr[u].r <= r:
             return self.tr[u].v

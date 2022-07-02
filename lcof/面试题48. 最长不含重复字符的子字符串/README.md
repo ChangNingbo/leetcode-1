@@ -1,4 +1,4 @@
-# [面试题 48. 最长不含重复字符的子字符串](https://leetcode-cn.com/problems/zui-chang-bu-han-zhong-fu-zi-fu-de-zi-zi-fu-chuan-lcof/)
+# [面试题 48. 最长不含重复字符的子字符串](https://leetcode.cn/problems/zui-chang-bu-han-zhong-fu-zi-fu-de-zi-zi-fu-chuan-lcof/)
 
 ## 题目描述
 
@@ -36,7 +36,7 @@
 	<li><code>s.length &lt;= 40000</code></li>
 </ul>
 
-<p>注意：本题与主站 3 题相同：<a href="https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/">https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/</a></p>
+<p>注意：本题与主站 3 题相同：<a href="https://leetcode.cn/problems/longest-substring-without-repeating-characters/">https://leetcode.cn/problems/longest-substring-without-repeating-characters/</a></p>
 
 ## 解法
 
@@ -160,15 +160,34 @@ var lengthOfLongestSubstring = function (s) {
 
 ```ts
 function lengthOfLongestSubstring(s: string): number {
+    const n = s.length;
+    const set = new Set<string>();
     let res = 0;
-    let l = 0;
-    let set = new Set<string>();
-    for (const c of s) {
+    let i = 0;
+    for (let j = 0; j < n; j++) {
+        const c = s[j];
         while (set.has(c)) {
-            set.delete(s[l++]);
+            set.delete(s[i++]);
         }
         set.add(c);
         res = Math.max(res, set.size);
+    }
+    return res;
+}
+```
+
+```ts
+function lengthOfLongestSubstring(s: string): number {
+    const map = new Map<string, number>();
+    const n = s.length;
+    let res = 0;
+    let i = -1;
+    for (let j = 0; j < n; j++) {
+        if (map.has(s[j])) {
+            i = Math.max(i, map.get(s[j]));
+        }
+        map.set(s[j], j);
+        res = Math.max(res, j - i);
     }
     return res;
 }
@@ -178,22 +197,45 @@ function lengthOfLongestSubstring(s: string): number {
 
 ```rust
 use std::collections::HashSet;
-
 impl Solution {
     pub fn length_of_longest_substring(s: String) -> i32 {
+        let s = s.as_bytes();
+        let n = s.len();
+        let mut set = HashSet::new();
         let mut res = 0;
         let mut i = 0;
-        let mut set = HashSet::new();
-        let chars = s.chars().collect::<Vec<char>>();
-        for c in chars.iter() {
-            while set.contains(c) {
-                set.remove(&chars[i]);
+        for j in 0..n {
+            while set.contains(&s[j]) {
+                set.remove(&s[i]);
                 i += 1;
             }
-            set.insert(c);
-            res = res.max(set.len())
+            set.insert(s[j]);
+            res = res.max(set.len());
         }
         res as i32
+    }
+}
+```
+
+```rust
+use std::collections::HashMap;
+impl Solution {
+    pub fn length_of_longest_substring(s: String) -> i32 {
+        let s = s.as_bytes();
+        let n = s.len();
+        let mut map = HashMap::new();
+        let mut res = 0;
+        let mut i = -1;
+        for j in 0..n {
+            let c = s[j];
+            let j = j as i32;
+            if map.contains_key(&c) {
+                i = i.max(*map.get(&c).unwrap());
+            }
+            map.insert(c, j);
+            res = res.max(j - i);
+        }
+        res
     }
 }
 ```

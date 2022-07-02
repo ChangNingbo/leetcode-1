@@ -1,4 +1,4 @@
-# [589. N 叉树的前序遍历](https://leetcode-cn.com/problems/n-ary-tree-preorder-traversal)
+# [589. N 叉树的前序遍历](https://leetcode.cn/problems/n-ary-tree-preorder-traversal)
 
 [English Version](/solution/0500-0599/0589.N-ary%20Tree%20Preorder%20Traversal/README_EN.md)
 
@@ -13,7 +13,7 @@
 <p><br />
 <strong>示例 1：</strong></p>
 
-<p><img src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0500-0599/0589.N-ary%20Tree%20Preorder%20Traversal/images/narytreeexample.png" style="height: 193px; width: 300px;" /></p>
+<p><img src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0500-0599/0589.N-ary%20Tree%20Preorder%20Traversal/images/narytreeexample.png" style="height: 193px; width: 300px;" /></p>
 
 <pre>
 <strong>输入：</strong>root = [1,null,3,2,4,null,5,6]
@@ -22,7 +22,7 @@
 
 <p><strong>示例 2：</strong></p>
 
-<p><img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0500-0599/0589.N-ary%20Tree%20Preorder%20Traversal/images/sample_4_964.png" style="height: 272px; width: 300px;" /></p>
+<p><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0500-0599/0589.N-ary%20Tree%20Preorder%20Traversal/images/sample_4_964.png" style="height: 272px; width: 300px;" /></p>
 
 <pre>
 <strong>输入：</strong>root = [1,null,2,3,4,5,null,null,6,7,null,8,null,9,10,null,null,11,null,12,null,13,null,null,14]
@@ -212,12 +212,16 @@ func preorder(root *Node) []int {
 
 function preorder(root: Node | null): number[] {
     const res = [];
+    if (root == null) {
+        return res;
+    }
     const stack = [root];
     while (stack.length !== 0) {
-        const root = stack.pop();
-        if (root != null) {
-            res.push(root.val);
-            stack.push(...root.children.reverse());
+        const { val, children } = stack.pop();
+        res.push(val);
+        const n = children.length;
+        for (let i = n - 1; i >= 0; i--) {
+            stack.push(children[i]);
         }
     }
     return res;
@@ -238,18 +242,16 @@ function preorder(root: Node | null): number[] {
  */
 
 function preorder(root: Node | null): number[] {
-    const res = [];
-    const dfs = (root: Node | null) => {
-        if (root == null) {
-            return;
-        }
-        res.push(root.val);
-        for (const node of root.children) {
-            dfs(node);
-        }
-    };
-    dfs(root);
-    return res;
+    if (root == null) {
+        return [];
+    }
+    const { val, children } = root;
+    return [
+        val,
+        ...children
+            .map(node => preorder(node))
+            .reduce((p, v) => p.concat(v), []),
+    ];
 }
 ```
 

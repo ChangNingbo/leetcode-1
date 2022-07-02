@@ -1,4 +1,4 @@
-# [913. 猫和老鼠](https://leetcode-cn.com/problems/cat-and-mouse)
+# [913. 猫和老鼠](https://leetcode.cn/problems/cat-and-mouse)
 
 [English Version](/solution/0900-0999/0913.Cat%20and%20Mouse/README_EN.md)
 
@@ -34,14 +34,14 @@
 &nbsp;
 
 <p><strong>示例 1：</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0900-0999/0913.Cat%20and%20Mouse/images/cat1.jpg" style="width: 300px; height: 300px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0900-0999/0913.Cat%20and%20Mouse/images/cat1.jpg" style="width: 300px; height: 300px;" />
 <pre>
 <strong>输入：</strong>graph = [[2,5],[3],[0,4,5],[1,4,5],[2,3],[0,2,3]]
 <strong>输出：</strong>0
 </pre>
 
 <p><strong>示例 2：</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0900-0999/0913.Cat%20and%20Mouse/images/cat2.jpg" style="width: 200px; height: 200px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0900-0999/0913.Cat%20and%20Mouse/images/cat2.jpg" style="width: 200px; height: 200px;" />
 <pre>
 <strong>输入：</strong>graph = [[1,3],[0],[3],[0,2]]
 <strong>输出：</strong>1
@@ -73,7 +73,7 @@
 ```python
 class Solution:
     def catMouseGame(self, graph: List[List[int]]) -> int:
-        @lru_cache(None)
+        @cache
         def dfs(i, j, k):
             # 老鼠 / 猫 / 总步数
             if k >= 2 * len(graph):

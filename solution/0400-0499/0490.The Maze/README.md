@@ -1,4 +1,4 @@
-# [490. 迷宫](https://leetcode-cn.com/problems/the-maze)
+# [490. 迷宫](https://leetcode.cn/problems/the-maze)
 
 [English Version](/solution/0400-0499/0490.The%20Maze/README_EN.md)
 
@@ -18,7 +18,7 @@
 <p> </p>
 
 <p><strong>示例 1：</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0400-0499/0490.The%20Maze/images/maze1-1-grid.jpg" style="width: 573px; height: 573px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0400-0499/0490.The%20Maze/images/maze1-1-grid.jpg" style="width: 573px; height: 573px;" />
 <pre>
 <strong>输入：</strong>maze = [[0,0,1,0,0],[0,0,0,0,0],[0,0,0,1,0],[1,1,0,1,1],[0,0,0,0,0]], start = [0,4], destination = [4,4]
 <strong>输出：</strong>true
@@ -26,7 +26,7 @@
 </pre>
 
 <p><strong>示例 2：</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0400-0499/0490.The%20Maze/images/maze1-2-grid.jpg" style="width: 573px; height: 573px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0400-0499/0490.The%20Maze/images/maze1-2-grid.jpg" style="width: 573px; height: 573px;" />
 <pre>
 <strong>输入：</strong>maze = [[0,0,1,0,0],[0,0,0,0,0],[0,0,0,1,0],[1,1,0,1,1],[0,0,0,0,0]], start = [0,4], destination = [3,2]
 <strong>输出：</strong>false
@@ -103,7 +103,7 @@ class Solution:
         m, n = len(maze), len(maze[0])
         q = deque([start])
         rs, cs = start
-        vis = set([(rs, cs)])
+        vis = {(rs, cs)}
         while q:
             i, j = q.popleft()
             for a, b in [[0, -1], [0, 1], [-1, 0], [1, 0]]:

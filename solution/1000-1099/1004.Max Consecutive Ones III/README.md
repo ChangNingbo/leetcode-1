@@ -1,4 +1,4 @@
-# [1004. 最大连续 1 的个数 III](https://leetcode-cn.com/problems/max-consecutive-ones-iii)
+# [1004. 最大连续 1 的个数 III](https://leetcode.cn/problems/max-consecutive-ones-iii)
 
 [English Version](/solution/1000-1099/1004.Max%20Consecutive%20Ones%20III/README_EN.md)
 
@@ -6,7 +6,7 @@
 
 <!-- 这里写题目描述 -->
 
-<p>给定一个二进制数组&nbsp;<code>nums</code>&nbsp;和一个整数&nbsp;<code><font color="#c7254e"><font face="Menlo, Monaco, Consolas, Courier New, monospace"><span style="font-size:12.6px"><span style="background-color:#f9f2f4">k</span></span></font></font></code>&nbsp;，如果可以翻转最多<code><font color="#c7254e"><font face="Menlo, Monaco, Consolas, Courier New, monospace"><span style="font-size:12.6px"><span style="background-color:#f9f2f4">k</span></span></font></font></code>&nbsp;个 <code>0</code> ，则返回 <em>数组中连续 <code>1</code> 的最大个数</em> 。</p>
+<p>给定一个二进制数组&nbsp;<code>nums</code>&nbsp;和一个整数 <code>k</code>，如果可以翻转最多 <code>k</code> 个 <code>0</code> ，则返回 <em>数组中连续 <code>1</code> 的最大个数</em> 。</p>
 
 <p>&nbsp;</p>
 
@@ -127,6 +127,65 @@ func longestOnes(nums []int, k int) int {
 		}
 	}
 	return r - l
+}
+```
+
+### **TypeScript**
+
+```ts
+function longestOnes(nums: number[], k: number): number {
+    const n = nums.length;
+    let l = 0;
+    for (const num of nums) {
+        if (num === 0) {
+            k--;
+        }
+        if (k < 0 && nums[l++] === 0) {
+            k++;
+        }
+    }
+    return n - l;
+}
+```
+
+```ts
+function longestOnes(nums: number[], k: number): number {
+    const n = nums.length;
+    let l = 0;
+    let res = k;
+    const count = [0, 0];
+    for (let r = 0; r < n; r++) {
+        count[nums[r]]++;
+        res = Math.max(res, r - l);
+        while (count[0] > k) {
+            count[nums[l]]--;
+            l++;
+        }
+    }
+    return Math.max(res, n - l);
+}
+```
+
+### **Rust**
+
+```rust
+impl Solution {
+    pub fn longest_ones(nums: Vec<i32>, mut k: i32) -> i32 {
+        let n = nums.len();
+        let mut l = 0;
+        for num in nums.iter() {
+            if num == &0 {
+                k -= 1;
+            }
+            if k < 0 {
+                if nums[l] == 0 {
+                    k += 1;
+                }
+                l += 1;
+            }
+        }
+        (n - l) as i32
+    }
 }
 ```
 

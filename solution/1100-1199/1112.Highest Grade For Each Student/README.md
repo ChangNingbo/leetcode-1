@@ -1,4 +1,4 @@
-# [1112. 每位学生的最高成绩](https://leetcode-cn.com/problems/highest-grade-for-each-student)
+# [1112. 每位学生的最高成绩](https://leetcode.cn/problems/highest-grade-for-each-student)
 
 [English Version](/solution/1100-1199/1112.Highest%20Grade%20For%20Each%20Student/README_EN.md)
 
@@ -63,7 +63,15 @@ Enrollments 表：
 ### **SQL**
 
 ```sql
-
+SELECT
+  student_id,
+  course_id,
+  grade
+FROM (SELECT
+  *,
+  RANK() OVER (PARTITION BY student_id ORDER BY grade DESC, course_id) rk
+FROM Enrollments) a
+WHERE a.rk = 1;
 ```
 
 <!-- tabs:end -->

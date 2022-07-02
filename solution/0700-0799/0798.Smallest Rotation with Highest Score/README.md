@@ -1,4 +1,4 @@
-# [798. 得分最高的最小轮调](https://leetcode-cn.com/problems/smallest-rotation-with-highest-score)
+# [798. 得分最高的最小轮调](https://leetcode.cn/problems/smallest-rotation-with-highest-score)
 
 [English Version](/solution/0700-0799/0798.Smallest%20Rotation%20with%20Highest%20Score/README_EN.md)
 
@@ -53,7 +53,7 @@ nums 无论怎么变化总是有 3 分。
 
 <!-- 这里可写通用的实现逻辑 -->
 
-差分数组。
+**方法一：差分数组**
 
 对于每个数，都有一个固定的 k 生效区间。我们先利用差分，预处理每个数的 k 生效区间。有最多个数能覆盖到的 k 即是答案。
 

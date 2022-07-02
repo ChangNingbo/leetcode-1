@@ -1,4 +1,4 @@
-# [1252. 奇数值单元格的数目](https://leetcode-cn.com/problems/cells-with-odd-values-in-a-matrix)
+# [1252. 奇数值单元格的数目](https://leetcode.cn/problems/cells-with-odd-values-in-a-matrix)
 
 [English Version](/solution/1200-1299/1252.Cells%20with%20Odd%20Values%20in%20a%20Matrix/README_EN.md)
 
@@ -23,7 +23,7 @@
 
 <p><strong>示例 1：</strong></p>
 
-<p><img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/1200-1299/1252.Cells%20with%20Odd%20Values%20in%20a%20Matrix/images/e1.png" style="height: 118px; width: 600px;" /></p>
+<p><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/1200-1299/1252.Cells%20with%20Odd%20Values%20in%20a%20Matrix/images/e1.png" style="height: 118px; width: 600px;" /></p>
 
 <pre>
 <strong>输入：</strong>m = 2, n = 3, indices = [[0,1],[1,1]]
@@ -35,7 +35,7 @@
 
 <p><strong>示例 2：</strong></p>
 
-<p><img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/1200-1299/1252.Cells%20with%20Odd%20Values%20in%20a%20Matrix/images/e2.png" style="height: 150px; width: 600px;" /></p>
+<p><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/1200-1299/1252.Cells%20with%20Odd%20Values%20in%20a%20Matrix/images/e2.png" style="height: 150px; width: 600px;" /></p>
 
 <pre>
 <strong>输入：</strong>m = 2, n = 2, indices = [[1,1],[0,0]]
@@ -69,7 +69,15 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def oddCells(self, m: int, n: int, indices: List[List[int]]) -> int:
+        g = [[0] * n for _ in range(m)]
+        for r, c in indices:
+            for i in range(m):
+                g[i][c] += 1
+            for j in range(n):
+                g[r][j] += 1
+        return sum(g[i][j] % 2 for i in range(m) for j in range(n))
 ```
 
 ### **Java**
@@ -77,7 +85,76 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public int oddCells(int m, int n, int[][] indices) {
+        int[][] g = new int[m][n];
+        for (int[] e : indices) {
+            int r = e[0], c = e[1];
+            for (int i = 0; i < m; ++i) {
+                ++g[i][c];
+            }
+            for (int j = 0; j < n; ++j) {
+                ++g[r][j];
+            }
+        }
+        int ans = 0;
+        for (int i = 0; i < m; ++i) {
+            for (int j = 0; j < n; ++j) {
+                ans += g[i][j] % 2;
+            }
+        }
+        return ans;
+    }
+}
+```
 
+### **C++**
+
+```cpp
+class Solution {
+public:
+    int oddCells(int m, int n, vector<vector<int>>& indices) {
+        vector<vector<int>> g(m, vector<int>(n));
+        for (auto& e : indices)
+        {
+            int r = e[0], c = e[1];
+            for (int i = 0; i < m; ++i) ++g[i][c];
+            for (int j = 0; j < n; ++j) ++g[r][j];
+        }
+        int ans = 0;
+        for (int i = 0; i < m; ++i)
+            for (int j = 0; j < n; ++j)
+                ans += g[i][j] % 2;
+        return ans;
+    }
+};
+```
+
+### **Go**
+
+```go
+func oddCells(m int, n int, indices [][]int) int {
+	g := make([][]int, m)
+	for i := range g {
+		g[i] = make([]int, n)
+	}
+	for _, e := range indices {
+		r, c := e[0], e[1]
+		for i := 0; i < m; i++ {
+			g[i][c]++
+		}
+		for j := 0; j < n; j++ {
+			g[r][j]++
+		}
+	}
+	ans := 0
+	for i := 0; i < m; i++ {
+		for j := 0; j < n; j++ {
+			ans += g[i][j] % 2
+		}
+	}
+	return ans
+}
 ```
 
 ### **...**

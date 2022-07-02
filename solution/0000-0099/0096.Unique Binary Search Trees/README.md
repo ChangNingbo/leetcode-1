@@ -1,4 +1,4 @@
-# [96. 不同的二叉搜索树](https://leetcode-cn.com/problems/unique-binary-search-trees)
+# [96. 不同的二叉搜索树](https://leetcode.cn/problems/unique-binary-search-trees)
 
 [English Version](/solution/0000-0099/0096.Unique%20Binary%20Search%20Trees/README_EN.md)
 
@@ -11,7 +11,7 @@
 <p> </p>
 
 <p><strong>示例 1：</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0000-0099/0096.Unique%20Binary%20Search%20Trees/images/uniquebstn3.jpg" style="width: 600px; height: 148px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0000-0099/0096.Unique%20Binary%20Search%20Trees/images/uniquebstn3.jpg" style="width: 600px; height: 148px;" />
 <pre>
 <strong>输入：</strong>n = 3
 <strong>输出：</strong>5

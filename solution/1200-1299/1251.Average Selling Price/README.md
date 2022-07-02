@@ -1,4 +1,4 @@
-# [1251. 平均售价](https://leetcode-cn.com/problems/average-selling-price)
+# [1251. 平均售价](https://leetcode.cn/problems/average-selling-price)
 
 [English Version](/solution/1200-1299/1251.Average%20Selling%20Price/README_EN.md)
 
@@ -90,7 +90,7 @@ FROM   Prices p
        INNER JOIN UnitsSold u
                ON p.product_id = u.product_id
 WHERE  u.purchase_date BETWEEN p.start_date AND p.end_date
-GROUP  BY p.product_id; 
+GROUP  BY p.product_id;
 ```
 
 <!-- tabs:end -->

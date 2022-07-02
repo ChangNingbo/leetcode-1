@@ -1,4 +1,4 @@
-# [561. 数组拆分 I](https://leetcode-cn.com/problems/array-partition-i)
+# [561. 数组拆分 I](https://leetcode.cn/problems/array-partition-i)
 
 [English Version](/solution/0500-0599/0561.Array%20Partition%20I/README_EN.md)
 
@@ -91,6 +91,24 @@ var arrayPairSum = function (nums) {
     }
     return res;
 };
+```
+
+### **Rust**
+
+```rust
+impl Solution {
+    pub fn array_pair_sum(mut nums: Vec<i32>) -> i32 {
+        nums.sort();
+        let n = nums.len();
+        let mut i = 0;
+        let mut res = 0;
+        while i < n {
+            res += nums[i];
+            i += 2;
+        }
+        res
+    }
+}
 ```
 
 ### **...**

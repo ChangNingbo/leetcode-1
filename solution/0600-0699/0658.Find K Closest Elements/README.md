@@ -1,4 +1,4 @@
-# [658. 找到 K 个最接近的元素](https://leetcode-cn.com/problems/find-k-closest-elements)
+# [658. 找到 K 个最接近的元素](https://leetcode.cn/problems/find-k-closest-elements)
 
 [English Version](/solution/0600-0699/0658.Find%20K%20Closest%20Elements/README_EN.md)
 
@@ -46,6 +46,24 @@
 
 <!-- 这里可写通用的实现逻辑 -->
 
+**方法一：排序**
+
+将 `arr` 中的所有元素按照与 `x` 的距离从小到大进行排列。取前 `k` 个元素排序后返回。
+
+时间复杂度：$O(nlogn)$。
+
+**方法二：双指针**
+
+根据 `arr` 有序的特点，可以声明头尾指针，然后根据 `k - arr[left]` 与 `arr[right] - k` 的判断结果缩小范围，直到 `right - left == k`，
+
+时间复杂度：$O(n)$。
+
+**方法三：二分查找**
+
+查找大小为 `k` 的所有窗口的左边界。
+
+时间复杂度：$O(logn)$。
+
 <!-- tabs:start -->
 
 ### **Python3**
@@ -53,7 +71,23 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def findClosestElements(self, arr: List[int], k: int, x: int) -> List[int]:
+        arr.sort(key=lambda v: (abs(v - x), x))
+        return sorted(arr[:k])
+```
 
+```python
+class Solution:
+    def findClosestElements(self, arr: List[int], k: int, x: int) -> List[int]:
+        left, right = 0, len(arr) - k
+        while left < right:
+            mid = (left + right) >> 1
+            if x - arr[mid] <= arr[mid + k] - x:
+                right = mid
+            else:
+                left = mid + 1
+        return arr[left: left + k]
 ```
 
 ### **Java**
@@ -63,43 +97,113 @@
 ```java
 class Solution {
     public List<Integer> findClosestElements(int[] arr, int k, int x) {
-        List<Integer> res = new ArrayList<>();
-        if (arr.length < k) {
-            for (int item : arr) {
-                res.add(item);
-            }
-            return res;
-        }
-        int left = 0, right = arr.length - 1;
-        while (left < right) {
-            int mid = (left + right + 1) >> 1;
-            if (arr[mid] > x) {
-                right = mid - 1;
-            } else {
-                left = mid;
-            }
-        }
-        int left1 = 0;
-        int right1 = arr.length - 1;
-        if (left >= k) {
-            left1 = left - k;
-        }
-        if (arr.length - 1 - left >= k) {
-            right1 = left + k;
-        }
-        while (right1 - left1 >= k) {
-            if (Math.abs(arr[left1] - x) > Math.abs(arr[right1] -x)) {
-                left1++;
-            } else {
-                right1--;
-            }
-        }
-        while (left1 <= right1) {
-            res.add(arr[left1]);
-            left1++;
-        }
-        return res;
+        List<Integer> ans = Arrays.stream(arr).boxed().sorted((a, b) -> {
+            int v = Math.abs(a - x) - Math.abs(b - x);
+            return v == 0 ? a - b : v;
+        }).collect(Collectors.toList());
+        ans = ans.subList(0, k);
+        Collections.sort(ans);
+        return ans;
     }
+}
+```
+
+```java
+class Solution {
+    public List<Integer> findClosestElements(int[] arr, int k, int x) {
+        int left = 0;
+        int right = arr.length - k;
+        while (left < right) {
+            int mid = (left + right) >> 1;
+            if (x - arr[mid] <= arr[mid + k] - x) {
+                right = mid;
+            } else {
+                left = mid + 1;
+            }
+        }
+        List<Integer> ans = new ArrayList<>();
+        for (int i = left; i < left + k; ++i) {
+            ans.add(arr[i]);
+        }
+        return ans;
+    }
+}
+```
+
+### **C++**
+
+```cpp
+int target;
+
+class Solution {
+public:
+    static bool cmp(int& a ,int& b) {
+        int v = abs(a - target) - abs(b - target);
+        return v == 0 ? a < b : v < 0;
+    }
+
+    vector<int> findClosestElements(vector<int>& arr, int k, int x) {
+        target = x;
+        sort(arr.begin(), arr.end(), cmp);
+        vector<int> ans(arr.begin(), arr.begin() + k);
+        sort(ans.begin(), ans.end());
+        return ans;
+    }
+};
+```
+
+```cpp
+class Solution {
+public:
+    vector<int> findClosestElements(vector<int>& arr, int k, int x) {
+        int left = 0, right = arr.size() - k;
+        while (left < right)
+        {
+            int mid = (left + right) >> 1;
+            if (x - arr[mid] <= arr[mid + k] - x) right = mid;
+            else left = mid + 1;
+        }
+        return vector<int>(arr.begin() + left, arr.begin() + left + k);
+    }
+};
+```
+
+### **Go**
+
+```go
+func findClosestElements(arr []int, k int, x int) []int {
+	sort.Slice(arr, func(i, j int) bool {
+		v := abs(arr[i]-x) - abs(arr[j]-x)
+		if v == 0 {
+			return arr[i] < arr[j]
+		}
+		return v < 0
+	})
+	ans := arr[:k]
+	sort.Ints(ans)
+	return ans
+}
+
+func abs(x int) int {
+	if x >= 0 {
+		return x
+	}
+	return -x
+}
+```
+
+```go
+func findClosestElements(arr []int, k int, x int) []int {
+	left, right := 0, len(arr)-k
+	for left < right {
+		mid := (left + right) >> 1
+		if x-arr[mid] <= arr[mid+k]-x {
+			right = mid
+		} else {
+			left = mid + 1
+		}
+	}
+	return arr[left : left+k]
 }
 ```
 
@@ -121,6 +225,26 @@ impl Solution {
             }
         }
         arr[l..r].to_vec()
+    }
+}
+```
+
+```rust
+impl Solution {
+    pub fn find_closest_elements(arr: Vec<i32>, k: i32, x: i32) -> Vec<i32> {
+        let k = k as usize;
+        let n = arr.len();
+        let mut left = 0;
+        let mut right = n - k;
+        while left < right {
+            let mid = left + (right - left) / 2;
+            if x - arr[mid] > arr[mid + k] - x {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
+        }
+        arr[left..left + k].to_vec()
     }
 }
 ```

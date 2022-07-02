@@ -1,4 +1,4 @@
-# [1066. 校园自行车分配 II](https://leetcode-cn.com/problems/campus-bikes-ii)
+# [1066. 校园自行车分配 II](https://leetcode.cn/problems/campus-bikes-ii)
 
 [English Version](/solution/1000-1099/1066.Campus%20Bikes%20II/README_EN.md)
 
@@ -18,7 +18,7 @@
 
 <p><strong>示例 1：</strong></p>
 
-<p><img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/1000-1099/1066.Campus%20Bikes%20II/images/1261_example_1_v2.png" /></p>
+<p><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/1000-1099/1066.Campus%20Bikes%20II/images/1261_example_1_v2.png" /></p>
 
 <pre>
 <strong>输入：</strong>workers = [[0,0],[2,1]], bikes = [[1,2],[3,3]]
@@ -29,7 +29,7 @@
 
 <p><strong>示例 2：</strong></p>
 
-<p><img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/1000-1099/1066.Campus%20Bikes%20II/images/1261_example_2_v2.png" /></p>
+<p><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/1000-1099/1066.Campus%20Bikes%20II/images/1261_example_2_v2.png" /></p>
 
 <pre>
 <strong>输入：</strong>workers = [[0,0],[1,1],[2,0]], bikes = [[1,0],[2,2],[2,1]]

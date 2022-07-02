@@ -14,7 +14,7 @@
 
 <p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0300-0399/0302.Smallest%20Rectangle%20Enclosing%20Black%20Pixels/images/pixel-grid.jpg" style="width: 333px; height: 253px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0300-0399/0302.Smallest%20Rectangle%20Enclosing%20Black%20Pixels/images/pixel-grid.jpg" style="width: 333px; height: 253px;" />
 <pre>
 <strong>Input:</strong> image = [[&quot;0&quot;,&quot;0&quot;,&quot;1&quot;,&quot;0&quot;],[&quot;0&quot;,&quot;1&quot;,&quot;1&quot;,&quot;0&quot;],[&quot;0&quot;,&quot;1&quot;,&quot;0&quot;,&quot;0&quot;]], x = 0, y = 2
 <strong>Output:</strong> 6
@@ -35,8 +35,8 @@
 	<li><code>n == image[i].length</code></li>
 	<li><code>1 &lt;= m, n &lt;= 100</code></li>
 	<li><code>image[i][j]</code> is either <code>&#39;0&#39;</code> or <code>&#39;1&#39;</code>.</li>
-	<li><code>1 &lt;= x &lt; m</code></li>
-	<li><code>1 &lt;= y &lt; n</code></li>
+	<li><code>0 &lt;= x &lt; m</code></li>
+	<li><code>0 &lt;= y &lt; n</code></li>
 	<li><code>image[x][y] == &#39;1&#39;.</code></li>
 	<li>The black pixels in the <code>image</code> only form <strong>one component</strong>.</li>
 </ul>

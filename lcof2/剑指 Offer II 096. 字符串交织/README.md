@@ -1,4 +1,4 @@
-# [剑指 Offer II 096. 字符串交织](https://leetcode-cn.com/problems/IY6buf)
+# [剑指 Offer II 096. 字符串交织](https://leetcode.cn/problems/IY6buf)
 
 ## 题目描述
 
@@ -21,7 +21,7 @@
 
 <p><strong>示例 1：</strong></p>
 
-<p><img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/lcof2/%E5%89%91%E6%8C%87%20Offer%20II%20096.%20%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%BA%A4%E7%BB%87/images/interleave.jpg" style="width: 561px; height: 203px;" /></p>
+<p><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/lcof2/%E5%89%91%E6%8C%87%20Offer%20II%20096.%20%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%BA%A4%E7%BB%87/images/interleave.jpg" style="width: 561px; height: 203px;" /></p>
 
 <pre>
 <strong>输入：</strong>s1 = &quot;aabcc&quot;, s2 = &quot;dbbca&quot;, s3 = &quot;aadbbcbcac&quot;
@@ -54,7 +54,7 @@
 
 <p>&nbsp;</p>
 
-<p><meta charset="UTF-8" />注意：本题与主站 97&nbsp;题相同：&nbsp;<a href="https://leetcode-cn.com/problems/interleaving-string/">https://leetcode-cn.com/problems/interleaving-string/</a></p>
+<p><meta charset="UTF-8" />注意：本题与主站 97&nbsp;题相同：&nbsp;<a href="https://leetcode.cn/problems/interleaving-string/">https://leetcode.cn/problems/interleaving-string/</a></p>
 
 ## 解法
 
@@ -75,7 +75,7 @@ class Solution:
         if m + n != len(s3):
             return False
 
-        @lru_cache
+        @cache
         def dfs(i, j):
             if i == m and j == n:
                 return True

@@ -1,4 +1,4 @@
-# [面试题 10.02. 变位词组](https://leetcode-cn.com/problems/group-anagrams-lcci)
+# [面试题 10.02. 变位词组](https://leetcode.cn/problems/group-anagrams-lcci)
 
 [English Version](/lcci/10.02.Group%20Anagrams/README_EN.md)
 
@@ -115,6 +115,40 @@ func groupAnagrams(strs []string) [][]string {
 		res = append(res, v)
 	}
 	return res
+}
+```
+
+### **TypeScript**
+
+```ts
+function groupAnagrams(strs: string[]): string[][] {
+    const map = new Map<string, string[]>();
+    for (const s of strs) {
+        const k = s.split('').sort().join();
+        map.set(k, (map.get(k) || []).concat([s]));
+    }
+    return [...map.values()];
+}
+```
+
+### **Rust**
+
+```rust
+use std::collections::HashMap;
+
+impl Solution {
+    pub fn group_anagrams(strs: Vec<String>) -> Vec<Vec<String>> {
+        let mut map = HashMap::new();
+        for s in strs {
+            let key = {
+                let mut cs = s.chars().collect::<Vec<char>>();
+                cs.sort();
+                cs.iter().collect::<String>()
+            };
+            map.entry(key).or_insert(vec![]).push(s);
+        }
+        map.into_values().collect()
+    }
 }
 ```
 

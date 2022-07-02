@@ -1,4 +1,4 @@
-# [53. 最大子序和](https://leetcode-cn.com/problems/maximum-subarray)
+# [53. 最大子数组和](https://leetcode.cn/problems/maximum-subarray)
 
 [English Version](/solution/0000-0099/0053.Maximum%20Subarray/README_EN.md)
 
@@ -59,7 +59,7 @@
 
 ### 2. 分治
 
-最大子序和可能有三种情况：
+最大子数组和可能有三种情况：
 
 1. 在数组左半部分
 1. 在数组右半部分
@@ -232,6 +232,24 @@ public class Solution {
             res = Math.Max(res, f);
         }
         return res;
+    }
+}
+```
+
+### **Rust**
+
+```rust
+impl Solution {
+    pub fn max_sub_array(nums: Vec<i32>) -> i32 {
+        let n = nums.len();
+        let mut res = nums[0];
+        let mut sum = nums[0];
+        for i in 1..n {
+            let num = nums[i];
+            sum = num.max(sum + num);
+            res = res.max(sum);
+        }
+        res
     }
 }
 ```

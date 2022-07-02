@@ -14,7 +14,7 @@
 
 <p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0000-0099/0011.Container%20With%20Most%20Water/images/question_11.jpg" style="width: 600px; height: 287px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0000-0099/0011.Container%20With%20Most%20Water/images/question_11.jpg" style="width: 600px; height: 287px;" />
 <pre>
 <strong>Input:</strong> height = [1,8,6,2,5,4,8,3,7]
 <strong>Output:</strong> 49
@@ -147,6 +147,45 @@ var maxArea = function (height) {
     }
     return res;
 };
+```
+
+### **TypeScript**
+
+```ts
+function maxArea(height: number[]): number {
+    const n = height.length;
+    let res = 0;
+    for (let i = 0; i < n - 1; i++) {
+        for (let j = n - 1; j >= 0; j--) {
+            if (height[i] * (j - i) < res) {
+                break;
+            }
+            res = Math.max(res, Math.min(height[i], height[j]) * (j - i));
+        }
+    }
+    return res;
+}
+```
+
+### **Rust**
+
+```rust
+impl Solution {
+    pub fn max_area(height: Vec<i32>) -> i32 {
+        let mut i = 0;
+        let mut j = height.len() - 1;
+        let mut res = 0;
+        while i < j {
+            res = res.max(height[i].min(height[j]) * (j - i) as i32);
+            if height[i] <= height[j] {
+                i += 1;
+            } else {
+                j -= 1;
+            }
+        }
+        res
+    }
+}
 ```
 
 ### **...**

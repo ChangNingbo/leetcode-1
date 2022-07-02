@@ -1,4 +1,4 @@
-# [1850. 邻位交换的最小次数](https://leetcode-cn.com/problems/minimum-adjacent-swaps-to-reach-the-kth-smallest-number)
+# [1850. 邻位交换的最小次数](https://leetcode.cn/problems/minimum-adjacent-swaps-to-reach-the-kth-smallest-number)
 
 [English Version](/solution/1800-1899/1850.Minimum%20Adjacent%20Swaps%20to%20Reach%20the%20Kth%20Smallest%20Number/README_EN.md)
 
@@ -12,6 +12,7 @@
 
 <ul>
 	<li>例如，<code>num = "5489355142"</code> ：
+
     <ul>
     	<li>第 1 个最小妙数是 <code>"5489355214"</code></li>
     	<li>第 2 个最小妙数是 <code>"5489355241"</code></li>

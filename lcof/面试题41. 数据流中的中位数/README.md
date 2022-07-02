@@ -1,4 +1,4 @@
-# [面试题 41. 数据流中的中位数](https://leetcode-cn.com/problems/shu-ju-liu-zhong-de-zhong-wei-shu-lcof/)
+# [面试题 41. 数据流中的中位数](https://leetcode.cn/problems/shu-ju-liu-zhong-de-zhong-wei-shu-lcof/)
 
 ## 题目描述
 
@@ -42,7 +42,7 @@
 	<li>最多会对&nbsp;<code>addNum、findMedian</code> 进行&nbsp;<code>50000</code>&nbsp;次调用。</li>
 </ul>
 
-<p>注意：本题与主站 295 题相同：<a href="https://leetcode-cn.com/problems/find-median-from-data-stream/">https://leetcode-cn.com/problems/find-median-from-data-stream/</a></p>
+<p>注意：本题与主站 295 题相同：<a href="https://leetcode.cn/problems/find-median-from-data-stream/">https://leetcode.cn/problems/find-median-from-data-stream/</a></p>
 
 ## 解法
 
@@ -71,9 +71,9 @@ class MedianFinder:
 
     def addNum(self, num: int) -> None:
         if len(self.max_heap) == len(self.min_heap):
-            heapq.heappush(self.min_heap, -heapq.heappushpop(self.max_heap, -num))
+            heappush(self.min_heap, -heappushpop(self.max_heap, -num))
         else:
-            heapq.heappush(self.max_heap, -heapq.heappushpop(self.min_heap, num))
+            heappush(self.max_heap, -heappushpop(self.min_heap, num))
 
     def findMedian(self) -> float:
         return (-self.max_heap[0] + self.min_heap[0]) / 2 if len(self.max_heap) == len(self.min_heap) else self.min_heap[0]
@@ -209,32 +209,34 @@ private:
 
 ```ts
 class MedianFinder {
-    public arr: number[] = [];
+    private nums: number[];
 
-    constructor() {}
+    constructor() {
+        this.nums = [];
+    }
 
     addNum(num: number): void {
-        const { arr } = this;
+        const { nums } = this;
         let l = 0;
-        let r = arr.length - 1;
-        while (l <= r) {
-            const mid = (l + r) >> 1;
-            if (arr[mid] < num) {
+        let r = nums.length;
+        while (l < r) {
+            const mid = (l + r) >>> 1;
+            if (nums[mid] < num) {
                 l = mid + 1;
             } else {
-                r = mid - 1;
+                r = mid;
             }
         }
-        arr.splice(l, 0, num);
+        nums.splice(l, 0, num);
     }
 
     findMedian(): number {
-        const { arr } = this;
-        const n = arr.length;
-        if (n % 2 === 0) {
-            return (arr[n >> 1] + arr[(n >> 1) - 1]) / 2;
+        const { nums } = this;
+        const n = nums.length;
+        if ((n & 1) === 1) {
+            return nums[n >> 1];
         }
-        return arr[n >> 1];
+        return (nums[n >> 1] + nums[(n >> 1) - 1]) / 2;
     }
 }
 
@@ -250,7 +252,7 @@ class MedianFinder {
 
 ```rust
 struct MedianFinder {
-    arr: Vec<i32>,
+    nums: Vec<i32>,
 }
 
 /**
@@ -260,31 +262,29 @@ struct MedianFinder {
 impl MedianFinder {
     /** initialize your data structure here. */
     fn new() -> Self {
-        MedianFinder {
-            arr: vec![]
-        }
+        Self { nums: Vec::new() }
     }
 
     fn add_num(&mut self, num: i32) {
         let mut l = 0;
-        let mut r = self.arr.len();
+        let mut r = self.nums.len();
         while l < r {
             let mid = l + r >> 1;
-            if self.arr[mid] < num {
+            if self.nums[mid] < num {
                 l = mid + 1;
             } else {
                 r = mid;
             }
         }
-        self.arr.splice(l..l, [num]);
+        self.nums.insert(l, num);
     }
 
     fn find_median(&self) -> f64 {
-        let n = self.arr.len();
-        match n % 2 == 0 {
-            true => f64::from(self.arr[n >> 1] + self.arr[(n >> 1) - 1]) / 2.0,
-            false => f64::from(self.arr[n >> 1]),
+        let n = self.nums.len();
+        if (n & 1) == 1 {
+            return f64::from(self.nums[n >> 1]);
         }
+        f64::from(self.nums[n >> 1] + self.nums[(n >> 1) - 1]) / 2.0
     }
 }
 

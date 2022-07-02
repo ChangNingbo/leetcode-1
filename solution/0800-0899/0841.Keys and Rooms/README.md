@@ -1,4 +1,4 @@
-# [841. 钥匙和房间](https://leetcode-cn.com/problems/keys-and-rooms)
+# [841. 钥匙和房间](https://leetcode.cn/problems/keys-and-rooms)
 
 [English Version](/solution/0800-0899/0841.Keys%20and%20Rooms/README_EN.md)
 
@@ -146,6 +146,62 @@ func canVisitAllRooms(rooms [][]int) bool {
 	}
 	dfs(0)
 	return len(vis) == len(rooms)
+}
+```
+
+### **TypeScript**
+
+```ts
+function canVisitAllRooms(rooms: number[][]): boolean {
+    const n = rooms.length;
+    const isOpen = new Array(n).fill(false);
+    const dfs = (i: number) => {
+        if (isOpen[i]) {
+            return;
+        }
+        isOpen[i] = true;
+        rooms[i].forEach(k => dfs(k));
+    };
+    dfs(0);
+    return isOpen.every(v => v);
+}
+```
+
+```ts
+function canVisitAllRooms(rooms: number[][]): boolean {
+    const n = rooms.length;
+    const isOpen = new Array(n).fill(false);
+    const keys = [0];
+    while (keys.length !== 0) {
+        const i = keys.pop();
+        if (isOpen[i]) {
+            continue;
+        }
+        isOpen[i] = true;
+        keys.push(...rooms[i]);
+    }
+    return isOpen.every(v => v);
+}
+```
+
+### **Rust**
+
+```rust
+impl Solution {
+    pub fn can_visit_all_rooms(rooms: Vec<Vec<i32>>) -> bool {
+        let n = rooms.len();
+        let mut is_open = vec![false; n];
+        let mut keys = vec![0];
+        while !keys.is_empty() {
+            let i = keys.pop().unwrap();
+            if is_open[i] {
+                continue;
+            }
+            is_open[i] = true;
+            rooms[i].iter().for_each(|&key| keys.push(key as usize));
+        }
+        is_open.iter().all(|&v| v)
+    }
 }
 ```
 

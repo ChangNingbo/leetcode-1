@@ -1,4 +1,4 @@
-# [709. 转换成小写字母](https://leetcode-cn.com/problems/to-lower-case)
+# [709. 转换成小写字母](https://leetcode.cn/problems/to-lower-case)
 
 [English Version](/solution/0700-0799/0709.To%20Lower%20Case/README_EN.md)
 
@@ -103,6 +103,30 @@ func toLowerCase(s string) string {
 		sb.WriteRune(c)
 	}
 	return sb.String()
+}
+```
+
+### **Rust**
+
+```rust
+impl Solution {
+    pub fn to_lower_case(s: String) -> String {
+        s.to_ascii_lowercase()
+    }
+}
+```
+
+```rust
+impl Solution {
+    pub fn to_lower_case(s: String) -> String {
+        String::from_utf8(
+            s.as_bytes()
+                .iter()
+                .map(|&c| c + if c >= b'A' && c <= b'Z' { 32 } else { 0 })
+                .collect(),
+        )
+        .unwrap()
+    }
 }
 ```
 

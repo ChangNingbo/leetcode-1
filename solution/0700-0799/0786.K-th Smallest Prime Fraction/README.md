@@ -1,4 +1,4 @@
-# [786. 第 K 个最小的素数分数](https://leetcode-cn.com/problems/k-th-smallest-prime-fraction)
+# [786. 第 K 个最小的素数分数](https://leetcode.cn/problems/k-th-smallest-prime-fraction)
 
 [English Version](/solution/0700-0799/0786.K-th%20Smallest%20Prime%20Fraction/README_EN.md)
 
@@ -57,11 +57,11 @@
 class Solution:
     def kthSmallestPrimeFraction(self, arr: List[int], k: int) -> List[int]:
         h = [(1 / y, 0, j + 1) for j, y in enumerate(arr[1:])]
-        heapq.heapify(h)
+        heapify(h)
         for _ in range(k - 1):
-            _, i, j = heapq.heappop(h)
+            _, i, j = heappop(h)
             if i + 1 < j:
-                heapq.heappush(h, (arr[i + 1] / arr[j], i + 1, j))
+                heappush(h, (arr[i + 1] / arr[j], i + 1, j))
         return [arr[h[0][1]], arr[h[0][2]]]
 ```
 

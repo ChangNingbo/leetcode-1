@@ -1,4 +1,4 @@
-# [597. 好友申请 I：总体通过率](https://leetcode-cn.com/problems/friend-requests-i-overall-acceptance-rate)
+# [597. 好友申请 I：总体通过率](https://leetcode.cn/problems/friend-requests-i-overall-acceptance-rate)
 
 [English Version](/solution/0500-0599/0597.Friend%20Requests%20I%20Overall%20Acceptance%20Rate/README_EN.md)
 
@@ -102,7 +102,13 @@ RequestAccepted 表：
 ### **SQL**
 
 ```sql
-
+SELECT IFNULL(ROUND((
+		SELECT COUNT(DISTINCT requester_id, accepter_id)
+		FROM RequestAccepted
+	) / (
+		SELECT COUNT(DISTINCT sender_id, send_to_id)
+		FROM FriendRequest
+	), 2), 0.00) AS accept_rate;
 ```
 
 <!-- tabs:end -->

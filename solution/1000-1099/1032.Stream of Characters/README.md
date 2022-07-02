@@ -1,4 +1,4 @@
-# [1032. 字符流](https://leetcode-cn.com/problems/stream-of-characters)
+# [1032. 字符流](https://leetcode.cn/problems/stream-of-characters)
 
 [English Version](/solution/1000-1099/1032.Stream%20of%20Characters/README_EN.md)
 
@@ -50,7 +50,7 @@ streamChecker.query("l"); // 返回 True ，因为 'kl' 在 words 中
 
 <ul>
 	<li><code>1 &lt;= words.length &lt;= 2000</code></li>
-	<li><code>1 &lt;= words[i].length &lt;= 2000</code></li>
+	<li><code>1 &lt;= words[i].length &lt;= 200</code></li>
 	<li><code>words[i]</code> 由小写英文字母组成</li>
 	<li><code>letter</code> 是一个小写英文字母</li>
 	<li>最多调用查询 <code>4 * 10<sup>4</sup></code> 次</li>

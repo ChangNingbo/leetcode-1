@@ -1,4 +1,4 @@
-# [1622. 奇妙序列](https://leetcode-cn.com/problems/fancy-sequence)
+# [1622. 奇妙序列](https://leetcode.cn/problems/fancy-sequence)
 
 [English Version](/solution/1600-1699/1622.Fancy%20Sequence/README_EN.md)
 
@@ -322,20 +322,20 @@ class Fancy {
     public Fancy() {
 
     }
-    
+
     public void append(int val) {
         ++n;
         tree.modifyAdd(n, n, val);
     }
-    
+
     public void addAll(int inc) {
         tree.modifyAdd(1, n, inc);
     }
-    
+
     public void multAll(int m) {
         tree.modifyMul(1, n, m);
     }
-    
+
     public int getIndex(int idx) {
         return idx >= n ? -1 : tree.query(idx + 1, idx + 1);
     }
@@ -471,20 +471,20 @@ public:
         n = 0;
         tree = new SegmentTree();
     }
-    
+
     void append(int val) {
         ++n;
         tree->modifyAdd(n, n, val);
     }
-    
+
     void addAll(int inc) {
         tree->modifyAdd(1, n, inc);
     }
-    
+
     void multAll(int m) {
         tree->modifyMul(1, n, m);
     }
-    
+
     int getIndex(int idx) {
         return idx >= n ? -1 : tree->query(idx + 1, idx + 1);
     }

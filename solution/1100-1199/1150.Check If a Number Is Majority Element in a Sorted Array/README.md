@@ -1,4 +1,4 @@
-# [1150. 检查一个数是否在数组中占绝大多数](https://leetcode-cn.com/problems/check-if-a-number-is-majority-element-in-a-sorted-array)
+# [1150. 检查一个数是否在数组中占绝大多数](https://leetcode.cn/problems/check-if-a-number-is-majority-element-in-a-sorted-array)
 
 [English Version](/solution/1100-1199/1150.Check%20If%20a%20Number%20Is%20Majority%20Element%20in%20a%20Sorted%20Array/README_EN.md)
 
@@ -92,7 +92,7 @@ class Solution:
 ```python
 class Solution:
     def isMajorityElement(self, nums: List[int], target: int) -> bool:
-        left, right = bisect.bisect_left(nums, target), bisect.bisect_right(nums, target)
+        left, right = bisect_left(nums, target), bisect_right(nums, target)
         return right - left > (len(nums) >> 1)
 ```
 

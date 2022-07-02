@@ -1,4 +1,4 @@
-# [面试题 04. 二维数组中的查找](https://leetcode-cn.com/problems/er-wei-shu-zu-zhong-de-cha-zhao-lcof/)
+# [面试题 04. 二维数组中的查找](https://leetcode.cn/problems/er-wei-shu-zu-zhong-de-cha-zhao-lcof/)
 
 ## 题目描述
 
@@ -34,7 +34,7 @@
 
 <p> </p>
 
-<p><strong>注意：</strong>本题与主站 240 题相同：<a href="https://leetcode-cn.com/problems/search-a-2d-matrix-ii/">https://leetcode-cn.com/problems/search-a-2d-matrix-ii/</a></p>
+<p><strong>注意：</strong>本题与主站 240 题相同：<a href="https://leetcode.cn/problems/search-a-2d-matrix-ii/">https://leetcode.cn/problems/search-a-2d-matrix-ii/</a></p>
 
 ## 解法
 
@@ -188,27 +188,19 @@ function findNumberIn2DArray(matrix: number[][], target: number): boolean {
 ### **Rust**
 
 ```rust
+use std::cmp::Ordering;
 impl Solution {
     pub fn find_number_in2_d_array(matrix: Vec<Vec<i32>>, target: i32) -> bool {
-        let len_y = matrix.len();
-        if len_y == 0 {
+        if matrix.len() == 0 || matrix[0].len() == 0 {
             return false;
         }
-        let len_x = matrix[0].len();
-        if len_x == 0 {
-            return false;
-        }
-
-        let mut x = len_x - 1;
-        let mut y = 0;
-        while y < len_y {
-            match target.cmp(&matrix[y][x]) {
-                std::cmp::Ordering::Greater => y += 1,
-                std::cmp::Ordering::Equal => return true,
-                std::cmp::Ordering::Less => match x {
-                    0 => return false,
-                    _ => x -= 1,
-                },
+        let (m, n) = (matrix.len(), matrix[0].len());
+        let (mut i, mut j) = (0, n);
+        while i < m && j > 0 {
+            match target.cmp(&matrix[i][j - 1]) {
+                Ordering::Less => j -= 1,
+                Ordering::Greater => i += 1,
+                Ordering::Equal => return true,
             }
         }
         false

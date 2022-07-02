@@ -1,4 +1,4 @@
-# [2185. 统计包含给定前缀的字符串](https://leetcode-cn.com/problems/counting-words-with-a-given-prefix)
+# [2185. 统计包含给定前缀的字符串](https://leetcode.cn/problems/counting-words-with-a-given-prefix)
 
 [English Version](/solution/2100-2199/2185.Counting%20Words%20With%20a%20Given%20Prefix/README_EN.md)
 
@@ -49,7 +49,9 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def prefixCount(self, words: List[str], pref: str) -> int:
+        return sum(w.startswith(pref) for w in words)
 ```
 
 ### **Java**
@@ -57,7 +59,17 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
-
+class Solution {
+    public int prefixCount(String[] words, String pref) {
+        int ans = 0;
+        for (String w : words) {
+            if (w.startsWith(pref)) {
+                ++ans;
+            }
+        }
+        return ans;
+    }
+}
 ```
 
 ### **TypeScript**
@@ -72,6 +84,35 @@ function prefixCount(words: string[], pref: string): number {
         }
     }
     return ans;
+}
+```
+
+### **C++**
+
+```cpp
+class Solution {
+public:
+    int prefixCount(vector<string>& words, string pref) {
+        int ans = 0;
+        for (auto& w : words)
+            if (w.find(pref) == 0)
+                ++ans;
+        return ans;
+    }
+};
+```
+
+### **Go**
+
+```go
+func prefixCount(words []string, pref string) int {
+	ans := 0
+	for _, w := range words {
+		if strings.HasPrefix(w, pref) {
+			ans++
+		}
+	}
+	return ans
 }
 ```
 

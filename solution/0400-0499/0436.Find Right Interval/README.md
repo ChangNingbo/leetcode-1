@@ -1,4 +1,4 @@
-# [436. 寻找右区间](https://leetcode-cn.com/problems/find-right-interval)
+# [436. 寻找右区间](https://leetcode.cn/problems/find-right-interval)
 
 [English Version](/solution/0400-0499/0436.Find%20Right%20Interval/README_EN.md)
 
@@ -10,7 +10,7 @@
 
 <p>区间 <code>i</code> 的 <strong>右侧区间</strong> 可以记作区间 <code>j</code> ，并满足 <code>start<sub>j</sub></code><code>&nbsp;&gt;= end<sub>i</sub></code> ，且 <code>start<sub>j</sub></code> <strong>最小化 </strong>。</p>
 
-<p>返回一个由每个区间 <code>i</code> 的 <strong>右侧区间</strong> 的最小起始位置组成的数组。如果某个区间 <code>i</code> 不存在对应的 <strong>右侧区间</strong> ，则下标 <code>i</code> 处的值设为 <code>-1</code> 。</p>
+<p>返回一个由每个区间 <code>i</code> 的 <strong>右侧区间</strong> 在&nbsp;<code>intervals</code> 中对应下标组成的数组。如果某个区间 <code>i</code> 不存在对应的 <strong>右侧区间</strong> ，则下标 <code>i</code> 处的值设为 <code>-1</code> 。</p>
 &nbsp;
 
 <p><strong>示例 1：</strong></p>
@@ -55,7 +55,7 @@
 
 <!-- 这里可写通用的实现逻辑 -->
 
-二分查找。
+**方法一：二分查找**
 
 <!-- tabs:start -->
 
@@ -66,20 +66,16 @@
 ```python
 class Solution:
     def findRightInterval(self, intervals: List[List[int]]) -> List[int]:
+        for i, v in enumerate(intervals):
+            v.append(i)
+        intervals.sort()
         n = len(intervals)
-        starts = [(intervals[i][0], i) for i in range(n)]
-        starts.sort(key=lambda x : x[0])
-        res = []
-        for _, end in intervals:
-            left, right = 0, n - 1
-            while left < right:
-                mid = (left + right) >> 1
-                if starts[mid][0] >= end:
-                    right = mid
-                else:
-                    left = mid + 1
-            res.append(-1 if starts[left][0] < end else starts[left][1])
-        return res
+        ans = [-1] * n
+        for _, e, i in intervals:
+            j = bisect_left(intervals, [e])
+            if j < n:
+                ans[i] = intervals[j][2]
+        return ans
 ```
 
 ### **Java**
@@ -175,6 +171,37 @@ func findRightInterval(intervals [][]int) []int {
 		res = append(res, val)
 	}
 	return res
+}
+```
+
+### **TypeScript**
+
+```ts
+function findRightInterval(intervals: number[][]): number[] {
+    const n = intervals.length;
+    const starts = Array.from({ length: n }).map(() => new Array<number>(2));
+    for (let i = 0; i < n; i++) {
+        starts[i][0] = intervals[i][0];
+        starts[i][1] = i;
+    }
+    starts.sort((a, b) => a[0] - b[0]);
+
+    return intervals.map(([_, target]) => {
+        let left = 0;
+        let right = n;
+        while (left < right) {
+            const mid = (left + right) >>> 1;
+            if (starts[mid][0] < target) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
+        }
+        if (left >= n) {
+            return -1;
+        }
+        return starts[left][1];
+    });
 }
 ```
 

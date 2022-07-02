@@ -1,4 +1,4 @@
-# [138. 复制带随机指针的链表](https://leetcode-cn.com/problems/copy-list-with-random-pointer)
+# [138. 复制带随机指针的链表](https://leetcode.cn/problems/copy-list-with-random-pointer)
 
 [English Version](/solution/0100-0199/0138.Copy%20List%20with%20Random%20Pointer/README_EN.md)
 
@@ -27,7 +27,7 @@
 
 <p><strong>示例 1：</strong></p>
 
-<p><img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0100-0199/0138.Copy%20List%20with%20Random%20Pointer/images/e1.png" style="height: 142px; width: 700px;" /></p>
+<p><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0100-0199/0138.Copy%20List%20with%20Random%20Pointer/images/e1.png" style="height: 142px; width: 700px;" /></p>
 
 <pre>
 <strong>输入：</strong>head = [[7,null],[13,0],[11,4],[10,2],[1,0]]
@@ -36,7 +36,7 @@
 
 <p><strong>示例 2：</strong></p>
 
-<p><img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0100-0199/0138.Copy%20List%20with%20Random%20Pointer/images/e2.png" style="height: 114px; width: 700px;" /></p>
+<p><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0100-0199/0138.Copy%20List%20with%20Random%20Pointer/images/e2.png" style="height: 114px; width: 700px;" /></p>
 
 <pre>
 <strong>输入：</strong>head = [[1,1],[2,1]]
@@ -45,7 +45,7 @@
 
 <p><strong>示例 3：</strong></p>
 
-<p><strong><img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0100-0199/0138.Copy%20List%20with%20Random%20Pointer/images/e3.png" style="height: 122px; width: 700px;" /></strong></p>
+<p><strong><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0100-0199/0138.Copy%20List%20with%20Random%20Pointer/images/e3.png" style="height: 122px; width: 700px;" /></strong></p>
 
 <pre>
 <strong>输入：</strong>head = [[3,null],[3,0],[3,null]]
@@ -377,6 +377,40 @@ var copyRandomList = function (head) {
     }
     return copy;
 };
+```
+
+### **TypeScript**
+
+```ts
+/**
+ * Definition for Node.
+ * class Node {
+ *     val: number
+ *     next: Node | null
+ *     random: Node | null
+ *     constructor(val?: number, next?: Node, random?: Node) {
+ *         this.val = (val===undefined ? 0 : val)
+ *         this.next = (next===undefined ? null : next)
+ *         this.random = (random===undefined ? null : random)
+ *     }
+ * }
+ */
+
+function copyRandomList(head: Node | null): Node | null {
+    const map = new Map<Node, Node>();
+    let cur = head;
+    while (cur != null) {
+        map.set(cur, new Node(cur.val));
+        cur = cur.next;
+    }
+    cur = head;
+    while (cur != null) {
+        map.get(cur).next = map.get(cur.next) ?? null;
+        map.get(cur).random = map.get(cur.random) ?? null;
+        cur = cur.next;
+    }
+    return map.get(head);
+}
 ```
 
 ### **...**

@@ -1,4 +1,4 @@
-# [1423. 可获得的最大点数](https://leetcode-cn.com/problems/maximum-points-you-can-obtain-from-cards)
+# [1423. 可获得的最大点数](https://leetcode.cn/problems/maximum-points-you-can-obtain-from-cards)
 
 [English Version](/solution/1400-1499/1423.Maximum%20Points%20You%20Can%20Obtain%20from%20Cards/README_EN.md)
 
@@ -157,6 +157,38 @@ func min(a, b int) int {
 		return a
 	}
 	return b
+}
+```
+
+### **TypeScript**
+
+```ts
+function maxScore(cardPoints: number[], k: number): number {
+    const n = cardPoints.length;
+    let sum = cardPoints.slice(0, n - k).reduce((r, v) => r + v, 0);
+    let min = sum;
+    for (let i = 0; i < k; i++) {
+        sum += cardPoints[n - k + i] - cardPoints[i];
+        min = Math.min(min, sum);
+    }
+    return cardPoints.reduce((r, v) => r + v, 0) - min;
+}
+```
+
+### **Rust**
+
+```rust
+impl Solution {
+    pub fn max_score(card_points: Vec<i32>, k: i32) -> i32 {
+        let (k, n) = (k as usize, card_points.len());
+        let mut sum = card_points.iter().take(n - k).sum::<i32>();
+        let mut min = sum;
+        for i in 0..k {
+            sum += card_points[n - k + i] - card_points[i];
+            min = min.min(sum);
+        }
+        card_points.iter().sum::<i32>() - min
+    }
 }
 ```
 

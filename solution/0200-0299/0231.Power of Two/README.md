@@ -1,4 +1,4 @@
-# [231. 2 的幂](https://leetcode-cn.com/problems/power-of-two)
+# [231. 2 的幂](https://leetcode.cn/problems/power-of-two)
 
 [English Version](/solution/0200-0299/0231.Power%20of%20Two/README_EN.md)
 
@@ -65,8 +65,15 @@
 
 <!-- 这里可写通用的实现逻辑 -->
 
-1. `n & (n - 1)` 可将最后一个二进制形式的 n 的最后一位 1 移除，若移除后为 0，说明 n 是 2 的幂。
-2. lowbit：`n & (-n)` 可以得到 n 的最后一位 1 表示的十进制数，若与 n 相等，说明 n 是 2 的幂。
+**方法一：位运算**
+
+$\texttt{n\&(n-1)}$ 可将最后一个二进制形式的 $n$ 的最后一位 $1$ 移除，若移除后为 $0$，说明 $n$ 是 $2$ 的幂。
+
+**方法二：lowbit**
+
+$\texttt{n\&(-n)}$ 可以得到 $n$ 的最后一位 $1$ 表示的十进制数，若与 $n$ 相等，说明 $n$ 是 $2$ 的幂。
+
+注意：要满足 $n$ 是 $2$ 的幂次方，需要保证 $n$ 大于 $0$。
 
 <!-- tabs:start -->
 

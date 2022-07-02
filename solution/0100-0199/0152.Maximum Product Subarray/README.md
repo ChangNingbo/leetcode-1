@@ -1,4 +1,4 @@
-# [152. 乘积最大子数组](https://leetcode-cn.com/problems/maximum-product-subarray)
+# [152. 乘积最大子数组](https://leetcode.cn/problems/maximum-product-subarray)
 
 [English Version](/solution/0100-0199/0152.Maximum%20Product%20Subarray/README_EN.md)
 
@@ -173,6 +173,25 @@ func min(a, b int) int {
 		return a
 	}
 	return b
+}
+```
+
+### **Rust**
+
+```rust
+impl Solution {
+    pub fn max_product(nums: Vec<i32>) -> i32 {
+        let mut min = nums[0];
+        let mut max = nums[0];
+        let mut res = nums[0];
+        for &num in nums.iter().skip(1) {
+            let (pre_min, pre_max) = (min, max);
+            min = num.min(num * pre_min).min(num * pre_max);
+            max = num.max(num * pre_min).max(num * pre_max);
+            res = res.max(max);
+        }
+        res
+    }
 }
 ```
 

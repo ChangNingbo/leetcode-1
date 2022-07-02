@@ -1,4 +1,4 @@
-# [剑指 Offer II 112. 最长递增路径](https://leetcode-cn.com/problems/fpTFWP)
+# [剑指 Offer II 112. 最长递增路径](https://leetcode.cn/problems/fpTFWP)
 
 ## 题目描述
 
@@ -12,7 +12,7 @@
 
 <p><strong>示例 1：</strong></p>
 
-<p><img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/lcof2/%E5%89%91%E6%8C%87%20Offer%20II%20112.%20%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E8%B7%AF%E5%BE%84/images/grid1.jpg" style="width: 242px; height: 242px;" /></p>
+<p><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/lcof2/%E5%89%91%E6%8C%87%20Offer%20II%20112.%20%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E8%B7%AF%E5%BE%84/images/grid1.jpg" style="width: 242px; height: 242px;" /></p>
 
 <pre>
 <strong>输入：</strong>matrix = [[9,9,4],[6,6,8],[2,1,1]]
@@ -21,7 +21,7 @@
 
 <p><strong>示例 2：</strong></p>
 
-<p><img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/lcof2/%E5%89%91%E6%8C%87%20Offer%20II%20112.%20%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E8%B7%AF%E5%BE%84/images/tmp-grid.jpg" style="width: 253px; height: 253px;" /></p>
+<p><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/lcof2/%E5%89%91%E6%8C%87%20Offer%20II%20112.%20%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E8%B7%AF%E5%BE%84/images/tmp-grid.jpg" style="width: 253px; height: 253px;" /></p>
 
 <pre>
 <strong>输入：</strong>matrix = [[3,4,5],[3,2,6],[2,2,1]]
@@ -49,7 +49,7 @@
 
 <p>&nbsp;</p>
 
-<p><meta charset="UTF-8" />注意：本题与主站 329&nbsp;题相同：&nbsp;<a href="https://leetcode-cn.com/problems/longest-increasing-path-in-a-matrix/">https://leetcode-cn.com/problems/longest-increasing-path-in-a-matrix/</a></p>
+<p><meta charset="UTF-8" />注意：本题与主站 329&nbsp;题相同：&nbsp;<a href="https://leetcode.cn/problems/longest-increasing-path-in-a-matrix/">https://leetcode.cn/problems/longest-increasing-path-in-a-matrix/</a></p>
 
 ## 解法
 
@@ -66,7 +66,7 @@
 ```python
 class Solution:
     def longestIncreasingPath(self, matrix: List[List[int]]) -> int:
-        @lru_cache(None)
+        @cache
         def dfs(i, j):
             ans = 1
             for a, b in [[-1, 0], [1, 0], [0, 1], [0, -1]]:

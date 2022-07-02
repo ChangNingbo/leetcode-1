@@ -1,4 +1,4 @@
-# [1329. 将矩阵按对角线排序](https://leetcode-cn.com/problems/sort-the-matrix-diagonally)
+# [1329. 将矩阵按对角线排序](https://leetcode.cn/problems/sort-the-matrix-diagonally)
 
 [English Version](/solution/1300-1399/1329.Sort%20the%20Matrix%20Diagonally/README_EN.md)
 
@@ -14,7 +14,7 @@
 
 <p><strong>示例 1：</strong></p>
 
-<p><img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/1300-1399/1329.Sort%20the%20Matrix%20Diagonally/images/1482_example_1_2.png" style="height: 198px; width: 500px;" /></p>
+<p><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/1300-1399/1329.Sort%20the%20Matrix%20Diagonally/images/1482_example_1_2.png" style="height: 198px; width: 500px;" /></p>
 
 <pre>
 <strong>输入：</strong>mat = [[3,3,1,1],[2,2,1,2],[1,1,1,2]]

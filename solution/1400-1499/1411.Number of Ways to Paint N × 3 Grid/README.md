@@ -1,4 +1,4 @@
-# [1411. 给 N x 3 网格图涂色的方案数](https://leetcode-cn.com/problems/number-of-ways-to-paint-n-3-grid)
+# [1411. 给 N x 3 网格图涂色的方案数](https://leetcode.cn/problems/number-of-ways-to-paint-n-3-grid)
 
 [English Version](/solution/1400-1499/1411.Number%20of%20Ways%20to%20Paint%20N%20%C3%97%203%20Grid/README_EN.md)
 
@@ -19,7 +19,7 @@
 <pre><strong>输入：</strong>n = 1
 <strong>输出：</strong>12
 <strong>解释：</strong>总共有 12 种可行的方法：
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/1400-1499/1411.Number%20of%20Ways%20to%20Paint%20N%20%C3%97%203%20Grid/images/e1.png" style="height: 289px; width: 450px;">
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/1400-1499/1411.Number%20of%20Ways%20to%20Paint%20N%20%C3%97%203%20Grid/images/e1.png" style="height: 289px; width: 450px;">
 </pre>
 
 <p><strong>示例 2：</strong></p>

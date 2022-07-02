@@ -1,4 +1,4 @@
-# [面试题 27. 二叉树的镜像](https://leetcode-cn.com/problems/er-cha-shu-de-jing-xiang-lcof/)
+# [面试题 27. 二叉树的镜像](https://leetcode.cn/problems/er-cha-shu-de-jing-xiang-lcof/)
 
 ## 题目描述
 
@@ -33,7 +33,7 @@
 
 <p><code>0 &lt;= 节点个数 &lt;= 1000</code></p>
 
-<p>注意：本题与主站 226 题相同：<a href="https://leetcode-cn.com/problems/invert-binary-tree/">https://leetcode-cn.com/problems/invert-binary-tree/</a></p>
+<p>注意：本题与主站 226 题相同：<a href="https://leetcode.cn/problems/invert-binary-tree/">https://leetcode.cn/problems/invert-binary-tree/</a></p>
 
 ## 解法
 
@@ -211,23 +211,22 @@ function mirrorTree(root: TreeNode | null): TreeNode | null {
 //     }
 //   }
 // }
-use std::mem;
 use std::rc::Rc;
 use std::cell::RefCell;
-
 impl Solution {
-    pub fn mirror_tree(mut root: Option<Rc<RefCell<TreeNode>>>) -> Option<Rc<RefCell<TreeNode>>> {
-        fn dfs(root: &Option<Rc<RefCell<TreeNode>>>) {
-            if let Some(node) = root {
-                let mut node = node.borrow_mut();
-                let lt = mem::replace(&mut node.left, None);
-                let rt = mem::replace(&mut node.right, lt);
-                mem::replace(&mut node.left, rt);
-                dfs(&node.left);
-                dfs(&node.right);
-            }
+    fn dfs(root: &mut Option<Rc<RefCell<TreeNode>>>) {
+        if let Some(node) = root {
+            let mut node = node.borrow_mut();
+            let temp = node.left.take();
+            node.left = node.right.take();
+            node.right = temp;
+            Self::dfs(&mut node.left);
+            Self::dfs(&mut node.right);
         }
-        dfs(&root);
+    }
+
+    pub fn mirror_tree(mut root: Option<Rc<RefCell<TreeNode>>>) -> Option<Rc<RefCell<TreeNode>>> {
+        Self::dfs(&mut root);
         root
     }
 }

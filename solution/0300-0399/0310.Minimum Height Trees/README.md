@@ -1,4 +1,4 @@
-# [310. 最小高度树](https://leetcode-cn.com/problems/minimum-height-trees)
+# [310. 最小高度树](https://leetcode.cn/problems/minimum-height-trees)
 
 [English Version](/solution/0300-0399/0310.Minimum%20Height%20Trees/README_EN.md)
 
@@ -18,14 +18,14 @@
 <p>&nbsp;</p>
 
 <p><strong>示例 1：</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0300-0399/0310.Minimum%20Height%20Trees/images/e1.jpg" style="height: 213px; width: 800px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0300-0399/0310.Minimum%20Height%20Trees/images/e1.jpg" style="height: 213px; width: 800px;" />
 <pre>
 <strong>输入：</strong>n = 4, edges = [[1,0],[1,2],[1,3]]
 <strong>输出：</strong>[1]
 <strong>解释：</strong>如图所示，当根是标签为 1 的节点时，树的高度是 1 ，这是唯一的最小高度树。</pre>
 
 <p><strong>示例 2：</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0300-0399/0310.Minimum%20Height%20Trees/images/e2.jpg" style="height: 321px; width: 800px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0300-0399/0310.Minimum%20Height%20Trees/images/e2.jpg" style="height: 321px; width: 800px;" />
 <pre>
 <strong>输入：</strong>n = 6, edges = [[3,0],[3,1],[3,2],[3,4],[5,4]]
 <strong>输出：</strong>[3,4]

@@ -1,4 +1,4 @@
-# [LCP 31. 变换的迷宫](https://leetcode-cn.com/problems/Db3wC1)
+# [LCP 31. 变换的迷宫](https://leetcode.cn/problems/Db3wC1)
 
 ## 题目描述
 
@@ -24,7 +24,7 @@
 > 输出：`true`
 >
 > 解释：
-> ![maze.gif](https://cdn.jsdelivr.net/gh/doocs/leetcode@main/lcp/LCP%2031.%20变换的迷宫/images/1615892239-SCIjyf-maze.gif)
+> ![maze.gif](https://fastly.jsdelivr.net/gh/doocs/leetcode@main/lcp/LCP%2031.%20变换的迷宫/images/1615892239-SCIjyf-maze.gif)
 
 **示例 2：**
 

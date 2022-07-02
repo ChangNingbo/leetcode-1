@@ -1,4 +1,4 @@
-# [2005. Subtree Removal Game with Fibonacci Tree](https://leetcode-cn.com/problems/subtree-removal-game-with-fibonacci-tree)
+# [2005. 斐波那契树的移除子树游戏](https://leetcode.cn/problems/subtree-removal-game-with-fibonacci-tree)
 
 [English Version](/solution/2000-2099/2005.Subtree%20Removal%20Game%20with%20Fibonacci%20Tree/README_EN.md)
 
@@ -23,7 +23,7 @@
 <p>&nbsp;</p>
 
 <p><strong>示例 1:</strong><br />
-<img src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/2000-2099/2005.Subtree%20Removal%20Game%20with%20Fibonacci%20Tree/images/image-20210914173520-3.png" style="width: 200px; height: 184px;" /></p>
+<img src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/2000-2099/2005.Subtree%20Removal%20Game%20with%20Fibonacci%20Tree/images/image-20210914173520-3.png" style="width: 200px; height: 184px;" /></p>
 
 <pre>
 <strong>输入:</strong> n = 3
@@ -37,7 +37,7 @@ Bob 只能删除根节点 3，所以 Bob 输了。
 </pre>
 
 <p><strong>示例 2:</strong><br />
-<img src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/2000-2099/2005.Subtree%20Removal%20Game%20with%20Fibonacci%20Tree/images/image-20210914173634-4.png" style="width: 75px; height: 75px;" /></p>
+<img src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/2000-2099/2005.Subtree%20Removal%20Game%20with%20Fibonacci%20Tree/images/image-20210914173634-4.png" style="width: 75px; height: 75px;" /></p>
 
 <pre>
 <strong>输入:</strong> n = 1
@@ -48,7 +48,7 @@ Alice 只能移除根节点 1, 所以 Alice 输了。
 </pre>
 
 <p><strong>示例 3:</strong><br />
-<img src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/2000-2099/2005.Subtree%20Removal%20Game%20with%20Fibonacci%20Tree/images/image-20210914173425-1.png" style="width: 100px; height: 106px;" /></p>
+<img src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/2000-2099/2005.Subtree%20Removal%20Game%20with%20Fibonacci%20Tree/images/image-20210914173425-1.png" style="width: 100px; height: 106px;" /></p>
 
 <pre>
 <strong>输入:</strong> n = 2

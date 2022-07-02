@@ -1,4 +1,4 @@
-# [1779. 找到最近的有相同 X 或 Y 坐标的点](https://leetcode-cn.com/problems/find-nearest-point-that-has-the-same-x-or-y-coordinate)
+# [1779. 找到最近的有相同 X 或 Y 坐标的点](https://leetcode.cn/problems/find-nearest-point-that-has-the-same-x-or-y-coordinate)
 
 [English Version](/solution/1700-1799/1779.Find%20Nearest%20Point%20That%20Has%20the%20Same%20X%20or%20Y%20Coordinate/README_EN.md)
 
@@ -65,6 +65,50 @@
 
 ```java
 
+```
+
+### **TypeScript**
+
+```ts
+function nearestValidPoint(x: number, y: number, points: number[][]): number {
+    let res = -1;
+    let midDif = Infinity;
+    points.forEach(([px, py], i) => {
+        if (px != x && py != y) {
+            return;
+        }
+        const dif = Math.abs(px - x) + Math.abs(py - y);
+        if (dif < midDif) {
+            midDif = dif;
+            res = i;
+        }
+    });
+    return res;
+}
+```
+
+### **Rust**
+
+```rust
+impl Solution {
+    pub fn nearest_valid_point(x: i32, y: i32, points: Vec<Vec<i32>>) -> i32 {
+        let n = points.len();
+        let mut min_dif = i32::MAX;
+        let mut res = -1;
+        for i in 0..n {
+            let (p_x, p_y) = (points[i][0], points[i][1]);
+            if p_x != x && p_y != y {
+                continue;
+            }
+            let dif = (p_x - x).abs() + (p_y - y).abs();
+            if dif < min_dif {
+                min_dif = dif;
+                res = i as i32;
+            }
+        }
+        res
+    }
+}
 ```
 
 ### **...**

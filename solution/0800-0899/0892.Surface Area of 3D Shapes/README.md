@@ -1,4 +1,4 @@
-# [892. 三维形体的表面积](https://leetcode-cn.com/problems/surface-area-of-3d-shapes)
+# [892. 三维形体的表面积](https://leetcode.cn/problems/surface-area-of-3d-shapes)
 
 [English Version](/solution/0800-0899/0892.Surface%20Area%20of%203D%20Shapes/README_EN.md)
 
@@ -20,21 +20,21 @@
 </ul>
 
 <p><strong>示例 1：</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0800-0899/0892.Surface%20Area%20of%203D%20Shapes/images/tmp-grid2.jpg" style="height: 80px; width: 80px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0800-0899/0892.Surface%20Area%20of%203D%20Shapes/images/tmp-grid2.jpg" style="height: 80px; width: 80px;" />
 <pre>
 <strong>输入：</strong>grid = [[1,2],[3,4]]
 <strong>输出：</strong>34
 </pre>
 
 <p><strong>示例 2：</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0800-0899/0892.Surface%20Area%20of%203D%20Shapes/images/tmp-grid4.jpg" style="height: 100px; width: 100px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0800-0899/0892.Surface%20Area%20of%203D%20Shapes/images/tmp-grid4.jpg" style="height: 100px; width: 100px;" />
 <pre>
 <strong>输入：</strong>grid = [[1,1,1],[1,0,1],[1,1,1]]
 <strong>输出：</strong>32
 </pre>
 
 <p><strong>示例 3：</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0800-0899/0892.Surface%20Area%20of%203D%20Shapes/images/tmp-grid5.jpg" style="height: 100px; width: 100px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0800-0899/0892.Surface%20Area%20of%203D%20Shapes/images/tmp-grid5.jpg" style="height: 100px; width: 100px;" />
 <pre>
 <strong>输入：</strong>grid = [[2,2,2],[2,1,2],[2,2,2]]
 <strong>输出：</strong>46

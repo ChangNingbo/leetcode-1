@@ -1,4 +1,4 @@
-# [388. 文件的最长绝对路径](https://leetcode-cn.com/problems/longest-absolute-file-path)
+# [388. 文件的最长绝对路径](https://leetcode.cn/problems/longest-absolute-file-path)
 
 [English Version](/solution/0300-0399/0388.Longest%20Absolute%20File%20Path/README_EN.md)
 
@@ -8,7 +8,7 @@
 
 <p>假设有一个同时存储文件和目录的文件系统。下图展示了文件系统的一个示例：</p>
 
-<p><img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0300-0399/0388.Longest%20Absolute%20File%20Path/images/mdir.jpg" style="height: 142px; width: 300px;" /></p>
+<p><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0300-0399/0388.Longest%20Absolute%20File%20Path/images/mdir.jpg" style="height: 142px; width: 300px;" /></p>
 
 <p>这里将 <code>dir</code> 作为根目录中的唯一目录。<code>dir</code> 包含两个子目录 <code>subdir1</code> 和 <code>subdir2</code> 。<code>subdir1</code> 包含文件 <code>file1.ext</code> 和子目录 <code>subsubdir1</code>；<code>subdir2</code> 包含子目录 <code>subsubdir2</code>，该子目录下包含文件 <code>file2.ext</code> 。</p>
 
@@ -33,7 +33,7 @@ dir
 <p>&nbsp;</p>
 
 <p><strong>示例 1：</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0300-0399/0388.Longest%20Absolute%20File%20Path/images/dir1.jpg" style="height: 101px; width: 200px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0300-0399/0388.Longest%20Absolute%20File%20Path/images/dir1.jpg" style="height: 101px; width: 200px;" />
 <pre>
 <strong>输入：</strong>input = "dir\n\tsubdir1\n\tsubdir2\n\t\tfile.ext"
 <strong>输出：</strong>20
@@ -41,7 +41,7 @@ dir
 </pre>
 
 <p><strong>示例 2：</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0300-0399/0388.Longest%20Absolute%20File%20Path/images/dir2.jpg" style="height: 151px; width: 300px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0300-0399/0388.Longest%20Absolute%20File%20Path/images/dir2.jpg" style="height: 151px; width: 300px;" />
 <pre>
 <strong>输入：</strong>input = "dir\n\tsubdir1\n\t\tfile1.ext\n\t\tsubsubdir1\n\tsubdir2\n\t\tsubsubdir2\n\t\t\tfile2.ext"
 <strong>输出：</strong>32
@@ -79,6 +79,8 @@ dir
 
 <!-- 这里可写通用的实现逻辑 -->
 
+遍历文件系统的时候需要在各个目录间切换，在实际的 Linux 中，有 `pushd` 和 `popd` 命令，本题可以使用栈模拟这一过程
+
 <!-- tabs:start -->
 
 ### **Python3**
@@ -86,7 +88,40 @@ dir
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
+class Solution:
+    def lengthLongestPath(self, input: str) -> int:
+        i, n = 0, len(input)
+        ans = 0
+        stk = []
+        while i < n:
+            ident = 0
+            while input[i] == '\t':
+                ident += 1
+                i += 1
 
+            cur, isFile = 0, False
+            while i < n and input[i] != '\n':
+                cur += 1
+                if input[i] == '.':
+                    isFile = True
+                i += 1
+            i += 1
+
+            # popd
+            while len(stk) > 0 and len(stk) > ident:
+                stk.pop()
+
+            if len(stk) > 0:
+                cur += stk[-1] + 1
+
+            # pushd
+            if not isFile:
+                stk.append(cur)
+                continue
+
+            ans = max(ans, cur)
+
+        return ans
 ```
 
 ### **Java**
@@ -94,7 +129,145 @@ dir
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public int lengthLongestPath(String input) {
+        int i = 0;
+        int n = input.length();
+        int ans = 0;
+        Deque<Integer> stack = new ArrayDeque<>();
+        while (i < n) {
+            int ident = 0;
+            for (; input.charAt(i) == '\t'; i++) {
+                ident++;
+            }
 
+            int cur = 0;
+            boolean isFile = false;
+            for (; i < n && input.charAt(i) != '\n'; i++) {
+                cur++;
+                if (input.charAt(i) == '.') {
+                    isFile = true;
+                }
+            }
+            i++;
+
+            // popd
+            while (!stack.isEmpty() && stack.size() > ident) {
+                stack.pop();
+            }
+
+            if (stack.size() > 0) {
+                cur += stack.peek() + 1;
+            }
+
+            // pushd
+            if (!isFile) {
+                stack.push(cur);
+                continue;
+            }
+
+            ans = Math.max(ans, cur);
+        }
+        return ans;
+    }
+}
+```
+
+### **Go**
+
+```go
+func lengthLongestPath(input string) int {
+	i, n := 0, len(input)
+	ans := 0
+	var stk []int
+	for i < n {
+		ident := 0
+		for ; input[i] == '\t'; i++ {
+			ident++
+		}
+
+		cur, isFile := 0, false
+		for ; i < n && input[i] != '\n'; i++ {
+			cur++
+			if input[i] == '.' {
+				isFile = true
+			}
+		}
+		i++
+
+		// popd
+		for len(stk) > 0 && len(stk) > ident {
+			stk = stk[:len(stk)-1]
+		}
+
+		if len(stk) > 0 {
+			cur += stk[len(stk)-1] + 1
+		}
+
+		// pushd
+		if !isFile {
+			stk = append(stk, cur)
+			continue
+		}
+
+		ans = max(ans, cur)
+	}
+	return ans
+}
+
+func max(x, y int) int {
+	if x > y {
+		return x
+	}
+	return y
+}
+```
+
+### **C++**
+
+```cpp
+class Solution {
+public:
+    int lengthLongestPath(string input) {
+        int i = 0, n = input.size();
+        int ans = 0;
+        stack<int> stk;
+        while (i < n) {
+            int ident = 0;
+            for (; input[i] == '\t'; ++i) {
+                ++ident;
+            }
+
+            int cur = 0;
+            bool isFile = false;
+            for (; i < n && input[i] != '\n'; ++i) {
+                ++cur;
+                if (input[i] == '.') {
+                    isFile = true;
+                }
+            }
+            ++i;
+
+            // popd
+            while (!stk.empty() && stk.size() > ident) {
+                stk.pop();
+            }
+
+            if (stk.size() > 0) {
+                cur += stk.top() + 1;
+            }
+
+            // pushd
+            if (!isFile) {
+                stk.push(cur);
+                continue;
+            }
+
+            ans = max(ans, cur);
+        }
+        return ans;
+    }
+};
 ```
 
 ### **...**

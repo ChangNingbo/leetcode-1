@@ -1,4 +1,4 @@
-# [1845. 座位预约管理系统](https://leetcode-cn.com/problems/seat-reservation-manager)
+# [1845. 座位预约管理系统](https://leetcode.cn/problems/seat-reservation-manager)
 
 [English Version](/solution/1800-1899/1845.Seat%20Reservation%20Manager/README_EN.md)
 
@@ -69,10 +69,10 @@ class SeatManager:
         self.q = [i for i in range(1, n + 1)]
 
     def reserve(self) -> int:
-        return heapq.heappop(self.q)
+        return heappop(self.q)
 
     def unreserve(self, seatNumber: int) -> None:
-        heapq.heappush(self.q, seatNumber)
+        heappush(self.q, seatNumber)
 
 
 # Your SeatManager object will be instantiated and called as such:

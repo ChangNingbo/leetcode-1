@@ -16,6 +16,7 @@
 
 <ul>
 	<li>A coordinate <code>(x1, y1)</code> is lexicographically smaller than <code>(x2, y2)</code> if either:
+
     <ul>
     	<li><code>x1 &lt; x2</code>, or</li>
     	<li><code>x1 == x2</code> and <code>y1 &lt; y2</code>.</li>
@@ -27,7 +28,7 @@
 
 <p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/1600-1699/1620.Coordinate%20With%20Maximum%20Network%20Quality/images/untitled-diagram.png" style="width: 176px; height: 176px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/1600-1699/1620.Coordinate%20With%20Maximum%20Network%20Quality/images/untitled-diagram.png" style="width: 176px; height: 176px;" />
 <pre>
 <strong>Input:</strong> towers = [[1,2,5],[2,1,7],[3,1,9]], radius = 2
 <strong>Output:</strong> [2,1]

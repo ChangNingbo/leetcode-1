@@ -1,4 +1,4 @@
-# [92. 反转链表 II](https://leetcode-cn.com/problems/reverse-linked-list-ii)
+# [92. 反转链表 II](https://leetcode.cn/problems/reverse-linked-list-ii)
 
 [English Version](/solution/0000-0099/0092.Reverse%20Linked%20List%20II/README_EN.md)
 
@@ -11,7 +11,7 @@
 <p> </p>
 
 <p><strong>示例 1：</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0000-0099/0092.Reverse%20Linked%20List%20II/images/rev2ex2.jpg" style="width: 542px; height: 222px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0000-0099/0092.Reverse%20Linked%20List%20II/images/rev2ex2.jpg" style="width: 542px; height: 222px;" />
 <pre>
 <strong>输入：</strong>head = [1,2,3,4,5], left = 2, right = 4
 <strong>输出：</strong>[1,4,3,2,5]
@@ -234,6 +234,52 @@ public class Solution {
         q.next = cur;
         return dummy.next;
     }
+}
+```
+
+### **TypeScript**
+
+```ts
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     val: number
+ *     next: ListNode | null
+ *     constructor(val?: number, next?: ListNode | null) {
+ *         this.val = (val===undefined ? 0 : val)
+ *         this.next = (next===undefined ? null : next)
+ *     }
+ * }
+ */
+
+function reverseBetween(
+    head: ListNode | null,
+    left: number,
+    right: number,
+): ListNode | null {
+    const n = right - left;
+    if (n === 0) {
+        return head;
+    }
+
+    const dummy = new ListNode(0, head);
+    let pre = null;
+    let cur = dummy;
+    for (let i = 0; i < left; i++) {
+        pre = cur;
+        cur = cur.next;
+    }
+    const h = pre;
+    pre = null;
+    for (let i = 0; i <= n; i++) {
+        const next = cur.next;
+        cur.next = pre;
+        pre = cur;
+        cur = next;
+    }
+    h.next.next = cur;
+    h.next = pre;
+    return dummy.next;
 }
 ```
 

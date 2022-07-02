@@ -1,4 +1,4 @@
-# [729. 我的日程安排表 I](https://leetcode-cn.com/problems/my-calendar-i)
+# [729. 我的日程安排表 I](https://leetcode.cn/problems/my-calendar-i)
 
 [English Version](/solution/0700-0799/0729.My%20Calendar%20I/README_EN.md)
 
@@ -155,7 +155,7 @@ public:
     MyCalendar() {
 
     }
-    
+
     bool book(int start, int end) {
         ++m[start];
         --m[end];
@@ -178,6 +178,35 @@ public:
  * Your MyCalendar object will be instantiated and called as such:
  * MyCalendar* obj = new MyCalendar();
  * bool param_1 = obj->book(start,end);
+ */
+```
+
+### **TypeScript**
+
+```ts
+class MyCalendar {
+    private calendar: number[][];
+
+    constructor() {
+        this.calendar = [];
+    }
+
+    book(start: number, end: number): boolean {
+        for (const item of this.calendar) {
+            if (end <= item[0] || item[1] <= start) {
+                continue;
+            }
+            return false;
+        }
+        this.calendar.push([start, end]);
+        return true;
+    }
+}
+
+/**
+ * Your MyCalendar object will be instantiated and called as such:
+ * var obj = new MyCalendar()
+ * var param_1 = obj.book(start,end)
  */
 ```
 

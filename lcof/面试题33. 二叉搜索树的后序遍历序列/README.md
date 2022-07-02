@@ -1,4 +1,4 @@
-# [面试题 33. 二叉搜索树的后序遍历序列](https://leetcode-cn.com/problems/er-cha-sou-suo-shu-de-hou-xu-bian-li-xu-lie-lcof/)
+# [面试题 33. 二叉搜索树的后序遍历序列](https://leetcode.cn/problems/er-cha-sou-suo-shu-de-hou-xu-bian-li-xu-lie-lcof/)
 
 ## 题目描述
 
@@ -169,6 +169,59 @@ public:
         return dfs(postorder, i, j - i) && dfs(postorder, j, n + i - j - 1);
     }
 };
+```
+
+### **TypeScript**
+
+```ts
+function verifyPostorder(postorder: number[]): boolean {
+    const dfs = (start: number, end: number, maxVal: number) => {
+        if (start > end) {
+            return true;
+        }
+        const rootVal = postorder[end];
+        for (let i = end; i >= start; i--) {
+            const val = postorder[i];
+            if (val > maxVal) {
+                return false;
+            }
+            if (val < rootVal) {
+                return dfs(start, i, rootVal) && dfs(i + 1, end - 1, maxVal);
+            }
+        }
+        return dfs(start, end - 1, maxVal);
+    };
+    const n = postorder.length;
+    return dfs(0, n - 1, Infinity);
+}
+```
+
+### **Rust**
+
+```rust
+impl Solution {
+    fn dfs(start: usize, end: usize, max_val: i32, postorder: &Vec<i32>) -> bool {
+        if start >= end {
+            return true;
+        }
+        let root_val = postorder[end - 1];
+        for i in (start..end).rev() {
+            let val = postorder[i];
+            if val > max_val {
+                return false;
+            }
+            if val < root_val {
+                return Self::dfs(start, i, root_val, postorder)
+                    && Self::dfs(i + 1, end - 1, max_val, postorder);
+            }
+        }
+        Self::dfs(start, end - 1, max_val, postorder)
+    }
+
+    pub fn verify_postorder(postorder: Vec<i32>) -> bool {
+        Self::dfs(0, postorder.len(), i32::MAX, &postorder)
+    }
+}
 ```
 
 ### **...**

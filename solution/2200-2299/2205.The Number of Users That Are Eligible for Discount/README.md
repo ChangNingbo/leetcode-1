@@ -1,4 +1,4 @@
-# [2205. The Number of Users That Are Eligible for Discount](https://leetcode-cn.com/problems/the-number-of-users-that-are-eligible-for-discount)
+# [2205. The Number of Users That Are Eligible for Discount](https://leetcode.cn/problems/the-number-of-users-that-are-eligible-for-discount)
 
 [English Version](/solution/2200-2299/2205.The%20Number%20of%20Users%20That%20Are%20Eligible%20for%20Discount/README_EN.md)
 
@@ -22,7 +22,7 @@ Each row contains information about the purchase time and the amount paid for th
 
 <p>&nbsp;</p>
 
-<p>A user is eligible for a discount if they had a purchase in the inclusive interval of time <code>[startDate, endDate]</code> with at least <code>minAmount</code> amount.</p>
+<p>A user is eligible for a discount if they had a purchase in the inclusive interval of time <code>[startDate, endDate]</code> with at least <code>minAmount</code> amount. To convert the dates to times, both dates should be considered as the <strong>start</strong> of the day (i.e., <code>endDate = 2022-03-05</code> should be considered as the time <code>2022-03-05 00:00:00</code>).</p>
 
 <p>Write an SQL query to report the number of users that are eligible for a discount.</p>
 

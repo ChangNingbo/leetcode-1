@@ -1,4 +1,4 @@
-# [317. 离建筑物最近的距离](https://leetcode-cn.com/problems/shortest-distance-from-all-buildings)
+# [317. 离建筑物最近的距离](https://leetcode.cn/problems/shortest-distance-from-all-buildings)
 
 [English Version](/solution/0300-0399/0317.Shortest%20Distance%20from%20All%20Buildings/README_EN.md)
 
@@ -26,7 +26,7 @@
 
 <p><strong>示例&nbsp; 1：</strong></p>
 
-<p><img src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0300-0399/0317.Shortest%20Distance%20from%20All%20Buildings/images/buildings-grid.jpg" /></p>
+<p><img src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0300-0399/0317.Shortest%20Distance%20from%20All%20Buildings/images/buildings-grid.jpg" /></p>
 
 <pre>
 <strong>输入：</strong>grid = [[1,0,2,0,1],[0,0,0,0,0],[0,0,1,0,0]]
@@ -93,7 +93,7 @@ class Solution:
                     vis = set()
                     while q:
                         d += 1
-                        for _ in range(len(q), 0, -1):
+                        for _ in range(len(q)):
                             r, c = q.popleft()
                             for a, b in [[0, 1], [0, -1], [1, 0], [-1, 0]]:
                                 x, y = r + a, c + b

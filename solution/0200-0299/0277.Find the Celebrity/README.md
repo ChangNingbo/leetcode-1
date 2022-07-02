@@ -1,4 +1,4 @@
-# [277. 搜寻名人](https://leetcode-cn.com/problems/find-the-celebrity)
+# [277. 搜寻名人](https://leetcode.cn/problems/find-the-celebrity)
 
 [English Version](/solution/0200-0299/0277.Find%20the%20Celebrity/README_EN.md)
 
@@ -18,7 +18,7 @@
 
 <p><strong>示例 1:</strong></p>
 
-<p><img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0200-0299/0277.Find%20the%20Celebrity/images/277_example_1_bold.PNG" style="height: 181px; width: 186px;" /></p>
+<p><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0200-0299/0277.Find%20the%20Celebrity/images/277_example_1_bold.png" style="height: 181px; width: 186px;" /></p>
 
 <pre>
 <strong>输入: </strong>graph = [
@@ -32,7 +32,7 @@
 
 <p><strong>示例 2:</strong></p>
 
-<p><img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0200-0299/0277.Find%20the%20Celebrity/images/277_example_2.PNG" style="height: 192px; width: 193px;" /></p>
+<p><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0200-0299/0277.Find%20the%20Celebrity/images/277_example_2.png" style="height: 192px; width: 193px;" /></p>
 
 <pre>
 <strong>输入: </strong>graph = [

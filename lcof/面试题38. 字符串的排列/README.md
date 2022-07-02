@@ -1,4 +1,4 @@
-# [面试题 38. 字符串的排列](https://leetcode-cn.com/problems/zi-fu-chuan-de-pai-lie-lcof/)
+# [面试题 38. 字符串的排列](https://leetcode.cn/problems/zi-fu-chuan-de-pai-lie-lcof/)
 
 ## 题目描述
 
@@ -154,6 +154,60 @@ public:
         return ret;
     }
 };
+```
+
+### **TypeScript**
+
+```ts
+function permutation(s: string): string[] {
+    const n = s.length;
+    const cs = s.split('');
+    const set = new Set<string>();
+    const dfs = (i: number) => {
+        if (i === n) {
+            set.add(cs.join(''));
+            return;
+        }
+        dfs(i + 1);
+        for (let j = i + 1; j < n; j++) {
+            [cs[i], cs[j]] = [cs[j], cs[i]];
+            dfs(i + 1);
+            [cs[i], cs[j]] = [cs[j], cs[i]];
+        }
+    };
+    dfs(0);
+    return [...set];
+}
+```
+
+### **Rust**
+
+```rust
+use std::collections::HashSet;
+impl Solution {
+    fn dfs(i: usize, cs: &mut Vec<char>, res: &mut Vec<String>) {
+        if i == cs.len() {
+            res.push(cs.iter().collect());
+            return;
+        }
+        let mut set = HashSet::new();
+        for j in i..cs.len() {
+            if set.contains(&cs[j]) {
+                continue;
+            }
+            set.insert(cs[j]);
+            cs.swap(i, j);
+            Self::dfs(i + 1, cs, res);
+            cs.swap(i, j);
+        }
+    }
+
+    pub fn permutation(s: String) -> Vec<String> {
+        let mut res = Vec::new();
+        Self::dfs(0, &mut s.chars().collect(), &mut res);
+        res
+    }
+}
 ```
 
 ### **...**

@@ -1,4 +1,4 @@
-# [588. 设计内存文件系统](https://leetcode-cn.com/problems/design-in-memory-file-system)
+# [588. 设计内存文件系统](https://leetcode.cn/problems/design-in-memory-file-system)
 
 [English Version](/solution/0500-0599/0588.Design%20In-Memory%20File%20System/README_EN.md)
 
@@ -37,7 +37,7 @@
 
 <p><strong>示例 1:</strong></p>
 
-<p><img src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0500-0599/0588.Design%20In-Memory%20File%20System/images/filesystem.png" style="height: 315px; width: 650px;" /></p>
+<p><img src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0500-0599/0588.Design%20In-Memory%20File%20System/images/filesystem.png" style="height: 315px; width: 650px;" /></p>
 
 <pre>
 <strong>输入:</strong> 

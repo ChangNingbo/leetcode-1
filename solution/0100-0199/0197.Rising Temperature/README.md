@@ -1,4 +1,4 @@
-# [197. 上升的温度](https://leetcode-cn.com/problems/rising-temperature)
+# [197. 上升的温度](https://leetcode.cn/problems/rising-temperature)
 
 [English Version](/solution/0100-0199/0197.Rising%20Temperature/README_EN.md)
 
@@ -76,10 +76,10 @@ where
 
 ```sql
 SELECT
-	w2.id AS Id 
+	w2.id AS Id
 FROM
 	weather AS w1
-	JOIN weather AS w2 ON DATE_ADD( w1.recordDate, INTERVAL 1 DAY) = w2.recordDate 
+	JOIN weather AS w2 ON DATE_ADD( w1.recordDate, INTERVAL 1 DAY) = w2.recordDate
 WHERE
 	w1.temperature < w2.temperature
 ```

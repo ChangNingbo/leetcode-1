@@ -1,4 +1,4 @@
-# [1368. 使网格图至少有一条有效路径的最小代价](https://leetcode-cn.com/problems/minimum-cost-to-make-at-least-one-valid-path-in-a-grid)
+# [1368. 使网格图至少有一条有效路径的最小代价](https://leetcode.cn/problems/minimum-cost-to-make-at-least-one-valid-path-in-a-grid)
 
 [English Version](/solution/1300-1399/1368.Minimum%20Cost%20to%20Make%20at%20Least%20One%20Valid%20Path%20in%20a%20Grid/README_EN.md)
 
@@ -27,7 +27,7 @@
 
 <p><strong>示例 1：</strong></p>
 
-<p><img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/1300-1399/1368.Minimum%20Cost%20to%20Make%20at%20Least%20One%20Valid%20Path%20in%20a%20Grid/images/grid1.png" style="height: 528px; width: 542px;"></p>
+<p><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/1300-1399/1368.Minimum%20Cost%20to%20Make%20at%20Least%20One%20Valid%20Path%20in%20a%20Grid/images/grid1.png" style="height: 528px; width: 542px;"></p>
 
 <pre><strong>输入：</strong>grid = [[1,1,1,1],[2,2,2,2],[1,1,1,1],[2,2,2,2]]
 <strong>输出：</strong>3
@@ -38,7 +38,7 @@
 
 <p><strong>示例 2：</strong></p>
 
-<p><img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/1300-1399/1368.Minimum%20Cost%20to%20Make%20at%20Least%20One%20Valid%20Path%20in%20a%20Grid/images/grid2.png" style="height: 408px; width: 419px;"></p>
+<p><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/1300-1399/1368.Minimum%20Cost%20to%20Make%20at%20Least%20One%20Valid%20Path%20in%20a%20Grid/images/grid2.png" style="height: 408px; width: 419px;"></p>
 
 <pre><strong>输入：</strong>grid = [[1,1,3],[3,2,2],[1,1,4]]
 <strong>输出：</strong>0
@@ -47,7 +47,7 @@
 
 <p><strong>示例 3：</strong></p>
 
-<p><img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/1300-1399/1368.Minimum%20Cost%20to%20Make%20at%20Least%20One%20Valid%20Path%20in%20a%20Grid/images/grid3.png" style="height: 302px; width: 314px;"></p>
+<p><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/1300-1399/1368.Minimum%20Cost%20to%20Make%20at%20Least%20One%20Valid%20Path%20in%20a%20Grid/images/grid3.png" style="height: 302px; width: 314px;"></p>
 
 <pre><strong>输入：</strong>grid = [[1,2],[4,3]]
 <strong>输出：</strong>1
@@ -79,7 +79,9 @@
 
 <!-- 这里可写通用的实现逻辑 -->
 
-双端队列 BFS。本题实际上也是最短路模型，只不过求解的是改变方向的最小次数。
+**方法一：双端队列 BFS**
+
+本题实际上也是最短路模型，只不过求解的是改变方向的最小次数。
 
 在一个边权只有 0、1 的无向图中搜索最短路径可以使用双端队列进行 BFS。其原理是当前可以扩展到的点的权重为 0 时，将其加入队首；权重为 1 时，将其加入队尾。
 
@@ -150,6 +152,41 @@ class Solution {
         }
         return -1;
     }
+}
+```
+
+### **TypeScript**
+
+```ts
+function minCost(grid: number[][]): number {
+    const m = grid.length,
+        n = grid[0].length;
+    let ans = Array.from({ length: m }, v => new Array(n).fill(Infinity));
+    ans[0][0] = 0;
+    let queue = [[0, 0]];
+    const dirs = [
+        [0, 1],
+        [0, -1],
+        [1, 0],
+        [-1, 0],
+    ];
+    while (queue.length) {
+        let [x, y] = queue.shift();
+        for (let step = 1; step < 5; step++) {
+            let [dx, dy] = dirs[step - 1];
+            let [i, j] = [x + dx, y + dy];
+            if (i < 0 || i >= m || j < 0 || j >= n) continue;
+            let cost = ~~(grid[x][y] != step) + ans[x][y];
+            if (cost >= ans[i][j]) continue;
+            ans[i][j] = cost;
+            if (grid[x][y] == step) {
+                queue.unshift([i, j]);
+            } else {
+                queue.push([i, j]);
+            }
+        }
+    }
+    return ans[m - 1][n - 1];
 }
 ```
 

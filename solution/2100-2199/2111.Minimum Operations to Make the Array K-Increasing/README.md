@@ -1,4 +1,4 @@
-# [2111. 使数组 K 递增的最少操作次数](https://leetcode-cn.com/problems/minimum-operations-to-make-the-array-k-increasing)
+# [2111. 使数组 K 递增的最少操作次数](https://leetcode.cn/problems/minimum-operations-to-make-the-array-k-increasing)
 
 [English Version](/solution/2100-2199/2111.Minimum%20Operations%20to%20Make%20the%20Array%20K-Increasing/README_EN.md)
 
@@ -20,7 +20,6 @@
     </ul>
     </li>
     <li>但是，相同的数组&nbsp;<code>arr</code>&nbsp;对于&nbsp;<code>k = 1</code>&nbsp;不是 K 递增的（因为&nbsp;<code>arr[0] &gt; arr[1]</code>），对于&nbsp;<code>k = 3</code>&nbsp;也不是 K 递增的（因为&nbsp;<code>arr[0] &gt; arr[3]</code>&nbsp;）。</li>
-
 </ul>
 
 <p>每一次 <strong>操作</strong>&nbsp;中，你可以选择一个下标&nbsp;<code>i</code> 并将&nbsp;<code>arr[i]</code> <strong>改成任意&nbsp;</strong>正整数。</p>
@@ -87,7 +86,7 @@ class Solution:
         def lis(arr):
             t = []
             for x in arr:
-                idx = bisect.bisect_right(t, x)
+                idx = bisect_right(t, x)
                 if idx == len(t):
                     t.append(x)
                 else:

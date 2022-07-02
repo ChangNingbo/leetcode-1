@@ -1,4 +1,4 @@
-# [1281. 整数的各位积和之差](https://leetcode-cn.com/problems/subtract-the-product-and-sum-of-digits-of-an-integer)
+# [1281. 整数的各位积和之差](https://leetcode.cn/problems/subtract-the-product-and-sum-of-digits-of-an-integer)
 
 [English Version](/solution/1200-1299/1281.Subtract%20the%20Product%20and%20Sum%20of%20Digits%20of%20an%20Integer/README_EN.md)
 
@@ -109,6 +109,24 @@ func subtractProductAndSum(n int) int {
 		p *= t
 	}
 	return p - s
+}
+```
+
+### **Rust**
+
+```rust
+impl Solution {
+    pub fn subtract_product_and_sum(mut n: i32) -> i32 {
+        let mut mul = 1;
+        let mut sum = 0;
+        while n != 0 {
+            let num = n % 10;
+            n /= 10;
+            mul *= num;
+            sum += num;
+        }
+        mul - sum
+    }
 }
 ```
 

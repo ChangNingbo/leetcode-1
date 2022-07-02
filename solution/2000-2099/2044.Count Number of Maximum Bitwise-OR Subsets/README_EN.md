@@ -97,6 +97,25 @@ class Solution:
         return ans
 ```
 
+```python
+class Solution:
+    def countMaxOrSubsets(self, nums: List[int]) -> int:
+        n = len(nums)
+        ans = 0
+        mx = 0
+        for mask in range(1 << n):
+            t = 0
+            for i, v in enumerate(nums):
+                if (mask >> i) & 1:
+                    t |= v
+            if mx < t:
+                mx = t
+                ans = 1
+            elif mx == t:
+                ans += 1
+        return ans
+```
+
 ### **Java**
 
 ```java
@@ -137,7 +156,7 @@ class Solution {
     public int countMaxOrSubsets(int[] nums) {
         this.nums = nums;
         dfs(0, 0);
-        return ans;    
+        return ans;
     }
 
     private void dfs(int u, int t) {
@@ -152,6 +171,31 @@ class Solution {
         }
         dfs(u + 1, t);
         dfs(u + 1, t | nums[u]);
+    }
+}
+```
+
+```java
+class Solution {
+    public int countMaxOrSubsets(int[] nums) {
+        int n = nums.length;
+        int ans = 0;
+        int mx = 0;
+        for (int mask = 1; mask < 1 << n; ++mask) {
+            int t = 0;
+            for (int i = 0; i < n; ++i) {
+                if (((mask >> i) & 1) == 1) {
+                    t |= nums[i];
+                }
+            }
+            if (mx < t) {
+                mx = t;
+                ans = 1;
+            } else if (mx == t) {
+                ++ans;
+            }
+        }
+        return ans;
     }
 }
 ```
@@ -241,7 +285,7 @@ public:
 
     int countMaxOrSubsets(vector<int>& nums) {
         dfs(0, 0, nums);
-        return ans;    
+        return ans;
     }
 
     void dfs(int u, int t, vector<int>& nums) {
@@ -257,6 +301,35 @@ public:
         }
         dfs(u + 1, t, nums);
         dfs(u + 1, t | nums[u], nums);
+    }
+};
+```
+
+```cpp
+class Solution {
+public:
+    int countMaxOrSubsets(vector<int>& nums) {
+        int n = nums.size();
+        int ans = 0;
+        int mx = 0;
+        for (int mask = 1; mask < 1 << n; ++mask)
+        {
+            int t = 0;
+            for (int i = 0; i < n; ++i)
+            {
+                if ((mask >> i) & 1)
+                {
+                    t |= nums[i];
+                }
+            }
+            if (mx < t)
+            {
+                mx = t;
+                ans = 1;
+            }
+            else if (mx == t) ++ans;
+        }
+        return ans;
     }
 };
 ```
@@ -304,6 +377,29 @@ func countMaxOrSubsets(nums []int) int {
 		dfs(u+1, t|nums[u])
 	}
 	dfs(0, 0)
+	return ans
+}
+```
+
+```go
+func countMaxOrSubsets(nums []int) int {
+	n := len(nums)
+	ans := 0
+	mx := 0
+	for mask := 1; mask < 1<<n; mask++ {
+		t := 0
+		for i, v := range nums {
+			if ((mask >> i) & 1) == 1 {
+				t |= v
+			}
+		}
+		if mx < t {
+			mx = t
+			ans = 1
+		} else if mx == t {
+			ans++
+		}
+	}
 	return ans
 }
 ```

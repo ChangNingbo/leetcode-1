@@ -1,4 +1,4 @@
-# [1120. 子树的最大平均值](https://leetcode-cn.com/problems/maximum-average-subtree)
+# [1120. 子树的最大平均值](https://leetcode.cn/problems/maximum-average-subtree)
 
 [English Version](/solution/1100-1199/1120.Maximum%20Average%20Subtree/README_EN.md)
 
@@ -16,7 +16,7 @@
 
 <p><strong>示例：</strong></p>
 
-<p><img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/1100-1199/1120.Maximum%20Average%20Subtree/images/1308_example_1.png" style="height: 123px; width: 132px;"></p>
+<p><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/1100-1199/1120.Maximum%20Average%20Subtree/images/1308_example_1.png" style="height: 123px; width: 132px;"></p>
 
 <pre><strong>输入：</strong>[5,6,1]
 <strong>输出：</strong>6.00000

@@ -1,4 +1,4 @@
-# [1158. 市场分析 I](https://leetcode-cn.com/problems/market-analysis-i)
+# [1158. 市场分析 I](https://leetcode.cn/problems/market-analysis-i)
 
 [English Version](/solution/1100-1199/1158.Market%20Analysis%20I/README_EN.md)
 
@@ -114,7 +114,29 @@ Items 表:
 ### **SQL**
 
 ```sql
+SELECT user_id AS buyer_id,
+    join_date,
+    COUNT(order_id) AS orders_in_2019
+FROM users AS u
+    LEFT JOIN orders AS o ON u.user_id = o.buyer_id
+    AND YEAR(order_date) = 2019
+GROUP BY user_id;
+```
 
+```sql
+SELECT
+    user_id AS buyer_id,
+    join_date,
+    (
+        SELECT
+            COUNT(*)
+        FROM
+            orders AS o
+        WHERE
+            u.user_id = o.buyer_id AND YEAR(order_date) = 2019
+    ) AS orders_in_2019
+FROM
+    users AS u;
 ```
 
 <!-- tabs:end -->

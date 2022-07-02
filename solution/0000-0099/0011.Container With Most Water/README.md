@@ -1,4 +1,4 @@
-# [11. 盛最多水的容器](https://leetcode-cn.com/problems/container-with-most-water)
+# [11. 盛最多水的容器](https://leetcode.cn/problems/container-with-most-water)
 
 [English Version](/solution/0000-0099/0011.Container%20With%20Most%20Water/README_EN.md)
 
@@ -18,7 +18,7 @@
 
 <p><strong>示例 1：</strong></p>
 
-<p><img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0000-0099/0011.Container%20With%20Most%20Water/images/question_11.jpg" /></p>
+<p><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0000-0099/0011.Container%20With%20Most%20Water/images/question_11.jpg" /></p>
 
 <pre>
 <strong>输入：</strong>[1,8,6,2,5,4,8,3,7]
@@ -172,6 +172,45 @@ var maxArea = function (height) {
     }
     return res;
 };
+```
+
+### **TypeScript**
+
+```ts
+function maxArea(height: number[]): number {
+    const n = height.length;
+    let res = 0;
+    for (let i = 0; i < n - 1; i++) {
+        for (let j = n - 1; j >= 0; j--) {
+            if (height[i] * (j - i) < res) {
+                break;
+            }
+            res = Math.max(res, Math.min(height[i], height[j]) * (j - i));
+        }
+    }
+    return res;
+}
+```
+
+### **Rust**
+
+```rust
+impl Solution {
+    pub fn max_area(height: Vec<i32>) -> i32 {
+        let mut i = 0;
+        let mut j = height.len() - 1;
+        let mut res = 0;
+        while i < j {
+            res = res.max(height[i].min(height[j]) * (j - i) as i32);
+            if height[i] <= height[j] {
+                i += 1;
+            } else {
+                j -= 1;
+            }
+        }
+        res
+    }
+}
 ```
 
 ### **...**

@@ -1,4 +1,4 @@
-# [1197. 进击的骑士](https://leetcode-cn.com/problems/minimum-knight-moves)
+# [1197. 进击的骑士](https://leetcode.cn/problems/minimum-knight-moves)
 
 [English Version](/solution/1100-1199/1197.Minimum%20Knight%20Moves/README_EN.md)
 
@@ -12,7 +12,7 @@
 
 <p>每次移动，他都可以按图示八个方向之一前进。</p>
 
-<p><img src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/1100-1199/1197.Minimum%20Knight%20Moves/images/knight.png" style="width: 250px; height: 250px;" /></p>
+<p><img src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/1100-1199/1197.Minimum%20Knight%20Moves/images/knight.png" style="width: 250px; height: 250px;" /></p>
 
 <p>返回 <em>骑士前去征服坐标为&nbsp;<code>[x, y]</code>&nbsp;的部落所需的最小移动次数</em> 。本题确保答案是一定存在的。</p>
 
@@ -67,13 +67,14 @@ class Solution:
     def minKnightMoves(self, x: int, y: int) -> int:
         q = deque([(0, 0)])
         ans = 0
-        vis = set([(0, 0)])
+        vis = {(0, 0)}
+        dirs = ((-2, 1), (-1, 2), (1, 2), (2, 1), (2, -1), (1, -2), (-1, -2), (-2, -1))
         while q:
-            for _ in range(len(q), 0, -1):
+            for _ in range(len(q)):
                 i, j = q.popleft()
                 if (i, j) == (x, y):
                     return ans
-                for a, b in [[-2, 1], [-1, 2], [1, 2], [2, 1], [2, -1], [1, -2], [-1, -2], [-2, -1]]:
+                for a, b in dirs:
                     c, d = i + a, j + b
                     if (c, d) not in vis:
                         vis.add((c, d))
@@ -82,16 +83,16 @@ class Solution:
         return -1
 ```
 
-双向 BFS；
+双向 BFS：
 
 ```python
 class Solution:
     def minKnightMoves(self, x: int, y: int) -> int:
         def extend(m1, m2, q):
-            for _ in range(len(q), 0, -1):
+            for _ in range(len(q)):
                 i, j = q.popleft()
                 step = m1[(i, j)]
-                for a, b in [[-2, 1], [-1, 2], [1, 2], [2, 1], [2, -1], [1, -2], [-1, -2], [-2, -1]]:
+                for a, b in ((-2, 1), (-1, 2), (1, 2), (2, 1), (2, -1), (1, -2), (-1, -2), (-2, -1)):
                     x, y = i + a, j + b
                     if (x, y) in m1:
                         continue

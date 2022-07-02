@@ -1,4 +1,4 @@
-# [934. 最短的桥](https://leetcode-cn.com/problems/shortest-bridge)
+# [934. 最短的桥](https://leetcode.cn/problems/shortest-bridge)
 
 [English Version](/solution/0900-0999/0934.Shortest%20Bridge/README_EN.md)
 
@@ -82,7 +82,7 @@ class Solution:
         ans = -1
         while q:
             ans += 1
-            for _ in range(len(q), 0, -1):
+            for _ in range(len(q)):
                 i, j = q.popleft()
                 for a, b in dirs:
                     x, y = i + a, j + b

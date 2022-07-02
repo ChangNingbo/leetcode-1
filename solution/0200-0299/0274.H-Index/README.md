@@ -1,4 +1,4 @@
-# [274. H 指数](https://leetcode-cn.com/problems/h-index)
+# [274. H 指数](https://leetcode.cn/problems/h-index)
 
 [English Version](/solution/0200-0299/0274.H-Index/README_EN.md)
 
@@ -55,7 +55,7 @@
 class Solution:
     def hIndex(self, citations: List[int]) -> int:
         n = len(citations)
-        cnt = [0 for i in range(n + 1)]
+        cnt = [0] * (n + 1)
         for c in citations:
             if c <= n:
                 cnt[c] += 1

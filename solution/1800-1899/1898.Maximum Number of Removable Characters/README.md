@@ -1,4 +1,4 @@
-# [1898. 可移除字符的最大数目](https://leetcode-cn.com/problems/maximum-number-of-removable-characters)
+# [1898. 可移除字符的最大数目](https://leetcode.cn/problems/maximum-number-of-removable-characters)
 
 [English Version](/solution/1800-1899/1898.Maximum%20Number%20of%20Removable%20Characters/README_EN.md)
 
@@ -61,9 +61,11 @@
 
 <!-- 这里可写通用的实现逻辑 -->
 
-“二分查找 + 判断子序列”实现。二分枚举整数 k，找到满足要求的最大 k 即可。
+**方法一：二分查找 + 判断子序列**
 
-以下是二分查找的两个模板：
+二分枚举整数 k，找到满足要求的最大 k 即可。
+
+以下是二分查找的两个通用模板：
 
 模板 1：
 
@@ -273,6 +275,50 @@ func maximumRemovals(s string, p string, removable []int) int {
 		}
 	}
 	return left
+}
+```
+
+### **Rust**
+
+```rust
+use std::collections::HashSet;
+
+impl Solution {
+    pub fn maximum_removals(s: String, p: String, removable: Vec<i32>) -> i32 {
+        let m = s.len();
+        let n = p.len();
+        let s = s.as_bytes();
+        let p = p.as_bytes();
+
+        let check = |k| {
+            let mut i = 0;
+            let mut j = 0;
+            let ids: HashSet<i32> = removable[..k].iter().cloned().collect();
+            while i < m && j < n {
+                if !ids.contains(&(i as i32)) && s[i] == p[j] {
+                    j += 1;
+                }
+                i += 1;
+            }
+            j == n
+        };
+
+        let mut left = 0;
+        let mut right = removable.len();
+        while left + 1 < right {
+            let mid = left + (right - left) / 2;
+            if check(mid) {
+                left = mid;
+            } else {
+                right = mid;
+            }
+        }
+
+        if check(right) {
+            return right as i32;
+        }
+        left as i32
+    }
 }
 ```
 

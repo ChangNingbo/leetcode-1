@@ -1,4 +1,4 @@
-# [剑指 Offer II 102. 加减的目标值](https://leetcode-cn.com/problems/YaVDxD)
+# [剑指 Offer II 102. 加减的目标值](https://leetcode.cn/problems/YaVDxD)
 
 ## 题目描述
 
@@ -49,7 +49,7 @@
 
 <p>&nbsp;</p>
 
-<p><meta charset="UTF-8" />注意：本题与主站 494&nbsp;题相同：&nbsp;<a href="https://leetcode-cn.com/problems/target-sum/">https://leetcode-cn.com/problems/target-sum/</a></p>
+<p><meta charset="UTF-8" />注意：本题与主站 494&nbsp;题相同：&nbsp;<a href="https://leetcode.cn/problems/target-sum/">https://leetcode.cn/problems/target-sum/</a></p>
 
 ## 解法
 
@@ -125,7 +125,7 @@ class Solution:
 ```python
 class Solution:
     def findTargetSumWays(self, nums: List[int], target: int) -> int:
-        @lru_cache(None)
+        @cache
         def dfs(i, t):
             if i == n:
                 if t == target:

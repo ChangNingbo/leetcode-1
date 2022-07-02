@@ -1,4 +1,4 @@
-# [面试题 59 - II. 队列的最大值](https://leetcode-cn.com/problems/dui-lie-de-zui-da-zhi-lcof/)
+# [面试题 59 - II. 队列的最大值](https://leetcode.cn/problems/dui-lie-de-zui-da-zhi-lcof/)
 
 ## 题目描述
 
@@ -46,11 +46,7 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-from collections import deque
-
-
 class MaxQueue:
-
     def __init__(self):
         self.p = deque()
         self.q = deque()
@@ -248,6 +244,105 @@ func (this *MaxQueue) Pop_front() int {
 	}
 	return retVal
 }
+```
+
+### **TypeScript**
+
+```ts
+class MaxQueue {
+    private queue: number[];
+    private deque: number[];
+
+    constructor() {
+        this.queue = [];
+        this.deque = [];
+    }
+
+    max_value(): number {
+        return this.deque[0] ?? -1;
+    }
+
+    push_back(value: number): void {
+        this.queue.push(value);
+        while (
+            this.deque.length !== 0 &&
+            this.deque[this.deque.length - 1] < value
+        ) {
+            this.deque.pop();
+        }
+        this.deque.push(value);
+    }
+
+    pop_front(): number {
+        const res = this.queue.shift();
+        if (res === this.deque[0]) {
+            this.deque.shift();
+        }
+        return res ?? -1;
+    }
+}
+
+/**
+ * Your MaxQueue object will be instantiated and called as such:
+ * var obj = new MaxQueue()
+ * var param_1 = obj.max_value()
+ * obj.push_back(value)
+ * var param_3 = obj.pop_front()
+ */
+```
+
+### **Rust**
+
+```rust
+use std::collections::VecDeque;
+struct MaxQueue {
+    queue: VecDeque<i32>,
+    deque: VecDeque<i32>,
+}
+
+/**
+ * `&self` means the method takes an immutable reference.
+ * If you need a mutable reference, change it to `&mut self` instead.
+ */
+impl MaxQueue {
+    fn new() -> Self {
+        Self {
+            queue: VecDeque::new(),
+            deque: VecDeque::new(),
+        }
+    }
+
+    fn max_value(&self) -> i32 {
+        *self.deque.front().unwrap_or(&-1)
+    }
+
+    fn push_back(&mut self, value: i32) {
+        self.queue.push_back(value);
+        while !self.deque.is_empty() && *self.deque.back().unwrap() < value {
+            self.deque.pop_back();
+        }
+        self.deque.push_back(value);
+    }
+
+    fn pop_front(&mut self) -> i32 {
+        if self.queue.is_empty() {
+            return -1;
+        }
+        let res = self.queue.pop_front().unwrap();
+        if res == self.deque[0] {
+            self.deque.pop_front();
+        }
+        res
+    }
+}
+
+/**
+ * Your MaxQueue object will be instantiated and called as such:
+ * let obj = MaxQueue::new();
+ * let ret_1: i32 = obj.max_value();
+ * obj.push_back(value);
+ * let ret_3: i32 = obj.pop_front();
+ */
 ```
 
 ### **...**

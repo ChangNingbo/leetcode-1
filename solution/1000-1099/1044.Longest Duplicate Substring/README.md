@@ -1,4 +1,4 @@
-# [1044. 最长重复子串](https://leetcode-cn.com/problems/longest-duplicate-substring)
+# [1044. 最长重复子串](https://leetcode.cn/problems/longest-duplicate-substring)
 
 [English Version](/solution/1000-1099/1044.Longest%20Duplicate%20Substring/README_EN.md)
 
@@ -39,9 +39,17 @@
 
 <!-- 这里可写通用的实现逻辑 -->
 
-字符串哈希 + 二分查找。
+**方法一：字符串哈希 + 二分查找**
 
-字符串哈希用于计算字符串哈希值，快速判断两个字符串是否相等。二分枚举长度，找到满足条件的最大长度即可。
+**字符串哈希**是把一个任意长度的字符串映射成一个非负整数，并且其冲突的概率几乎为 0。字符串哈希用于计算字符串哈希值，快速判断两个字符串是否相等。
+
+取一固定值 BASE，把字符串看作是 BASE 进制数，并分配一个大于 0 的数值，代表每种字符。一般来说，我们分配的数值都远小于 BASE。例如，对于小写字母构成的字符串，可以令 a=1, b=2, ..., z=26。取一固定值 MOD，求出该 BASE 进制对 M 的余数，作为该字符串的 hash 值。
+
+一般来说，取 BASE=131 或者 BASE=13331，此时 hash 值产生的冲突概率极低。只要两个字符串 hash 值相同，我们就认为两个字符串是相等的。通常 MOD 取 2^64，C++ 里，可以直接使用 unsigned long long 类型存储这个 hash 值，在计算时不处理算术溢出问题，产生溢出时相当于自动对 2^64 取模，这样可以避免低效取模运算。
+
+除了在极特殊构造的数据上，上述 hash 算法很难产生冲突，一般情况下上述 hash 算法完全可以出现在题目的标准答案中。我们还可以多取一些恰当的 BASE 和 MOD 的值（例如大质数），多进行几组 hash 运算，当结果都相同时才认为原字符串相等，就更加难以构造出使这个 hash 产生错误的数据。
+
+对于本题，二分枚举长度，找到满足条件的最大长度即可。
 
 <!-- tabs:start -->
 
@@ -52,24 +60,23 @@
 ```python
 class Solution:
     def longestDupSubstring(self, s: str) -> str:
-        n = len(s)
-
         def check(l):
-            seen = set()
+            vis = set()
             for i in range(n - l + 1):
                 t = s[i: i + l]
-                if t in seen:
+                if t in vis:
                     return t
-                seen.add(t)
+                vis.add(t)
             return ''
 
+        n = len(s)
         left, right = 0, n
         ans = ''
         while left < right:
             mid = (left + right + 1) >> 1
             t = check(mid)
             ans = t or ans
-            if len(t) > 0:
+            if t:
                 left = mid
             else:
                 right = mid - 1
@@ -112,14 +119,14 @@ class Solution {
 
     private String check(String s, int len) {
         int n = s.length();
-        Set<Long> seen = new HashSet<>();
+        Set<Long> vis = new HashSet<>();
         for (int i = 1; i + len - 1 <= n; ++i) {
             int j = i + len - 1;
             long t = h[j] - h[i - 1] * p[j - i + 1];
-            if (seen.contains(t)) {
+            if (vis.contains(t)) {
                 return s.substring(i - 1, j);
             }
-            seen.add(t);
+            vis.add(t);
         }
         return "";
     }
@@ -159,15 +166,15 @@ public:
         return ans;
     }
 
-    string check(string s, int len) {
+    string check(string& s, int len) {
         int n = s.size();
-        unordered_set<ULL> seen;
+        unordered_set<ULL> vis;
         for (int i = 1; i + len - 1 <= n; ++i)
         {
             int j = i + len - 1;
             ULL t = h[j] - h[i - 1] * p[j - i + 1];
-            if (seen.count(t)) return s.substr(i - 1, len);
-            seen.insert(t);
+            if (vis.count(t)) return s.substr(i - 1, len);
+            vis.insert(t);
         }
         return "";
     }
@@ -187,14 +194,14 @@ func longestDupSubstring(s string) string {
 		h[i+1] = h[i]*int64(base) + int64(s[i])
 	}
 	check := func(l int) string {
-		seen := make(map[int64]bool)
+		vis := make(map[int64]bool)
 		for i := 1; i+l-1 <= n; i++ {
 			j := i + l - 1
 			t := h[j] - h[i-1]*p[j-i+1]
-			if seen[t] {
+			if vis[t] {
 				return s[i-1 : j]
 			}
-			seen[t] = true
+			vis[t] = true
 		}
 		return ""
 	}

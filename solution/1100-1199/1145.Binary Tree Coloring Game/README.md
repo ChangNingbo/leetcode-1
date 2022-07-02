@@ -1,4 +1,4 @@
-# [1145. 二叉树着色游戏](https://leetcode-cn.com/problems/binary-tree-coloring-game)
+# [1145. 二叉树着色游戏](https://leetcode.cn/problems/binary-tree-coloring-game)
 
 [English Version](/solution/1100-1199/1145.Binary%20Tree%20Coloring%20Game/README_EN.md)
 
@@ -34,7 +34,7 @@
 
 <p><strong>示例：</strong></p>
 
-<p><strong><img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/1100-1199/1145.Binary%20Tree%20Coloring%20Game/images/1480-binary-tree-coloring-game.png" style="height: 186px; width: 300px;"></strong></p>
+<p><strong><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/1100-1199/1145.Binary%20Tree%20Coloring%20Game/images/1480-binary-tree-coloring-game.png" style="height: 186px; width: 300px;"></strong></p>
 
 <pre><strong>输入：</strong>root = [1,2,3,4,5,6,7,8,9,10,11], n = 11, x = 3
 <strong>输出：</strong>True

@@ -1,4 +1,4 @@
-# [面试题 02.04. 分割链表](https://leetcode-cn.com/problems/partition-list-lcci)
+# [面试题 02.04. 分割链表](https://leetcode.cn/problems/partition-list-lcci)
 
 [English Version](/lcci/02.04.Partition%20List/README_EN.md)
 
@@ -14,7 +14,7 @@
 
 <p><strong>示例 1：</strong></p>
 
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/lcci/02.04.Partition%20List/images/partition.jpg" style="width: 662px; height: 222px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/lcci/02.04.Partition%20List/images/partition.jpg" style="width: 662px; height: 222px;" />
 
 <pre>
 <strong>输入：</strong>head = [1,4,3,2,5,2], x = 3

@@ -1,4 +1,4 @@
-# [752. 打开转盘锁](https://leetcode-cn.com/problems/open-the-lock)
+# [752. 打开转盘锁](https://leetcode.cn/problems/open-the-lock)
 
 [English Version](/solution/0700-0799/0752.Open%20the%20Lock/README_EN.md)
 
@@ -86,7 +86,7 @@ BFS 最小步数模型。
 
     def extend(m1, m2, q):
         # 新一轮扩展
-        for _ in range(len(q), 0, -1):
+        for _ in range(len(q)):
             p = q.popleft()
             step = m1[p]
             for t in next(p):
@@ -143,7 +143,7 @@ class Solution:
         ans = 0
         while q:
             ans += 1
-            for _ in range(len(q), 0, -1):
+            for _ in range(len(q)):
                 p = q.popleft()
                 for t in next(p):
                     if t == target:
@@ -172,7 +172,7 @@ class Solution:
             return res
 
         def extend(m1, m2, q):
-            for _ in range(len(q), 0, -1):
+            for _ in range(len(q)):
                 p = q.popleft()
                 step = m1[p]
                 for t in next(p):
@@ -237,7 +237,7 @@ class Solution:
         q = [(f(start), start)]
         dist = {start: 0}
         while q:
-            _, state = heapq.heappop(q)
+            _, state = heappop(q)
             if state == target:
                 return dist[state]
             for t in next(state):
@@ -245,7 +245,7 @@ class Solution:
                     continue
                 if t not in dist or dist[t] > dist[state] + 1:
                     dist[t] = dist[state] + 1
-                    heapq.heappush(q, (dist[t] + f(t), t))
+                    heappush(q, (dist[t] + f(t), t))
         return -1
 ```
 

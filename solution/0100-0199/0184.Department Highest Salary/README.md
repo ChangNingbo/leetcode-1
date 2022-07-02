@@ -1,4 +1,4 @@
-# [184. 部门工资最高的员工](https://leetcode-cn.com/problems/department-highest-salary)
+# [184. 部门工资最高的员工](https://leetcode.cn/problems/department-highest-salary)
 
 [English Version](/solution/0100-0199/0184.Department%20Highest%20Salary/README_EN.md)
 
@@ -105,18 +105,18 @@ WHERE
 SELECT
 	d.NAME AS Department,
 	e1.NAME AS Employee,
-	e1.salary AS Salary 
+	e1.salary AS Salary
 FROM
 	Employee AS e1
-	JOIN Department AS d ON e1.departmentId = d.id 
+	JOIN Department AS d ON e1.departmentId = d.id
 WHERE
 	e1.salary = (
 	SELECT
-		MAX( Salary ) 
+		MAX( Salary )
 	FROM
-		Employee AS e2 
+		Employee AS e2
 	WHERE
-		e2.departmentId = d.id 
+		e2.departmentId = d.id
 	)
 ```
 

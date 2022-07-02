@@ -1,4 +1,4 @@
-# [67. 二进制求和](https://leetcode-cn.com/problems/add-binary)
+# [67. 二进制求和](https://leetcode.cn/problems/add-binary)
 
 [English Version](/solution/0000-0099/0067.Add%20Binary/README_EN.md)
 
@@ -48,6 +48,19 @@ class Solution:
         return bin(int(a, 2) + int(b, 2))[2:]
 ```
 
+```python
+class Solution:
+    def addBinary(self, a: str, b: str) -> str:
+        ans = []
+        i, j, carry = len(a) - 1, len(b) - 1, 0
+        while i >= 0 or j >= 0 or carry:
+            carry += (0 if i < 0 else int(a[i])) + (0 if j < 0 else int(b[j]))
+            carry, v = divmod(carry, 2)
+            ans.append(str(v))
+            i, j = i - 1, j - 1
+        return ''.join(ans[::-1])
+```
+
 ### **Java**
 
 <!-- 这里可写当前语言的特殊实现逻辑 -->
@@ -56,13 +69,10 @@ class Solution:
 class Solution {
     public String addBinary(String a, String b) {
         StringBuilder sb = new StringBuilder();
-        int i = a.length() - 1, j = b.length() - 1, carry = 0;
-        while (i >= 0 || j >= 0 || carry != 0) {
-            int s = carry + (i >= 0 ? a.charAt(i) - '0' : 0) + (j >= 0 ? b.charAt(j) - '0' : 0);
-            sb.append(s % 2);
-            carry = s / 2;
-            --i;
-            --j;
+        for (int i = a.length() - 1, j = b.length() - 1, carry = 0; i >= 0 || j >= 0 || carry > 0; --i, --j) {
+            carry += (i >= 0 ? a.charAt(i) - '0' : 0) + (j >= 0 ? b.charAt(j) - '0' : 0);
+            sb.append(carry % 2);
+            carry /= 2;
         }
         return sb.reverse().toString();
     }
@@ -157,6 +167,63 @@ func addBinary(a string, b string) string {
 	}
 
 	return string(ret)
+}
+```
+
+### **TypeScript**
+
+```ts
+function addBinary(a: string, b: string): string {
+    const n = Math.max(a.length, b.length);
+    const res = [];
+    let isOver = false;
+    for (let i = 0; i < n || isOver; i++) {
+        let val = isOver ? 1 : 0;
+        isOver = false;
+        if (a[a.length - i - 1] === '1') {
+            val++;
+        }
+        if (b[b.length - i - 1] === '1') {
+            val++;
+        }
+        if (val > 1) {
+            isOver = true;
+            val -= 2;
+        }
+        res.push(val);
+    }
+    return res.reverse().join('');
+}
+```
+
+### **Rust**
+
+```rust
+impl Solution {
+    pub fn add_binary(a: String, b: String) -> String {
+        let n = a.len().max(b.len());
+        let (a, b) = (a.as_bytes(), b.as_bytes());
+        let mut res = vec![];
+        let mut is_over = false;
+        let mut i = 0;
+        while i < n || is_over {
+            let mut val = if is_over { 1 } else { 0 };
+            is_over = false;
+            if a.get(a.len() - i - 1).unwrap_or(&b'0') == &b'1' {
+                val += 1;
+            }
+            if b.get(b.len() - i - 1).unwrap_or(&b'0') == &b'1' {
+                val += 1;
+            }
+            if val > 1 {
+                is_over = true;
+                val -= 2;
+            }
+            i += 1;
+            res.push(char::from(b'0' + val));
+        }
+        res.iter().rev().collect()
+    }
 }
 ```
 

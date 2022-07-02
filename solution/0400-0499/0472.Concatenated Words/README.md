@@ -1,4 +1,4 @@
-# [472. 连接词](https://leetcode-cn.com/problems/concatenated-words)
+# [472. 连接词](https://leetcode.cn/problems/concatenated-words)
 
 [English Version](/solution/0400-0499/0472.Concatenated%20Words/README_EN.md)
 
@@ -34,7 +34,7 @@
 
 <ul>
 	<li><code>1 &lt;= words.length &lt;= 10<sup>4</sup></code></li>
-	<li><code>0 &lt;= words[i].length &lt;= 1000</code></li>
+	<li><code>0 &lt;= words[i].length &lt;= 30</code></li>
 	<li><code>words[i]</code> 仅由小写字母组成</li>
 	<li><code>0 &lt;= sum(words[i].length) &lt;= 10<sup>5</sup></code></li>
 </ul>

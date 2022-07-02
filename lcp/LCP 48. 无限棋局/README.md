@@ -1,4 +1,4 @@
-# [LCP 48. 无限棋局](https://leetcode-cn.com/problems/fsa7oZ)
+# [LCP 48. 无限棋局](https://leetcode.cn/problems/fsa7oZ)
 
 ## 题目描述
 
@@ -50,7 +50,7 @@
 
 > 解释：三步之内黑棋必胜，以下是一种可能的落子情况：
 
-> ![902b87df29998b1c181146c8fdb3a4b6.gif](https://cdn.jsdelivr.net/gh/doocs/leetcode@main/lcp/LCP%2048.%20%E6%97%A0%E9%99%90%E6%A3%8B%E5%B1%80/images/1629800639-KabOfY-902b87df29998b1c181146c8fdb3a4b6.gif)
+> ![902b87df29998b1c181146c8fdb3a4b6.gif](https://fastly.jsdelivr.net/gh/doocs/leetcode@main/lcp/LCP%2048.%20%E6%97%A0%E9%99%90%E6%A3%8B%E5%B1%80/images/1629800639-KabOfY-902b87df29998b1c181146c8fdb3a4b6.gif)
 
 **提示：**
 

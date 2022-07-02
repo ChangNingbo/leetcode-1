@@ -1,4 +1,4 @@
-# [63. 不同路径 II](https://leetcode-cn.com/problems/unique-paths-ii)
+# [63. 不同路径 II](https://leetcode.cn/problems/unique-paths-ii)
 
 [English Version](/solution/0000-0099/0063.Unique%20Paths%20II/README_EN.md)
 
@@ -17,7 +17,7 @@
 <p>&nbsp;</p>
 
 <p><strong>示例 1：</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0000-0099/0063.Unique%20Paths%20II/images/robot1.jpg" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0000-0099/0063.Unique%20Paths%20II/images/robot1.jpg" />
 <pre>
 <strong>输入：</strong>obstacleGrid = [[0,0,0],[0,1,0],[0,0,0]]
 <strong>输出：</strong>2
@@ -28,7 +28,7 @@
 </pre>
 
 <p><strong>示例 2：</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0000-0099/0063.Unique%20Paths%20II/images/robot2.jpg" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0000-0099/0063.Unique%20Paths%20II/images/robot2.jpg" />
 <pre>
 <strong>输入：</strong>obstacleGrid = [[0,1],[0,0]]
 <strong>输出：</strong>1
@@ -160,6 +160,73 @@ func uniquePathsWithObstacles(obstacleGrid [][]int) int {
 		}
 	}
 	return dp[m-1][n-1]
+}
+```
+
+### **TypeScript**
+
+```ts
+function uniquePathsWithObstacles(obstacleGrid: number[][]): number {
+    const m = obstacleGrid.length;
+    const n = obstacleGrid[0].length;
+    const dp = Array.from({ length: m }, () => new Array(n).fill(0));
+    for (let i = 0; i < m; i++) {
+        if (obstacleGrid[i][0] === 1) {
+            break;
+        }
+        dp[i][0] = 1;
+    }
+    for (let i = 0; i < n; i++) {
+        if (obstacleGrid[0][i] === 1) {
+            break;
+        }
+        dp[0][i] = 1;
+    }
+    for (let i = 1; i < m; i++) {
+        for (let j = 1; j < n; j++) {
+            if (obstacleGrid[i][j] === 1) {
+                continue;
+            }
+            dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+        }
+    }
+    return dp[m - 1][n - 1];
+}
+```
+
+### **Rust**
+
+```rust
+impl Solution {
+    pub fn unique_paths_with_obstacles(obstacle_grid: Vec<Vec<i32>>) -> i32 {
+        let m = obstacle_grid.len();
+        let n = obstacle_grid[0].len();
+        if obstacle_grid[0][0] == 1 || obstacle_grid[m - 1][n - 1] == 1 {
+            return 0;
+        }
+        let mut dp = vec![vec![0; n]; m];
+        for i in 0..n {
+            if obstacle_grid[0][i] == 1 {
+                break;
+            }
+            dp[0][i] = 1;
+        }
+        for i in 0..m {
+            if obstacle_grid[i][0] == 1 {
+                break;
+            }
+            dp[i][0] = 1;
+        }
+        for i in 1..m {
+            for j in 1..n {
+                if obstacle_grid[i][j] == 1 {
+                    continue;
+                }
+                dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+            }
+        }
+        dp[m - 1][n - 1]
+    }
 }
 ```
 

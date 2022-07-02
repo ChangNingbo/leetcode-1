@@ -1,4 +1,4 @@
-# [LCP 01. 猜数字](https://leetcode-cn.com/problems/guess-numbers)
+# [LCP 01. 猜数字](https://leetcode.cn/problems/guess-numbers)
 
 ## 题目描述
 
@@ -109,6 +109,20 @@ var game = function (guess, answer) {
     }
     return ans;
 };
+```
+
+### **C**
+
+```c
+int game(int* guess, int guessSize, int* answer, int answerSize) {
+    int res = 0;
+    for (int i = 0; i < 3; i++) {
+        if (guess[i] == answer[i]) {
+            res++;
+        }
+    }
+    return res;
+}
 ```
 
 ### **...**

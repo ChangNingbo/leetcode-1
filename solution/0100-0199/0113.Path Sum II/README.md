@@ -1,4 +1,4 @@
-# [113. 路径总和 II](https://leetcode-cn.com/problems/path-sum-ii)
+# [113. 路径总和 II](https://leetcode.cn/problems/path-sum-ii)
 
 [English Version](/solution/0100-0199/0113.Path%20Sum%20II/README_EN.md)
 
@@ -15,14 +15,14 @@
 <p> </p>
 
 <p><strong>示例 1：</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0100-0199/0113.Path%20Sum%20II/images/pathsumii1.jpg" style="width: 500px; height: 356px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0100-0199/0113.Path%20Sum%20II/images/pathsumii1.jpg" style="width: 500px; height: 356px;" />
 <pre>
 <strong>输入：</strong>root = [5,4,8,11,null,13,4,7,2,null,null,5,1], targetSum = 22
 <strong>输出：</strong>[[5,4,11,2],[5,8,4,5]]
 </pre>
 
 <p><strong>示例 2：</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0100-0199/0113.Path%20Sum%20II/images/pathsum2.jpg" style="width: 212px; height: 181px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0100-0199/0113.Path%20Sum%20II/images/pathsum2.jpg" style="width: 212px; height: 181px;" />
 <pre>
 <strong>输入：</strong>root = [1,2,3], targetSum = 5
 <strong>输出：</strong>[]
@@ -209,6 +209,65 @@ func pathSum(root *TreeNode, targetSum int) [][]int {
 	}
 	dfs(root, 0)
 	return ans
+}
+```
+
+### **Rust**
+
+```rust
+// Definition for a binary tree node.
+// #[derive(Debug, PartialEq, Eq)]
+// pub struct TreeNode {
+//   pub val: i32,
+//   pub left: Option<Rc<RefCell<TreeNode>>>,
+//   pub right: Option<Rc<RefCell<TreeNode>>>,
+// }
+//
+// impl TreeNode {
+//   #[inline]
+//   pub fn new(val: i32) -> Self {
+//     TreeNode {
+//       val,
+//       left: None,
+//       right: None
+//     }
+//   }
+// }
+use std::rc::Rc;
+use std::cell::RefCell;
+impl Solution {
+    fn dfs(
+        root: Option<Rc<RefCell<TreeNode>>>,
+        paths: &mut  Vec<i32>,
+        mut target_sum: i32,
+        res: &mut Vec<Vec<i32>>,
+    ) {
+        if let Some(node) = root {
+            let mut node = node.borrow_mut();
+            target_sum -= node.val;
+            paths.push(node.val);
+            if node.left.is_none() && node.right.is_none() {
+                if target_sum == 0 {
+                    res.push(paths.clone());
+                }
+            } else {
+                if node.left.is_some() {
+                    Self::dfs(node.left.take(), paths, target_sum, res);
+                }
+                if node.right.is_some() {
+                    Self::dfs(node.right.take(), paths, target_sum, res);
+                }
+            }
+            paths.pop();
+        }
+    }
+
+    pub fn path_sum(root: Option<Rc<RefCell<TreeNode>>>, target_sum: i32) -> Vec<Vec<i32>> {
+        let mut res = vec![];
+        let mut paths = vec![];
+        Self::dfs(root, &mut paths,  target_sum, &mut res);
+        res
+    }
 }
 ```
 

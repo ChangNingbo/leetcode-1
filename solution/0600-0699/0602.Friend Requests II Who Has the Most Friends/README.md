@@ -1,4 +1,4 @@
-# [602. 好友申请 II ：谁有最多的好友](https://leetcode-cn.com/problems/friend-requests-ii-who-has-the-most-friends)
+# [602. 好友申请 II ：谁有最多的好友](https://leetcode.cn/problems/friend-requests-ii-who-has-the-most-friends)
 
 [English Version](/solution/0600-0699/0602.Friend%20Requests%20II%20Who%20Has%20the%20Most%20Friends/README_EN.md)
 
@@ -71,7 +71,19 @@ RequestAccepted 表：
 ### **SQL**
 
 ```sql
-
+SELECT
+    ids AS id, COUNT(*) num
+FROM
+    (SELECT
+        requester_id AS ids
+    FROM
+        RequestAccepted UNION ALL SELECT
+        accepter_id
+    FROM
+        RequestAccepted) t
+GROUP BY ids
+ORDER BY num DESC
+LIMIT 1;
 ```
 
 <!-- tabs:end -->

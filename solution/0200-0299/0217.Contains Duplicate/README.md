@@ -1,4 +1,4 @@
-# [217. 存在重复元素](https://leetcode-cn.com/problems/contains-duplicate)
+# [217. 存在重复元素](https://leetcode.cn/problems/contains-duplicate)
 
 [English Version](/solution/0200-0299/0217.Contains%20Duplicate/README_EN.md)
 
@@ -40,6 +40,14 @@
 ## 解法
 
 <!-- 这里可写通用的实现逻辑 -->
+
+**方法一：排序**
+
+排序数组，然后两个相邻元素是否相同即可。
+
+**方法二：哈希表**
+
+遍历元素并记录，当第二次出现时，直接返回 `true`。
 
 <!-- tabs:start -->
 
@@ -133,6 +141,32 @@ public class Solution {
 var containsDuplicate = function (nums) {
     return new Set(nums).size !== nums.length;
 };
+```
+
+### **Rust**
+
+```rust
+use std::collections::HashSet;
+impl Solution {
+    pub fn contains_duplicate(nums: Vec<i32>) -> bool {
+        nums.iter().collect::<HashSet<&i32>>().len() != nums.len()
+    }
+}
+```
+
+```rust
+impl Solution {
+    pub fn contains_duplicate(mut nums: Vec<i32>) -> bool {
+        nums.sort();
+        let n = nums.len();
+        for i in 1..n {
+            if nums[i - 1] == nums[i] {
+                return true
+            }
+        }
+        false
+    }
+}
 ```
 
 ### **...**

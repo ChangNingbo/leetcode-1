@@ -1,4 +1,4 @@
-# [199. 二叉树的右视图](https://leetcode-cn.com/problems/binary-tree-right-side-view)
+# [199. 二叉树的右视图](https://leetcode.cn/problems/binary-tree-right-side-view)
 
 [English Version](/solution/0100-0199/0199.Binary%20Tree%20Right%20Side%20View/README_EN.md)
 
@@ -12,7 +12,7 @@
 
 <p><strong>示例 1:</strong></p>
 
-<p><img src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0100-0199/0199.Binary%20Tree%20Right%20Side%20View/images/tree.jpg" style="width: 270px; " /></p>
+<p><img src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0100-0199/0199.Binary%20Tree%20Right%20Side%20View/images/tree.jpg" style="width: 270px; " /></p>
 
 <pre>
 <strong>输入:</strong> [1,2,3,null,5,null,4]
@@ -190,6 +190,94 @@ func rightSideView(root *TreeNode) []int {
 		}
 	}
 	return ans
+}
+```
+
+### **TypeScript**
+
+```ts
+/**
+ * Definition for a binary tree node.
+ * class TreeNode {
+ *     val: number
+ *     left: TreeNode | null
+ *     right: TreeNode | null
+ *     constructor(val?: number, left?: TreeNode | null, right?: TreeNode | null) {
+ *         this.val = (val===undefined ? 0 : val)
+ *         this.left = (left===undefined ? null : left)
+ *         this.right = (right===undefined ? null : right)
+ *     }
+ * }
+ */
+
+function rightSideView(root: TreeNode | null): number[] {
+    const res = [];
+    if (root == null) {
+        return res;
+    }
+    const queue = [root];
+    while (queue.length !== 0) {
+        const n = queue.length;
+        res.push(queue[n - 1].val);
+        for (let i = 0; i < n; i++) {
+            const { left, right } = queue.shift();
+            left && queue.push(left);
+            right && queue.push(right);
+        }
+    }
+    return res;
+}
+```
+
+### **Rust**
+
+```rust
+// Definition for a binary tree node.
+// #[derive(Debug, PartialEq, Eq)]
+// pub struct TreeNode {
+//   pub val: i32,
+//   pub left: Option<Rc<RefCell<TreeNode>>>,
+//   pub right: Option<Rc<RefCell<TreeNode>>>,
+// }
+//
+// impl TreeNode {
+//   #[inline]
+//   pub fn new(val: i32) -> Self {
+//     TreeNode {
+//       val,
+//       left: None,
+//       right: None
+//     }
+//   }
+// }
+use std::rc::Rc;
+use std::cell::RefCell;
+use std::collections::VecDeque;
+impl Solution {
+    pub fn right_side_view(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<i32> {
+        let mut res = vec![];
+        if root.is_none() {
+            return res;
+        }
+        let mut q = VecDeque::new();
+        q.push_back(root);
+        while !q.is_empty() {
+            let n = q.len();
+            res.push(q[n - 1].as_ref().unwrap().borrow().val);
+            for _ in 0..n {
+                if let Some(node) = q.pop_front().unwrap() {
+                    let mut node = node.borrow_mut();
+                    if node.left.is_some() {
+                        q.push_back(node.left.take());
+                    }
+                    if node.right.is_some() {
+                        q.push_back(node.right.take());
+                    }
+                }
+            }
+        }
+        res
+    }
 }
 ```
 

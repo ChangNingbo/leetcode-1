@@ -12,7 +12,7 @@
 
 <p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0700-0799/0773.Sliding%20Puzzle/images/slide1-grid.jpg" style="width: 244px; height: 165px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0700-0799/0773.Sliding%20Puzzle/images/slide1-grid.jpg" style="width: 244px; height: 165px;" />
 <pre>
 <strong>Input:</strong> board = [[1,2,3],[4,0,5]]
 <strong>Output:</strong> 1
@@ -20,7 +20,7 @@
 </pre>
 
 <p><strong>Example 2:</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0700-0799/0773.Sliding%20Puzzle/images/slide2-grid.jpg" style="width: 244px; height: 165px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0700-0799/0773.Sliding%20Puzzle/images/slide2-grid.jpg" style="width: 244px; height: 165px;" />
 <pre>
 <strong>Input:</strong> board = [[1,2,3],[5,4,0]]
 <strong>Output:</strong> -1
@@ -28,7 +28,7 @@
 </pre>
 
 <p><strong>Example 3:</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0700-0799/0773.Sliding%20Puzzle/images/slide3-grid.jpg" style="width: 244px; height: 165px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0700-0799/0773.Sliding%20Puzzle/images/slide3-grid.jpg" style="width: 244px; height: 165px;" />
 <pre>
 <strong>Input:</strong> board = [[4,1,2],[5,0,3]]
 <strong>Output:</strong> 5
@@ -98,12 +98,12 @@ class Solution:
         end = "123450"
         if start == end:
             return 0
-        vis = set([(start)])
+        vis = {start}
         q = deque([(start)])
         ans = 0
         while q:
             ans += 1
-            for _ in range(len(q), 0, -1):
+            for _ in range(len(q)):
                 x = q.popleft()
                 setb(x)
                 for y in next():
@@ -148,7 +148,7 @@ class Solution:
         q = [(f(start), start)]
         dist = {start: 0}
         while q:
-            _, state = heapq.heappop(q)
+            _, state = heappop(q)
             if state == end:
                 return dist[state]
             p1 = state.index('0')
@@ -163,7 +163,7 @@ class Solution:
                     s[p1], s[p2] = s[p2], s[p1]
                     if next not in dist or dist[next] > dist[state] + 1:
                         dist[next] = dist[state] + 1
-                        heapq.heappush(q, (dist[next] + f(next), next))
+                        heappush(q, (dist[next] + f(next), next))
         return -1
 ```
 

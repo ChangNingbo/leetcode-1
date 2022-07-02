@@ -1,4 +1,4 @@
-# [333. 最大 BST 子树](https://leetcode-cn.com/problems/largest-bst-subtree)
+# [333. 最大 BST 子树](https://leetcode.cn/problems/largest-bst-subtree)
 
 [English Version](/solution/0300-0399/0333.Largest%20BST%20Subtree/README_EN.md)
 
@@ -25,7 +25,7 @@
 
 <p><strong>示例 1：</strong></p>
 
-<p><strong><img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0300-0399/0333.Largest%20BST%20Subtree/images/tmp.jpg" /></strong></p>
+<p><strong><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0300-0399/0333.Largest%20BST%20Subtree/images/tmp.jpg" /></strong></p>
 
 <pre>
 <strong>输入：</strong>root = [10,5,15,1,8,null,7]

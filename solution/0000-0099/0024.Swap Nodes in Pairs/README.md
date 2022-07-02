@@ -1,4 +1,4 @@
-# [24. 两两交换链表中的节点](https://leetcode-cn.com/problems/swap-nodes-in-pairs)
+# [24. 两两交换链表中的节点](https://leetcode.cn/problems/swap-nodes-in-pairs)
 
 [English Version](/solution/0000-0099/0024.Swap%20Nodes%20in%20Pairs/README_EN.md)
 
@@ -11,7 +11,7 @@
 <p>&nbsp;</p>
 
 <p><strong>示例 1：</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0000-0099/0024.Swap%20Nodes%20in%20Pairs/images/swap_ex1.jpg" style="width: 422px; height: 222px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0000-0099/0024.Swap%20Nodes%20in%20Pairs/images/swap_ex1.jpg" style="width: 422px; height: 222px;" />
 <pre>
 <strong>输入：</strong>head = [1,2,3,4]
 <strong>输出：</strong>[2,1,4,3]
@@ -216,6 +216,72 @@ def swap_pairs(head)
     end
     dummy.next
 end
+```
+
+### **TypeScript**
+
+```ts
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     val: number
+ *     next: ListNode | null
+ *     constructor(val?: number, next?: ListNode | null) {
+ *         this.val = (val===undefined ? 0 : val)
+ *         this.next = (next===undefined ? null : next)
+ *     }
+ * }
+ */
+
+function swapPairs(head: ListNode | null): ListNode | null {
+    const dummy = new ListNode(0, head);
+    let cur = dummy;
+    while (cur.next != null && cur.next.next != null) {
+        const a = cur.next;
+        const b = cur.next.next;
+        [a.next, b.next, cur.next] = [b.next, a, b];
+        cur = cur.next.next;
+    }
+    return dummy.next;
+}
+```
+
+### **Rust**
+
+```rust
+// Definition for singly-linked list.
+// #[derive(PartialEq, Eq, Clone, Debug)]
+// pub struct ListNode {
+//   pub val: i32,
+//   pub next: Option<Box<ListNode>>
+// }
+//
+// impl ListNode {
+//   #[inline]
+//   fn new(val: i32) -> Self {
+//     ListNode {
+//       next: None,
+//       val
+//     }
+//   }
+// }
+impl Solution {
+    pub fn swap_pairs(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
+        let mut dummy = Some(Box::new(ListNode { val: 0, next: head }));
+        let mut cur = dummy.as_mut().unwrap();
+        while cur.next.is_some() && cur.next.as_ref().unwrap().next.is_some() {
+            cur.next = {
+                let mut b = cur.next.as_mut().unwrap().next.take();
+                cur.next.as_mut().unwrap().next = b.as_mut().unwrap().next.take();
+                let a = cur.next.take();
+                b.as_mut().unwrap().next = a;
+                b
+            };
+            cur = cur.next.as_mut().unwrap().next.as_mut().unwrap();
+        }
+        dummy.unwrap().next
+    }
+}
 ```
 
 ### **...**

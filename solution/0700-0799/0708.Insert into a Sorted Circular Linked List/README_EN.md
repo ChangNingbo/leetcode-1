@@ -12,14 +12,14 @@
 
 <p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0700-0799/0708.Insert%20into%20a%20Sorted%20Circular%20Linked%20List/images/example_1_before_65p.jpg" style="width: 250px; height: 149px;" /><br />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0700-0799/0708.Insert%20into%20a%20Sorted%20Circular%20Linked%20List/images/example_1_before_65p.jpg" style="width: 250px; height: 149px;" /><br />
 &nbsp;
 <pre>
 <strong>Input:</strong> head = [3,4,1], insertVal = 2
 <strong>Output:</strong> [3,4,1,2]
 <strong>Explanation:</strong> In the figure above, there is a sorted circular list of three elements. You are given a reference to the node with value 3, and we need to insert 2 into the list. The new node should be inserted between node 1 and node 3. After the insertion, the list should look like this, and we should still return node 3.
 
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0700-0799/0708.Insert%20into%20a%20Sorted%20Circular%20Linked%20List/images/example_1_after_65p.jpg" style="width: 250px; height: 149px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0700-0799/0708.Insert%20into%20a%20Sorted%20Circular%20Linked%20List/images/example_1_after_65p.jpg" style="width: 250px; height: 149px;" />
 
 </pre>
 
@@ -61,21 +61,20 @@ class Node:
         self.next = next
 """
 
+
 class Solution:
-    def insert(self, head: 'Node', insertVal: int) -> 'Node':
-        node = Node(val=insertVal)
+    def insert(self, head: 'Optional[Node]', insertVal: int) -> 'Node':
+        node = Node(insertVal)
         if head is None:
             node.next = node
             return node
-        pre, cur = head, head.next
-        while 1:
-            if pre.val <= insertVal <= cur.val or (pre.val > cur.val and (insertVal >= pre.val or insertVal <= cur.val)):
+        prev, curr = head, head.next
+        while curr != head:
+            if prev.val <= insertVal <= curr.val or (prev.val > curr.val and (insertVal >= prev.val or insertVal <= curr.val)):
                 break
-            pre, cur = cur, cur.next
-            if pre == head:
-                break
-        pre.next = node
-        node.next = cur
+            prev, curr = curr, curr.next
+        prev.next = node
+        node.next = curr
         return head
 ```
 
@@ -108,19 +107,16 @@ class Solution {
             node.next = node;
             return node;
         }
-        Node pre = head, cur = head.next;
-        while (true) {
-            if ((pre.val <= insertVal && insertVal <= cur.val) || (pre.val > cur.val && (insertVal >= pre.val || cur.val >= insertVal))) {
+        Node prev = head, curr = head.next;
+        while (curr != head) {
+            if ((prev.val <= insertVal && insertVal <= curr.val) || (prev.val > curr.val && (insertVal >= prev.val || insertVal <= curr.val))) {
                 break;
             }
-            pre = cur;
-            cur = cur.next;
-            if (pre == head) {
-                break;
-            }
+            prev = curr;
+            curr = curr.next;
         }
-        pre.next = node;
-        node.next = cur;
+        prev.next = node;
+        node.next = curr;
         return head;
     }
 }
@@ -153,44 +149,54 @@ public:
 class Solution {
 public:
     Node* insert(Node* head, int insertVal) {
-        Node* insert = new Node(insertVal);
-        if (head == nullptr) {
-            head = insert;
-            head->next = head;
-        } else if (head->next == nullptr) {
-            head->next = insert;
-            insert->next = head;
-        } else {
-            insertCore(head, insert);
+        Node* node = new Node(insertVal);
+        if (!head)
+        {
+            node->next = node;
+            return node;
         }
-
+        Node *prev = head, *curr = head->next;
+        while (curr != head)
+        {
+            if ((prev->val <= insertVal && insertVal <= curr->val) || (prev->val > curr->val && (insertVal >= prev->val || insertVal <= curr->val))) break;
+            prev = curr;
+            curr = curr->next;
+        }
+        prev->next = node;
+        node->next = curr;
         return head;
     }
-
-    void insertCore(Node* head, Node* insert) {
-        Node* cur = head;
-        Node* maxNode = head;
-        Node* next = head->next;
-
-        while (!(cur->val <= insert->val && insert->val <= next->val) && next != head) {
-            cur = cur->next;
-            next = next->next;
-
-            if (cur->val >= maxNode->val)
-                maxNode = cur;
-        }
-
-        if (cur->val <= insert->val && insert->val <= next->val) {
-            insert->next = next;
-            cur->next = insert;
-        } else {
-            insert->next = maxNode->next;
-            maxNode->next = insert;
-
-        }
-
-    }
 };
+```
+
+### **Go**
+
+```go
+/**
+ * Definition for a Node.
+ * type Node struct {
+ *     Val int
+ *     Next *Node
+ * }
+ */
+
+func insert(head *Node, x int) *Node {
+	node := &Node{Val: x}
+	if head == nil {
+		node.Next = node
+		return node
+	}
+	prev, curr := head, head.Next
+	for curr != head {
+		if (prev.Val <= x && x <= curr.Val) || (prev.Val > curr.Val && (x >= prev.Val || x <= curr.Val)) {
+			break
+		}
+		prev, curr = curr, curr.Next
+	}
+	prev.Next = node
+	node.Next = curr
+	return head
+}
 ```
 
 ### **...**

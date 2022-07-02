@@ -12,14 +12,14 @@
 
 <p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/1000-1099/1019.Next%20Greater%20Node%20In%20Linked%20List/images/linkedlistnext1.jpg" style="width: 304px; height: 133px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/1000-1099/1019.Next%20Greater%20Node%20In%20Linked%20List/images/linkedlistnext1.jpg" style="width: 304px; height: 133px;" />
 <pre>
 <strong>Input:</strong> head = [2,1,5]
 <strong>Output:</strong> [5,5,0]
 </pre>
 
 <p><strong>Example 2:</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/1000-1099/1019.Next%20Greater%20Node%20In%20Linked%20List/images/linkedlistnext2.jpg" style="width: 500px; height: 113px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/1000-1099/1019.Next%20Greater%20Node%20In%20Linked%20List/images/linkedlistnext2.jpg" style="width: 500px; height: 113px;" />
 <pre>
 <strong>Input:</strong> head = [2,7,4,3,5]
 <strong>Output:</strong> [7,0,5,5,0]
@@ -125,6 +125,95 @@ var nextLargerNodes = function (head) {
     }
     return larger;
 };
+```
+
+### **TypeScript**
+
+```ts
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     val: number
+ *     next: ListNode | null
+ *     constructor(val?: number, next?: ListNode | null) {
+ *         this.val = (val===undefined ? 0 : val)
+ *         this.next = (next===undefined ? null : next)
+ *     }
+ * }
+ */
+
+interface Item {
+    index: number;
+    val: number;
+}
+
+function nextLargerNodes(head: ListNode | null): number[] {
+    const res: number[] = [];
+    const stack: Item[] = [];
+    let cur = head;
+    for (let i = 0; cur != null; i++) {
+        res.push(0);
+        const { val, next } = cur;
+        while (stack.length !== 0 && stack[stack.length - 1].val < val) {
+            res[stack.pop().index] = val;
+        }
+        stack.push({
+            val,
+            index: i,
+        });
+        cur = next;
+    }
+    return res;
+}
+```
+
+### **Rust**
+
+```rust
+// Definition for singly-linked list.
+// #[derive(PartialEq, Eq, Clone, Debug)]
+// pub struct ListNode {
+//   pub val: i32,
+//   pub next: Option<Box<ListNode>>
+// }
+//
+// impl ListNode {
+//   #[inline]
+//   fn new(val: i32) -> Self {
+//     ListNode {
+//       next: None,
+//       val
+//     }
+//   }
+// }
+struct Item {
+    index: usize,
+    val: i32,
+}
+
+impl Solution {
+    pub fn next_larger_nodes(head: Option<Box<ListNode>>) -> Vec<i32> {
+        let mut res = Vec::new();
+        let mut stack: Vec<Item> = Vec::new();
+        let mut cur = &head;
+        for i in 0..usize::MAX {
+            if cur.is_none() {
+                break;
+            }
+            res.push(0);
+            let node = cur.as_ref().unwrap();
+            while !stack.is_empty() && stack.last().unwrap().val < node.val {
+                res[stack.pop().unwrap().index] = node.val;
+            }
+            stack.push(Item {
+                index: i,
+                val: node.val,
+            });
+            cur = &node.next;
+        }
+        res
+    }
+}
 ```
 
 ### **...**

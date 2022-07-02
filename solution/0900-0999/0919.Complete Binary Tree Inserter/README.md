@@ -1,4 +1,4 @@
-# [919. 完全二叉树插入器](https://leetcode-cn.com/problems/complete-binary-tree-inserter)
+# [919. 完全二叉树插入器](https://leetcode.cn/problems/complete-binary-tree-inserter)
 
 [English Version](/solution/0900-0999/0919.Complete%20Binary%20Tree%20Inserter/README_EN.md)
 
@@ -25,7 +25,7 @@
 
 <p><strong>示例 1：</strong></p>
 
-<p><img src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0900-0999/0919.Complete%20Binary%20Tree%20Inserter/images/lc-treeinsert.jpg" style="height: 143px; width: 500px;" /></p>
+<p><img src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0900-0999/0919.Complete%20Binary%20Tree%20Inserter/images/lc-treeinsert.jpg" style="height: 143px; width: 500px;" /></p>
 
 <pre>
 <strong>输入</strong>

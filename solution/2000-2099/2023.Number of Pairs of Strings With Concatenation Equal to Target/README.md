@@ -1,4 +1,4 @@
-# [2023. 连接后等于目标字符串的字符串对](https://leetcode-cn.com/problems/number-of-pairs-of-strings-with-concatenation-equal-to-target)
+# [2023. 连接后等于目标字符串的字符串对](https://leetcode.cn/problems/number-of-pairs-of-strings-with-concatenation-equal-to-target)
 
 [English Version](/solution/2000-2099/2023.Number%20of%20Pairs%20of%20Strings%20With%20Concatenation%20Equal%20to%20Target/README_EN.md)
 
@@ -66,7 +66,10 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```python
-
+class Solution:
+    def numOfPairs(self, nums: List[str], target: str) -> int:
+        n = len(nums)
+        return sum(i != j and nums[i] + nums[j] == target for i in range(n) for j in range(n))
 ```
 
 ### **Java**
@@ -74,7 +77,56 @@
 <!-- 这里可写当前语言的特殊实现逻辑 -->
 
 ```java
+class Solution {
+    public int numOfPairs(String[] nums, String target) {
+        int n = nums.length;
+        int ans = 0;
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < n; ++j) {
+                if (i != j && target.equals(nums[i] + nums[j])) {
+                    ++ans;
+                }
+            }
+        }
+        return ans;
+    }
+}
+```
 
+### **C++**
+
+```cpp
+class Solution {
+public:
+    int numOfPairs(vector<string>& nums, string target) {
+        int n = nums.size();
+        int ans = 0;
+        for (int i = 0; i < n; ++i)
+        {
+            for (int j = 0; j < n; ++j)
+            {
+                if (i != j && nums[i] + nums[j] == target) ++ans;
+            }
+        }
+        return ans;
+    }
+};
+```
+
+### **Go**
+
+```go
+func numOfPairs(nums []string, target string) int {
+	ans := 0
+	for i, a := range nums {
+		for j, b := range nums {
+			if i != j && a+b == target {
+				ans++
+			}
+		}
+	}
+	return ans
+}
 ```
 
 ### **...**

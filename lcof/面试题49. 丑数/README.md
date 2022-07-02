@@ -1,4 +1,4 @@
-# [面试题 49. 丑数](https://leetcode-cn.com/problems/chou-shu-lcof/)
+# [面试题 49. 丑数](https://leetcode.cn/problems/chou-shu-lcof/)
 
 ## 题目描述
 
@@ -21,7 +21,7 @@
 	<li><code>n</code>&nbsp;<strong>不超过</strong>1690。</li>
 </ol>
 
-<p>注意：本题与主站 264 题相同：<a href="https://leetcode-cn.com/problems/ugly-number-ii/">https://leetcode-cn.com/problems/ugly-number-ii/</a></p>
+<p>注意：本题与主站 264 题相同：<a href="https://leetcode.cn/problems/ugly-number-ii/">https://leetcode.cn/problems/ugly-number-ii/</a></p>
 
 ## 解法
 
@@ -111,7 +111,7 @@ public:
  * @return {number}
  */
 var nthUglyNumber = function (n) {
-    let dp = [1];
+    const dp = [1];
     let p2 = 0,
         p3 = 0,
         p5 = 0;
@@ -119,11 +119,10 @@ var nthUglyNumber = function (n) {
         const next2 = dp[p2] * 2,
             next3 = dp[p3] * 3,
             next5 = dp[p5] * 5;
-        dp[i] = Math.min(next2, Math.min(next3, next5));
+        dp[i] = Math.min(next2, next3, next5);
         if (dp[i] == next2) ++p2;
         if (dp[i] == next3) ++p3;
         if (dp[i] == next5) ++p5;
-        dp.push(dp[i]);
     }
     return dp[n - 1];
 };
@@ -157,6 +156,37 @@ func min(a, b int) int {
         return a
     }
     return b
+}
+```
+
+### **Rust**
+
+```rust
+impl Solution {
+    pub fn nth_ugly_number(n: i32) -> i32 {
+        let n = n as usize;
+        let mut dp = vec![1; n];
+        let mut p2 = 0;
+        let mut p3 = 0;
+        let mut p5 = 0;
+        for i in 1..n {
+            let n2 = dp[p2] * 2;
+            let n3 = dp[p3] * 3;
+            let n5 = dp[p5] * 5;
+            dp[i] = n2.min(n3.min(n5));
+
+            if dp[i] == n2 {
+                p2 += 1;
+            };
+            if dp[i] == n3 {
+                p3 += 1;
+            };
+            if dp[i] == n5 {
+                p5 += 1;
+            };
+        }
+        dp[n - 1]
+    }
 }
 ```
 

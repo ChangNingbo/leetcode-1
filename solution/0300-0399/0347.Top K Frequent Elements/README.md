@@ -1,4 +1,4 @@
-# [347. 前 K 个高频元素](https://leetcode-cn.com/problems/top-k-frequent-elements)
+# [347. 前 K 个高频元素](https://leetcode.cn/problems/top-k-frequent-elements)
 
 [English Version](/solution/0300-0399/0347.Top%20K%20Frequent%20Elements/README_EN.md)
 
@@ -56,10 +56,10 @@ class Solution:
         hp = []
         for num, freq in counter.items():
             if len(hp) == k:
-                heapq.heappush(hp, (freq, num))
-                heapq.heappop(hp)
+                heappush(hp, (freq, num))
+                heappop(hp)
             else:
-                heapq.heappush(hp, (freq, num))
+                heappush(hp, (freq, num))
         return [t[1] for t in hp]
 ```
 
@@ -130,6 +130,29 @@ function topKFrequent(nums: number[], k: number): number[] {
 }
 ```
 
+```ts
+function topKFrequent(nums: number[], k: number): number[] {
+    const map = new Map<number, number>();
+    let maxCount = 0;
+    for (const num of nums) {
+        map.set(num, (map.get(num) ?? 0) + 1);
+        maxCount = Math.max(maxCount, map.get(num));
+    }
+
+    const res = [];
+    while (k > 0) {
+        for (const key of map.keys()) {
+            if (map.get(key) === maxCount) {
+                res.push(key);
+                k--;
+            }
+        }
+        maxCount--;
+    }
+    return res;
+}
+```
+
 ### **C++**
 
 ```cpp
@@ -160,6 +183,39 @@ public:
         return ans;
     }
 };
+```
+
+### **Rust**
+
+```rust
+use std::collections::HashMap;
+impl Solution {
+    pub fn top_k_frequent(nums: Vec<i32>, k: i32) -> Vec<i32> {
+        let mut map = HashMap::new();
+        let mut max_count = 0;
+        for &num in nums.iter() {
+            let val = map.get(&num).unwrap_or(&0) + 1;
+            map.insert(num, val);
+            max_count = max_count.max(val);
+        }
+        let mut k = k as usize;
+        let mut res = vec![0; k];
+        while k > 0 {
+            let mut next = 0;
+            for key in map.keys() {
+                let val = map[key];
+                if val == max_count {
+                    res[k - 1] = *key;
+                    k -= 1;
+                } else if val < max_count {
+                    next = next.max(val);
+                }
+            }
+            max_count = next;
+        }
+        res
+    }
+}
 ```
 
 ### **...**

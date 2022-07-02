@@ -1,4 +1,4 @@
-# [剑指 Offer II 060. 出现频率最高的 k 个数字](https://leetcode-cn.com/problems/g5c51o)
+# [剑指 Offer II 060. 出现频率最高的 k 个数字](https://leetcode.cn/problems/g5c51o)
 
 ## 题目描述
 
@@ -37,7 +37,7 @@
 
 <p>&nbsp;</p>
 
-<p><meta charset="UTF-8" />注意：本题与主站 347&nbsp;题相同：<a href="https://leetcode-cn.com/problems/top-k-frequent-elements/">https://leetcode-cn.com/problems/top-k-frequent-elements/</a></p>
+<p><meta charset="UTF-8" />注意：本题与主站 347&nbsp;题相同：<a href="https://leetcode.cn/problems/top-k-frequent-elements/">https://leetcode.cn/problems/top-k-frequent-elements/</a></p>
 
 ## 解法
 
@@ -58,10 +58,10 @@ class Solution:
         hp = []
         for num, freq in counter.items():
             if len(hp) == k:
-                heapq.heappush(hp, (freq, num))
-                heapq.heappop(hp)
+                heappush(hp, (freq, num))
+                heappop(hp)
             else:
-                heapq.heappush(hp, (freq, num))
+                heappush(hp, (freq, num))
         return [t[1] for t in hp]
 ```
 

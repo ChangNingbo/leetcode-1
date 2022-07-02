@@ -12,14 +12,14 @@
 
 <p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0000-0099/0025.Reverse%20Nodes%20in%20k-Group/images/reverse_ex1.jpg" style="width: 542px; height: 222px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0000-0099/0025.Reverse%20Nodes%20in%20k-Group/images/reverse_ex1.jpg" style="width: 542px; height: 222px;" />
 <pre>
 <strong>Input:</strong> head = [1,2,3,4,5], k = 2
 <strong>Output:</strong> [2,1,4,3,5]
 </pre>
 
 <p><strong>Example 2:</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0000-0099/0025.Reverse%20Nodes%20in%20k-Group/images/reverse_ex2.jpg" style="width: 542px; height: 222px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0000-0099/0025.Reverse%20Nodes%20in%20k-Group/images/reverse_ex2.jpg" style="width: 542px; height: 222px;" />
 <pre>
 <strong>Input:</strong> head = [1,2,3,4,5], k = 3
 <strong>Output:</strong> [3,2,1,4,5]
@@ -175,6 +175,55 @@ function reverse(head: ListNode, tail: ListNode) {
         cur = t;
     }
     return [tail, head];
+}
+```
+
+```ts
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     val: number
+ *     next: ListNode | null
+ *     constructor(val?: number, next?: ListNode | null) {
+ *         this.val = (val===undefined ? 0 : val)
+ *         this.next = (next===undefined ? null : next)
+ *     }
+ * }
+ */
+
+function reverseKGroup(head: ListNode | null, k: number): ListNode | null {
+    if (k === 1) {
+        return head;
+    }
+
+    const dummy = new ListNode(0, head);
+    let root = dummy;
+    while (root != null) {
+        let pre = root;
+        let cur = root;
+
+        let count = 0;
+        while (count !== k) {
+            count++;
+            cur = cur.next;
+            if (cur == null) {
+                return dummy.next;
+            }
+        }
+
+        const nextRoot = pre.next;
+        pre.next = cur;
+
+        let node = nextRoot;
+        let next = node.next;
+        node.next = cur.next;
+        while (node != cur) {
+            [next.next, node, next] = [node, next, next.next];
+        }
+        root = nextRoot;
+    }
+
+    return dummy.next;
 }
 ```
 

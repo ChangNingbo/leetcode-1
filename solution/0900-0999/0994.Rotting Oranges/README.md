@@ -1,4 +1,4 @@
-# [994. 腐烂的橘子](https://leetcode-cn.com/problems/rotting-oranges)
+# [994. 腐烂的橘子](https://leetcode.cn/problems/rotting-oranges)
 
 [English Version](/solution/0900-0999/0994.Rotting%20Oranges/README_EN.md)
 
@@ -22,7 +22,7 @@
 
 <p><strong>示例 1：</strong></p>
 
-<p><strong><img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0900-0999/0994.Rotting%20Oranges/images/oranges.png" style="height: 137px; width: 650px;" /></strong></p>
+<p><strong><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0900-0999/0994.Rotting%20Oranges/images/oranges.png" style="height: 137px; width: 650px;" /></strong></p>
 
 <pre>
 <strong>输入：</strong>grid = [[2,1,1],[1,1,0],[0,1,1]]
@@ -93,7 +93,7 @@ class Solution:
         ans = 0
         while q and cnt:
             ans += 1
-            for _ in range(len(q), 0, -1):
+            for _ in range(len(q)):
                 i, j = q.popleft()
                 for a, b in [[0, 1], [0, -1], [1, 0], [-1, 0]]:
                     x, y = i + a, j + b

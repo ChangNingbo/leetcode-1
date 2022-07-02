@@ -7,7 +7,7 @@
 <p>Given the heads of two singly linked-lists <code>headA</code> and <code>headB</code>, return <em>the node at which the two lists intersect</em>. If the two linked lists have no intersection at all, return <code>null</code>.</p>
 
 <p>For example, the following two linked lists begin to intersect at node <code>c1</code>:</p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0100-0199/0160.Intersection%20of%20Two%20Linked%20Lists/images/160_statement.png" style="width: 500px; height: 162px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0100-0199/0160.Intersection%20of%20Two%20Linked%20Lists/images/160_statement.png" style="width: 500px; height: 162px;" />
 <p>The test cases are generated such that there are no cycles anywhere in the entire linked structure.</p>
 
 <p><strong>Note</strong> that the linked lists must <strong>retain their original structure</strong> after the function returns.</p>
@@ -28,7 +28,7 @@
 
 <p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0100-0199/0160.Intersection%20of%20Two%20Linked%20Lists/images/160_example_1_1.png" style="width: 500px; height: 162px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0100-0199/0160.Intersection%20of%20Two%20Linked%20Lists/images/160_example_1_1.png" style="width: 500px; height: 162px;" />
 <pre>
 <strong>Input:</strong> intersectVal = 8, listA = [4,1,8,4,5], listB = [5,6,1,8,4,5], skipA = 2, skipB = 3
 <strong>Output:</strong> Intersected at &#39;8&#39;
@@ -37,7 +37,7 @@ From the head of A, it reads as [4,1,8,4,5]. From the head of B, it reads as [5,
 </pre>
 
 <p><strong>Example 2:</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0100-0199/0160.Intersection%20of%20Two%20Linked%20Lists/images/160_example_2.png" style="width: 500px; height: 194px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0100-0199/0160.Intersection%20of%20Two%20Linked%20Lists/images/160_example_2.png" style="width: 500px; height: 194px;" />
 <pre>
 <strong>Input:</strong> intersectVal = 2, listA = [1,9,1,2,4], listB = [3,2,4], skipA = 3, skipB = 1
 <strong>Output:</strong> Intersected at &#39;2&#39;
@@ -46,7 +46,7 @@ From the head of A, it reads as [1,9,1,2,4]. From the head of B, it reads as [3,
 </pre>
 
 <p><strong>Example 3:</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0100-0199/0160.Intersection%20of%20Two%20Linked%20Lists/images/160_example_3.png" style="width: 300px; height: 189px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0100-0199/0160.Intersection%20of%20Two%20Linked%20Lists/images/160_example_3.png" style="width: 300px; height: 189px;" />
 <pre>
 <strong>Input:</strong> intersectVal = 0, listA = [2,6,4], listB = [1,5], skipA = 3, skipB = 2
 <strong>Output:</strong> No intersection
@@ -86,11 +86,11 @@ Explanation: The two lists do not intersect, so return null.
 
 class Solution:
     def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> ListNode:
-        cur1, cur2 = headA, headB
-        while cur1 != cur2:
-            cur1 = headB if cur1 is None else cur1.next
-            cur2 = headA if cur2 is None else cur2.next
-        return cur1
+        a, b = headA, headB
+        while a != b:
+            a = a.next if a else headB
+            b = b.next if b else headA
+        return a
 ```
 
 ### **Java**
@@ -109,12 +109,12 @@ class Solution:
  */
 public class Solution {
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-        ListNode cur1 = headA, cur2 = headB;
-        while (cur1 != cur2) {
-            cur1 = cur1 == null ? headB : cur1.next;
-            cur2 = cur2 == null ? headA : cur2.next;
+        ListNode a = headA, b = headB;
+        while (a != b) {
+            a = a == null ? headB : a.next;
+            b = b == null ? headA : b.next;
         }
-        return cur1;
+        return a;
     }
 }
 ```
@@ -133,13 +133,13 @@ public class Solution {
 class Solution {
 public:
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
-        ListNode* cur1 = headA;
-        ListNode* cur2 = headB;
-        while (cur1 != cur2) {
-            cur1 = cur1 ? cur1->next : headB;
-            cur2 = cur2 ? cur2->next : headA;
+        ListNode *a = headA, *b = headB;
+        while (a != b)
+        {
+            a = a ? a->next : headB;
+            b = b ? b->next : headA;
         }
-        return cur1;
+        return a;
     }
 };
 ```
@@ -161,13 +161,13 @@ public:
  * @return {ListNode}
  */
 var getIntersectionNode = function (headA, headB) {
-    let cur1 = headA;
-    let cur2 = headB;
-    while (cur1 != cur2) {
-        cur1 = cur1 ? cur1.next : headB;
-        cur2 = cur2 ? cur2.next : headA;
+    let a = headA;
+    let b = headB;
+    while (a != b) {
+        a = a ? a.next : headB;
+        b = b ? b.next : headA;
     }
-    return cur1;
+    return a;
 };
 ```
 
@@ -182,20 +182,20 @@ var getIntersectionNode = function (headA, headB) {
  * }
  */
  func getIntersectionNode(headA, headB *ListNode) *ListNode {
-    cur1, cur2 := headA, headB
-    for cur1 != cur2 {
-        if cur1 == nil {
-            cur1 = headB
+    a, b := headA, headB
+    for a != b {
+        if a == nil {
+            a = headB
         } else {
-            cur1 = cur1.Next
+            a = a.Next
         }
-        if cur2 == nil {
-            cur2 = headA
+        if b == nil {
+            b = headA
         } else {
-            cur2 = cur2.Next
+            b = b.Next
         }
     }
-    return cur1
+    return a
 }
 ```
 
@@ -218,13 +218,13 @@ function getIntersectionNode(
     headA: ListNode | null,
     headB: ListNode | null,
 ): ListNode | null {
-    let p1: ListNode | null = headA;
-    let p2: ListNode | null = headB;
-    while (p1 != p2) {
-        p1 = p1 == null ? headB : p1.next;
-        p2 = p2 == null ? headA : p2.next;
+    let a = headA;
+    let b = headB;
+    while (a != b) {
+        a = a ? a.next : headB;
+        b = b ? b.next : headA;
     }
-    return p1;
+    return a;
 }
 ```
 
@@ -245,26 +245,13 @@ function getIntersectionNode(
 
 class Solution {
     func getIntersectionNode(_ headA: ListNode?, _ headB: ListNode?) -> ListNode? {
-
-        guard let _ = headA, let _ = headB else {
-            return nil
+        var a = headA
+        var b = headB
+        while a !== b {
+            a = a == nil ? headB : a?.next
+            b = b == nil ? headA : b?.next
         }
-
-        var nodeA = headA
-        var nodeB = headB
-
-        while nodeA != nodeB {
-            nodeA = nodeA != nil ? nodeA?.next : headB
-            nodeB = nodeB != nil ? nodeB?.next : headA
-        }
-
-        return nodeA
-    }
-}
-
-extension ListNode: Equatable {
-    public static func ==(lhs: ListNode, rhs: ListNode) -> Bool {
-        return ObjectIdentifier(lhs) == ObjectIdentifier(rhs)
+        return a
     }
 }
 ```

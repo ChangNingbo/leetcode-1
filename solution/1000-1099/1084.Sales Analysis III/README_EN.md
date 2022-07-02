@@ -38,7 +38,7 @@ Each row of this table contains some information about one sale.
 
 <p>&nbsp;</p>
 
-<p>Write an SQL query that reports the <strong>products</strong> that were <strong>only</strong> sold in the spring of <code>2019</code>. That is, between <code>2019-01-01</code> and <code>2019-03-31</code> inclusive.</p>
+<p>Write an SQL query that reports the <strong>products</strong> that were <strong>only</strong> sold in the first quarter of <code>2019</code>. That is, between <code>2019-01-01</code> and <code>2019-03-31</code> inclusive.</p>
 
 <p>Return the result table in <strong>any order</strong>.</p>
 
@@ -86,7 +86,13 @@ We return only product 1 as it is the product that was only sold in the spring o
 ### **SQL**
 
 ```sql
-
+SELECT p.product_id,
+    P.product_name
+FROM product AS p
+    JOIN sales AS s ON p.product_id = s.product_id
+GROUP BY p.product_id
+HAVING SUM(sale_date < '2019-01-01') = 0
+    AND SUM(sale_date > '2019-03-31') = 0;
 ```
 
 <!-- tabs:end -->

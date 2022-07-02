@@ -12,7 +12,7 @@
 
 <p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0300-0399/0370.Range%20Addition/images/rangeadd-grid.jpg" style="width: 413px; height: 573px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0300-0399/0370.Range%20Addition/images/rangeadd-grid.jpg" style="width: 413px; height: 573px;" />
 <pre>
 <strong>Input:</strong> length = 5, updates = [[1,3,2],[2,4,3],[0,2,-2]]
 <strong>Output:</strong> [-2,0,3,5,3]
@@ -49,9 +49,7 @@ class Solution:
             delta[start] += inc
             if end + 1 < length:
                 delta[end + 1] -= inc
-        for i in range(1, length):
-            delta[i] += delta[i - 1]
-        return delta
+        return list(accumulate(delta))
 ```
 
 ```python
@@ -59,7 +57,7 @@ class BinaryIndexedTree:
     def __init__(self, n):
         self.n = n
         self.c = [0] * (n + 1)
-    
+
     @staticmethod
     def lowbit(x):
         return x & -x
@@ -68,7 +66,7 @@ class BinaryIndexedTree:
         while x <= self.n:
             self.c[x] += delta
             x += BinaryIndexedTree.lowbit(x)
-    
+
     def query(self, x):
         s = 0
         while x:
@@ -281,6 +279,29 @@ func getModifiedArray(length int, updates [][]int) []int {
 	}
 	return ans
 }
+```
+
+### **JavaScript**
+
+```js
+/**
+ * @param {number} length
+ * @param {number[][]} updates
+ * @return {number[]}
+ */
+var getModifiedArray = function (length, updates) {
+    let delta = new Array(length).fill(0);
+    for (let [start, end, inc] of updates) {
+        delta[start] += inc;
+        if (end + 1 < length) {
+            delta[end + 1] -= inc;
+        }
+    }
+    for (let i = 1; i < length; ++i) {
+        delta[i] += delta[i - 1];
+    }
+    return delta;
+};
 ```
 
 ### **...**

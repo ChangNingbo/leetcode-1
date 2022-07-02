@@ -1,4 +1,4 @@
-# [1167. 连接棒材的最低费用](https://leetcode-cn.com/problems/minimum-cost-to-connect-sticks)
+# [1167. 连接棒材的最低费用](https://leetcode.cn/problems/minimum-cost-to-connect-sticks)
 
 [English Version](/solution/1100-1199/1167.Minimum%20Cost%20to%20Connect%20Sticks/README_EN.md)
 
@@ -71,12 +71,12 @@ class Solution:
     def connectSticks(self, sticks: List[int]) -> int:
         h = []
         for s in sticks:
-            heapq.heappush(h, s)
+            heappush(h, s)
         res = 0
         while len(h) > 1:
-            val = heapq.heappop(h) + heapq.heappop(h)
+            val = heappop(h) + heappop(h)
             res += val
-            heapq.heappush(h, val)
+            heappush(h, val)
         return res
 ```
 

@@ -10,7 +10,7 @@
 
 <p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0000-0099/0002.Add%20Two%20Numbers/images/addtwonumber1.jpg" style="width: 483px; height: 342px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0000-0099/0002.Add%20Two%20Numbers/images/addtwonumber1.jpg" style="width: 483px; height: 342px;" />
 <pre>
 <strong>Input:</strong> l1 = [2,4,3], l2 = [5,6,4]
 <strong>Output:</strong> [7,0,8]
@@ -325,6 +325,90 @@ proc addTwoNumbers(l1: var SinglyLinkedList, l2: var SinglyLinkedList): SinglyLi
   for i in psum: aggregate.append(($i).parseInt())
 
   result = aggregate
+```
+
+### **TypeScript**
+
+```ts
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     val: number
+ *     next: ListNode | null
+ *     constructor(val?: number, next?: ListNode | null) {
+ *         this.val = (val===undefined ? 0 : val)
+ *         this.next = (next===undefined ? null : next)
+ *     }
+ * }
+ */
+
+function addTwoNumbers(
+    l1: ListNode | null,
+    l2: ListNode | null,
+): ListNode | null {
+    const dummy = new ListNode();
+    let cur = dummy;
+    let sum = 0;
+    while (l1 != null || l2 != null || sum !== 0) {
+        if (l1 != null) {
+            sum += l1.val;
+            l1 = l1.next;
+        }
+        if (l2 != null) {
+            sum += l2.val;
+            l2 = l2.next;
+        }
+        cur.next = new ListNode(sum % 10);
+        cur = cur.next;
+        sum = Math.floor(sum / 10);
+    }
+    return dummy.next;
+}
+```
+
+### **Rust**
+
+```rust
+// Definition for singly-linked list.
+// #[derive(PartialEq, Eq, Clone, Debug)]
+// pub struct ListNode {
+//   pub val: i32,
+//   pub next: Option<Box<ListNode>>
+// }
+//
+// impl ListNode {
+//   #[inline]
+//   fn new(val: i32) -> Self {
+//     ListNode {
+//       next: None,
+//       val
+//     }
+//   }
+// }
+impl Solution {
+    pub fn add_two_numbers(
+        mut l1: Option<Box<ListNode>>,
+        mut l2: Option<Box<ListNode>>,
+    ) -> Option<Box<ListNode>> {
+        let mut dummy = Some(Box::new(ListNode::new(0)));
+        let mut cur = &mut dummy;
+        let mut sum = 0;
+        while l1.is_some() || l2.is_some() || sum != 0 {
+            if let Some(node) = l1 {
+                sum += node.val;
+                l1 = node.next;
+            }
+            if let Some(node) = l2 {
+                sum += node.val;
+                l2 = node.next;
+            }
+            cur.as_mut().unwrap().next = Some(Box::new(ListNode::new(sum % 10)));
+            cur = &mut cur.as_mut().unwrap().next;
+            sum /= 10;
+        }
+        dummy.unwrap().next.take()
+    }
+}
 ```
 
 ### **...**

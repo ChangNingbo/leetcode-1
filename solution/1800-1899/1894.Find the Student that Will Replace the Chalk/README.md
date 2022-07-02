@@ -1,4 +1,4 @@
-# [1894. 找到需要补充粉笔的学生编号](https://leetcode-cn.com/problems/find-the-student-that-will-replace-the-chalk)
+# [1894. 找到需要补充粉笔的学生编号](https://leetcode.cn/problems/find-the-student-that-will-replace-the-chalk)
 
 [English Version](/solution/1800-1899/1894.Find%20the%20Student%20that%20Will%20Replace%20the%20Chalk/README_EN.md)
 
@@ -59,7 +59,56 @@
 
 <!-- 这里可写通用的实现逻辑 -->
 
-“前缀和 + 二分查找”实现。
+**方法一：前缀和 + 二分查找**
+
+以下是二分查找的两个通用模板：
+
+模板 1：
+
+```java
+boolean check(int x) {}
+
+int search(int left, int right) {
+    while (left < right) {
+        int mid = (left + right) >> 1;
+        if (check(mid)) {
+            right = mid;
+        } else {
+            left = mid + 1;
+        }
+    }
+    return left;
+}
+```
+
+模板 2：
+
+```java
+boolean check(int x) {}
+
+int search(int left, int right) {
+    while (left < right) {
+        int mid = (left + right + 1) >> 1;
+        if (check(mid)) {
+            left = mid;
+        } else {
+            right = mid - 1;
+        }
+    }
+    return left;
+}
+```
+
+做二分题目时，可以按照以下步骤：
+
+1. 写出循环条件：`while (left < right)`，注意是 `left < right`，而非 `left <= right`；
+1. 循环体内，先无脑写出 `mid = (left + right) >> 1`；
+1. 根据具体题目，实现 `check()` 函数（有时很简单的逻辑，可以不定义 `check`），想一下究竟要用 `right = mid`（模板 1） 还是 `left = mid`（模板 2）；
+    - 如果 `right = mid`，那么无脑写出 else 语句 `left = mid + 1`，并且不需要更改 mid 的计算，即保持 `mid = (left + right) >> 1`；
+    - 如果 `left = mid`，那么无脑写出 else 语句 `right = mid - 1`，并且在 mid 计算时补充 +1，即 `mid = (left + right + 1) >> 1`。
+1. 循环结束时，left 与 right 相等。
+
+注意，这两个模板的优点是始终保持答案位于二分区间内，二分结束条件对应的值恰好在答案所处的位置。 对于可能无解的情况，只要判断二分结束后的 left 或者 right 是否满足题意即可。
 
 <!-- tabs:start -->
 
@@ -70,16 +119,9 @@
 ```python
 class Solution:
     def chalkReplacer(self, chalk: List[int], k: int) -> int:
-        pre_sum = list(itertools.accumulate(chalk))
-        k %= pre_sum[-1]
-        left, right = 0, len(chalk) - 1
-        while left < right:
-            mid = (left + right) >> 1
-            if pre_sum[mid] > k:
-                right = mid
-            else:
-                left = mid + 1
-        return left
+        s = list(accumulate(chalk))
+        k %= s[-1]
+        return bisect_right(s, k)
 ```
 
 ### **Java**
@@ -116,21 +158,10 @@ class Solution {
 public:
     int chalkReplacer(vector<int>& chalk, int k) {
         int n = chalk.size();
-        vector<long long> preSum(n + 1);
-        for (int i = 0; i < n; ++i) {
-            preSum[i + 1] = preSum[i] + chalk[i];
-        }
-        k %= preSum[n];
-        int left = 0, right = n - 1;
-        while (left < right) {
-            int mid = left + (right - left >> 1);
-            if (preSum[mid + 1] > k) {
-                right = mid;
-            } else {
-                left = mid + 1;
-            }
-        }
-        return left;
+        vector<long long> s(n, chalk[0]);
+        for (int i = 1; i < n; ++i) s[i] = s[i - 1] + chalk[i];
+        k %= s[n - 1];
+        return upper_bound(s.begin(), s.end(), k) - s.begin();
     }
 };
 ```
@@ -140,21 +171,42 @@ public:
 ```go
 func chalkReplacer(chalk []int, k int) int {
 	n := len(chalk)
-	preSum := make([]int, n+1)
+	s := make([]int, n+1)
 	for i := 0; i < n; i++ {
-		preSum[i+1] = preSum[i] + chalk[i]
+		s[i+1] = s[i] + chalk[i]
 	}
-	k %= preSum[n]
+	k %= s[n]
 	left, right := 0, n-1
 	for left < right {
-		mid := left + ((right - left) >> 1)
-		if preSum[mid+1] > k {
+		mid := (left + right) >> 1
+		if s[mid+1] > k {
 			right = mid
 		} else {
 			left = mid + 1
 		}
 	}
 	return left
+}
+```
+
+### **Rust**
+
+```rust
+impl Solution {
+    pub fn chalk_replacer(chalk: Vec<i32>, k: i32) -> i32 {
+        let pre_sum: Vec<i64> = chalk
+            .into_iter()
+            .map(|x| x as i64)
+            .scan(0, |state, x| {
+                *state += x;
+                Some(*state)
+            })
+            .collect();
+
+        pre_sum
+            .binary_search(&(k as i64 % pre_sum.last().unwrap()))
+            .map_or_else(|e| e, |v| v + 1) as i32
+    }
 }
 ```
 

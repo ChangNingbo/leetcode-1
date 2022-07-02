@@ -8,14 +8,14 @@
 
 <p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0600-0699/0653.Two%20Sum%20IV%20-%20Input%20is%20a%20BST/images/sum_tree_1.jpg" style="width: 400px; height: 229px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0600-0699/0653.Two%20Sum%20IV%20-%20Input%20is%20a%20BST/images/sum_tree_1.jpg" style="width: 400px; height: 229px;" />
 <pre>
 <strong>Input:</strong> root = [5,3,6,2,4,null,7], k = 9
 <strong>Output:</strong> true
 </pre>
 
 <p><strong>Example 2:</strong></p>
-<img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/0600-0699/0653.Two%20Sum%20IV%20-%20Input%20is%20a%20BST/images/sum_tree_2.jpg" style="width: 400px; height: 229px;" />
+<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0600-0699/0653.Two%20Sum%20IV%20-%20Input%20is%20a%20BST/images/sum_tree_2.jpg" style="width: 400px; height: 229px;" />
 <pre>
 <strong>Input:</strong> root = [5,3,6,2,4,null,7], k = 28
 <strong>Output:</strong> false
@@ -144,15 +144,15 @@ function find(root: TreeNode | null, k: number, nodes: Set<number>): boolean {
 
 function findTarget(root: TreeNode | null, k: number): boolean {
     if (root == null) {
-      return false;
+        return false;
     }
     const set = new Set<number>();
     const dfs = (root: TreeNode | null) => {
         if (root == null) {
-          return false;
+            return false;
         }
         if (set.has(root.val)) {
-          return true;
+            return true;
         }
         set.add(k - root.val);
         return dfs(root.left) || dfs(root.right);

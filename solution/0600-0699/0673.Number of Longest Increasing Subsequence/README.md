@@ -1,4 +1,4 @@
-# [673. 最长递增子序列的个数](https://leetcode-cn.com/problems/number-of-longest-increasing-subsequence)
+# [673. 最长递增子序列的个数](https://leetcode.cn/problems/number-of-longest-increasing-subsequence)
 
 [English Version](/solution/0600-0699/0673.Number%20of%20Longest%20Increasing%20Subsequence/README_EN.md)
 
@@ -63,7 +63,6 @@
 本题我们使用树状数组 `tree[x]` 来维护以 x 结尾的最长上升子序列的长度，以及该长度对应的子序列个数。
 
 时间复杂度 O(nlogn)。
-
 
 <!-- tabs:start -->
 

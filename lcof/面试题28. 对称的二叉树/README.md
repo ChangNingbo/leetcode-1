@@ -1,4 +1,4 @@
-# [面试题 28. 对称的二叉树](https://leetcode-cn.com/problems/dui-cheng-de-er-cha-shu-lcof/)
+# [面试题 28. 对称的二叉树](https://leetcode.cn/problems/dui-cheng-de-er-cha-shu-lcof/)
 
 ## 题目描述
 
@@ -38,7 +38,7 @@
 
 <p><code>0 &lt;= 节点个数 &lt;= 1000</code></p>
 
-<p>注意：本题与主站 101 题相同：<a href="https://leetcode-cn.com/problems/symmetric-tree/">https://leetcode-cn.com/problems/symmetric-tree/</a></p>
+<p>注意：本题与主站 101 题相同：<a href="https://leetcode.cn/problems/symmetric-tree/">https://leetcode.cn/problems/symmetric-tree/</a></p>
 
 ## 解法
 
@@ -160,21 +160,17 @@ func isSymme(left *TreeNode, right *TreeNode) bool {
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
-
 class Solution {
 public:
-    bool isSymmetric(TreeNode* a, TreeNode* b) {
-        // 均为空，则直接返回true。有且仅有一个不为空，则返回false
-        if (a == nullptr && b == nullptr) {
+    bool isSymmetric(TreeNode* left, TreeNode* right) {
+        // 均为空，则直接返回 true。有且仅有一个不为空，则返回 false
+        if (left == nullptr && right == nullptr) {
             return true;
-        } else if (a == nullptr && b != nullptr) {
-            return false;
-        } else if (a != nullptr && b == nullptr) {
+        }
+        if (left == nullptr || right == nullptr || left->val != right->val) {
             return false;
         }
-
-        // 判定值是否相等，和下面的节点是否对称
-        return (a->val == b->val) && isSymmetric(a->left, b->right) && isSymmetric(a->right, b->left);
+        return isSymmetric(left->left, right->right) && isSymmetric(left->right, right->left);
     }
 
     bool isSymmetric(TreeNode* root) {
@@ -185,7 +181,6 @@ public:
         return isSymmetric(root->left, root->right);
     }
 };
-
 ```
 
 ### **TypeScript**
@@ -209,19 +204,14 @@ function isSymmetric(root: TreeNode | null): boolean {
     if (root == null) {
         return true;
     }
-    const dfs = (l: TreeNode | null, r: TreeNode | null) => {
-        if (l == null && r == null) {
+    const dfs = (left: TreeNode | null, right: TreeNode | null) => {
+        if (left == null && right == null) {
             return true;
         }
-        if (l == null || r == null) {
+        if (left == null || right == null || left.val != right.val) {
             return false;
         }
-        return (
-            l.val == r.val &&
-            dfs(l.left, r.right) &&
-            dfs(l.right, r.left) &&
-            true
-        );
+        return dfs(left.left, right.right) && dfs(left.right, right.left);
     };
     return dfs(root.left, root.right);
 }
@@ -248,34 +238,29 @@ function isSymmetric(root: TreeNode | null): boolean {
 //     }
 //   }
 // }
-use std::cell::RefCell;
 use std::rc::Rc;
+use std::cell::RefCell;
 impl Solution {
-    pub fn is_symmetric(root: Option<Rc<RefCell<TreeNode>>>) -> bool {
-        match root {
-            None => true,
-            Some(root) => {
-                fn dfs(
-                    l: &Option<Rc<RefCell<TreeNode>>>,
-                    r: &Option<Rc<RefCell<TreeNode>>>,
-                ) -> bool {
-                    if l.is_none() && r.is_none() {
-                        return true;
-                    }
-                    if l.is_none() || r.is_none() {
-                        return false;
-                    }
-                    let l = l.as_ref().unwrap().borrow();
-                    let r = r.as_ref().unwrap().borrow();
-                    l.val == r.val && dfs(&l.left, &r.right) && dfs(&l.right, &r.left) && true
-                }
-                let node = root.borrow();
-                dfs(&node.left, &node.right)
-            }
+    fn dfs(left: &Option<Rc<RefCell<TreeNode>>>, right: &Option<Rc<RefCell<TreeNode>>>) -> bool {
+        if left.is_none() && right.is_none() {
+            return true;
         }
+        if left.is_none() || right.is_none() {
+            return false;
+        }
+        let l = left.as_ref().unwrap().borrow();
+        let r = right.as_ref().unwrap().borrow();
+        l.val == r.val && Self::dfs(&l.left, &r.right) && Self::dfs(&l.right, &r.left)
+    }
+
+    pub fn is_symmetric(root: Option<Rc<RefCell<TreeNode>>>) -> bool {
+        if root.is_none() {
+            return true;
+        }
+        let node = root.as_ref().unwrap().borrow();
+        Self::dfs(&node.left, &node.right)
     }
 }
-
 ```
 
 ### **...**

@@ -1,4 +1,4 @@
-# [1192. 查找集群内的「关键连接」](https://leetcode-cn.com/problems/critical-connections-in-a-network)
+# [1192. 查找集群内的「关键连接」](https://leetcode.cn/problems/critical-connections-in-a-network)
 
 [English Version](/solution/1100-1199/1192.Critical%20Connections%20in%20a%20Network/README_EN.md)
 
@@ -16,7 +16,7 @@
 
 <p><strong>示例 1：</strong></p>
 
-<p><strong><img alt="" src="https://cdn.jsdelivr.net/gh/doocs/leetcode@main/solution/1100-1199/1192.Critical%20Connections%20in%20a%20Network/images/critical-connections-in-a-network.png" style="height: 205px; width: 200px;" /></strong></p>
+<p><strong><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/1100-1199/1192.Critical%20Connections%20in%20a%20Network/images/critical-connections-in-a-network.png" style="height: 205px; width: 200px;" /></strong></p>
 
 <pre>
 <strong>输入：</strong>n = 4, connections = [[0,1],[1,2],[2,0],[1,3]]
